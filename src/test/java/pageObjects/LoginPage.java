@@ -1,13 +1,17 @@
 package pageObjects;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utilities.CommonUtils;
 
 public class LoginPage extends BasePage{
-
+	
+	CommonUtils commonUtils;
+	
+	
 	public LoginPage(WebDriver driver) {
 		super(driver);
+		commonUtils = new CommonUtils(driver);
 	}
 	
 	@FindBy(xpath = "//input[@placeholder='Email']")
@@ -16,22 +20,30 @@ public class LoginPage extends BasePage{
 	@FindBy(xpath = "//input[@placeholder='Password']")
 	WebElement passwordField;
 	
-	@FindBy(xpath = "//button[@id='observerLoginForm']")
-	WebElement loginButton;
+	@FindBy(xpath = "//button[@id='adminLoginForm']")
+	WebElement adminLoginButton;
 	
-	public void enterEmail(String email)
-	{
-		emailField.sendKeys(email);
-	}
+	@FindBy(xpath = "//button[@id='observerLoginForm']")
+	WebElement observerLoginButton;
+	
+	
+	public void enterEmail(String username) {
+		commonUtils.sendKeys(emailField, username);
+    }
 	
 	public void enterPassword(String password)
 	{
-		passwordField.sendKeys(password);
+		commonUtils.sendKeys(passwordField, password);
 	}
 	
-	public void clickOnLogin()
+	public void clickOnAdminLogin()
 	{
-		loginButton.click();
+		commonUtils.click(adminLoginButton);
+	}
+	
+	public void clickOnObserverLogin()
+	{
+		commonUtils.click(observerLoginButton);
 	}
 
 }

@@ -8,15 +8,13 @@ import testBase.BaseClass;
 
 public class AdminLoginTest extends BaseClass {
 	
-	@Test
+	@Test(groups= {"Smoke"})
 	public void verify_admin_login()
 	{
 		try {
 			logger.info("****** Starting Admin Login Test Case ******");
-			LoginPage lp = new LoginPage(driver);
-			lp.enterEmail("avinash.jha@ksolves.com");
-			lp.enterPassword("dev@123");
-			lp.clickOnLogin();
+			login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
+			Thread.sleep(3000);
 		} catch(Exception e) {
 			Assert.fail();
 		}
