@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+  <Properties>
+    <Property name="basePath">./logs</Property>
+  </Properties>
+
+  <Appenders>
+    <!-- Console Appender with a name attribute -->
+    <Console name="ConsoleAppender">
+      <PatternLayout pattern="%d{HH:mm.SS$} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+    
+    <!-- RollingFile Appender with a defined policy -->
+    <RollingFile name="FileAppender" fileName="${basePath}/automation.log" filePattern="${basePath}/automation-%d{yyyy-MM-dd HH:mm:ss.SSS}.log">
+      <PatternLayout pattern="%d{HH:mm.SS$} [%t] %-5level %logger{36} - %msg%n"/>
+      <Policies>
+        <!-- Correct policy for size-based rolling -->
+        <SizeBasedTriggeringPolicy size="5MB"/>
+      </Policies>
+    </RollingFile>
+  </Appenders>
+
+  <Loggers>
+    <Root level="INFO"> <!-- Here you can use multiple log levels All < Trace < Debug < Warn < Error < Fatal -->
+      <!-- Attach the appenders here -->
+      <AppenderRef ref="ConsoleAppender"/>
+      <!--  <AppenderRef ref="FileAppender"/>-->
+    </Root>
+  </Loggers>
+
+</Configuration>
