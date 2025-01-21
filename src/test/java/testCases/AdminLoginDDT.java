@@ -1,8 +1,6 @@
 package testCases;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import pageObjects.LoginPage;
 import pageObjects.MyAccountPage;
 import testBase.BaseClass;

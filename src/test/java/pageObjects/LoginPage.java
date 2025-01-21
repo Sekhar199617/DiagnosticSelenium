@@ -2,16 +2,11 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import utilities.CommonUtils;
 
 public class LoginPage extends BasePage{
 	
-	CommonUtils commonUtils;
-	
-	
 	public LoginPage(WebDriver driver) {
 		super(driver);
-		commonUtils = new CommonUtils(driver);
 	}
 	
 	@FindBy(xpath = "//input[@placeholder='Email']")
@@ -31,27 +26,23 @@ public class LoginPage extends BasePage{
 	
 	
 	public void enterEmail(String username) {
-		commonUtils.sendKeys(emailField, username);
+		emailField.sendKeys(username);
     }
 	
-	public void enterPassword(String password)
-	{
-		commonUtils.sendKeys(passwordField, password);
+	public void enterPassword(String password) {
+		passwordField.sendKeys(password);
 	}
 	
-	public void clickOnAdminLogin()
-	{
-		commonUtils.click(adminLoginButton);
+	public void clickOnAdminLogin() {
+		adminLoginButton.click();
 	}
 	
-	public void clickOnObserverLogin()
-	{
-		commonUtils.click(observerLoginButton);
+	public void clickOnObserverLogin() {
+		observerLoginButton.click();
 	}
 	
-	public String alertMessage() 
-	{
-	    return commonUtils.getText(alertMessage); 
+	public String alertMessage() {
+	    return alertMessage.getText();
 	}
 
 }
