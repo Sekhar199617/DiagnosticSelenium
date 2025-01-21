@@ -26,6 +26,9 @@ public class LoginPage extends BasePage{
 	@FindBy(xpath = "//button[@id='observerLoginForm']")
 	WebElement observerLoginButton;
 	
+	@FindBy(xpath = "//div[@role='alert']")
+	WebElement alertMessage;
+	
 	
 	public void enterEmail(String username) {
 		commonUtils.sendKeys(emailField, username);
@@ -44,6 +47,11 @@ public class LoginPage extends BasePage{
 	public void clickOnObserverLogin()
 	{
 		commonUtils.click(observerLoginButton);
+	}
+	
+	public String alertMessage() 
+	{
+	    return commonUtils.getText(alertMessage); 
 	}
 
 }

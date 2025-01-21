@@ -1,6 +1,7 @@
 package utilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 public class CommonUtils {
     WebDriver driver;
@@ -15,5 +16,14 @@ public class CommonUtils {
     
     public void click(WebElement element) {
         element.click();
+    }
+    
+    public String getText(WebElement element) {
+        return element.getText();
+    }
+    
+    public void validateText(String actualAlertMessage, String expectedAlertMessage)
+    {
+        Assert.assertEquals(actualAlertMessage, expectedAlertMessage);
     }
 }
