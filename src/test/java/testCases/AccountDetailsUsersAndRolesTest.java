@@ -1,11 +1,11 @@
 package testCases;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
-import pageObjects.AccountUserPage;
+import pageObjects.AccountDetailsUsersAndRolesPage;
 import pageObjects.MyAccountPage;
 import testBase.BaseClass;
 
-public class AccountDetailsUsersAndRoles extends BaseClass {
+public class AccountDetailsUsersAndRolesTest extends BaseClass {
 	
 	@Test
 	public void verifyAddNewAccountUser() {
@@ -22,7 +22,7 @@ public class AccountDetailsUsersAndRoles extends BaseClass {
 		ad.selectTab("Users & Roles");
 		ad.clickOnAdd();
 		
-		AccountUserPage au = new AccountUserPage(driver);
+		AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
 		au.enterNewUserName(randomString());
 		au.clickOnMobileCountryCode(p.getProperty("mobileCountryCode"));
 		au.enterPhoneNumber(randomNumbers());

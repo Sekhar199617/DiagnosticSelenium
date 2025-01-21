@@ -8,11 +8,11 @@ import org.openqa.selenium.support.FindBy;
 
 import utilities.CommonUtils;
 
-public class AccountUserPage extends BasePage {
+public class AccountDetailsUsersAndRolesPage extends BasePage {
 	
 	CommonUtils commonUtils;
 
-	public AccountUserPage(WebDriver driver) {
+	public AccountDetailsUsersAndRolesPage(WebDriver driver) {
 		super(driver);
 	}
 	
