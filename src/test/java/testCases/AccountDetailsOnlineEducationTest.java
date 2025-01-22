@@ -3,7 +3,7 @@ package testCases;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsOnlineEducationPage;
 import pageObjects.AccountDetailsPage;
-import pageObjects.MyAccountPage;
+import pageObjects.DashboardPage;
 import testBase.BaseClass;
 
 public class AccountDetailsOnlineEducationTest extends BaseClass {
@@ -12,11 +12,11 @@ public class AccountDetailsOnlineEducationTest extends BaseClass {
     public void verifyOnlineEducationTest() {
         login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-        MyAccountPage macc = new MyAccountPage(driver);
+        DashboardPage dp = new DashboardPage(driver);
 
-        macc.searchForElement(p.getProperty("accountName"));
-        macc.clickOnActionsDropDown();
-        macc.clickOnView();
+        dp.searchForElement(p.getProperty("accountName"));
+        dp.clickOnActionsDropDown();
+        dp.clickOnView();
 
         AccountDetailsPage ad = new AccountDetailsPage(driver);
         ad.selectTab("Online Education");

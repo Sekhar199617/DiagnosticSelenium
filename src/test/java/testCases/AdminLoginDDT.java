@@ -2,7 +2,7 @@ package testCases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.LoginPage;
-import pageObjects.MyAccountPage;
+import pageObjects.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 import utilities.DataProviders;
@@ -19,8 +19,8 @@ public class AdminLoginDDT extends BaseClass {
 		{
 			login(email, password, true);
 			
-			MyAccountPage macc = new MyAccountPage(driver);
-			boolean targetPage = macc.isMyAccountExists();
+			DashboardPage dp = new DashboardPage(driver);
+			boolean targetPage = dp.isMyAccountExists();
 			
 			LoginPage loginPage = new LoginPage(driver);
 			
@@ -28,24 +28,24 @@ public class AdminLoginDDT extends BaseClass {
 			
 			if(exp.equalsIgnoreCase("valid"))
 			{
-				if(targetPage==true)
+				if(targetPage)
 				{
-					macc.clickOnTogglerIcon();
-					macc.clickOnLogoutButton();
+					dp.clickOnTogglerIcon();
+					dp.clickOnHamBurgerMenuItem("Logout");
 					Assert.assertTrue(true);
 				}else
 				{
-					Assert.assertTrue(false);
+                    Assert.fail();
 				}
 			}
 			
 			if(exp.equalsIgnoreCase("invalid"))
 			{
-				if(targetPage==true)
+				if(targetPage)
 				{
-					macc.clickOnTogglerIcon();
-					macc.clickOnLogoutButton();
-					Assert.assertTrue(false);
+					dp.clickOnTogglerIcon();
+					dp.clickOnHamBurgerMenuItem("Logout");
+                    Assert.fail();
 				}else
 				{
 					Assert.assertTrue(true);

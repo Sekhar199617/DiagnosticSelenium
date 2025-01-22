@@ -2,7 +2,7 @@ package testCases;
 
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
-import pageObjects.MyAccountPage;
+import pageObjects.DashboardPage;
 import pageObjects.AccountDetailsOrdersPage;
 import testBase.BaseClass;
 
@@ -12,11 +12,11 @@ public class AccountDetailsOrdersTest extends BaseClass {
     public void verifyProvisionedOrdersTest() {
         login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-        MyAccountPage macc = new MyAccountPage(driver);
+        DashboardPage dp = new DashboardPage(driver);
 
-        macc.searchForElement(p.getProperty("accountName"));
-        macc.clickOnActionsDropDown();
-        macc.clickOnView();
+        dp.searchForElement(p.getProperty("accountName"));
+        dp.clickOnActionsDropDown();
+        dp.clickOnView();
 
         AccountDetailsPage ad = new AccountDetailsPage(driver);
         ad.selectTab("Orders");

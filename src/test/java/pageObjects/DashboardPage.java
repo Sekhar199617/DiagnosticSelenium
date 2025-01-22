@@ -5,11 +5,13 @@ import org.openqa.selenium.support.FindBy;
 
 import utilities.CommonUtils;
 
-public class MyAccountPage extends BasePage {
+import java.util.List;
+
+public class DashboardPage extends BasePage {
 	
 	CommonUtils commonUtils;
 
-	public MyAccountPage(WebDriver driver) {
+	public DashboardPage(WebDriver driver) {
 		super(driver);
 	}
 	
@@ -33,6 +35,9 @@ public class MyAccountPage extends BasePage {
 	
 	@FindBy(xpath = "//a[normalize-space()='View']")
 	WebElement view;
+
+	@FindBy(xpath = "//div[@class='mt--10px']/li/a")
+	List<WebElement> hamburgerMenuList;
 	
 	public boolean isMyAccountExists()	{
 		try	{
@@ -46,8 +51,8 @@ public class MyAccountPage extends BasePage {
 		togglerIcon.click();
 	}
 	
-	public void clickOnLogoutButton() {
-		logoutButton.click();
+	public void clickOnHamBurgerMenuItem(String menuItemName) {
+		commonUtils.selectTab(hamburgerMenuList, menuItemName);
 	}
 	
 	public void searchForElement(String searchElement) {

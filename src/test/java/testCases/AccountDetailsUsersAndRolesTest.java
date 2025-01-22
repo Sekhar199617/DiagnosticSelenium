@@ -2,7 +2,7 @@ package testCases;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.MyAccountPage;
+import pageObjects.DashboardPage;
 import testBase.BaseClass;
 
 public class AccountDetailsUsersAndRolesTest extends BaseClass {
@@ -12,11 +12,11 @@ public class AccountDetailsUsersAndRolesTest extends BaseClass {
 		
 		login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 		
-		MyAccountPage macc = new MyAccountPage(driver);
-		
-		macc.searchForElement(p.getProperty("accountName"));
-		macc.clickOnActionsDropDown();
-		macc.clickOnView();
+		DashboardPage dp = new DashboardPage(driver);
+
+		dp.searchForElement(p.getProperty("accountName"));
+		dp.clickOnActionsDropDown();
+		dp.clickOnView();
 		
 		AccountDetailsPage ad = new AccountDetailsPage(driver);
 		ad.selectTab("Users & Roles");

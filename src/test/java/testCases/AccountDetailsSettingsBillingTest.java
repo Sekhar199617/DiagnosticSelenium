@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.AccountDetailsSettingsPage;
 import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.MyAccountPage;
+import pageObjects.DashboardPage;
 import testBase.BaseClass;
 
 public class AccountDetailsSettingsBillingTest extends BaseClass {
@@ -14,11 +14,11 @@ public class AccountDetailsSettingsBillingTest extends BaseClass {
 
         login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-        MyAccountPage ma = new MyAccountPage(driver);
+        DashboardPage dp = new DashboardPage(driver);
 
-        ma.searchForElement(p.getProperty("accountName"));
-        ma.clickOnActionsDropDown();
-        ma.clickOnView();
+        dp.searchForElement(p.getProperty("accountName"));
+        dp.clickOnActionsDropDown();
+        dp.clickOnView();
 
         AccountDetailsPage ad = new AccountDetailsPage(driver);
         ad.selectTab("Settings");
