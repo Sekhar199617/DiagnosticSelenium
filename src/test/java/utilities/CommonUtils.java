@@ -1,10 +1,12 @@
 package utilities;
+import java.time.Duration;
 import java.util.List;
 import java.util.Random;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 public class CommonUtils {
@@ -12,6 +14,27 @@ public class CommonUtils {
     
     public CommonUtils(WebDriver driver) {
         this.driver = driver;
+    }
+    
+    public void clickOnElement(WebElement element, String elementText) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        if (elementText != null) {
+            if (element.getText().equalsIgnoreCase(elementText)) {
+                element.click();
+            }
+        } else {
+            element.click();
+        }
+    }
+    
+    public void enterValueInTextField(WebElement element, String value) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
+        element.clear();
+        element.sendKeys(value);
     }
     
     public void validateText(String actualAlertMessage, String expectedAlertMessage) {

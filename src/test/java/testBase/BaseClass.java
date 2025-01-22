@@ -20,6 +20,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import pageObjects.LoginPage;
+import utilities.CommonUtils;
 
 public class BaseClass {
     
@@ -39,7 +40,7 @@ public class BaseClass {
         
         switch(browser.toLowerCase())
         {
-        case "chrome" : driver  = new ChromeDriver(); break;
+        case "chrome" : driver = new ChromeDriver(); break;
         case "edge" : driver = new EdgeDriver(); break;
         case "firefox" : driver = new FirefoxDriver(); break;
         default : System.out.println("Invalid browser name..."); return;
@@ -57,14 +58,15 @@ public class BaseClass {
         driver.get(appURL); 
         
         LoginPage loginPage = new LoginPage(driver);
+        CommonUtils commonUtils = new CommonUtils(driver);
         
-        loginPage.enterEmail(username);
-        loginPage.enterPassword(password);   
+        commonUtils.enterValueInTextField(loginPage.emailField, username);
+        commonUtils.enterValueInTextField(loginPage.passwordField, password);
         
         if (isAdminLogin) {
-            loginPage.clickOnAdminLogin();
+        	commonUtils.clickOnElement(loginPage.adminLoginButton, "Login");
         } else {
-            loginPage.clickOnObserverLogin();
+        	commonUtils.clickOnElement(loginPage.observerLoginButton, "Login");
         }
     }
     
