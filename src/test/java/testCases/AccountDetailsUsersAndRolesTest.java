@@ -24,7 +24,8 @@ public class AccountDetailsUsersAndRolesTest extends BaseClass {
 		
 		AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
 		au.enterNewUserName(randomString());
-		au.clickOnMobileCountryCode(p.getProperty("mobileCountryCode"));
+		au.clickOnCountryDropDown();
+		au.selectMobileCountryCode(p.getProperty("mobileCountryCode"));
 		au.enterPhoneNumber(randomNumbers());
 		au.enterEmail(randomString() + "@gmail.com");
 		au.selectRole(p.getProperty("role"));
@@ -68,5 +69,6 @@ public class AccountDetailsUsersAndRolesTest extends BaseClass {
 		au.clickOnSave();
 		
 		au.verifyDialogueText(p.getProperty("dialogueText"));
+		au.clickOnDialogueOk();
 	}
 }

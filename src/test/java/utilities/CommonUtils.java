@@ -33,7 +33,7 @@ public class CommonUtils {
     	}
     }
     
-    public void clickOnMobileCountryCode(List<WebElement> element, String countryName) {
+    public void selectMobileCountryCode(List<WebElement> element, String countryName) {
     	for(WebElement country : element) {
     		String countryText = country.getText();
     		if(countryText.equalsIgnoreCase(countryName)) {

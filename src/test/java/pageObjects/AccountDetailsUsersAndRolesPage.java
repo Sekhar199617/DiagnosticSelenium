@@ -78,6 +78,9 @@ public class AccountDetailsUsersAndRolesPage extends BasePage {
 	
 	@FindBy(xpath = "//h2[@class='swal2-title']")
 	WebElement dialogueText;
+
+	@FindBy(xpath = "//button[normalize-space()='Ok']")
+	WebElement dialogueOkButton;
 	
 	
 	public void enterNewUserName(String userName) {
@@ -88,8 +91,8 @@ public class AccountDetailsUsersAndRolesPage extends BasePage {
 		mobileCountryCodeDropDown.click();
 	}
 	
-	public void clickOnMobileCountryCode(String countryName) {
-		commonUtils.clickOnMobileCountryCode(countryList, countryName);
+	public void selectMobileCountryCode(String countryName) {
+		commonUtils.selectMobileCountryCode(countryList, countryName);
 	}
 	
 	public void enterPhoneNumber(String phoneNumber) {
@@ -162,6 +165,10 @@ public class AccountDetailsUsersAndRolesPage extends BasePage {
 	
 	public void verifyDialogueText(String expectedMessage) {
 		commonUtils.validateGetText(dialogueText, expectedMessage);
+	}
+
+	public void clickOnDialogueOk() {
+		dialogueOkButton.click();
 	}
 
 }
