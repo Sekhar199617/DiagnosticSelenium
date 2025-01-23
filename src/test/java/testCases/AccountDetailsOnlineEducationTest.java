@@ -29,11 +29,11 @@ public class AccountDetailsOnlineEducationTest extends BaseClass {
 
             AccountDetailsOnlineEducationPage aoe = new AccountDetailsOnlineEducationPage(driver);
             commonUtils.selectRadioButton(aoe.experiencesForProvisionedOrdersRadioButton);
-            commonUtils.clickOnElement(aoe.manageButton, null);
-            commonUtils.clickOnElement(aoe.addButton, null);
+            commonUtils.clickOnElement(aoe.manageButton, "Manage");
+            commonUtils.clickOnElement(aoe.addButton, "Add");
             commonUtils.enterValueInTextField(aoe.experienceNameField, randomString());
             commonUtils.selectDropDownValue(aoe.attachBundleDropDown, p.getProperty("attachBundle"));
-            commonUtils.clickOnElement(aoe.saveButton, null);
+            commonUtils.clickOnElement(aoe.saveButton, "Save");
         }catch(Exception e)
         {
             Assert.fail();

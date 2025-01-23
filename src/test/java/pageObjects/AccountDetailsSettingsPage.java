@@ -1,10 +1,8 @@
 package pageObjects;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utilities.CommonUtils;
-
 import java.util.List;
 
 public class AccountDetailsSettingsPage extends BasePage {
@@ -13,26 +11,16 @@ public class AccountDetailsSettingsPage extends BasePage {
 
     public AccountDetailsSettingsPage(WebDriver driver) {
         super(driver);
+        this.commonUtils = new CommonUtils(driver);
     }
 
     @FindBy(xpath = "//ul[@id='settingTabs']/li/a")
-    List<WebElement> settingsTabsList;
+    public List<WebElement> settingsTabsList;
 
     @FindBy(xpath = "//button[@id='enable-edit-form']")
-    WebElement editButton;
+    public WebElement editButton;
 
     @FindBy(xpath = "//a[normalize-space()='Create New']")
-    WebElement createNewButton;
+    public WebElement createNewButton;
 
-    public void selectSettingsTab(String settingsTabName) {
-        commonUtils.selectTab(settingsTabsList, settingsTabName);
-    }
-
-    public void clickOnEdit() {
-        editButton.click();
-    }
-
-    public void clickOnCreateNew() {
-        createNewButton.click();
-    }
 }

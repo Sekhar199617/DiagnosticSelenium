@@ -1,45 +1,58 @@
 package testCases;
-
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.AccountDetailsSettingsPage;
 import pageObjects.AccountDetailsUsersAndRolesPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
+import utilities.CommonUtils;
 
 public class AccountDetailsSettingsBillingTest extends BaseClass {
+
+    public String randomUser;
 
     @Test
     public void verifyCreateNewBillingContactTest() {
 
-        login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
+        logger.info("****** Starting New Billing Contact Test ******");
+        try {
+            randomUser = randomString();
 
-        DashboardPage dp = new DashboardPage(driver);
+            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-        dp.searchForElement(p.getProperty("accountName"));
-        dp.clickOnActionsDropDown();
-        dp.clickOnView();
+            DashboardPage dp = new DashboardPage(driver);
+            CommonUtils commonUtils = new CommonUtils(driver);
 
-        AccountDetailsPage ad = new AccountDetailsPage(driver);
-        ad.selectTab("Settings");
+            commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
+            commonUtils.clickOnElement(dp.searchButton, "Search");
+            commonUtils.clickOnElement(dp.actionsDropDown, null);
+            commonUtils.clickOnElement(dp.view, "View");
 
-        AccountDetailsSettingsPage ads = new AccountDetailsSettingsPage(driver);
-        ads.selectSettingsTab("Billing");
-        ads.clickOnEdit();
-        ads.clickOnCreateNew();
+            AccountDetailsPage ad = new AccountDetailsPage(driver);
+            commonUtils.selectTab(ad.tabList, "Settings");
 
-        AccountDetailsUsersAndRolesPage aduar = new AccountDetailsUsersAndRolesPage(driver);
-        aduar.enterNewUserName(randomString());
-        aduar.clickOnCountryDropDown();
-        aduar.selectMobileCountryCode(p.getProperty("mobileCountryCode"));
-        aduar.enterPhoneNumber(randomNumbers());
-        aduar.enterEmail(randomString() + "@gmail.com");
-        aduar.verifyShowAssigneeSessionTimeRadioButton();
-        aduar.selectUserDefaultTimeZone(p.getProperty("defaultTimeZone"));
-        aduar.verifyActiveCheckbox();
-        aduar.clickOnSave();
+            AccountDetailsSettingsPage ads = new AccountDetailsSettingsPage(driver);
+            commonUtils.selectTab(ads.settingsTabsList, "Billing");
+            commonUtils.clickOnElement(ads.editButton, "Edit");
+            commonUtils.clickOnElement(ads.createNewButton, "Create New");
 
-        aduar.verifyDialogueText(p.getProperty("dialogueText"));
-        aduar.clickOnDialogueOk();
+            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            commonUtils.enterValueInTextField(au.newUserNameField, randomUser);
+            commonUtils.clickOnElement(au.mobileCountryCodeDropDown, null);
+            commonUtils.selectMobileCountryCode(au.countryList, p.getProperty("mobileCountryCode"));
+            commonUtils.enterValueInTextField(au.phoneNumberField, randomNumbers());
+            commonUtils.enterValueInTextField(au.emailField, randomString() + "@gmail.com");
+            commonUtils.validateRadioButton(au.userTimeZoneRadioButton);
+            commonUtils.selectDropDownValue(au.userDefaultTimeZoneDropDown, p.getProperty("defaultTimeZone"));
+            commonUtils.validateCheckbox(au.activeCheckbox);
+            commonUtils.scrollToBottomAndClick(au.saveButton);
+            commonUtils.validateGetText(au.dialogueText, p.getProperty("dialogueText"));
+            commonUtils.clickOnElement(au.dialogueOkButton, "Ok");
+        }catch(Exception e)
+        {
+            Assert.fail();
+        }
+        logger.info("****** Finished New Billing Contact Test ******");
     }
 }
