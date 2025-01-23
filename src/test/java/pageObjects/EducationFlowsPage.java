@@ -1,9 +1,9 @@
 package pageObjects;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utilities.CommonUtils;
+import java.util.List;
 
 public class EducationFlowsPage extends BasePage {
 
@@ -11,47 +11,34 @@ public class EducationFlowsPage extends BasePage {
 
     public EducationFlowsPage(WebDriver driver) {
         super(driver);
+        this.commonUtils = new CommonUtils(driver);
     }
 
     @FindBy(xpath = "//button[normalize-space()='Add']")
-    WebElement addButton;
+    public WebElement addButton;
 
     @FindBy(xpath = "//input[@id='observation_flow_name']")
-    WebElement educationFlowNameField;
+    public WebElement educationFlowNameField;
 
     @FindBy(xpath = "//select[@id='flow_purpose']")
-    WebElement purposeOfFlowDropDown;
+    public WebElement purposeOfFlowDropDown;
+
+    @FindBy(xpath = "//select[@id='flow_purpose']//option")
+    public List<WebElement> list;
 
     @FindBy(xpath = "//input[@id='active_check']")
-    WebElement activeCheckbox;
+    public WebElement activeCheckbox;
+
+    @FindBy(xpath = "//button[contains(text(),'Save')]")
+    public WebElement saveButton;
 
     @FindBy(xpath = "//h2[@class='swal2-title']")
-    WebElement dialogueText;
+    public WebElement dialogueText;
 
     @FindBy(xpath = "//button[normalize-space()='Ok']")
-    WebElement educationFlowDialogue;
+    public WebElement educationFlowDialogue;
 
-    public void clickOnAdd() {
-        addButton.click();
-    }
+    @FindBy(xpath = "//button[@id='submitEductionFlowForm']")
+    public WebElement updateButton;
 
-    public void enterEducationFlowName(String educationFlowName) {
-        educationFlowNameField.sendKeys(educationFlowName);
-    }
-
-    public void selectPurposeOfFlowValue(String purposeOfFlow) {
-        commonUtils.selectDropDownValue(purposeOfFlowDropDown, purposeOfFlow);
-    }
-
-    public void verifyActiveCheckbox() {
-        commonUtils.validateCheckbox(activeCheckbox);
-    }
-
-    public void verifyEducationFlowDialogueText(String expectedMessage) {
-        commonUtils.validateGetText(dialogueText, expectedMessage);
-    }
-
-    public void clickOnEducationFlowDialogueOk() {
-        educationFlowDialogue.click();
-    }
 }
