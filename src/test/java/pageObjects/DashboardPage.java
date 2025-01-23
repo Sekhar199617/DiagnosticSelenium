@@ -2,9 +2,7 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 import utilities.CommonUtils;
-
 import java.util.List;
 
 public class DashboardPage extends BasePage {
@@ -13,31 +11,32 @@ public class DashboardPage extends BasePage {
 
 	public DashboardPage(WebDriver driver) {
 		super(driver);
+		this.commonUtils = new CommonUtils(driver);
 	}
 	
 	@FindBy(xpath = "//h3[normalize-space()='Dashboard']")
-	WebElement headerText;
+	public WebElement headerText;
 	
 	@FindBy(xpath = "//span[@class='navbar-toggler-icon']")
-	WebElement togglerIcon;
+	public WebElement togglerIcon;
 	
 	@FindBy(xpath = "//a[normalize-space()='Logout']")
-	WebElement logoutButton;
+	public WebElement logoutButton;
 	
 	@FindBy(xpath = "//input[@id='searchAccName']")
-	WebElement searchField;
+	public WebElement searchField;
 	
 	@FindBy(xpath = "//button[@id='search_btn']")
-	WebElement searchButton;
+	public WebElement searchButton;
 	
 	@FindBy(xpath = "//button[@id='dropdownMenuButton1']")
-	WebElement actionsDropDown;
+	public WebElement actionsDropDown;
 	
 	@FindBy(xpath = "//a[normalize-space()='View']")
-	WebElement view;
+	public WebElement view;
 
 	@FindBy(xpath = "//div[@class='mt--10px']/li/a")
-	List<WebElement> hamburgerMenuList;
+	public List<WebElement> hamburgerMenuList;
 	
 	public boolean isMyAccountExists()	{
 		try	{
@@ -45,26 +44,6 @@ public class DashboardPage extends BasePage {
 		}catch(Exception e)	{
 			return false;
 		}
-	}
-	
-	public void clickOnTogglerIcon() {
-		togglerIcon.click();
-	}
-	
-	public void clickOnHamBurgerMenuItem(String menuItemName) {
-		commonUtils.selectTab(hamburgerMenuList, menuItemName);
-	}
-	
-	public void searchForElement(String searchElement) {
-		commonUtils.search(searchElement, searchField, searchButton);
-	}
-	
-	public void clickOnActionsDropDown() {
-		actionsDropDown.click();
-	}
-	
-	public void clickOnView() {
-		view.click();
 	}
 
 }

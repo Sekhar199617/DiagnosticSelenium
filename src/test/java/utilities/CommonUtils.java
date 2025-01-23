@@ -88,7 +88,7 @@ public class CommonUtils {
     	Select dropdown = new Select(element);
     	dropdown.selectByVisibleText(text);
     }
-    
+
     public void validateRadioButton(WebElement element) {
         waitForElementToBeVisible(element, 5);
     	element.isSelected();
@@ -141,5 +141,11 @@ public class CommonUtils {
             System.err.println("Error during scrolling and clicking the element: " + e.getMessage());
         }
     }
-    
+
+    public void selectRadioButton(WebElement radioButton) {
+        waitForElementToBeClickable(radioButton, 5);
+        if (!radioButton.isSelected()) {
+            radioButton.click();
+        }
+    }
 }

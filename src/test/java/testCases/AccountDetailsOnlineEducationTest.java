@@ -1,32 +1,43 @@
 package testCases;
-
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsOnlineEducationPage;
 import pageObjects.AccountDetailsPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
+import utilities.CommonUtils;
 
 public class AccountDetailsOnlineEducationTest extends BaseClass {
 
     @Test
     public void verifyOnlineEducationTest() {
-        login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-        DashboardPage dp = new DashboardPage(driver);
+        logger.info("****** Starting Online Education Test ******");
+        try {
+            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-        dp.searchForElement(p.getProperty("accountName"));
-        dp.clickOnActionsDropDown();
-        dp.clickOnView();
+            DashboardPage dp = new DashboardPage(driver);
+            CommonUtils commonUtils = new CommonUtils(driver);
 
-        AccountDetailsPage ad = new AccountDetailsPage(driver);
-        ad.selectTab("Online Education");
+            commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
+            commonUtils.clickOnElement(dp.searchButton, "Search");
+            commonUtils.clickOnElement(dp.actionsDropDown, null);
+            commonUtils.clickOnElement(dp.view, "View");
 
-        AccountDetailsOnlineEducationPage aoe = new AccountDetailsOnlineEducationPage(driver);
-        aoe.selectExperiencesForProvisionedOrdersRadioButton();
-        aoe.clickOnManage();
-        aoe.clickOnAdd();
-        aoe.enterExperienceName(randomString());
-        aoe.selectAttachBundleValue(p.getProperty("attachBundle"));
-        aoe.clickOnSave();
+            AccountDetailsPage ad = new AccountDetailsPage(driver);
+            commonUtils.selectTab(ad.tabList, "Online Education");
+
+            AccountDetailsOnlineEducationPage aoe = new AccountDetailsOnlineEducationPage(driver);
+            commonUtils.selectRadioButton(aoe.experiencesForProvisionedOrdersRadioButton);
+            commonUtils.clickOnElement(aoe.manageButton, null);
+            commonUtils.clickOnElement(aoe.addButton, null);
+            commonUtils.enterValueInTextField(aoe.experienceNameField, randomString());
+            commonUtils.selectDropDownValue(aoe.attachBundleDropDown, p.getProperty("attachBundle"));
+            commonUtils.clickOnElement(aoe.saveButton, null);
+        }catch(Exception e)
+        {
+            Assert.fail();
+        }
+        logger.info("****** Finished Online Education Test ******");
     }
 }

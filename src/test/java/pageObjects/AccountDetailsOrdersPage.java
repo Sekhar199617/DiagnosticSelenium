@@ -1,5 +1,4 @@
 package pageObjects;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,81 +10,37 @@ public class AccountDetailsOrdersPage extends BasePage {
 
     public AccountDetailsOrdersPage(WebDriver driver) {
         super(driver);
+        this.commonUtils = new CommonUtils(driver);
     }
 
     @FindBy(xpath = "//input[@id='provisioned_orders']")
-    WebElement provisionedOrdersRadioButton;
+    public WebElement provisionedOrdersRadioButton;
 
     @FindBy(xpath = "//a[@data-bs-toggle='modal'][normalize-space()='Add']")
-    WebElement addText;
+    public WebElement addText;
 
     @FindBy(xpath = "//select[@id='orderType']")
-    WebElement purchasableBundleDropDown;
+    public WebElement purchasableBundleDropDown;
 
     @FindBy(xpath = "//select[@id='shipping_options']")
-    WebElement availableShippingOptions;
+    public WebElement availableShippingOptions;
 
     @FindBy(xpath = "//select[@id='variations']")
-    WebElement availableVariationsOptions;
+    public WebElement availableVariationsOptions;
 
     @FindBy(xpath = "//select[@id='noOfUnits']")
-    WebElement noOfUnitsDropDown;
+    public WebElement noOfUnitsDropDown;
 
     @FindBy(xpath = "//input[@id='pricePerUnit']")
-    WebElement pricePerUnit;
+    public WebElement pricePerUnit;
 
     @FindBy(xpath = "//input[@id='shipping_pricePerUnit']")
-    WebElement shippingAmountPerUnit;
+    public WebElement shippingAmountPerUnit;
 
     @FindBy(xpath = "//input[@id='estimated_tax']")
-    WebElement estimatedTaxField;
+    public WebElement estimatedTaxField;
 
     @FindBy(xpath = "//button[@id='add_user_purchase']")
-    WebElement addOrderButton;
+    public WebElement addOrderButton;
 
-
-
-    public void selectProvisionedOrdersRadioButton() {
-        if (!provisionedOrdersRadioButton.isSelected()) {
-            // If the radio button is not selected, click on the element
-            provisionedOrdersRadioButton.click();
-        }
-    }
-
-    public void clickOnAdd() {
-        addText.click();
-    }
-
-    public void selectPurchasableBundleValue(String purchasableBundleValue) {
-        commonUtils.selectDropDownValue(purchasableBundleDropDown, purchasableBundleValue);
-    }
-
-    public void selectAvailableShippingOptionsValue(String availableShippingOptionsValue) {
-        commonUtils.selectDropDownValue(availableShippingOptions, availableShippingOptionsValue);
-    }
-
-    public void selectAvailableVariationsOptionsValue(String availableVariationsOptionsValue) {
-        commonUtils.selectDropDownValue(availableVariationsOptions, availableVariationsOptionsValue);
-    }
-
-    public void selectNoOfUnitsValue(String noOfUnitsValue) {
-        commonUtils.selectDropDownValue(noOfUnitsDropDown, noOfUnitsValue);
-    }
-
-    public void enterPricePerUnit(String pricePerUnitValue) {
-        pricePerUnit.sendKeys(pricePerUnitValue);
-    }
-
-    public void enterShippingAmountPerUnit(String shippingAmountPerUnitValue) {
-        shippingAmountPerUnit.sendKeys(shippingAmountPerUnitValue);
-    }
-
-    public void enterEstimatedTax(String estimatedTax) {
-        estimatedTaxField.clear();
-        estimatedTaxField.sendKeys(estimatedTax);
-    }
-
-    public void clickOnAddOrderButton() {
-        addOrderButton.click();
-    }
 }

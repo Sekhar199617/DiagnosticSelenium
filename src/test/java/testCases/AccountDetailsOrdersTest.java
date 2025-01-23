@@ -1,36 +1,48 @@
 package testCases;
-
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.DashboardPage;
 import pageObjects.AccountDetailsOrdersPage;
 import testBase.BaseClass;
+import utilities.CommonUtils;
 
 public class AccountDetailsOrdersTest extends BaseClass {
 
     @Test
     public void verifyProvisionedOrdersTest() {
-        login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-        DashboardPage dp = new DashboardPage(driver);
+        logger.info("****** Starting Provisioned Orders Test ******");
+        try {
+            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-        dp.searchForElement(p.getProperty("accountName"));
-        dp.clickOnActionsDropDown();
-        dp.clickOnView();
+            DashboardPage dp = new DashboardPage(driver);
+            CommonUtils commonUtils = new CommonUtils(driver);
 
-        AccountDetailsPage ad = new AccountDetailsPage(driver);
-        ad.selectTab("Orders");
+            commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
+            commonUtils.clickOnElement(dp.searchButton, "Search");
+            commonUtils.clickOnElement(dp.actionsDropDown, null);
+            commonUtils.clickOnElement(dp.view, "View");
 
-        AccountDetailsOrdersPage po = new AccountDetailsOrdersPage(driver);
-        po.selectProvisionedOrdersRadioButton();
-        po.clickOnAdd();
-        po.selectPurchasableBundleValue(p.getProperty("purchasableBundle"));
-        po.selectAvailableShippingOptionsValue(p.getProperty("availableShippingOptions"));
-        po.selectAvailableVariationsOptionsValue(p.getProperty("availableVariationsOptions"));
-        po.selectNoOfUnitsValue(p.getProperty("noOfUnits"));
-        po.enterPricePerUnit(p.getProperty("pricePerUnit"));
-        po.enterShippingAmountPerUnit(p.getProperty("shippingAmountPerUnit"));
-        po.enterEstimatedTax(p.getProperty("estimatedTax"));
-        po.clickOnAddOrderButton();
+            AccountDetailsPage ad = new AccountDetailsPage(driver);
+            commonUtils.selectTab(ad.tabList, "Orders");
+
+            AccountDetailsOrdersPage po = new AccountDetailsOrdersPage(driver);
+            commonUtils.selectRadioButton(po.provisionedOrdersRadioButton);
+            commonUtils.clickOnElement(po.addText, null);
+            commonUtils.selectDropDownValue(po.purchasableBundleDropDown, p.getProperty("purchasableBundle"));
+            commonUtils.selectDropDownValue(po.availableShippingOptions, p.getProperty("availableShippingOptions"));
+            commonUtils.selectDropDownValue(po.availableVariationsOptions, p.getProperty("availableVariationsOptions"));
+            commonUtils.selectDropDownValue(po.noOfUnitsDropDown, p.getProperty("noOfUnits"));
+            commonUtils.enterValueInTextField(po.pricePerUnit, p.getProperty("pricePerUnit"));
+            commonUtils.enterValueInTextField(po.shippingAmountPerUnit, p.getProperty("shippingAmountPerUnit"));
+            commonUtils.enterValueInTextField(po.estimatedTaxField, p.getProperty("estimatedTax"));
+            commonUtils.clickOnElement(po.addOrderButton, null);
+        }catch(Exception e)
+        {
+            Assert.fail();
+        }
+        logger.info("****** Finished Provisioned Orders Test ******");
+
     }
 }
