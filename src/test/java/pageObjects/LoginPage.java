@@ -3,46 +3,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 	
 	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
-	
+
 	@FindBy(xpath = "//input[@placeholder='Email']")
-	WebElement emailField;
+	public WebElement emailField;
 	
 	@FindBy(xpath = "//input[@placeholder='Password']")
-	WebElement passwordField;
+	public WebElement passwordField;
 	
 	@FindBy(xpath = "//button[@id='adminLoginForm']")
-	WebElement adminLoginButton;
+	public WebElement adminLoginButton;
 	
 	@FindBy(xpath = "//button[@id='observerLoginForm']")
-	WebElement observerLoginButton;
+	public WebElement observerLoginButton;
 	
 	@FindBy(xpath = "//div[@role='alert']")
-	WebElement alertMessage;
-	
-	
-	public void enterEmail(String username) {
-		emailField.sendKeys(username);
-    }
-	
-	public void enterPassword(String password) {
-		passwordField.sendKeys(password);
-	}
-	
-	public void clickOnAdminLogin() {
-		adminLoginButton.click();
-	}
-	
-	public void clickOnObserverLogin() {
-		observerLoginButton.click();
-	}
-	
-	public String alertMessage() {
-	    return alertMessage.getText();
-	}
+	public WebElement alertMessage;
 
 }

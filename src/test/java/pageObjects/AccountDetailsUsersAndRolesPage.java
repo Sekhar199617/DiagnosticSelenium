@@ -14,161 +14,73 @@ public class AccountDetailsUsersAndRolesPage extends BasePage {
 
 	public AccountDetailsUsersAndRolesPage(WebDriver driver) {
 		super(driver);
+	    this.commonUtils = new CommonUtils(driver);
 	}
 	
 	@FindBy(xpath = "//input[@placeholder='Enter Name']")
-	WebElement newUserNameField;
+	public WebElement newUserNameField;
 	
 	@FindBy(xpath = "//div[@aria-owns='country-listbox']")
-	WebElement mobileCountryCodeDropDown;
+	public WebElement mobileCountryCodeDropDown;
 	
 	@FindBy(xpath = "//span[@class='iti__country-name']")
-	List<WebElement> countryList;
+	public List<WebElement> countryList;
 	
 	@FindBy(xpath = "//input[@placeholder='Enter phone number']")
-	WebElement phoneNumberField;
+	public WebElement phoneNumberField;
 	
 	@FindBy(xpath = "//input[@placeholder='Enter email address']")
-	WebElement emailField;
+	public WebElement emailField;
 	
 	@FindBy(xpath = "//select[@id='userRole']")
-	WebElement roleDropDown;
+	public WebElement roleDropDown;
 	
 	@FindBy(xpath = "//select[@id='role']")
-	WebElement userTypeDropDown;
+	public WebElement userTypeDropDown;
 	
 	@FindBy(xpath = "(//input[@name='timezone_support'])[2]")
-	WebElement userTimeZoneRadioButton;
+	public WebElement userTimeZoneRadioButton;
 	
 	@FindBy(xpath = "//select[@name='timezone_id']")
-	WebElement userDefaultTimeZoneDropDown;
+	public WebElement userDefaultTimeZoneDropDown;
 	
 	@FindBy(xpath = "//input[@id='immediately']")
-	WebElement immediatelyRadioButton;
+	public WebElement immediatelyRadioButton;
 	
 	@FindBy(xpath = "//input[@id='activeAccount']")
-	WebElement activeCheckbox;
+	public WebElement activeCheckbox;
 	
-	@FindBy(xpath = "//button[@id='addUserForm']")
-	WebElement saveButton;
+	@FindBy(css = "#addUserForm")
+	public WebElement saveButton;
 	
 	@FindBy(xpath = "//input[@id='provider_npi']")
-	WebElement licenseIDField;
+	public WebElement licenseIDField;
 	
 	@FindBy(xpath = "//textarea[@id='credentials']")
-	WebElement credentialsField;
+	public WebElement credentialsField;
 	
 	@FindBy(xpath = "//input[@value='Company Test 1']")
-	WebElement accountNameField;
+	public WebElement accountNameField;
 	
 	@FindBy(xpath = "//select[@id='unselected_bundles']")
-	WebElement unselectedBundlesList;
+	public WebElement unselectedBundlesList;
 	
 	@FindBy(xpath = "//button[@onclick='addProduct()']")
-	WebElement rightArrow;
+	public WebElement rightArrow;
 	
 	@FindBy(xpath = "//select[@id='selected_bundles']")
-	WebElement selectedBundleField;
+	public WebElement selectedBundleField;
 	
 	@FindBy(xpath = "//div[@class='manager_privilege_div']/div/input")
-	List<WebElement> additionalPriviligesCheckboxesList;
+	public List<WebElement> additionalPriviligesCheckboxesList;
 	
 	@FindBy(xpath = "//div[@class='support_manager_privilege_div']/div/input")
-	List<WebElement> supportManagerPriviligesCheckboxesList;
+	public List<WebElement> supportManagerPriviligesCheckboxesList;
 	
 	@FindBy(xpath = "//h2[@class='swal2-title']")
-	WebElement dialogueText;
+	public WebElement dialogueText;
 
 	@FindBy(xpath = "//button[normalize-space()='Ok']")
-	WebElement dialogueOkButton;
-	
-	
-	public void enterNewUserName(String userName) {
-		newUserNameField.sendKeys(userName);
-	}
-	
-	public void clickOnCountryDropDown() {
-		mobileCountryCodeDropDown.click();
-	}
-	
-	public void selectMobileCountryCode(String countryName) {
-		commonUtils.selectMobileCountryCode(countryList, countryName);
-	}
-	
-	public void enterPhoneNumber(String phoneNumber) {
-		phoneNumberField.sendKeys(phoneNumber);
-	}
-	
-	public void enterEmail(String email) {
-		emailField.sendKeys(email);
-	}
-	
-	public void selectRole(String role) {
-		commonUtils.selectDropDownValue(roleDropDown, role);
-	}
-	
-	public void selectUserType(String userType) {
-		commonUtils.selectDropDownValue(userTypeDropDown, userType);
-	}
-	
-	public void verifyShowAssigneeSessionTimeRadioButton() {
-		commonUtils.validateRadioButton(userTimeZoneRadioButton);
-	}
-	
-	public void selectUserDefaultTimeZone(String defaultTimeZone) {
-		commonUtils.selectDropDownValue(userDefaultTimeZoneDropDown, defaultTimeZone);
-	}
-	
-	public void verifySendLoginInformationRadioButton() {
-		commonUtils.validateRadioButton(immediatelyRadioButton);
-	}
-	
-	public void verifyActiveCheckbox() {
-		commonUtils.validateCheckbox(activeCheckbox);
-	}
-	
-	public void clickOnSave() {
-		saveButton.click();
-	}
-	
-	public void validateInputText(String accountName) {
-		commonUtils.validateInputText(accountNameField, accountName);
-	}
-	
-	public void enterLicenceID(String licenseID) {
-		licenseIDField.sendKeys(licenseID);
-	}
-	
-	public void enterCredentials(String credentials) {
-		credentialsField.sendKeys(credentials);
-	}
-	
-	public void selectUnselectedBundle(String unselectedBundle) {
-		commonUtils.selectDropDownValue(unselectedBundlesList, unselectedBundle);
-	}
-	
-	public void clickOnRightArrow() {
-		rightArrow.click();
-	}
-	
-	public void verifySelectedBundleText(String selectedBundle) {
-		commonUtils.validateGetText(selectedBundleField, selectedBundle);
-	}
-	
-	public void selectRandomAdditionalPriviligesCheckboxes() {
-		commonUtils.selectRandomCheckboxes(additionalPriviligesCheckboxesList);
-	}
-	
-	public void selectRandomSupportManagerPriviligesCheckboxes() {
-		commonUtils.selectRandomCheckboxes(supportManagerPriviligesCheckboxesList);
-	}
-	
-	public void verifyDialogueText(String expectedMessage) {
-		commonUtils.validateGetText(dialogueText, expectedMessage);
-	}
-
-	public void clickOnDialogueOk() {
-		dialogueOkButton.click();
-	}
+	public WebElement dialogueOkButton;
 
 }

@@ -1,74 +1,85 @@
 package testCases;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.AccountDetailsUsersAndRolesPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
+import utilities.CommonUtils;
 
 public class AccountDetailsUsersAndRolesTest extends BaseClass {
-	
-	@Test
-	public void verifyAddNewAccountUser() {
-		
-		login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-		
-		DashboardPage dp = new DashboardPage(driver);
 
-		dp.searchForElement(p.getProperty("accountName"));
-		dp.clickOnActionsDropDown();
-		dp.clickOnView();
-		
-		AccountDetailsPage ad = new AccountDetailsPage(driver);
-		ad.selectTab("Users & Roles");
-		ad.clickOnAdd();
-		
-		AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
-		au.enterNewUserName(randomString());
-		au.clickOnCountryDropDown();
-		au.selectMobileCountryCode(p.getProperty("mobileCountryCode"));
-		au.enterPhoneNumber(randomNumbers());
-		au.enterEmail(randomString() + "@gmail.com");
-		au.selectRole(p.getProperty("role"));
-		
-		au.selectUserType(p.getProperty("userType"));
-		
-		switch(p.getProperty("userType")) {
-			case "account_admin": 
-				au.validateInputText(p.getProperty("accountName"));
-				break;
-			case "provider":
-				au.enterLicenceID(p.getProperty("licenseID"));
-				au.enterCredentials(p.getProperty("credentials"));
-				break;
-			case "medical_staff":
-				au.enterLicenceID(p.getProperty("licenseID"));
-				au.enterCredentials(p.getProperty("credentials"));
-				break;
-			case "observer":
-				au.selectUnselectedBundle(p.getProperty("unselectedBundle"));
-				au.clickOnRightArrow();
-				au.verifySelectedBundleText(p.getProperty("unselectedBundle"));
-				break;
-			case "manager":
-				au.selectRandomAdditionalPriviligesCheckboxes();
-				break;
-			case "support_entity_admin":
-				break;
-			case "support_entity_manager":
-				au.selectRandomSupportManagerPriviligesCheckboxes();
-				break;
-			default :
-				System.out.println("Invalid user type provided: " + p.getProperty("userType"));
-                break;		
+	public String randomUser;
+	public CommonUtils commonUtils;
+
+	@Test(groups= {"Smoke"})
+	public void verifyAddNewAccountUser() {
+
+		logger.info("****** Starting Add New Account User Test ******");
+		try{
+			randomUser = randomString();
+
+			login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
+
+			DashboardPage dp = new DashboardPage(driver);
+			CommonUtils commonUtils = new CommonUtils(driver);
+
+			commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
+			commonUtils.clickOnElement(dp.searchButton, "Search");
+			commonUtils.clickOnElement(dp.actionsDropDown, null);
+			commonUtils.clickOnElement(dp.view, "View");
+
+			AccountDetailsPage ad = new AccountDetailsPage(driver);
+			commonUtils.selectTab(ad.tabList, "Users & Roles");
+			commonUtils.clickOnElement(ad.addText, "Add");
+
+			AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+			commonUtils.enterValueInTextField(au.newUserNameField, randomUser);
+			commonUtils.clickOnElement(au.mobileCountryCodeDropDown, null);
+			commonUtils.selectMobileCountryCode(au.countryList, p.getProperty("mobileCountryCode"));
+			commonUtils.enterValueInTextField(au.phoneNumberField, randomNumbers());
+			commonUtils.enterValueInTextField(au.emailField, randomString() + "@gmail.com");
+			commonUtils.selectDropDownValue(au.roleDropDown, p.getProperty("role"));
+			commonUtils.selectDropDownValue(au.userTypeDropDown, p.getProperty("userType"));
+
+			switch(p.getProperty("userType")) {
+				case "Account Admin":
+					commonUtils.validateInputText(au.accountNameField, p.getProperty("accountName"));
+					break;
+				case "Provider":
+				case "Medical Staff":
+					commonUtils.enterValueInTextField(au.licenseIDField, p.getProperty("licenseID"));
+					commonUtils.enterValueInTextField(au.credentialsField, p.getProperty("credentials"));
+					break;
+				case "Observer":
+					commonUtils.selectDropDownValue(au.unselectedBundlesList, p.getProperty("unselectedBundle"));
+					commonUtils.clickOnElement(au.rightArrow, null);
+					commonUtils.validateInputText(au.selectedBundleField, p.getProperty("unselectedBundle"));
+					break;
+				case "Manager":
+					commonUtils.selectRandomCheckboxes(au.additionalPriviligesCheckboxesList);
+					break;
+				case "Support Entity Admin":
+					break;
+				case "Support Entity Manager":
+					commonUtils.selectRandomCheckboxes(au.supportManagerPriviligesCheckboxesList);
+					break;
+				default :
+					System.out.println("Invalid user type provided: " + p.getProperty("userType"));
+					break;
+			}
+
+			commonUtils.validateRadioButton(au.userTimeZoneRadioButton);
+			commonUtils.selectDropDownValue(au.userDefaultTimeZoneDropDown, p.getProperty("defaultTimeZone"));
+			commonUtils.validateCheckbox(au.activeCheckbox);
+			commonUtils.scrollToBottomAndClick(au.saveButton);
+			commonUtils.validateGetText(au.dialogueText, p.getProperty("dialogueText"));
+			commonUtils.clickOnElement(au.dialogueOkButton, "Ok");
+
+		}catch(Exception e)
+		{
+			Assert.fail();
 		}
-		
-		
-		au.verifyShowAssigneeSessionTimeRadioButton();
-		au.selectUserDefaultTimeZone(p.getProperty("defaultTimeZone"));
-		au.verifyActiveCheckbox();
-		au.clickOnSave();
-		
-		au.verifyDialogueText(p.getProperty("dialogueText"));
-		au.clickOnDialogueOk();
+		logger.info("****** Finished Add New Account User Test ******");
 	}
 }

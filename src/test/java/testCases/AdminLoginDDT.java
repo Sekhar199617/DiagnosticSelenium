@@ -23,15 +23,14 @@ public class AdminLoginDDT extends BaseClass {
 			boolean targetPage = dp.isMyAccountExists();
 			
 			LoginPage loginPage = new LoginPage(driver);
-			
 			commonUtils = new CommonUtils(driver);
 			
 			if(exp.equalsIgnoreCase("valid"))
 			{
 				if(targetPage)
 				{
-					dp.clickOnTogglerIcon();
-					dp.clickOnHamBurgerMenuItem("Logout");
+					commonUtils.clickOnElement(dp.togglerIcon, null);
+					commonUtils.clickOnElement(dp.logoutButton, null);
 					Assert.assertTrue(true);
 				}else
 				{
@@ -41,20 +40,13 @@ public class AdminLoginDDT extends BaseClass {
 			
 			if(exp.equalsIgnoreCase("invalid"))
 			{
-				if(targetPage)
-				{
-					dp.clickOnTogglerIcon();
-					dp.clickOnHamBurgerMenuItem("Logout");
+				if(targetPage)	{
+					commonUtils.clickOnElement(dp.togglerIcon, null);
+					commonUtils.clickOnElement(dp.logoutButton, null);
                     Assert.fail();
-				}else
-				{
+				}else {
 					Assert.assertTrue(true);
-					String actualAlertMessage = loginPage.alertMessage();
-			        String expectedAlertMessage = "Wrong Credentials"; 
-			        
-			        System.out.println(actualAlertMessage );
-			        commonUtils.validateText(actualAlertMessage, expectedAlertMessage);
-					
+					commonUtils.validateGetText(loginPage.alertMessage, p.getProperty("invalidCredentialsAlertMessage"));
 				}
 			}
 		}catch(Exception e)
