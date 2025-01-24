@@ -24,7 +24,7 @@ import utilities.CommonUtils;
 
 public class BaseClass {
     
-    public WebDriver driver;
+	public static WebDriver driver;
     public Logger logger;
     public Properties p;
     
@@ -88,28 +88,26 @@ public class BaseClass {
 		String generatedNumbers = RandomStringUtils.randomNumeric(10);
 		return (generatedString+ "@" +generatedNumbers);
 	}
-    
-    public String captureScreen(String tname) throws IOException {
-        // Ensure the driver is an instance of TakesScreenshot
-        if (driver instanceof TakesScreenshot) {
-            String timeStamp = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-            TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+	
+	public String captureScreen(String tname) throws IOException {
+	    if (!(driver instanceof TakesScreenshot)) {
+	        throw new IllegalStateException("Driver does not support screenshot capture.");
+	    }
 
-            // Capture the screenshot
-            File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
+	    String timeStamp = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+	    TakesScreenshot takesScreenshot = (TakesScreenshot) driver;
+	    File sourceFile = takesScreenshot.getScreenshotAs(OutputType.FILE);
 
-            // Define target file path with extension
-            String targetFilePath = System.getProperty("user.dir") + "\\screenshots\\" + tname + "_" + timeStamp + ".png";
-            File targetFile = new File(targetFilePath);
+	    File screenshotDir = new File(System.getProperty("user.dir") + "\\screenshots");
+	    if (!screenshotDir.exists()) {
+	        screenshotDir.mkdirs();
+	    }
 
-            // Copy the screenshot to the target file
-            FileUtils.copyFile(sourceFile, targetFile);
-
-            return targetFilePath;
-        } else {
-            throw new IOException("Driver does not support screenshot capture.");
-        }
-    }
+	    String targetFilePath = screenshotDir + "\\" + tname + "_" + timeStamp + ".png";
+	    File targetFile = new File(targetFilePath);
+	    FileUtils.copyFile(sourceFile, targetFile);
+	    return targetFilePath;
+	}
     
     @AfterClass(groups= {"Smoke"})
     public void tearDown() {

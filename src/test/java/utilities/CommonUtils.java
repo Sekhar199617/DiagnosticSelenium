@@ -71,16 +71,16 @@ public class CommonUtils {
             }
     	}
     }
-    
-    public void selectMobileCountryCode(List<WebElement> element, String countryName) {
-    	for(WebElement country : element) {
-    		String countryText = country.getText();
-    		if(countryText.equalsIgnoreCase(countryName)) {
-                waitForElementToBeClickable(country, 5);
-    			country.click();
-    			break;
-    		}
-    	}
+
+    public void selectDropDownValueWithClick(List<WebElement> element, String countryName) {
+        for(WebElement country : element) {
+            String countryText = country.getText();
+            if(countryText.equalsIgnoreCase(countryName)) {
+                waitForElementToBeClickable(country, 5);;
+                country.click();
+                break;
+            }
+        }
     }
     
     public void selectDropDownValue(WebElement element, String text) {

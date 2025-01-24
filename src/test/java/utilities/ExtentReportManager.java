@@ -20,7 +20,6 @@ public class ExtentReportManager implements ITestListener {
 	public ExtentSparkReporter sparkReporter;
 	public ExtentReports extent;
 	public ExtentTest test;
-	
 	String repName;
 	
 	public void onStart(ITestContext testContext)
@@ -63,6 +62,7 @@ public class ExtentReportManager implements ITestListener {
 	
 	public void onTestFailure(ITestResult result)
 	{
+		System.out.println("onTestFailure triggered for test: " + result.getName());
 		test = extent.createTest(result.getTestClass().getName());
 		test.assignCategory(result.getMethod().getGroups());
 		

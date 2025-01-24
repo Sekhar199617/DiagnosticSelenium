@@ -36,7 +36,7 @@ public class AccountDetailsUsersAndRolesTest extends BaseClass {
 			AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
 			commonUtils.enterValueInTextField(au.newUserNameField, randomUser);
 			commonUtils.clickOnElement(au.mobileCountryCodeDropDown, null);
-			commonUtils.selectMobileCountryCode(au.countryList, p.getProperty("mobileCountryCode"));
+			commonUtils.selectDropDownValueWithClick(au.countryList, p.getProperty("mobileCountryCode"));
 			commonUtils.enterValueInTextField(au.phoneNumberField, randomNumbers());
 			commonUtils.enterValueInTextField(au.emailField, randomString() + "@gmail.com");
 			commonUtils.selectDropDownValue(au.roleDropDown, p.getProperty("role"));
@@ -65,7 +65,6 @@ public class AccountDetailsUsersAndRolesTest extends BaseClass {
 					commonUtils.selectRandomCheckboxes(au.supportManagerPriviligesCheckboxesList);
 					break;
 				default :
-					System.out.println("Invalid user type provided: " + p.getProperty("userType"));
 					break;
 			}
 

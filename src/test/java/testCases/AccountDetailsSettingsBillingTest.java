@@ -40,7 +40,7 @@ public class AccountDetailsSettingsBillingTest extends BaseClass {
             AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
             commonUtils.enterValueInTextField(au.newUserNameField, randomUser);
             commonUtils.clickOnElement(au.mobileCountryCodeDropDown, null);
-            commonUtils.selectMobileCountryCode(au.countryList, p.getProperty("mobileCountryCode"));
+            commonUtils.selectDropDownValueWithClick(au.countryList, p.getProperty("mobileCountryCode"));
             commonUtils.enterValueInTextField(au.phoneNumberField, randomNumbers());
             commonUtils.enterValueInTextField(au.emailField, randomString() + "@gmail.com");
             commonUtils.validateRadioButton(au.userTimeZoneRadioButton);

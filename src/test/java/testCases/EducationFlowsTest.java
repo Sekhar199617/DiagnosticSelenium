@@ -24,7 +24,7 @@ public class EducationFlowsTest extends BaseClass {
             EducationFlowsPage ef = new EducationFlowsPage(driver);
             commonUtils.clickOnElement(ef.addButton, "Add");
             commonUtils.enterValueInTextField(ef.educationFlowNameField, randomString());
-            commonUtils.selectMobileCountryCode(ef.list, p.getProperty("purposeOfFlow"));
+            commonUtils.selectDropDownValueWithClick(ef.list, p.getProperty("purposeOfFlow"));
             commonUtils.validateCheckbox(ef.activeCheckbox);
             commonUtils.scrollToBottomAndClick(ef.saveButton);
             commonUtils.validateGetText(ef.dialogueText, p.getProperty("educationFlowDialogueText"));
