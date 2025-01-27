@@ -1,4 +1,5 @@
 package utilities;
+import java.io.File;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
@@ -199,5 +200,25 @@ public class CommonUtils extends BaseClass {
         scrollToBottomAndClick(saveButton);
         validateGetText(dialogueText, dialogueTextExpected);
         clickOnElement(dialogueOkButton, "Ok");
+    }
+
+    public void scrollToElement(WebElement element) {
+        try {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            waitForElementToBeVisible(element, 10);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to scroll to element: " + e.getMessage(), e);
+        }
+    }
+
+    public void uploadFile(WebElement element, String filePath) {
+        File file = new File(filePath);
+
+        if (file.exists()) {
+            waitForElementToBeClickable(element, 10);
+            element.sendKeys(filePath);
+        } else {
+            System.out.println("File not found at: " + filePath);
+        }
     }
 }
