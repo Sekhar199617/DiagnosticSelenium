@@ -12,8 +12,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import testBase.BaseClass;
 
-public class CommonUtils {
+public class CommonUtils extends BaseClass {
     WebDriver driver;
     
     public CommonUtils(WebDriver driver) {
@@ -147,5 +148,56 @@ public class CommonUtils {
         if (!radioButton.isSelected()) {
             radioButton.click();
         }
+    }
+
+    public void createUser(WebElement newUserNameField, WebElement mobileCountryCodeDropDown, List<WebElement> countryList,
+                           WebElement phoneNumberField, WebElement emailField, WebElement roleDropDown, WebElement userTypeDropDown,
+                           WebElement licenseIDField, WebElement credentialsField, WebElement unselectedBundlesList, WebElement rightArrow,
+                           WebElement selectedBundleField, List<WebElement> additionalPriviligesCheckboxesList, List<WebElement> supportManagerPriviligesCheckboxesList,
+                           WebElement userTimeZoneRadioButton, WebElement userDefaultTimeZoneDropDown, WebElement activeCheckbox, WebElement saveButton,
+                           WebElement dialogueText, WebElement dialogueOkButton, String randomUser, String mobileCountryCode, String randomPhoneNumber,
+                           String role, String userType, String licenseID, String credentials, String unselectedBundle, String defaultTimeZone, String dialogueTextExpected) {
+
+        enterValueInTextField(newUserNameField, randomUser);
+        clickOnElement(mobileCountryCodeDropDown, null);
+        selectDropDownValueWithClick(countryList, mobileCountryCode);
+        enterValueInTextField(phoneNumberField, randomPhoneNumber);
+        enterValueInTextField(emailField, randomUser + "@gmail.com");
+        selectDropDownValue(roleDropDown, role);
+        selectDropDownValue(userTypeDropDown, userType);
+
+        // Handling specific logic for different user types
+        switch(userType) {
+            case "Account Admin":
+            case "Admin":
+            case "Support Entity Admin":
+                break;
+            case "Provider":
+            case "Medical Staff":
+                enterValueInTextField(licenseIDField, licenseID);
+                enterValueInTextField(credentialsField, credentials);
+                break;
+            case "Observer":
+                selectDropDownValue(unselectedBundlesList, unselectedBundle);
+                clickOnElement(rightArrow, null);
+                validateInputText(selectedBundleField, unselectedBundle);
+                break;
+            case "Manager":
+                selectRandomCheckboxes(additionalPriviligesCheckboxesList);
+                break;
+            case "Support Entity Manager":
+                selectRandomCheckboxes(supportManagerPriviligesCheckboxesList);
+                break;
+            default:
+                System.out.println("User type is not valid");
+                break;
+        }
+
+        validateRadioButton(userTimeZoneRadioButton);
+        selectDropDownValue(userDefaultTimeZoneDropDown, defaultTimeZone);
+        validateCheckbox(activeCheckbox);
+        scrollToBottomAndClick(saveButton);
+        validateGetText(dialogueText, dialogueTextExpected);
+        clickOnElement(dialogueOkButton, "Ok");
     }
 }
