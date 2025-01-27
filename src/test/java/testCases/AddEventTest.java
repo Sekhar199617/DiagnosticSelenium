@@ -13,10 +13,6 @@ import utilities.CommonUtils;
 
 public class AddEventTest extends BaseClass {
 
-	AddEventTagsPage addEventTagsPage;
-	AccountDetailsPage accountDetailsPage;
-	CommonUtils commonUtils;
-
 	@Test(groups = { "Smoke" })
 	public void verify_add_event() {
 		try {
@@ -42,18 +38,18 @@ public class AddEventTest extends BaseClass {
 			commonUtils.enterValueInTextField(addEventTagsPage.eventStartDateCalender, p.getProperty("eventStartDate"));
 			commonUtils.enterValueInTextField(addEventTagsPage.eventEndDateCalender, p.getProperty("eventEndDate"));
 			commonUtils.enterValueInTextField(addEventTagsPage.eventStartTime, p.getProperty("eventStartTiming"));
-			commonUtils.enterValueInTextField(addEventTagsPage.eventEndtTime, p.getProperty("eventEndtTiming"));
-			commonUtils.enterValueInTextField(addEventTagsPage.testing_windowStartDateCalender,
-					p.getProperty("testing_windowStartDate"));
-			commonUtils.enterValueInTextField(addEventTagsPage.testing_windowEndDateCalender,
-					p.getProperty("testing_windowEndDateCalender"));
-			commonUtils.enterValueInTextField(addEventTagsPage.testing_windowStartTime,
-					p.getProperty("testing_windowStartTiming"));
-			commonUtils.enterValueInTextField(addEventTagsPage.testing_windowEndtTime,
-					p.getProperty("testing_windowEndtTiming"));
+			commonUtils.enterValueInTextField(addEventTagsPage.eventEndTime, p.getProperty("eventEndTiming"));
+			commonUtils.enterValueInTextField(addEventTagsPage.testingWindowStartDateCalender,
+					p.getProperty("testingWindowStartDate"));
+			commonUtils.enterValueInTextField(addEventTagsPage.testingWindowEndDateCalender,
+					p.getProperty("testingWindowEndDateCalender"));
+			commonUtils.enterValueInTextField(addEventTagsPage.testingWindowStartTime,
+					p.getProperty("testingWindowStartTiming"));
+			commonUtils.enterValueInTextField(addEventTagsPage.testingWindowEndTime,
+					p.getProperty("testingWindowEndTiming"));
 
 			// Save Event
-			commonUtils.clickOnElement(addEventTagsPage.saveButton, null);
+			commonUtils.scrollToBottomAndClick(addEventTagsPage.saveButton);
 
 			logger.info("****** Finished Add Event Test Case ******");
 		} catch (Exception e) {

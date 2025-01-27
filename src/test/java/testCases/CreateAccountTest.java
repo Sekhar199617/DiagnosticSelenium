@@ -43,11 +43,11 @@ public class CreateAccountTest extends BaseClass {
 						"Invalid account type specified in config.properties: " + accountType);
 			}
 
-			commonUtils.clickOnElement(createAccountPage.diagnostic_MessagingSetDropdown, null);
+			commonUtils.selectDropDownValue(createAccountPage.diagnostic_MessagingSetDropdown, p.getProperty("diagnostic_MessagingSetDropdown"));
 			commonUtils.selectDropDownValue(createAccountPage.defaultIntakeFormDropdown,
 					p.getProperty("defaultIntake"));
 			commonUtils.selectDropDownValue(createAccountPage.billingCountryDropdown,
-					p.getProperty("billingcountryName"));
+					p.getProperty("billingCountryName"));
 			commonUtils.enterValueInTextField(createAccountPage.billingAddress_1Field,
 					p.getProperty("billingAddress1"));
 			commonUtils.enterValueInTextField(createAccountPage.billingCityField, p.getProperty("billingCity"));

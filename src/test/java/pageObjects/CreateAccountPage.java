@@ -27,13 +27,13 @@ public class CreateAccountPage extends  BasePage{
     @FindBy (xpath = "//input[@placeholder='Phone']")
     public WebElement  phoneField;
 
-    @FindBy (xpath = "//input[@type='radio' and @id='company']")
+    @FindBy (xpath = "//input[@id='company']")
     public WebElement accountType_CompanyRadioButton;
 
     @FindBy (xpath = "//input[@type='radio' and @id='individual']")
     public WebElement accountType_IndividualRadioButton;
 
-    @FindBy (xpath = "//select[@id='messaging_id']/option[@value='8']")
+    @FindBy (xpath = "//select[@id='messaging_id']")
     public WebElement diagnostic_MessagingSetDropdown;
 
     @FindBy (xpath = "//select[@id='default_intake_form']/option[@value='12']")
