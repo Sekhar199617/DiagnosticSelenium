@@ -17,11 +17,11 @@ import testBase.BaseClass;
 
 public class CommonUtils extends BaseClass {
     WebDriver driver;
-    
+
     public CommonUtils(WebDriver driver) {
         this.driver = driver;
     }
-    
+
     public void clickOnElement(WebElement element, String elementText) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
@@ -36,7 +36,7 @@ public class CommonUtils extends BaseClass {
             element.click();
         }
     }
-    
+
     public void enterValueInTextField(WebElement element, String value) {
         waitForElementToBeClickable(element, 5);
         element.click();
@@ -62,14 +62,14 @@ public class CommonUtils extends BaseClass {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void selectTab(List<WebElement> element, String tabName) {
     	for(WebElement tab: element) {
     		String tabText = tab.getText();
             if (tabText.equalsIgnoreCase(tabName)) {
                 waitForElementToBeClickable(tab, 5);
                 tab.click();
-                break;  
+                break;
             }
     	}
     }
@@ -84,8 +84,18 @@ public class CommonUtils extends BaseClass {
             }
         }
     }
-    
-    public void selectDropDownValue(WebElement element, String text) {
+
+    //SessionValid
+    public boolean isSessionValid() {
+        try {
+            driver.getTitle(); // Perform a lightweight operation to check session
+            return true;
+        } catch (Exception e) {
+            return false; // Session is invalid
+        }
+    }
+
+   public void selectDropDownValue(WebElement element, String text) {
         waitForElementToBeVisible(element, 5);
     	Select dropdown = new Select(element);
     	dropdown.selectByVisibleText(text);
@@ -95,24 +105,32 @@ public class CommonUtils extends BaseClass {
         waitForElementToBeVisible(element, 5);
     	element.isSelected();
     }
-    
+
+    public void clickRadioButton(WebElement element) {
+        waitForElementToBeVisible(element, 5);
+        if (!element.isSelected()) {
+            element.click();
+        }
+    }
+
+
     public void validateCheckbox(WebElement element) {
         waitForElementToBeVisible(element, 5);
     	element.isSelected();
     }
-    
+
     public void validateInputText(WebElement element, String expectedMessage) {
         waitForElementToBeVisible(element, 5);
     	String actualMessage = element.getDomProperty("value");
     	Assert.assertEquals(actualMessage, expectedMessage);
     }
-    
+
     public void validateGetText(WebElement element, String expectedMessage) {
         waitForElementToBeVisible(element, 10);
     	String actualMessage = element.getText().trim();
     	Assert.assertEquals(actualMessage, expectedMessage);
     }
-    
+
     public void selectRandomCheckboxes(List<WebElement> element) {
     	Random random = new Random();
         int randomIndex = random.nextInt(element.size());
