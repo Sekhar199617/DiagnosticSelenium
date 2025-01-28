@@ -36,9 +36,6 @@ public class CreateAccountPage extends  BasePage{
     @FindBy (xpath = "//select[@id='messaging_id']")
     public WebElement diagnosticMessagingSetDropdown;
 
-    @FindBy (xpath = "//select[@id='default_intake_form']/option[@value='12']")
-    public WebElement globalAccountDefaultIntakeFormDropdown;
-
     @FindBy (xpath = "//select[@id='default_intake_form']")
     public WebElement defaultIntakeFormDropdown;
 
@@ -60,13 +57,10 @@ public class CreateAccountPage extends  BasePage{
     @FindBy (xpath =  "//input[@name='postal_code']")
     public WebElement billingPostcodeField;
 
-    @FindBy (xpath = "//select[@name='sla_time']/option[@value='720']")
-    public WebElement hr12_MaximumObservationTimeframeSLADropdown;
-
     @FindBy (xpath = "//input[@name='demoUser']")
     public WebElement demoAccountCheckbox;
 
-    @FindBy (xpath = "//*[@id=\"addAccountForm\"]")
+    @FindBy (xpath = "//*[@id='addAccountForm']")
     public WebElement saveNewAccount_button;
 
 

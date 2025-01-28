@@ -1,15 +1,8 @@
 package testCases;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import pageObjects.CreateAccountPage;
-import pageObjects.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -43,7 +36,8 @@ public class CreateAccountTest extends BaseClass {
 						"Invalid account type specified in config.properties: " + accountType);
 			}
 
-			commonUtils.selectDropDownValue(createAccountPage.diagnosticMessagingSetDropdown, p.getProperty("diagnosticMessagingSetDropdown"));
+			commonUtils.selectDropDownValue(createAccountPage.diagnosticMessagingSetDropdown,
+					p.getProperty("diagnosticMessagingSetDropdown"));
 			commonUtils.selectDropDownValue(createAccountPage.defaultIntakeFormDropdown,
 					p.getProperty("defaultIntake"));
 			commonUtils.selectDropDownValue(createAccountPage.billingCountryDropdown,
