@@ -13,7 +13,7 @@ public class CreateAccountPage extends  BasePage{
         commonUtils = new CommonUtils(driver);
     }
     @FindBy(xpath = "//button[normalize-space()='Create Account']")
-    public WebElement click_CreateAccount;
+    public WebElement clickCreateAccount;
 
     @FindBy (xpath = "//input[@placeholder='Account Name']")
     public WebElement  accountNameField;
@@ -28,16 +28,16 @@ public class CreateAccountPage extends  BasePage{
     public WebElement  phoneField;
 
     @FindBy (xpath = "//input[@id='company']")
-    public WebElement accountType_CompanyRadioButton;
+    public WebElement accountTypeCompanyRadioButton;
 
-    @FindBy (xpath = "//input[@type='radio' and @id='individual']")
-    public WebElement accountType_IndividualRadioButton;
+    @FindBy (xpath = "//input[@id='individual']")
+    public WebElement accountTypeIndividualRadioButton;
 
     @FindBy (xpath = "//select[@id='messaging_id']")
-    public WebElement diagnostic_MessagingSetDropdown;
+    public WebElement diagnosticMessagingSetDropdown;
 
     @FindBy (xpath = "//select[@id='default_intake_form']/option[@value='12']")
-    public WebElement globalAccount_DefaultIntakeFormDropdown;
+    public WebElement globalAccountDefaultIntakeFormDropdown;
 
     @FindBy (xpath = "//select[@id='default_intake_form']")
     public WebElement defaultIntakeFormDropdown;
@@ -69,11 +69,5 @@ public class CreateAccountPage extends  BasePage{
     @FindBy (xpath = "//*[@id=\"addAccountForm\"]")
     public WebElement saveNewAccount_button;
 
-   
-    public void selectDemoAccount() {
-        if (!demoAccountCheckbox.isSelected()) {
-            demoAccountCheckbox.click();
-        }
-    }
 
 }

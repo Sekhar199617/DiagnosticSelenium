@@ -17,11 +17,11 @@ import testBase.BaseClass;
 
 public class CommonUtils extends BaseClass {
     WebDriver driver;
-    
+
     public CommonUtils(WebDriver driver) {
         this.driver = driver;
     }
-    
+
     public void clickOnElement(WebElement element, String elementText) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
@@ -84,7 +84,7 @@ public class CommonUtils extends BaseClass {
             }
         }
     }
-    
+
     //SessionValid
     public boolean isSessionValid() {
         try {
@@ -94,31 +94,18 @@ public class CommonUtils extends BaseClass {
             return false; // Session is invalid
         }
     }
-    
+
    public void selectDropDownValue(WebElement element, String text) {
         waitForElementToBeVisible(element, 5);
     	Select dropdown = new Select(element);
     	dropdown.selectByVisibleText(text);
     }
-    
-
-//scrollToElement
-public void scrollToElement(WebElement element) {
-    try {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOf(element));
-    } catch (Exception e) {
-        throw new RuntimeException("Failed to scroll to element: " + e.getMessage(), e);
-    }
-}
-
 
     public void validateRadioButton(WebElement element) {
         waitForElementToBeVisible(element, 5);
     	element.isSelected();
     }
-    
+
     public void clickRadioButton(WebElement element) {
         waitForElementToBeVisible(element, 5);
         if (!element.isSelected()) {
@@ -126,24 +113,24 @@ public void scrollToElement(WebElement element) {
         }
     }
 
-    
+
     public void validateCheckbox(WebElement element) {
         waitForElementToBeVisible(element, 5);
     	element.isSelected();
     }
-    
+
     public void validateInputText(WebElement element, String expectedMessage) {
         waitForElementToBeVisible(element, 5);
     	String actualMessage = element.getDomProperty("value");
     	Assert.assertEquals(actualMessage, expectedMessage);
     }
-    
+
     public void validateGetText(WebElement element, String expectedMessage) {
         waitForElementToBeVisible(element, 10);
     	String actualMessage = element.getText().trim();
     	Assert.assertEquals(actualMessage, expectedMessage);
     }
-    
+
     public void selectRandomCheckboxes(List<WebElement> element) {
     	Random random = new Random();
         int randomIndex = random.nextInt(element.size());

@@ -26,7 +26,7 @@ public class CreateAccountTest extends BaseClass {
 			CreateAccountPage createAccountPage = new CreateAccountPage(driver);
 			CommonUtils commonUtils = new CommonUtils(driver);
 
-			commonUtils.clickOnElement(createAccountPage.click_CreateAccount, null);
+			commonUtils.clickOnElement(createAccountPage.clickCreateAccount, null);
 			commonUtils.enterValueInTextField(createAccountPage.accountNameField, randomString());
 			commonUtils.enterValueInTextField(createAccountPage.primaryContactNameField, randomString());
 			commonUtils.enterValueInTextField(createAccountPage.emailField, randomString() + "@gmail.com");
@@ -35,15 +35,15 @@ public class CreateAccountTest extends BaseClass {
 			// Validate and select the account type based on the config file
 			String accountType = p.getProperty("accountType");
 			if (accountType.equalsIgnoreCase("Individual")) {
-				commonUtils.clickRadioButton(createAccountPage.accountType_IndividualRadioButton);
+				commonUtils.clickRadioButton(createAccountPage.accountTypeIndividualRadioButton);
 			} else if (accountType.equalsIgnoreCase("Company")) {
-				commonUtils.clickRadioButton(createAccountPage.accountType_CompanyRadioButton);
+				commonUtils.clickRadioButton(createAccountPage.accountTypeCompanyRadioButton);
 			} else {
 				throw new IllegalArgumentException(
 						"Invalid account type specified in config.properties: " + accountType);
 			}
 
-			commonUtils.selectDropDownValue(createAccountPage.diagnostic_MessagingSetDropdown, p.getProperty("diagnostic_MessagingSetDropdown"));
+			commonUtils.selectDropDownValue(createAccountPage.diagnosticMessagingSetDropdown, p.getProperty("diagnosticMessagingSetDropdown"));
 			commonUtils.selectDropDownValue(createAccountPage.defaultIntakeFormDropdown,
 					p.getProperty("defaultIntake"));
 			commonUtils.selectDropDownValue(createAccountPage.billingCountryDropdown,
