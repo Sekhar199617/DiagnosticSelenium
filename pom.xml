@@ -3,7 +3,6 @@
   <groupId>Diagnostic</groupId>
   <artifactId>Diagnostic</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
   <build>
     <pluginManagement>
       <plugins>
@@ -11,8 +10,7 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.13.0</version>
-        </plugin>
-        
+        </plugin>   
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -23,7 +21,6 @@
           	</suiteXmlFiles>
           </configuration>
         </plugin>
-        
       </plugins>
     </pluginManagement>
   </build>

@@ -18,6 +18,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import pageObjects.LoginPage;
 import utilities.CommonUtils;
@@ -30,7 +31,7 @@ public class BaseClass {
     
     @BeforeClass(groups= {"Smoke"})
     @Parameters({"os", "browser"})
-    public void setup(String os, String browser) throws IOException 
+    public void setup(@Optional("Windows")String os, String browser) throws IOException 
     {
     	FileReader file = new FileReader("./src//test//resources//config.properties");
     	p = new Properties();
