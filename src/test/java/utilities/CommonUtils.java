@@ -281,16 +281,10 @@ public class CommonUtils extends BaseClass {
     }
 
     //Changes
-
-    public void clickSelectButton(String fieldId) {
-        String xpath = "//a[@id='" + fieldId + "' and contains(@class, 'btn-primary')]";
-        WebElement selectButton = driver.findElement(By.xpath(xpath));
-
+    public void clickSelectButton( String availableFieldSelectButton) {
+        WebElement selectButton = findElementByXpath(availableFieldSelectButton);
         if (selectButton.isDisplayed()) {
             selectButton.click();
-            System.out.println("Clicked on 'Select' button for field ID: " + fieldId);
-        } else {
-            System.out.println("Select button not visible for field: " + fieldId);
         }
     }
 
@@ -306,11 +300,7 @@ public class CommonUtils extends BaseClass {
     }
 
     public void selectBundles(String bundleName) {
-        String xpath = "//div[@id='unselected_bundles']//div[span[text()='" + bundleName + "']]";
-       // String xpath = "//div[contains(@class,'availableFieldLabel')]//div[text()='" + fieldLabel + "']";
-        WebElement fieldElement = driver.findElement(By.xpath(xpath));
-
-        fieldElement.click(); // Trigger click event
+        clickOnElement(findElementByXpath("//div[@id='unselected_bundles']//div[span[text()='" + bundleName + "']]"), null);
         System.out.println("Clicked on field: " + bundleName);
     }
 
@@ -326,4 +316,23 @@ public class CommonUtils extends BaseClass {
         }
 
     }
+
+    public void handleCityAndState(String countryName, WebElement cityElement, WebElement stateElement, WebElement cityDropdownElement, WebElement stateDropdownElement, String cityName, String stateName) {
+        if (countryName.equals("United States")) {
+            if (cityDropdownElement != null && stateDropdownElement != null) {
+                selectDropDownValue(cityDropdownElement, cityName);
+                selectDropDownValue(stateDropdownElement, stateName);
+            } else {
+                System.out.println("City or State dropdown not found!");
+            }
+        } else {
+            if (cityElement != null && stateElement != null) {
+                enterValueInTextField(cityElement, cityName);
+                enterValueInTextField(stateElement, stateName);
+            } else {
+                System.out.println("City or State input fields not found!");
+            }
+        }
+    }
+
 }

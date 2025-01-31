@@ -31,14 +31,14 @@ public class IntakeFormsTest extends BaseClass {
         commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.createNewButton),null);
         commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formScopeDropdown),p.getProperty("formScopeAccount"));
     }
-    @Test(groups = {"Smoke"}, priority = 1)
+    @Test(groups = {"Smoke"}, priority = 2)
     public void verify_add_accountData() {
         try {
             logger.info("****** Starting Add Account Data Form Test Case ******");
 
             CommonUtils commonUtils = new CommonUtils(driver);
             AddFormsPage addFormsPage = new AddFormsPage(driver);
-
+            Thread.sleep(1000);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formNameField), randomString());
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypeAccount"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formTypeDropdown), p.getProperty("formTypeKiosk"));
@@ -48,9 +48,8 @@ public class IntakeFormsTest extends BaseClass {
             commonUtils.scrollToBottom();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addAccountFormFieldButton), null);
             commonUtils.scrollToBottom();
-            String accountFieldName = p.getProperty("accountFieldName");
-            commonUtils.selectDynamicField(accountFieldName, addFormsPage.AccountDynamicLocatorPattern1);
-            commonUtils.clickSelectButton("account_name");
+            commonUtils.selectDynamicField(p.getProperty("availableFieldNameAccount"), addFormsPage.availableFieldAccount);
+            commonUtils.clickSelectButton(addFormsPage.availableFieldSelectButton);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.field1InstructionField), randomString());
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.saveField1Button), null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.finishedButton), null);
@@ -62,31 +61,32 @@ public class IntakeFormsTest extends BaseClass {
         logger.info("****** Finished Add Account Data Form Test Case ******");
     }
 
-    @Test(groups = {"Smoke"}, priority = 2)
+    @Test(groups = {"Smoke"}, priority = 1)
     public void verify_add_event() {
         try {
             logger.info("****** Starting Add Patient Data Form Test Case ******");
 
             CommonUtils commonUtils = new CommonUtils(driver);
             AddFormsPage addFormsPage = new AddFormsPage(driver);
-
             Thread.sleep(2000);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formNameField), randomString());
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypePatient"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formTypeDropdown), p.getProperty("formTypeSelfRegistration"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formDescriptionField), randomString());
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.selectLogoImageDropdown), p.getProperty("selectLogoImage"));
-
             commonUtils.scrollToBottom();
             commonUtils.selectBundles(p.getProperty("bundleName"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.rightArrowButton),null);
             commonUtils.scrollToBottom();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addFormFieldButton),null);
             commonUtils.scrollToBottom();
-
-            String fieldName = p.getProperty("fieldName");
-            commonUtils.selectDynamicField(fieldName, addFormsPage.dynamicLocatorPattern1);
-            commonUtils.clickSelectButton(p.getProperty("fieldNameSelectButton"));
+            commonUtils.selectDynamicField(p.getProperty("availableFieldNamePatient1"),addFormsPage.availableField);
+            commonUtils.clickSelectButton(addFormsPage.availableFieldSelectButton);
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.saveField1button),null);
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addFormFieldButton),null);
+            commonUtils.scrollToBottom();
+            commonUtils.selectDynamicField(p.getProperty("availableFieldNamePatient"), addFormsPage.availableField);
+            commonUtils.clickSelectButton(addFormsPage.availableFieldSelectButton);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.saveField1button),null);
             commonUtils.scrollToBottom();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.consentCheckbox),null);

@@ -39,9 +39,9 @@ public class AddFormsPage extends BasePage{
     public  String  saveField1button = "(//button[@class='btn btn-primary wbtwPrimaryBtn onSubmitButton'])[1]";
     public  String consentCheckbox = "(//input[@id='consent_acknowledge'])[1]";
     public  String patientFinishedButton = "//input[@type='submit']";
-    public String dynamicLocatorPattern1 = "//div[contains(@class,'base_commonField')]//div[normalize-space(text())='%s']";
-    public  String AccountDynamicLocatorPattern1 = "//div[contains(@class,'availableFieldLabel')]//div[normalize-space(text())='%s']";
-
+    public String availableField = "//div[contains(@class,'base_commonField')]//div[normalize-space(text())='%s']";
+    public  String availableFieldAccount = "//div[contains(@class,'availableFieldLabel')]//div[normalize-space(text())='%s']";
+    public String availableFieldSelectButton = "//a[@class='btn btn-primary select_commonField add_select_commonField']";
     public String successfulMessageText = "//h2[@id='swal2-title']";
     public String okButton = "//button[normalize-space()='Ok']";
 
