@@ -1,7 +1,5 @@
 package pageObjects;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
 	
@@ -9,19 +7,10 @@ public class LoginPage extends BasePage {
 		super(driver);
 	}
 
-	@FindBy(xpath = "//input[@placeholder='Email']")
-	public WebElement emailField;
-	
-	@FindBy(xpath = "//input[@placeholder='Password']")
-	public WebElement passwordField;
-	
-	@FindBy(xpath = "//button[@id='adminLoginForm']")
-	public WebElement adminLoginButton;
-	
-	@FindBy(xpath = "//button[@id='observerLoginForm']")
-	public WebElement observerLoginButton;
-	
-	@FindBy(xpath = "//div[@role='alert']")
-	public WebElement alertMessage;
+	public String emailField = "//input[@placeholder='Email']";
+	public String passwordField = "//input[@placeholder='Password']";
+	public String adminLoginButton = "//button[@id='adminLoginForm']";
+	public String observerLoginButton = "//button[@id='observerLoginForm']";
+	public String alertMessage = "//div[@role='alert']";
 
 }

@@ -46,7 +46,7 @@ public class AdminLoginDDT extends BaseClass {
                     Assert.fail();
 				}else {
 					Assert.assertTrue(true);
-					commonUtils.validateGetText(loginPage.alertMessage, p.getProperty("invalidCredentialsAlertMessage"));
+					commonUtils.validateGetText(commonUtils.findElementByXpath(loginPage.alertMessage), p.getProperty("invalidCredentialsAlertMessage"));
 				}
 			}
 		}catch(Exception e)

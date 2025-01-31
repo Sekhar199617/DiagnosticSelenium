@@ -4,11 +4,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,6 +16,50 @@ public class CommonUtils extends BaseClass {
 
     public CommonUtils(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public WebElement findElement(By locator) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        } catch (TimeoutException e) {
+            System.out.println("Element not found within timeout: " + locator);
+            return null;
+        }
+    }
+
+    public WebElement findElementById(String locatorValue) {
+        return findElement(By.id(locatorValue));
+    }
+
+    public WebElement findElementByName(String locatorValue) {
+        return findElement(By.name(locatorValue));
+    }
+
+    public WebElement findElementByCssSelector(String locatorValue) {
+        return findElement(By.cssSelector(locatorValue));
+    }
+
+    public WebElement findElementByXpath(String locatorValue) {
+        return findElement(By.xpath(locatorValue));
+    }
+
+    public List<WebElement> findElements(By locator) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+        } catch (TimeoutException e) {
+            System.out.println("Elements not found within timeout: " + locator);
+            return null;
+        }
+    }
+
+    public List<WebElement> findElementsByCssSelector(String locatorValue) {
+        return findElements(By.cssSelector(locatorValue));
+    }
+
+    public List<WebElement> findElementsByXpath(String locatorValue) {
+        return findElements(By.xpath(locatorValue));
     }
 
     public void clickOnElement(WebElement element, String elementText) {
@@ -239,4 +279,60 @@ public class CommonUtils extends BaseClass {
             System.out.println("File not found at: " + filePath);
         }
     }
+
+    //Changes
+    public void clickSelectButton( String availableFieldSelectButton) {
+        WebElement selectButton = findElementByXpath(availableFieldSelectButton);
+        if (selectButton.isDisplayed()) {
+            selectButton.click();
+        }
+    }
+
+    // Method to scroll up to half of the page
+    public void scrollToBottom() {
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            Thread.sleep(1000); // Small delay to allow rendering
+        } catch (Exception e) {
+            System.err.println("Error scrolling to bottom: " + e.getMessage());
+        }
+    }
+
+    public void selectBundles(String bundleName) {
+        clickOnElement(findElementByXpath("//div[@id='unselected_bundles']//div[span[text()='" + bundleName + "']]"), null);
+        System.out.println("Clicked on field: " + bundleName);
+    }
+
+    public void selectDynamicField(String fieldName, String dynamicLocatorPattern) {
+        String formattedLocator = String.format(dynamicLocatorPattern, fieldName);
+
+        try {
+            WebElement fieldElement = driver.findElement(By.xpath(formattedLocator));
+            fieldElement.click();
+            System.out.println("Clicked on field: " + fieldName);
+        } catch (NoSuchElementException e) {
+            System.err.println("Field with name '" + fieldName + "' not found.");
+        }
+
+    }
+
+    public void handleCityAndState(String countryName, WebElement cityElement, WebElement stateElement, WebElement cityDropdownElement, WebElement stateDropdownElement, String cityName, String stateName) {
+        if (countryName.equals("United States")) {
+            if (cityDropdownElement != null && stateDropdownElement != null) {
+                selectDropDownValue(cityDropdownElement, cityName);
+                selectDropDownValue(stateDropdownElement, stateName);
+            } else {
+                System.out.println("City or State dropdown not found!");
+            }
+        } else {
+            if (cityElement != null && stateElement != null) {
+                enterValueInTextField(cityElement, cityName);
+                enterValueInTextField(stateElement, stateName);
+            } else {
+                System.out.println("City or State input fields not found!");
+            }
+        }
+    }
+
 }

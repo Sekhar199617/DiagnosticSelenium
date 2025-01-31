@@ -53,23 +53,23 @@ public class BaseClass {
         driver.get(p.getProperty("adminAppURL"));
         driver.manage().window().maximize();
     }
-    
-    public void login(String username, String password, boolean isAdminLogin) {
-        String appURL = isAdminLogin ? p.getProperty("adminAppURL") : p.getProperty("observerAppURL");
-        driver.get(appURL); 
-        
-        LoginPage loginPage = new LoginPage(driver);
-        CommonUtils commonUtils = new CommonUtils(driver);
-        
-        commonUtils.enterValueInTextField(loginPage.emailField, username);
-        commonUtils.enterValueInTextField(loginPage.passwordField, password);
-        
-        if (isAdminLogin) {
-        	commonUtils.clickOnElement(loginPage.adminLoginButton, "Login");
-        } else {
-        	commonUtils.clickOnElement(loginPage.observerLoginButton, "Login");
-        }
-    }
+
+	public void login(String username, String password, boolean isAdminLogin) {
+		String appURL = isAdminLogin ? p.getProperty("adminAppURL") : p.getProperty("observerAppURL");
+		driver.get(appURL);
+
+		LoginPage loginPage = new LoginPage(driver);
+		CommonUtils commonUtils = new CommonUtils(driver);
+
+		commonUtils.enterValueInTextField(commonUtils.findElementByXpath(loginPage.emailField), username);
+		commonUtils.enterValueInTextField(commonUtils.findElementByXpath(loginPage.passwordField), password);
+
+		if (isAdminLogin) {
+			commonUtils.clickOnElement(commonUtils.findElementByXpath(loginPage.adminLoginButton), "Login");
+		} else {
+			commonUtils.clickOnElement(commonUtils.findElementByXpath(loginPage.observerLoginButton), "Login");
+		}
+	}
     
     public String randomString()
 	{
