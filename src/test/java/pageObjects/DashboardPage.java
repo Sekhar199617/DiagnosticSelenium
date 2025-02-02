@@ -1,9 +1,6 @@
 package pageObjects;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import utilities.CommonUtils;
-import java.util.List;
 
 public class DashboardPage extends BasePage {
 	
@@ -13,37 +10,37 @@ public class DashboardPage extends BasePage {
 		super(driver);
 		this.commonUtils = new CommonUtils(driver);
 	}
-	
-	@FindBy(xpath = "//h3[normalize-space()='Dashboard']")
-	public WebElement headerText;
-	
-	@FindBy(xpath = "//span[@class='navbar-toggler-icon']")
-	public WebElement togglerIcon;
-	
-	@FindBy(xpath = "//a[normalize-space()='Logout']")
-	public WebElement logoutButton;
-	
-	@FindBy(xpath = "//input[@id='searchAccName']")
-	public WebElement searchField;
-	
-	@FindBy(xpath = "//button[@id='search_btn']")
-	public WebElement searchButton;
-	
-	@FindBy(xpath = "//button[@id='dropdownMenuButton1']")
-	public WebElement actionsDropDown;
-	
-	@FindBy(xpath = "//a[normalize-space()='View']")
-	public WebElement view;
 
-	@FindBy(xpath = "//div[@class='mt--10px']/li/a")
-	public List<WebElement> hamburgerMenuList;
+	public String headerText = "//h3[normalize-space()='Dashboard']";
+	public String togglerIcon = "//span[@class='navbar-toggler-icon']";
+	public String logoutButton = "//a[normalize-space()='Logout']";
+	public String searchField = "//input[@id='searchAccName']";
+	public String searchButton = "//button[@id='search_btn']";
+	public String actionsDropDown = "//button[@id='dropdownMenuButton1']";
+	public String view = "//a[normalize-space()='View']";
+	public String hamburgerMenuList = "//div[@class='mt--10px']/li/a";
 	
 	public boolean isMyAccountExists()	{
 		try	{
-			return (headerText.isDisplayed());
+			return (commonUtils.findElementByXpath(headerText).isDisplayed());
 		}catch(Exception e)	{
 			return false;
 		}
+	}
+
+	public void selectHamburgerTab(String tabName) {
+		commonUtils.clickOnElement(commonUtils.findElementByXpath(togglerIcon), null);
+		commonUtils.selectTab(commonUtils.findElementsByXpath(hamburgerMenuList), tabName);
+	}
+
+	public void searchForItem(String searchItem) {
+		commonUtils.enterValueInTextField(commonUtils.findElementByXpath(searchField), searchItem);
+		commonUtils.clickOnElement(commonUtils.findElementByXpath(searchButton), "Search");
+	}
+
+	public void clickView() {
+		commonUtils.clickOnElement(commonUtils.findElementByXpath(actionsDropDown), null);
+		commonUtils.clickOnElement(commonUtils.findElementByXpath(view), "View");
 	}
 
 }

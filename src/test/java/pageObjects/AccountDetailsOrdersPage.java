@@ -1,7 +1,5 @@
 package pageObjects;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import utilities.CommonUtils;
 
 public class AccountDetailsOrdersPage extends BasePage {
@@ -13,34 +11,15 @@ public class AccountDetailsOrdersPage extends BasePage {
         this.commonUtils = new CommonUtils(driver);
     }
 
-    @FindBy(xpath = "//input[@id='provisioned_orders']")
-    public WebElement provisionedOrdersRadioButton;
-
-    @FindBy(xpath = "//a[@data-bs-toggle='modal'][normalize-space()='Add']")
-    public WebElement addText;
-
-    @FindBy(xpath = "//select[@id='orderType']")
-    public WebElement purchasableBundleDropDown;
-
-    @FindBy(xpath = "//select[@id='shipping_options']")
-    public WebElement availableShippingOptions;
-
-    @FindBy(xpath = "//select[@id='variations']")
-    public WebElement availableVariationsOptions;
-
-    @FindBy(xpath = "//select[@id='noOfUnits']")
-    public WebElement noOfUnitsDropDown;
-
-    @FindBy(xpath = "//input[@id='pricePerUnit']")
-    public WebElement pricePerUnit;
-
-    @FindBy(xpath = "//input[@id='shipping_pricePerUnit']")
-    public WebElement shippingAmountPerUnit;
-
-    @FindBy(xpath = "//input[@id='estimated_tax']")
-    public WebElement estimatedTaxField;
-
-    @FindBy(xpath = "//button[@id='add_user_purchase']")
-    public WebElement addOrderButton;
+    public String provisionedOrdersRadioButton = "//input[@id='provisioned_orders']";
+    public String addText = "//a[@data-bs-toggle='modal'][normalize-space()='Add']";
+    public String purchasableBundleDropDown = "//select[@id='orderType']";
+    public String availableShippingOptions = "//select[@id='shipping_options']";
+    public String availableVariationsOptions = "//select[@id='variations']";
+    public String noOfUnitsDropDown = "//select[@id='noOfUnits']";
+    public String pricePerUnit = "//input[@id='pricePerUnit']";
+    public String shippingAmountPerUnit = "//input[@id='shipping_pricePerUnit']";
+    public String estimatedTaxField = "//input[@id='estimated_tax']";
+    public String addOrderButton = "//button[@id='add_user_purchase']";
 
 }

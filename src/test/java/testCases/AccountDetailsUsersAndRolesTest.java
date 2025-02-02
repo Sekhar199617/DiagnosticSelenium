@@ -22,20 +22,19 @@ public class AccountDetailsUsersAndRolesTest extends BaseClass {
 			login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
 			DashboardPage dp = new DashboardPage(driver);
-			CommonUtils commonUtils = new CommonUtils(driver);
+			commonUtils = new CommonUtils(driver);
 
-			commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
-			commonUtils.clickOnElement(dp.searchButton, "Search");
-			commonUtils.clickOnElement(dp.actionsDropDown, null);
-			commonUtils.clickOnElement(dp.view, "View");
+			dp.searchForItem(p.getProperty("accountName"));
+			dp.clickView();
 
 			AccountDetailsPage ad = new AccountDetailsPage(driver);
-			commonUtils.selectTab(ad.tabList, "Users & Roles");
-			commonUtils.clickOnElement(ad.addText, "Add");
+			commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
+			commonUtils.clickOnElement(commonUtils.findElementByXpath(ad.addText), "Add");
 
 			AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
 			commonUtils.createUser(
 					au.newUserNameField,
+					randomString(),
 					au.mobileCountryCodeDropDown,
 					au.countryList,
 					au.phoneNumberField,
@@ -44,7 +43,7 @@ public class AccountDetailsUsersAndRolesTest extends BaseClass {
 					au.userTypeDropDown,
 					au.licenseIDField,
 					au.credentialsField,
-					au.unselectedBundlesList,
+					au.bundlesNotAttachedField,
 					au.rightArrow,
 					au.selectedBundleField,
 					au.additionalPriviligesCheckboxesList,
@@ -55,18 +54,15 @@ public class AccountDetailsUsersAndRolesTest extends BaseClass {
 					au.saveButton,
 					au.dialogueText,
 					au.dialogueOkButton,
-					randomString(),  // randomUser
 					p.getProperty("mobileCountryCode"),
-					randomNumbers(), // randomPhoneNumber
+					randomNumbers(),
 					p.getProperty("role"),
-					p.getProperty("userType"),
+					p.getProperty("usersUserType"),
 					p.getProperty("licenseID"),
 					p.getProperty("credentials"),
-					p.getProperty("unselectedBundle"),
 					p.getProperty("defaultTimeZone"),
 					p.getProperty("dialogueText")
 			);
-
 		}catch(Exception e)
 		{
 			Assert.fail();
