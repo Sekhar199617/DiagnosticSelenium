@@ -19,36 +19,43 @@ public class CreateAccountTest extends BaseClass {
 			CreateAccountPage createAccountPage = new CreateAccountPage(driver);
 			CommonUtils commonUtils = new CommonUtils(driver);
 
-			commonUtils.clickOnElement(createAccountPage.clickCreateAccount, null);
-			commonUtils.enterValueInTextField(createAccountPage.accountNameField, randomString());
-			commonUtils.enterValueInTextField(createAccountPage.primaryContactNameField, randomString());
-			commonUtils.enterValueInTextField(createAccountPage.emailField, randomString() + "@gmail.com");
-			commonUtils.enterValueInTextField(createAccountPage.phoneField, p.getProperty("createAccountPhone"));
+			commonUtils.clickOnElement(commonUtils.findElementByXpath(createAccountPage.clickCreateAccount),null );
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.accountNameField),randomString());
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.accountNameField),randomString());
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.primaryContactNameField),randomString());
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.emailField),randomString()+"@gmail.com");
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.phoneField),randomNumbers());
+
+//			commonUtils.clickOnElement(createAccountPage.clickCreateAccount, null);
+//			commonUtils.enterValueInTextField(createAccountPage.accountNameField, randomString());
+//			commonUtils.enterValueInTextField(createAccountPage.primaryContactNameField, randomString());
+//			commonUtils.enterValueInTextField(createAccountPage.emailField, randomString() + "@gmail.com");
+//			commonUtils.enterValueInTextField(createAccountPage.phoneField, p.getProperty("createAccountPhone"));
 
 			// Validate and select the account type based on the config file
 			String accountType = p.getProperty("accountType");
 			if (accountType.equalsIgnoreCase("Individual")) {
-				commonUtils.clickRadioButton(createAccountPage.accountTypeIndividualRadioButton);
+				commonUtils.clickRadioButton(commonUtils.findElementByXpath(createAccountPage.accountTypeIndividualRadioButton));
 			} else if (accountType.equalsIgnoreCase("Company")) {
-				commonUtils.clickRadioButton(createAccountPage.accountTypeCompanyRadioButton);
+				commonUtils.clickRadioButton(commonUtils.findElementByXpath(createAccountPage.accountTypeCompanyRadioButton));
 			} else {
 				throw new IllegalArgumentException(
 						"Invalid account type specified in config.properties: " + accountType);
 			}
 
-			commonUtils.selectDropDownValue(createAccountPage.diagnosticMessagingSetDropdown,
+			commonUtils.selectDropDownValue(commonUtils.findElementByXpath(createAccountPage.diagnosticMessagingSetDropdown),
 					p.getProperty("diagnosticMessagingSetDropdown"));
-			commonUtils.selectDropDownValue(createAccountPage.defaultIntakeFormDropdown,
+			commonUtils.selectDropDownValue(commonUtils.findElementByXpath(createAccountPage.defaultIntakeFormDropdown),
 					p.getProperty("defaultIntake"));
-			commonUtils.selectDropDownValue(createAccountPage.billingCountryDropdown,
+			commonUtils.selectDropDownValue(commonUtils.findElementByXpath(createAccountPage.billingCountryDropdown),
 					p.getProperty("billingCountryName"));
-			commonUtils.enterValueInTextField(createAccountPage.billingAddress_1Field,
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingAddress_1Field),
 					p.getProperty("billingAddress1"));
-			commonUtils.enterValueInTextField(createAccountPage.billingCityField, p.getProperty("billingCity"));
-			commonUtils.enterValueInTextField(createAccountPage.billingStateField, p.getProperty("billingState"));
-			commonUtils.enterValueInTextField(createAccountPage.billingPostcodeField, p.getProperty("postCode"));
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingCityField), p.getProperty("billingCity"));
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingStateField), p.getProperty("billingState"));
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingPostcodeField), p.getProperty("postCode"));
 
-			commonUtils.scrollToBottomAndClick(createAccountPage.saveNewAccount_button);
+			commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(createAccountPage.saveNewAccount_button));
 
 		} catch (Exception e) {
 			logger.error("Exception occurred during test execution: ", e);
