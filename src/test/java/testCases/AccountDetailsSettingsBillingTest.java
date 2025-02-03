@@ -24,31 +24,33 @@ public class AccountDetailsSettingsBillingTest extends BaseClass {
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
-            commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
-            commonUtils.clickOnElement(dp.searchButton, "Search");
-            commonUtils.clickOnElement(dp.actionsDropDown, null);
-            commonUtils.clickOnElement(dp.view, "View");
+            dp.searchForItem(p.getProperty("accountName"));
+            dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            commonUtils.selectTab(ad.tabList, "Settings");
+            commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Settings");
 
             AccountDetailsSettingsPage ads = new AccountDetailsSettingsPage(driver);
-            commonUtils.selectTab(ads.settingsTabsList, "Billing");
-            commonUtils.clickOnElement(ads.editButton, "Edit");
-            commonUtils.clickOnElement(ads.createNewButton, "Create New");
+            commonUtils.selectTab(commonUtils.findElementsByXpath(ads.settingsTabsList), "Billing");
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(ads.editButton), "Edit");
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(ads.createNewButton), "Create New");
 
             AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
-            commonUtils.enterValueInTextField(au.newUserNameField, randomUser);
-            commonUtils.clickOnElement(au.mobileCountryCodeDropDown, null);
-            commonUtils.selectDropDownValueWithClick(au.countryList, p.getProperty("mobileCountryCode"));
-            commonUtils.enterValueInTextField(au.phoneNumberField, randomNumbers());
-            commonUtils.enterValueInTextField(au.emailField, randomString() + "@gmail.com");
-            commonUtils.validateRadioButton(au.userTimeZoneRadioButton);
-            commonUtils.selectDropDownValue(au.userDefaultTimeZoneDropDown, p.getProperty("defaultTimeZone"));
-            commonUtils.validateCheckbox(au.activeCheckbox);
-            commonUtils.scrollToBottomAndClick(au.saveButton);
-            commonUtils.validateGetText(au.dialogueText, p.getProperty("dialogueText"));
-            commonUtils.clickOnElement(au.dialogueOkButton, "Ok");
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(au.newUserNameField), randomUser);
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(au.mobileCountryCodeDropDown), null);
+            commonUtils.selectDropDownValueWithClick(commonUtils.findElementsByXpath(au.countryList),
+                    p.getProperty("mobileCountryCode"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(au.phoneNumberField), randomNumbers());
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(au.emailField),
+                    randomString() + "@gmail.com");
+            commonUtils.validateRadioButton(commonUtils.findElementByXpath(au.userTimeZoneRadioButton));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(au.userDefaultTimeZoneDropDown),
+                    p.getProperty("defaultTimeZone"));
+            commonUtils.validateCheckbox(commonUtils.findElementByXpath(au.activeCheckbox));
+            commonUtils.scrollToBottomAndClick(commonUtils.findElementByCssSelector(au.saveButton));
+            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),
+                    p.getProperty("settingsBillingDialogueText"),
+                    commonUtils.findElementByXpath(au.dialogueOkButton));
         }catch(Exception e)
         {
             Assert.fail();

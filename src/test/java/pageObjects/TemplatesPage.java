@@ -9,48 +9,19 @@ public class TemplatesPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = "//button[normalize-space()='Add']")
-    public WebElement addButton;
-
-    @FindBy(name = "messagingId")
-    public WebElement copyMessagingTemplateDropDown;
-
-    @FindBy(id = "messagingSetName")
-    public WebElement messagingSetNameField;
-
-    @FindBy(name = "allow_accounts_to_select")
-    public WebElement allowAccountsToSelectThisMessagingSet;
-
-    @FindBy(css = "[id='templateAddForm'] div input[name='name']")
-    public WebElement webSiteNameField;
-
-    @FindBy(name = "email_from_name_for_purchasers")
-    public WebElement emailFromNameForPurchasersField;
-
-    @FindBy(name = "email_from_address_for_purchsers")
-    public WebElement emailFromAddressForPurchasersField;
-
-    @FindBy(name = "email_from_name_for_assignees")
-    public WebElement emailFromNameForAssigneesField;
-
-    @FindBy(name = "email_from_address_for_assignees")
-    public WebElement emailFromAddressForAssigneesField;
-
-    @FindBy(name = "websiteURL")
-    public WebElement websiteURLField;
-
-    @FindBy(name = "provisionURL")
-    public WebElement provisioningSystemURLField;
-
-    @FindBy(css = "input[name='logoURL']")
-    public WebElement logoFileUpload;
-
-    @FindBy(name = "supportPhone")
-    public WebElement supportPhoneField;
-
-    @FindBy(css = "input[name='faviconURL']")
-    public WebElement faviconFileUpload;
-
-    @FindBy(xpath = "//button[@id='add_message']")
-    public WebElement addMessageSetButton;
+    public String addButton = "//button[normalize-space()='Add']";
+    public String copyMessagingTemplateDropDown = "messagingId"; //name
+    public String messagingSetNameField = "messagingSetName"; //id
+    public String allowAccountsToSelectThisMessagingSet = "allow_accounts_to_select"; //name
+    public String webSiteNameField = "[id='templateAddForm'] div input[name='name']"; //css
+    public String emailFromNameForPurchasersField = "email_from_name_for_purchasers"; //name
+    public String emailFromAddressForPurchasersField = "email_from_address_for_purchsers"; //name
+    public String emailFromNameForAssigneesField = "email_from_name_for_assignees"; //name
+    public String emailFromAddressForAssigneesField = "email_from_address_for_assignees"; //name
+    public String websiteURLField = "websiteURL"; //name
+    public String provisioningSystemURLField = "provisionURL"; //name
+    public String logoFileUpload = "input[name='logoURL']"; //css
+    public String supportPhoneField = "supportPhone"; //name
+    public String faviconFileUpload = "input[name='faviconURL']"; //css
+    public String addMessageSetButton = "//button[@id='add_message']"; //xpath
 }

@@ -29,8 +29,8 @@ public class AdminLoginDDT extends BaseClass {
 			{
 				if(targetPage)
 				{
-					commonUtils.clickOnElement(dp.togglerIcon, null);
-					commonUtils.clickOnElement(dp.logoutButton, null);
+					commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.togglerIcon), null);
+					commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.logoutButton), null);
 					Assert.assertTrue(true);
 				}else
 				{
@@ -41,12 +41,13 @@ public class AdminLoginDDT extends BaseClass {
 			if(exp.equalsIgnoreCase("invalid"))
 			{
 				if(targetPage)	{
-					commonUtils.clickOnElement(dp.togglerIcon, null);
-					commonUtils.clickOnElement(dp.logoutButton, null);
+					commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.togglerIcon), null);
+					commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.logoutButton), null);
                     Assert.fail();
 				}else {
 					Assert.assertTrue(true);
-					commonUtils.validateGetText(commonUtils.findElementByXpath(loginPage.alertMessage), p.getProperty("invalidCredentialsAlertMessage"));
+					commonUtils.validateGetText(commonUtils.findElementByXpath(loginPage.alertMessage),
+							p.getProperty("invalidCredentialsAlertMessage"));
 				}
 			}
 		}catch(Exception e)

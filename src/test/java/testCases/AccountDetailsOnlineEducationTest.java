@@ -3,6 +3,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsOnlineEducationPage;
 import pageObjects.AccountDetailsPage;
+import pageObjects.AccountDetailsUsersAndRolesPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
@@ -19,21 +20,27 @@ public class AccountDetailsOnlineEducationTest extends BaseClass {
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
-            commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
-            commonUtils.clickOnElement(dp.searchButton, "Search");
-            commonUtils.clickOnElement(dp.actionsDropDown, null);
-            commonUtils.clickOnElement(dp.view, "View");
+            dp.searchForItem(p.getProperty("accountName"));
+            dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            commonUtils.selectTab(ad.tabList, "Online Education");
+            commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Online Education");
 
             AccountDetailsOnlineEducationPage aoe = new AccountDetailsOnlineEducationPage(driver);
-            commonUtils.selectRadioButton(aoe.experiencesForProvisionedOrdersRadioButton);
-            commonUtils.clickOnElement(aoe.manageButton, "Manage");
-            commonUtils.clickOnElement(aoe.addButton, "Add");
-            commonUtils.enterValueInTextField(aoe.experienceNameField, randomString());
-            commonUtils.selectDropDownValue(aoe.attachBundleDropDown, p.getProperty("attachBundle"));
-            commonUtils.clickOnElement(aoe.saveButton, "Save");
+            commonUtils.selectRadioButton(commonUtils.findElementByXpath(
+                    aoe.experiencesForProvisionedOrdersRadioButton));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(aoe.manageButton), "Manage");
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(aoe.addButton), "Add");
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(aoe.experienceNameField),
+                    randomString());
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(aoe.attachBundleDropDown),
+                    p.getProperty("attachBundle"));
+            commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(aoe.saveButton));
+
+            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),
+                    p.getProperty("onlineEducationDialogueText"),
+                    commonUtils.findElementByXpath(au.dialogueOkButton));
         }catch(Exception e)
         {
             Assert.fail();

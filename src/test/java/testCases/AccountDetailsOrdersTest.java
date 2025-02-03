@@ -19,25 +19,30 @@ public class AccountDetailsOrdersTest extends BaseClass {
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
-            commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
-            commonUtils.clickOnElement(dp.searchButton, "Search");
-            commonUtils.clickOnElement(dp.actionsDropDown, null);
-            commonUtils.clickOnElement(dp.view, "View");
+            dp.searchForItem(p.getProperty("accountName"));
+            dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            commonUtils.selectTab(ad.tabList, "Orders");
+            commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Orders");
 
             AccountDetailsOrdersPage po = new AccountDetailsOrdersPage(driver);
-            commonUtils.selectRadioButton(po.provisionedOrdersRadioButton);
-            commonUtils.clickOnElement(po.addText, null);
-            commonUtils.selectDropDownValue(po.purchasableBundleDropDown, p.getProperty("purchasableBundle"));
-            commonUtils.selectDropDownValue(po.availableShippingOptions, p.getProperty("availableShippingOptions"));
-            commonUtils.selectDropDownValue(po.availableVariationsOptions, p.getProperty("availableVariationsOptions"));
-            commonUtils.selectDropDownValue(po.noOfUnitsDropDown, p.getProperty("noOfUnits"));
-            commonUtils.enterValueInTextField(po.pricePerUnit, p.getProperty("pricePerUnit"));
-            commonUtils.enterValueInTextField(po.shippingAmountPerUnit, p.getProperty("shippingAmountPerUnit"));
-            commonUtils.enterValueInTextField(po.estimatedTaxField, p.getProperty("estimatedTax"));
-            commonUtils.clickOnElement(po.addOrderButton, null);
+            commonUtils.selectRadioButton(commonUtils.findElementByXpath(po.provisionedOrdersRadioButton));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(po.addText), null);
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(po.purchasableBundleDropDown),
+                    p.getProperty("purchasableBundle"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(po.availableShippingOptions),
+                    p.getProperty("availableShippingOptions"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(po.availableVariationsOptions),
+                    p.getProperty("availableVariationsOptions"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(po.noOfUnitsDropDown),
+                    p.getProperty("noOfUnits"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(po.pricePerUnit),
+                    p.getProperty("pricePerUnit"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(po.shippingAmountPerUnit),
+                    p.getProperty("shippingAmountPerUnit"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(po.estimatedTaxField),
+                    p.getProperty("estimatedTax"));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(po.addOrderButton), null);
         }catch(Exception e)
         {
             Assert.fail();

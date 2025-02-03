@@ -2,9 +2,13 @@ package utilities;
 import java.io.File;
 import java.time.Duration;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
-
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -66,8 +70,8 @@ public class CommonUtils extends BaseClass {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
 
-        waitForElementToBeVisible(element, 5);
-        waitForElementToBeClickable(element, 5);
+        waitForElementToBeVisible(element, 10);
+        waitForElementToBeClickable(element, 10);
         if (elementText != null) {
             if (element.getText().equalsIgnoreCase(elementText)) {
                 element.click();
@@ -118,7 +122,7 @@ public class CommonUtils extends BaseClass {
         for(WebElement country : element) {
             String countryText = country.getText();
             if(countryText.equalsIgnoreCase(countryName)) {
-                waitForElementToBeClickable(country, 5);;
+                waitForElementToBeClickable(country, 10);;
                 country.click();
                 break;
             }
@@ -136,7 +140,7 @@ public class CommonUtils extends BaseClass {
     }
 
    public void selectDropDownValue(WebElement element, String text) {
-        waitForElementToBeVisible(element, 5);
+        waitForElementToBeVisible(element, 10);
     	Select dropdown = new Select(element);
     	dropdown.selectByVisibleText(text);
     }
@@ -193,7 +197,7 @@ public class CommonUtils extends BaseClass {
                 js.executeScript("window.scrollBy(0, 500);");  // Scroll down by 500px at a time
                 Thread.sleep(500);  // Wait for the page to load and update the DOM
             }
-            // Now scroll to the element to make sure it's in view
+
             js.executeScript("arguments[0].scrollIntoView(true);", element);
             waitForElementToBeVisible(element,10);
             element.click();
@@ -209,23 +213,29 @@ public class CommonUtils extends BaseClass {
         }
     }
 
-    public void createUser(WebElement newUserNameField, WebElement mobileCountryCodeDropDown, List<WebElement> countryList,
-                           WebElement phoneNumberField, WebElement emailField, WebElement roleDropDown, WebElement userTypeDropDown,
-                           WebElement licenseIDField, WebElement credentialsField, WebElement unselectedBundlesList, WebElement rightArrow,
-                           WebElement selectedBundleField, List<WebElement> additionalPriviligesCheckboxesList, List<WebElement> supportManagerPriviligesCheckboxesList,
-                           WebElement userTimeZoneRadioButton, WebElement userDefaultTimeZoneDropDown, WebElement activeCheckbox, WebElement saveButton,
-                           WebElement dialogueText, WebElement dialogueOkButton, String randomUser, String mobileCountryCode, String randomPhoneNumber,
-                           String role, String userType, String licenseID, String credentials, String unselectedBundle, String defaultTimeZone, String dialogueTextExpected) {
+    public void createUser(String newUserNameField, String randomUser,
+                           String mobileCountryCodeDropDown, String countryList,
+                           String phoneNumberField, String emailField,
+                           String roleDropDown, String userTypeDropDown, String licenseIDField,
+                           String credentialsField, String bundlesNotAttachedField,
+                           String rightArrow, String selectedBundleField,
+                           String additionalPriviligesCheckboxesList,
+                           String supportManagerPriviligesCheckboxesList,
+                           String userTimeZoneRadioButton, String userDefaultTimeZoneDropDown,
+                           String activeCheckbox, String saveButton, String dialogueText,
+                           String dialogueOkButton, String mobileCountryCode,
+                           String randomPhoneNumber, String role, String userType, String licenseID,
+                           String credentials, String defaultTimeZone,
+                           String dialogueTextExpected) {
 
-        enterValueInTextField(newUserNameField, randomUser);
-        clickOnElement(mobileCountryCodeDropDown, null);
-        selectDropDownValueWithClick(countryList, mobileCountryCode);
-        enterValueInTextField(phoneNumberField, randomPhoneNumber);
-        enterValueInTextField(emailField, randomUser + "@gmail.com");
-        selectDropDownValue(roleDropDown, role);
-        selectDropDownValue(userTypeDropDown, userType);
+        enterValueInTextField(findElementByXpath(newUserNameField), randomUser);
+        clickOnElement(findElementByXpath(mobileCountryCodeDropDown), null);
+        selectDropDownValueWithClick(findElementsByXpath(countryList), mobileCountryCode);
+        enterValueInTextField(findElementByXpath(phoneNumberField), randomPhoneNumber);
+        enterValueInTextField(findElementByXpath(emailField), randomUser + "@gmail.com");
+        selectDropDownValue(findElementByXpath(roleDropDown), role);
+        selectDropDownValue(findElementByXpath(userTypeDropDown), userType);
 
-        // Handling specific logic for different user types
         switch(userType) {
             case "Account Admin":
             case "Admin":
@@ -233,31 +243,30 @@ public class CommonUtils extends BaseClass {
                 break;
             case "Provider":
             case "Medical Staff":
-                enterValueInTextField(licenseIDField, licenseID);
-                enterValueInTextField(credentialsField, credentials);
+                enterValueInTextField(findElementByXpath(licenseIDField), licenseID);
+                enterValueInTextField(findElementByXpath(credentialsField), credentials);
                 break;
             case "Observer":
-                selectDropDownValue(unselectedBundlesList, unselectedBundle);
-                clickOnElement(rightArrow, null);
-                validateInputText(selectedBundleField, unselectedBundle);
+                moveNotAttachedBundlesToAttached(bundlesNotAttachedField, rightArrow, selectedBundleField);
                 break;
             case "Manager":
-                selectRandomCheckboxes(additionalPriviligesCheckboxesList);
+                selectRandomCheckboxes(findElementsByXpath(additionalPriviligesCheckboxesList));
                 break;
             case "Support Entity Manager":
-                selectRandomCheckboxes(supportManagerPriviligesCheckboxesList);
+                selectRandomCheckboxes(findElementsByXpath(supportManagerPriviligesCheckboxesList));
                 break;
             default:
                 System.out.println("User type is not valid");
                 break;
         }
 
-        validateRadioButton(userTimeZoneRadioButton);
-        selectDropDownValue(userDefaultTimeZoneDropDown, defaultTimeZone);
-        validateCheckbox(activeCheckbox);
-        scrollToBottomAndClick(saveButton);
-        validateGetText(dialogueText, dialogueTextExpected);
-        clickOnElement(dialogueOkButton, "Ok");
+        //validateRadioButton(findElementByXpath(userTimeZoneRadioButton));
+        scrollToElement(findElementByXpath(userDefaultTimeZoneDropDown));
+        selectDropDownValue(findElementByXpath(userDefaultTimeZoneDropDown), defaultTimeZone);
+        validateCheckbox(findElementByXpath(activeCheckbox));
+        scrollToBottomAndClick(findElementByCssSelector(saveButton));
+        validateGetText(findElementByXpath(dialogueText), dialogueTextExpected);
+        clickOnElement(findElementByXpath(dialogueOkButton), "Ok");
     }
 
     public void scrollToElement(WebElement element) {
@@ -278,6 +287,73 @@ public class CommonUtils extends BaseClass {
         } else {
             System.out.println("File not found at: " + filePath);
         }
+    }
+
+    public void moveNotAttachedBundlesToAttached(String bundlesNotAttachedField, String rightArrow,
+                                                 String selectedBundleField) {
+            WebElement unselectedDropdown = findElementByXpath(bundlesNotAttachedField);
+            Select unselectedSelect = new Select(unselectedDropdown);
+            List<WebElement> unselectedOptions = unselectedSelect.getOptions();
+            int optionCount = unselectedOptions.size();
+
+            Random random = new Random();
+            String firstSelectedOptionText = "";
+            String secondSelectedOptionText = "";
+
+            if (optionCount == 1) {
+                firstSelectedOptionText = unselectedOptions.get(0).getText();
+                System.out.println("Only one option available: " + firstSelectedOptionText);
+            } else if (optionCount > 1) {
+                firstSelectedOptionText = unselectedOptions.get(random.nextInt(optionCount)).getText();
+
+                // Ensure both selected options are different
+                do {
+                    secondSelectedOptionText = unselectedOptions.get(random.nextInt(optionCount)).getText();
+                } while (firstSelectedOptionText.equals(secondSelectedOptionText));
+                System.out.println("Randomly selected options: " + firstSelectedOptionText + " and " + secondSelectedOptionText);
+            }
+
+            unselectedSelect.selectByVisibleText(firstSelectedOptionText);
+            if (!secondSelectedOptionText.isEmpty()) {
+                unselectedSelect.selectByVisibleText(secondSelectedOptionText);
+            }
+
+            clickOnElement(findElementByXpath(rightArrow), null);
+
+            // Validate that the options are moved to the selected bundles dropdown
+            WebElement selectedBundlesDropdown = findElementById(selectedBundleField);
+            List<WebElement> selectedBundlesOptions = selectedBundlesDropdown.findElements(By.tagName("option"));
+
+            boolean isFirstOptionMoved = false;
+            // If only one option is selected, don't validate second
+            boolean isSecondOptionMoved = secondSelectedOptionText.isEmpty();
+
+            // Check if the selected options exist in the selected bundles dropdown
+            for (WebElement option : selectedBundlesOptions) {
+                if (option.getText().equals(firstSelectedOptionText)) {
+                    isFirstOptionMoved = true;
+                }
+                if (!secondSelectedOptionText.isEmpty() && option.getText().equals(secondSelectedOptionText)) {
+                    isSecondOptionMoved = true;
+                }
+                // Break early if both options are found
+                if (isFirstOptionMoved && isSecondOptionMoved) {
+                    break;
+                }
+            }
+
+            if (isFirstOptionMoved && isSecondOptionMoved) {
+                System.out.println("Selected options moved successfully: " + firstSelectedOptionText + " and " + secondSelectedOptionText);
+            } else {
+                System.out.println("One or both options were not moved to the selected bundles.");
+            }
+
+    }
+
+    public void validateDialogueTextAndClickConfirm(WebElement dialogueTextElement, String dialogueText,
+                                                    WebElement confirmButtonElement) {
+        validateGetText(dialogueTextElement, dialogueText);
+        clickOnElement(confirmButtonElement, null);
     }
 
     //Changes

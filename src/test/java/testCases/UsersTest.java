@@ -18,15 +18,15 @@ public class UsersTest extends BaseClass {
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
-            commonUtils.clickOnElement(dp.togglerIcon, null);
-            commonUtils.selectTab(dp.hamburgerMenuList, "Users");
+            dp.selectHamburgerTab("Users");
 
             UsersPage up = new UsersPage(driver);
-            commonUtils.clickOnElement(up.createUserButton, "Create User");
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(up.createUserButton), "Create User");
 
             AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
             commonUtils.createUser(
                     au.newUserNameField,
+                    randomString(),
                     au.mobileCountryCodeDropDown,
                     au.countryList,
                     au.phoneNumberField,
@@ -35,7 +35,7 @@ public class UsersTest extends BaseClass {
                     au.userTypeDropDown,
                     au.licenseIDField,
                     au.credentialsField,
-                    au.unselectedBundlesList,
+                    au.bundlesNotAttachedField,
                     au.rightArrow,
                     au.selectedBundleField,
                     au.additionalPriviligesCheckboxesList,
@@ -46,14 +46,12 @@ public class UsersTest extends BaseClass {
                     au.saveButton,
                     au.dialogueText,
                     au.dialogueOkButton,
-                    randomString(),  // randomUser
                     p.getProperty("mobileCountryCode"),
-                    randomNumbers(), // randomPhoneNumber
+                    randomNumbers(),
                     p.getProperty("role"),
                     p.getProperty("usersUserType"),
                     p.getProperty("licenseID"),
                     p.getProperty("credentials"),
-                    p.getProperty("unselectedBundle"),
                     p.getProperty("defaultTimeZone"),
                     p.getProperty("dialogueText")
             );

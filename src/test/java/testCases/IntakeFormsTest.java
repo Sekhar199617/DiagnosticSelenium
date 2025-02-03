@@ -19,13 +19,11 @@ public class IntakeFormsTest extends BaseClass {
         DashboardPage dp = new DashboardPage(driver);
         CommonUtils commonUtils = new CommonUtils(driver);
         AddFormsPage addFormsPage = new AddFormsPage(driver);
-        commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
-        commonUtils.clickOnElement(dp.searchButton, "Search");
-        commonUtils.clickOnElement(dp.actionsDropDown, null);
-        commonUtils.clickOnElement(dp.view, "View");
+        dp.searchForItem(p.getProperty("accountName"));
+        dp.clickView();
 
         AccountDetailsPage ad = new AccountDetailsPage(driver);
-        commonUtils.selectTab(ad.tabList, "Forms");
+        commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Forms");
 
         commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addButton),null);
         commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.createNewButton),null);

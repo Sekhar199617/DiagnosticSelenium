@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -28,7 +30,8 @@ public class BaseClass {
 	public static WebDriver driver;
     public Logger logger;
     public Properties p;
-    
+	public CommonUtils commonUtils;
+
     @BeforeClass(groups= {"Smoke"})
     @Parameters({"os", "browser"})
     public void setup(@Optional("Windows")String os, String browser) throws IOException 
@@ -55,21 +58,21 @@ public class BaseClass {
     }
 
 	public void login(String username, String password, boolean isAdminLogin) {
-		String appURL = isAdminLogin ? p.getProperty("adminAppURL") : p.getProperty("observerAppURL");
-		driver.get(appURL);
+        String appURL = isAdminLogin ? p.getProperty("adminAppURL") : p.getProperty("observerAppURL");
+        driver.get(appURL);
 
-		LoginPage loginPage = new LoginPage(driver);
-		CommonUtils commonUtils = new CommonUtils(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        commonUtils = new CommonUtils(driver);
 
-		commonUtils.enterValueInTextField(commonUtils.findElementByXpath(loginPage.emailField), username);
-		commonUtils.enterValueInTextField(commonUtils.findElementByXpath(loginPage.passwordField), password);
+        commonUtils.enterValueInTextField(commonUtils.findElementByXpath(loginPage.emailField), username);
+        commonUtils.enterValueInTextField(commonUtils.findElementByXpath(loginPage.passwordField), password);
 
-		if (isAdminLogin) {
-			commonUtils.clickOnElement(commonUtils.findElementByXpath(loginPage.adminLoginButton), "Login");
-		} else {
-			commonUtils.clickOnElement(commonUtils.findElementByXpath(loginPage.observerLoginButton), "Login");
-		}
-	}
+        if (isAdminLogin) {
+        	commonUtils.clickOnElement(commonUtils.findElementByXpath(loginPage.adminLoginButton), "Login");
+        } else {
+        	commonUtils.clickOnElement(commonUtils.findElementByXpath(loginPage.observerLoginButton), "Login");
+        }
+    }
     
     public String randomString()
 	{

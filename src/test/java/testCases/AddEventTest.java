@@ -21,13 +21,11 @@ public class AddEventTest extends BaseClass {
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
-            commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
-            commonUtils.clickOnElement(dp.searchButton, "Search");
-            commonUtils.clickOnElement(dp.actionsDropDown, null);
-            commonUtils.clickOnElement(dp.view, "View");
+            dp.searchForItem(p.getProperty("accountName"));
+            dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            commonUtils.selectTab(ad.tabList, "Events/Tags");
+            commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Events/Tags");
 
             AddEventTagsPage addEventTagsPage = new AddEventTagsPage(driver);
             // Fill Event Details
