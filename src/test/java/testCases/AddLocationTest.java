@@ -22,13 +22,11 @@ public class AddLocationTest extends BaseClass {
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
-            commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
-            commonUtils.clickOnElement(dp.searchButton, "Search");
-            commonUtils.clickOnElement(dp.actionsDropDown, null);
-            commonUtils.clickOnElement(dp.view, "View");
+            dp.searchForItem(p.getProperty("accountName"));
+            dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            commonUtils.selectTab(ad.tabList, "Locations");
+            commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Locations");
 
             AddLocationPage lp= new AddLocationPage(driver);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(lp.addLocationButton), null);
