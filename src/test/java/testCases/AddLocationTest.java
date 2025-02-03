@@ -15,7 +15,7 @@ public class AddLocationTest extends BaseClass {
     @Test
     public void verifyAddLocationTest() {
 
-        logger.info("****** Starting Online Education Test ******");
+        logger.info("****** Starting Add Location Test ******");
         try {
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
@@ -65,7 +65,7 @@ public class AddLocationTest extends BaseClass {
         } catch (Exception e) {
             Assert.fail();
         }
-        logger.info("****** Finished Online Education Test ******");
+        logger.info("****** Finished Add Location Test ******");
     }
 
 }
