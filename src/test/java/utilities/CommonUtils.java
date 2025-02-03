@@ -334,5 +334,17 @@ public class CommonUtils extends BaseClass {
             }
         }
     }
+    //Method for scroll up
+    public void scrollToUp()
+    {
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollTo(0, 0);");
+            Thread.sleep(1000); // Small delay to allow rendering
+        } catch (Exception e) {
+            System.err.println("Error scrolling to top: " + e.getMessage());
+        }
+    }
 
 }
+
