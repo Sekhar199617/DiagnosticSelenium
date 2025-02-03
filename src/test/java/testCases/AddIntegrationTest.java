@@ -10,14 +10,12 @@ import utilities.CommonUtils;
 
 public class AddIntegrationTest extends BaseClass {
 
-
     @Test(groups = { "Smoke" })
     public void verify_add_integration() {
         try {
             logger.info("****** Starting Add Integration Test Case ******");
 
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
             commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
@@ -26,7 +24,6 @@ public class AddIntegrationTest extends BaseClass {
             commonUtils.clickOnElement(dp.view, "View");
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(ad.tabList, "Settings");
-
             SettingPage sp = new SettingPage(driver);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.ssoButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.editButton),null);

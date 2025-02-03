@@ -50,7 +50,6 @@ public class CreateGroupTest extends BaseClass {
                 throw new IllegalArgumentException(
                         "Invalid account type specified in config.properties: " + communicationPreferencesType);
             }
-
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.uploadCSV),null);
             WebElement fileUploadElement = commonUtils.findElementByXpath(gp.fileUploadInput);
             String filePath = Paths.get("src/test/resources/group_member.csv").toAbsolutePath().toString();

@@ -26,6 +26,4 @@ public class SettingPage extends BasePage{
     public String successfulMessage = "//h2[@id='swal2-title']";
     public String successfulMessageOkButton = "//button[@class='swal2-confirm swal2-styled swal2-default-outline']";
 
-
-
 }

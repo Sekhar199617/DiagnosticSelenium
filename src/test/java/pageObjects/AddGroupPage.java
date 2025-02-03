@@ -11,7 +11,6 @@ public class AddGroupPage extends BasePage {
         super(driver);
         commonUtils = new CommonUtils(driver);
     }
-
     public String addGroupButton = "//a[@class='btn btn-primary group-add-btn']";
     public String groupNameField = "//input[@id='group_name']";
     public String orderingModeDropdown = "//select[@id='order_mode_id']";
