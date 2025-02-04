@@ -58,10 +58,10 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ip.apiMappingButton), null);
             //Selecting the above stored entity type in Integration Dropdown
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ip.typesOfIntegrationDropdown),ep.entityVariableName);
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ip.typesOfIntegrationDropdown), entityVariableName);
 
             //Checking the Support Entities Name is visible or not in partner dropdown
             String expectedValue = p.getProperty("supportEntitiesName");
-
             WebElement dropdownElement = commonUtils.findElementByXpath(ip.partnerDropdown) ;
             Select dropdown = new Select(dropdownElement);
 
