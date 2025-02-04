@@ -4,12 +4,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import pageObjects.AccountDetailsPage;
-import pageObjects.AddEventTagsPage;
+import pageObjects.AccountDetailsAddEventTagsPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class AddEventTest extends BaseClass {
+public class AccountDetailsAddEventTest extends BaseClass {
 
     @Test(groups = { "Smoke" })
     public void verify_add_event() {
@@ -27,7 +27,7 @@ public class AddEventTest extends BaseClass {
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Events/Tags");
 
-            AddEventTagsPage addEventTagsPage = new AddEventTagsPage(driver);
+            AccountDetailsAddEventTagsPage addEventTagsPage = new AccountDetailsAddEventTagsPage(driver);
             // Fill Event Details
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addEventTagsPage.addEventButton), null);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventNameTagField), randomString() );

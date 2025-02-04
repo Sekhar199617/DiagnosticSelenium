@@ -5,12 +5,12 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import pageObjects.AccountDetailsPage;
-import pageObjects.AddLocationPage;
+import pageObjects.AccountDetailsAddLocationPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class AddLocationTest extends BaseClass {
+public class AccountDetailsAddLocationTest extends BaseClass {
 
     @Test
     public void verifyAddLocationTest() {
@@ -28,7 +28,7 @@ public class AddLocationTest extends BaseClass {
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Locations");
 
-            AddLocationPage lp= new AddLocationPage(driver);
+            AccountDetailsAddLocationPage lp= new AccountDetailsAddLocationPage(driver);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(lp.addLocationButton), null);
             commonUtils.validateGetText(commonUtils.findElementByXpath(lp.validateAccountName), p.getProperty("accountName"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(lp.locationNameField), randomString());

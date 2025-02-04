@@ -1,16 +1,14 @@
 package pageObjects;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 import utilities.CommonUtils;
 
-public class AddEventTagsPage extends BasePage {
+public class AccountDetailsAddEventTagsPage extends BasePage {
 
     CommonUtils commonUtils;
 
-    public AddEventTagsPage(WebDriver driver) {
+    public AccountDetailsAddEventTagsPage(WebDriver driver) {
         super(driver);
         commonUtils = new CommonUtils(driver);
     }
