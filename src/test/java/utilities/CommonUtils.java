@@ -428,6 +428,15 @@ public class CommonUtils extends BaseClass {
             System.err.println("Error scrolling to top: " + e.getMessage());
         }
     }
+// This method checks if a checkbox is selected. If not selected, it clicks to select it.
+
+    public void validateAndClickCheckbox(String checkboxLocator) {
+        WebElement checkbox = driver.findElement(By.xpath(checkboxLocator));
+
+        if (!checkbox.isSelected()) {
+            checkbox.click();
+        }
+    }
 
 }
 
