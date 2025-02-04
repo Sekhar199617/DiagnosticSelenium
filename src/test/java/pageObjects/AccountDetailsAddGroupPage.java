@@ -3,11 +3,11 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 import utilities.CommonUtils;
 
-public class AddGroupPage extends BasePage {
+public class AccountDetailsAddGroupPage extends BasePage {
 
     CommonUtils commonUtils;
 
-    public AddGroupPage(WebDriver driver) {
+    public AccountDetailsAddGroupPage(WebDriver driver) {
         super(driver);
         commonUtils = new CommonUtils(driver);
     }

@@ -1,15 +1,13 @@
 package pageObjects;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import utilities.CommonUtils;
 
-public class AddFormsPage extends BasePage{
+public class AccountDetailsAddFormsPage extends BasePage{
 
     CommonUtils commonUtils;
 
-    public AddFormsPage(WebDriver driver) {
+    public AccountDetailsAddFormsPage(WebDriver driver) {
         super(driver);
         commonUtils = new CommonUtils(driver);
     }

@@ -4,11 +4,11 @@ import org.openqa.selenium.WebDriver;
 
 import utilities.CommonUtils;
 
-public class AddLocationPage extends BasePage {
+public class AccountDetailsAddLocationPage extends BasePage {
 
     CommonUtils commonUtils;
 
-    public AddLocationPage(WebDriver driver) {
+    public AccountDetailsAddLocationPage(WebDriver driver) {
         super(driver);
         commonUtils = new CommonUtils(driver);
     }

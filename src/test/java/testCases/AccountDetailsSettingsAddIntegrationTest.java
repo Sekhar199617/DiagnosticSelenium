@@ -3,12 +3,12 @@ package testCases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
+import pageObjects.AccountDetailsSettingsPage;
 import pageObjects.DashboardPage;
-import pageObjects.SettingPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class AddIntegrationTest extends BaseClass {
+public class AccountDetailsSettingsAddIntegrationTest extends BaseClass {
 
     @Test(groups = { "Smoke" })
     public void verify_add_integration() {
@@ -18,24 +18,23 @@ public class AddIntegrationTest extends BaseClass {
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
-            commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
-            commonUtils.clickOnElement(dp.searchButton, "Search");
-            commonUtils.clickOnElement(dp.actionsDropDown, null);
-            commonUtils.clickOnElement(dp.view, "View");
+            dp.searchForItem(p.getProperty("accountName"));
+            dp.clickView();
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            commonUtils.selectTab(ad.tabList, "Settings");
-            SettingPage sp = new SettingPage(driver);
+            commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Settings");
+            AccountDetailsSettingsPage sp = new AccountDetailsSettingsPage(driver);
+
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.ssoButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.editButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.singleSignOnIntegrationAddButton),null);
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(sp.integrationTypeDropdown),p.getProperty("integrationType"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.integrationName),randomString());
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.samlSsoUrl),randomString());
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.singleSignOnUrl),randomString());
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.singleSignOutUrl),randomString());
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.certificateFingerprint),randomString());
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.remoteLogoutUrl),randomString());
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.iPRanges),randomString());
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.samlSsoUrl),p.getProperty("samlSsoUrlAddIntegration"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.singleSignOnUrl),p.getProperty("singleSignOnUrlAddIntegration"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.singleSignOutUrl),p.getProperty("singleSignOutUrlAddIntegration"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.certificateFingerprint),p.getProperty("certificateFingerprintAddIntegration"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.remoteLogoutUrl),p.getProperty("remoteLogoutUrlAddIntegration"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(sp.iPRanges),p.getProperty("iPRangesAddIntegration"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.saveSSOIntegrationButton),null);
             commonUtils.validateGetText(commonUtils.findElementByXpath(sp.successfulMessage),p.getProperty("integrationSuccessfulMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.successfulMessageOkButton),null);

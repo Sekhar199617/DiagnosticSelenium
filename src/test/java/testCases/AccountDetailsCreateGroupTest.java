@@ -4,14 +4,14 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
-import pageObjects.AddGroupPage;
+import pageObjects.AccountDetailsAddGroupPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
 import java.nio.file.Paths;
 
-public class CreateGroupTest extends BaseClass {
+public class AccountDetailsCreateGroupTest extends BaseClass {
 
     @Test(groups = { "Smoke" })
     public void verify_create_group() {
@@ -22,16 +22,13 @@ public class CreateGroupTest extends BaseClass {
 
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
-
-            commonUtils.enterValueInTextField(dp.searchField, p.getProperty("accountName"));
-            commonUtils.clickOnElement(dp.searchButton, "Search");
-            commonUtils.clickOnElement(dp.actionsDropDown, null);
-            commonUtils.clickOnElement(dp.view, "View");
+            dp.searchForItem(p.getProperty("accountName"));
+            dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            commonUtils.selectTab(ad.tabList, "Groups");
+            commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Groups");
 
-            AddGroupPage gp = new AddGroupPage(driver);
+            AccountDetailsAddGroupPage gp = new AccountDetailsAddGroupPage(driver);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.addGroupButton), null);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(gp.groupNameField),randomString());
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(gp.orderingModeDropdown),p.getProperty("orderingModeDropdown"));
