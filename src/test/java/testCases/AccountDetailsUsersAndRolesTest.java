@@ -55,7 +55,7 @@ public class AccountDetailsUsersAndRolesTest extends BaseClass {
 					au.dialogueText,
 					au.dialogueOkButton,
 					p.getProperty("mobileCountryCode"),
-					randomNumbers(),
+					randomNumbers(10),
 					p.getProperty("role"),
 					p.getProperty("usersUserType"),
 					p.getProperty("licenseID"),

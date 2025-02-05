@@ -24,13 +24,7 @@ public class CreateAccountTest extends BaseClass {
 			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.accountNameField),randomString());
 			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.primaryContactNameField),randomString());
 			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.emailField),randomString()+"@gmail.com");
-			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.phoneField),randomNumbers());
-
-//			commonUtils.clickOnElement(createAccountPage.clickCreateAccount, null);
-//			commonUtils.enterValueInTextField(createAccountPage.accountNameField, randomString());
-//			commonUtils.enterValueInTextField(createAccountPage.primaryContactNameField, randomString());
-//			commonUtils.enterValueInTextField(createAccountPage.emailField, randomString() + "@gmail.com");
-//			commonUtils.enterValueInTextField(createAccountPage.phoneField, p.getProperty("createAccountPhone"));
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.phoneField),randomNumbers(10));
 
 			// Validate and select the account type based on the config file
 			String accountType = p.getProperty("accountType");

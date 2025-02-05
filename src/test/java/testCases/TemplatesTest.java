@@ -42,7 +42,7 @@ public class TemplatesTest extends BaseClass {
                     p.getProperty("websiteURL"));
             commonUtils.enterValueInTextField(commonUtils.findElementByName(tp.provisioningSystemURLField),
                     p.getProperty("provisioningSystemURL"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByName(tp.supportPhoneField), randomNumbers());
+            commonUtils.enterValueInTextField(commonUtils.findElementByName(tp.supportPhoneField), randomNumbers(10));
             String logoFilePath = System.getProperty("user.dir") + File.separator + "src" +
                     File.separator + "test" + File.separator + "resources" + File.separator + "Selenium_Logo.png";
             commonUtils.uploadFile(commonUtils.findElementByCssSelector(tp.logoFileUpload), logoFilePath);
