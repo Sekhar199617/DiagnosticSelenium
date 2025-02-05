@@ -42,5 +42,12 @@ public class AccountDetailsAddFormsPage extends BasePage{
     public String availableFieldSelectButton = "//a[@class='btn btn-primary select_commonField add_select_commonField']";
     public String successfulMessageText = "//h2[@id='swal2-title']";
     public String okButton = "//button[normalize-space()='Ok']";
+    public String addLegalConsentButton = "//a[@id='consent_form_account']";
+    public String createLegalConsentButton = "//a[@onclick='clearConsentModalFields()']";
+    public String consentFormNameField = "//input[@name='consent_form_name']";
+    public String instructionlegalConsentFormField = "//textarea[@id='consent_instruction']";
+    public String saveLegalConsentFormButton = "//a[@id='addConsentSubmit']";
+    public String okConsentFormCreatedButton = "//button[normalize-space()='Ok']";
+    public String consentFormSuccessfulMessageText = "//h2[@id='swal2-title']";
 
 }

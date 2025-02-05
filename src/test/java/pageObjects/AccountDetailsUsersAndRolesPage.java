@@ -34,4 +34,15 @@ public class AccountDetailsUsersAndRolesPage extends BasePage {
 	public String dialogueText = "//h2[@class='swal2-title']";
 	public String dialogueOkButton = "//button[normalize-space()='Ok']";
 
+	public String userTypeDropdown = "//select[@id='roleFilter']";
+	public String chooseFileButton = "//input[@name='csvfile']";
+	public String uploadCsvExcelButton = "//button[normalize-space()='Upload CSV/Excel']";
+	public String uploadCsvButton = "//button[@name='submit1']";
+	public String assignBundleButton = "//button[@id='assign_bundle_btn']";
+	public String assigneeType = "//select[@id='assignment_type']";
+	public String experienceAssigneeUploadDropdown = "//select[@id='observation_experience']";
+	public String numberToAssignCompleteUploadButton = "//button[@id='complete_upload']";
+	public String userUploadValidationMessage = "//h2[@class='swal2-title']";
+	public String userUploadOkButton = "//button[normalize-space()='Ok']";
+
 }
