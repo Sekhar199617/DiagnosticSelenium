@@ -80,9 +80,9 @@ public class BaseClass {
 		return generatedString;
 	}
 	
-	public String randomNumbers()
+	public String randomNumbers(int count)
 	{
-		String generatedNumbers = RandomStringUtils.randomNumeric(10);
+		String generatedNumbers = RandomStringUtils.randomNumeric(count);
 		return generatedNumbers;
 	}
 	

@@ -48,7 +48,7 @@ public class AccountDetailsAddLocationTest extends BaseClass {
             commonUtils.scrollToUp();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(lp.samplePickupTab),null);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(lp.pickupPersonNameField),randomString());
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(lp.pickPersonPhoneField),randomNumbers());
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(lp.pickPersonPhoneField),randomNumbers(10));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(lp.desiredInitialPickupDate),p.getProperty("desiredInitialPickupDate"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(lp.getDesiredInitialPickupTime),p.getProperty("getDesiredInitialPickupTime"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(lp.pickupLocationField),randomString());

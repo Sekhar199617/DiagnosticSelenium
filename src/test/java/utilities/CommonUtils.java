@@ -118,12 +118,12 @@ public class CommonUtils extends BaseClass {
     	}
     }
 
-    public void selectDropDownValueWithClick(List<WebElement> element, String countryName) {
-        for(WebElement country : element) {
-            String countryText = country.getText();
-            if(countryText.equalsIgnoreCase(countryName)) {
-                waitForElementToBeClickable(country, 10);;
-                country.click();
+    public void selectDropDownValueWithClick(List<WebElement> element, String name) {
+        for(WebElement dropdownElement : element) {
+            String dropdownElementText = dropdownElement.getText();
+            if(dropdownElementText.equalsIgnoreCase(name)) {
+                waitForElementToBeClickable(dropdownElement, 10);;
+                dropdownElement.click();
                 break;
             }
         }
@@ -207,9 +207,16 @@ public class CommonUtils extends BaseClass {
     }
 
     public void selectRadioButton(WebElement radioButton) {
-        waitForElementToBeClickable(radioButton, 5);
+        waitForElementToBeClickable(radioButton, 10);
         if (!radioButton.isSelected()) {
             radioButton.click();
+        }
+    }
+
+    public void selectCheckbox(WebElement checkbox) {
+        waitForElementToBeClickable(checkbox, 5);
+        if (!checkbox.isSelected()) {
+            checkbox.click();
         }
     }
 

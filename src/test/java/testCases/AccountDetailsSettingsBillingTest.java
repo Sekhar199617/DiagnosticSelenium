@@ -40,7 +40,7 @@ public class AccountDetailsSettingsBillingTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(au.mobileCountryCodeDropDown), null);
             commonUtils.selectDropDownValueWithClick(commonUtils.findElementsByXpath(au.countryList),
                     p.getProperty("mobileCountryCode"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(au.phoneNumberField), randomNumbers());
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(au.phoneNumberField), randomNumbers(10));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(au.emailField),
                     randomString() + "@gmail.com");
             commonUtils.validateRadioButton(commonUtils.findElementByXpath(au.userTimeZoneRadioButton));

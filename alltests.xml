@@ -12,11 +12,11 @@
         <class name="testCases.AccountDetailsOrdersTest"/>
         <class name="testCases.AccountDetailsSettingsBillingTest"/>
         <class name="testCases.AccountDetailsUsersAndRolesTest"/>
-        <class name="testCases.AddEventTest"/>
         <class name="testCases.AdminLoginDDT"/>
         <class name="testCases.EducationFlowsTest"/>
         <class name="testCases.TemplatesTest"/>
         <class name="testCases.UsersTest"/>
+        <class name="testCases.EntitiesTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
