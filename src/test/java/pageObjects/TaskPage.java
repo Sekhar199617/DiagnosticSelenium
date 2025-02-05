@@ -1,9 +1,13 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WebElement;
 import utilities.CommonUtils;
+
+import java.util.List;
 
 import java.util.List;
 import java.util.Properties;
@@ -16,6 +20,8 @@ public class TaskPage extends BasePage{
         commonUtils = new CommonUtils(driver);
     }
 
+    public String shippingTaskChart = "//table[@id='purchaseUsersTable']";
+   // public String accountNameShippingTaskChart = "//*[@id=\"purchaseUsersTable\"]/thead/tr/th[2]";
     public String sendContactAssigneeButton = "//button[@name='sendExpMail']";
     public String emailSentSuccessfulMessage = "//h2[@class='swal2-title']";
     public String emailSentSuccessfulMessageOkButton = "//button[@class='swal2-confirm swal2-styled swal2-default-outline']";
@@ -43,4 +49,5 @@ public class TaskPage extends BasePage{
             }
         }
     }
+    public String accountNameShippingTaskChart = "table[@id='purchaseUsersTable']/tbody/tr";
 }
