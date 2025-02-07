@@ -1,12 +1,11 @@
 package testCases;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsUsersAndRolesPage;
 import pageObjects.DashboardPage;
+import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -14,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddAssigneeWithUploadCSVTest extends BaseClass {
+public class PurchaserAddAssigneeWithUploadCSVTest extends BaseClass {
     public CommonUtils commonUtils;
 
     @Test(groups= {"Smoke"})
@@ -41,6 +40,12 @@ public class AddAssigneeWithUploadCSVTest extends BaseClass {
 
             //Clicking on Assign Test in action dropdown for a account
             au.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
+          //  AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
+        commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.userTypeDropdown),p.getProperty("usersUserTypeAccountAdmin"));
+
+        // Click on assign test for account name
+            pl.performActionOnUser("accountsTableUserRoles",p.getProperty("userAccountAdminName"),"Assign Tests" );
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
