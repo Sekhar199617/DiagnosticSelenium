@@ -31,22 +31,7 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
             commonUtils.scrollToBottom();
 
             //Here passing name of entity and storing that entity type and clicking on edit option of that entity
-            String entityVariableName = null;
-            for (WebElement row : commonUtils.findElementsByXpath(ep.supportEntityChart)) {
-                WebElement nameCell = row.findElement(By.xpath("./td[1]"));
-                if (nameCell.getText().trim().equals(p.getProperty("supportEntitiesName"))) {
-                    // Store the "Type" value
-                    entityVariableName = row.findElement(By.xpath("./td[2]")).getText().trim();
-                    System.out.println("Entity Type: " + entityVariableName);
-
-                    // Click the "Actions" button
-                    row.findElement(By.xpath(".//button[contains(text(),'Actions')]")).click();
-
-                    // Click the "Edit" option
-                    row.findElement(By.xpath(".//a[contains(text(),'Edit')]")).click();
-                    break;
-                }
-            }
+            ep.editSupportEntity(ep.supportEntityChart, p.getProperty("supportEntitiesName"), "Edit");
 
             //In edit entity validating and clicking if the permit checkbox is ticked or not
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ep.AuthenticationTab), null);
@@ -72,28 +57,15 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ip.newIntegrationButton), null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ip.apiMappingButton), null);
             //Selecting the above stored entity type in Integration Dropdown
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ip.typesOfIntegrationDropdown), entityVariableName);
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ip.typesOfIntegrationDropdown),ep.entityVariableName);
 
             //Checking the Support Entities Name is visible or not in partner dropdown
             String expectedValue = p.getProperty("supportEntitiesName");
+
             WebElement dropdownElement = commonUtils.findElementByXpath(ip.partnerDropdown) ;
             Select dropdown = new Select(dropdownElement);
 
-            List<WebElement> options = dropdown.getOptions();
-            boolean isValuePresent = false;
-
-            for (WebElement option : options) {
-                if (option.getText().equals(expectedValue)) {
-                    isValuePresent = true;
-                    break;
-                }
-            }
-
-            if (isValuePresent) {
-                System.out.println("Validation Passed: '" + expectedValue + "' exists in the dropdown.");
-            } else {
-                System.out.println("Validation Failed: '" + expectedValue + "' is NOT present in the dropdown.");
-            }
+            ip.validateDropdownValue(ip.partnerDropdown, p.getProperty("supportEntitiesName"));
 
         }catch(Exception e)
         {
