@@ -1,8 +1,5 @@
 package testCases;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsIntegrationPage;
@@ -11,7 +8,6 @@ import pageObjects.DashboardPage;
 import pageObjects.EntityPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
-import java.util.List;
 
 public class SupportEntityVisibleToUserTest extends BaseClass {
     @Test
@@ -43,6 +39,7 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ep.supportEntityUpdatedOKbutton), null);
 
             //Clicking accounts tab in hamburger menu
+            commonUtils.scrollToUp();
             dp.selectHamburgerTab("Accounts");
             dp.searchForItem(p.getProperty("accountName"));
             dp.clickView();
@@ -58,13 +55,8 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ip.apiMappingButton), null);
             //Selecting the above stored entity type in Integration Dropdown
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ip.typesOfIntegrationDropdown),ep.entityVariableName);
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ip.typesOfIntegrationDropdown), entityVariableName);
 
             //Checking the Support Entities Name is visible or not in partner dropdown
-            String expectedValue = p.getProperty("supportEntitiesName");
-            WebElement dropdownElement = commonUtils.findElementByXpath(ip.partnerDropdown) ;
-            Select dropdown = new Select(dropdownElement);
-
             ip.validateDropdownValue(ip.partnerDropdown, p.getProperty("supportEntitiesName"));
 
         }catch(Exception e)

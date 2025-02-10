@@ -1,6 +1,10 @@
 package pageObjects;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import utilities.CommonUtils;
+
+import java.util.List;
 
 public class AccountDetailsUsersAndRolesPage extends BasePage {
 
@@ -33,7 +37,6 @@ public class AccountDetailsUsersAndRolesPage extends BasePage {
 	public String supportManagerPriviligesCheckboxesList = "//div[@class='support_manager_privilege_div']/div/input";
 	public String dialogueText = "//h2[@class='swal2-title']";
 	public String dialogueOkButton = "//button[normalize-space()='Ok']";
-
 	public String userTypeDropdown = "//select[@id='roleFilter']";
 	public String chooseFileButton = "//input[@name='csvfile']";
 	public String uploadCsvExcelButton = "//button[normalize-space()='Upload CSV/Excel']";
@@ -42,7 +45,25 @@ public class AccountDetailsUsersAndRolesPage extends BasePage {
 	public String assigneeType = "//select[@id='assignment_type']";
 	public String experienceAssigneeUploadDropdown = "//select[@id='observation_experience']";
 	public String numberToAssignCompleteUploadButton = "//button[@id='complete_upload']";
-	public String userUploadValidationMessage = "//h2[@class='swal2-title']";
-	public String userUploadOkButton = "//button[normalize-space()='Ok']";
+
+	public void performActionOnUser(String tableId, String userName, String actionText) {
+		List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+
+		for (WebElement row : rows) {
+			WebElement nameCell = row.findElement(By.xpath("./td[1]"));
+
+			if (nameCell.getText().trim().equals(userName)) {
+				System.out.println("Found user: " + nameCell.getText());
+
+				WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));
+				actionsButton.click();
+
+				WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
+				actionOption.click();
+				break;
+			}
+		}
+
+	}
 
 }

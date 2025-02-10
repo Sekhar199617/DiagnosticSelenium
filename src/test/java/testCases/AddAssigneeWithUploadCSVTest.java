@@ -1,6 +1,5 @@
 package testCases;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -20,7 +19,7 @@ public class AddAssigneeWithUploadCSVTest extends BaseClass {
     @Test(groups= {"Smoke"})
     public void verifyAddAssigneeWithCSV() {
 
-    logger.info("****** Starting Add Assignee Wit hUpload CSV Test ******");
+    logger.info("****** Starting Add Assignee Wit Upload CSV Test ******");
 		try{
 
         login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
@@ -39,26 +38,8 @@ public class AddAssigneeWithUploadCSVTest extends BaseClass {
             AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
         commonUtils.selectDropDownValue(commonUtils.findElementByXpath(au.userTypeDropdown),p.getProperty("usersUserTypeAccountAdmin"));
 
-            // Locate the table rows
-            List<WebElement> rows = driver.findElements(By.xpath("//table[@id='accountsTableUserRoles']/tbody/tr"));
-
-            for (WebElement row : rows) {
-                // Get the name cell from the first column
-                WebElement nameCell = row.findElement(By.xpath("./td[1]"));
-
-                if (nameCell.getText().trim().equals(p.getProperty("userAccountAdminName"))) {
-                    System.out.println("Found user: " + nameCell.getText());
-
-                    // Click the "Actions" button
-                    WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));
-                    actionsButton.click();
-
-                    // Click the "Assign Tests" option
-                    WebElement assignTestsOption = row.findElement(By.xpath(".//a[contains(text(),'Assign Tests')]"));
-                    assignTestsOption.click();
-                    break;
-                }
-            }
+            //Clicking on Assign Test in action dropdown for a account
+            au.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -76,8 +57,8 @@ public class AddAssigneeWithUploadCSVTest extends BaseClass {
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(au.experienceAssigneeUploadDropdown),p.getProperty("userUploadAssigneeExperience"));
             Thread.sleep(1000);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(au.numberToAssignCompleteUploadButton),null);
-            commonUtils.validateGetText(commonUtils.findElementByXpath(au.userUploadValidationMessage),p.getProperty("userAssigneeUploadValidationMessage"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(au.userUploadOkButton),null);
+            commonUtils.validateGetText(commonUtils.findElementByXpath(au.dialogueText),p.getProperty("userAssigneeUploadValidationMessage"));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(au.dialogueOkButton),null);
 
     }catch(Exception e)
     {

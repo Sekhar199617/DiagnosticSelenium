@@ -125,8 +125,8 @@ public class AccountDetailsIntakeFormsTest extends BaseClass {
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.consentFormNameField), randomString());
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.instructionlegalConsentFormField), randomString());
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.saveLegalConsentFormButton), null);
-            commonUtils.validateGetText(commonUtils.findElementByXpath(addFormsPage.consentFormSuccessfulMessageText),p.getProperty("consentFormSuccessfulMessageText"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.okConsentFormCreatedButton),null);
+            commonUtils.validateGetText(commonUtils.findElementByXpath(addFormsPage.successfulMessageText),p.getProperty("consentFormSuccessfulMessageText"));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.okButton),null);
             commonUtils.scrollToBottom();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.patientFinishedButton), null);
             commonUtils.validateGetText(commonUtils.findElementByXpath(addFormsPage.successfulMessageText), p.getProperty("successfulFormCreationMessage"));
