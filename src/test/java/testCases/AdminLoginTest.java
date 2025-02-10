@@ -4,13 +4,17 @@ import org.testng.annotations.Test;
 import testBase.BaseClass;
 
 public class AdminLoginTest extends BaseClass {
-	
+
 	@Test(groups= {"Smoke"})
 	public void verify_admin_login()
 	{
 		try {
 			logger.info("****** Starting Admin Login Test Case ******");
-			login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
+			
+			String jsonPath = "./testData//adminLoginData.json";
+			loadTestData(jsonPath);
+			
+			login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 			Thread.sleep(3000);
 		} catch(Exception e) {
 			Assert.fail();

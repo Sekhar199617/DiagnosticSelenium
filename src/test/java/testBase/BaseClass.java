@@ -11,6 +11,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -31,6 +33,7 @@ public class BaseClass {
     public Logger logger;
     public Properties p;
 	public CommonUtils commonUtils;
+	private JSONObject testData;
 
     @BeforeClass(groups= {"Smoke"})
     @Parameters({"os", "browser"})
@@ -112,6 +115,22 @@ public class BaseClass {
 	    FileUtils.copyFile(sourceFile, targetFile);
 	    return targetFilePath;
 	}
+	
+	public void loadTestData(String jsonPath) {
+        try {
+            JSONParser parser = new JSONParser();
+            FileReader reader = new FileReader(jsonPath);
+            Object obj = parser.parse(reader);
+            testData = (JSONObject) obj;
+        } catch (Exception e) {
+            logger.error("Error reading the test data JSON file: " + e.getMessage());
+        }
+    }
+
+    // Method to get data from the JSON file by key
+    public String getTestData(String key) {
+        return (String) testData.get(key);
+    }
     
     @AfterClass(groups= {"Smoke"})
     public void tearDown() {

@@ -1,0 +1,27 @@
+[
+    {
+        "email" : "avinash.jha@ksolves.com",
+        "password" : "dev@123",
+        "exp" : "valid"
+    },
+    {
+        "email" : "avinash.jha@ksolves.com",
+        "password" : "dev@123456",
+        "exp" : "invalid"
+    },
+    {
+        "email" : "avinash@ksolves.com",
+        "password" : "dev@123",
+        "exp" : "invalid"
+    },
+    {
+        "email" : "avinash@ksolves.com",
+        "password" : "dev@123456",
+        "exp" : "invalid"
+    },
+	{
+	    "email" : "",
+	    "password" : "",
+	    "exp" : "empty"
+	}
+]
