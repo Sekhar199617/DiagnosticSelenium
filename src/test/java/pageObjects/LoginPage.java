@@ -12,4 +12,6 @@ public class LoginPage extends BasePage {
 	public String adminLoginButton = "//button[@id='adminLoginForm']";
 	public String observerLoginButton = "//button[@id='observerLoginForm']";
 	public String alertMessage = "//div[@role='alert']";
+	public String emailErrorText = "email-error"; //id
+	public String passwordErrorText = "password-error"; //id
 }

@@ -34,7 +34,7 @@ public class AdminLoginDDT extends BaseClass {
 					Assert.assertTrue(true);
 				}else
 				{
-                    Assert.fail();
+                    Assert.fail("Valid login failed, no dashboard found.");
 				}
 			}
 			
@@ -50,6 +50,20 @@ public class AdminLoginDDT extends BaseClass {
 							p.getProperty("invalidCredentialsAlertMessage"));
 				}
 			}
+
+            if(exp.equalsIgnoreCase("empty")) {
+                if (targetPage) {
+                    commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.togglerIcon), null);
+                    commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.logoutButton), null);
+                    Assert.fail("Invalid login treated as valid.");
+                } else {
+                    Assert.assertTrue(true);
+                    commonUtils.validateGetText(commonUtils.findElementById(loginPage.emailErrorText),
+                            p.getProperty("emailErrorText"));
+                    commonUtils.validateGetText(commonUtils.findElementById(loginPage.passwordErrorText),
+                            p.getProperty("passwordErrorText"));
+                }
+            }
 		}catch(Exception e)
 		{
 			Assert.fail();
