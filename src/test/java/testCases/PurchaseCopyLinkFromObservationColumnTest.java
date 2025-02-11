@@ -60,15 +60,7 @@ public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
             commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("observationLinkCopyValidationMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
 
-            ((JavascriptExecutor) driver).executeScript("window.open()");
-
-            // Switch to the new tab
-            for (String tab : driver.getWindowHandles()) {
-                driver.switchTo().window(tab);
-            }
-
-            // Open site in the new tab
-            driver.get(copiedURL);
+            ob.openNewTabWithURL(copiedURL);
 
             WebElement welcomeHeader = commonUtils.findElementByXpath(ob.welcomeTextMessage);
             String actualText = welcomeHeader.getText();

@@ -47,21 +47,18 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
 
             ob.selectHamburgerTab("Forms");
 
+            String copiedFormName = ob.clickOnFormsLink(p.getProperty("purchaserFormCopyUrlFormType"));
+            System.out.println(copiedFormName + " copied");
 
-            ob.clickOnFormsLink(p.getProperty("purchaserFormCopyUrlFormType"));
             String copiedURL = ob.getClipboardText();
             commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("copyFormUrlConfirmationMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
 
-            ((JavascriptExecutor) driver).executeScript("window.open()");
+            //Open the copied link in new Tab
+            ob.openNewTabWithURL(copiedURL);
+            String expectedFormName = commonUtils.findElementByXpath(ob.formUrlFormName).getText();
 
-            // Switch to the new tab
-            for (String tab : driver.getWindowHandles()) {
-                driver.switchTo().window(tab);
-            }
-
-            // Open site in the new tab
-            driver.get(copiedURL);
+            Assert.assertEquals(copiedFormName,expectedFormName , "Form name is not matching");
 
             Thread.sleep(2000);
 

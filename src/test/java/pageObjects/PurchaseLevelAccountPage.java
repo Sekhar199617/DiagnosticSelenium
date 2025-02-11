@@ -1,6 +1,7 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -67,8 +68,27 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String successfulConfirmationMessage = "//h2[@class='swal2-title' and @id='swal2-title']";
     public String successfulConfirmationOkButton = "//button[@type='button' and contains(@class, 'swal2-confirm')]";
     public String shippingTaskRadioButton = "//input[@class='shipping_tasks mx-2']";
-
-    public String formUrlFormName = "//div[contains(@class,'order-md-1')]";
+    public String formUrlFormName = "//span[contains(@class,'fontHeadline')]";
+    public String  editSettingButton = "//button[@id='enable-edit-form']";
+    public String settingTab = "//ul[@id='settingTabs']/li";
+    public String billingContactDropdown = "//select[@id='billing_contact_id']";
+    public String billingCountryDropdown = "//select[@id='billing_country']";
+    public String billingAddress1Field = "//input[@name='billing_line_one']";
+    public String billingAddress2Field = "//input[@name='billing_line_two']";
+    public String billingCityField = "//input[@name='city']";
+    public String billingStateField = "//input[@name='state']";
+    public String billingPostalCodeField = "//input[@name='postal_code']";
+    public String billingUpdateButton = "//button[@name='updateAccountDetails']";
+    public String addUserAndRolesButton = "(//a[@class='btn btn-primary'][normalize-space()='add'])[1]";
+    public String newUserNameField = "(//input[@name='name'])[2]";
+    public String newUserPhoneField = "//input[@name='phone_number']";
+    public String newUserEmailField = "(//input[@name='email'])[2]";
+    public String newUserRoleDropdown = "//select[@name='userRole']";
+    public String newUserUsertypeDropdown = "//select[@name='role']";
+    public String newUserAdditionalPrivilegesCheckboxList = "div[class='manager_div'] input";
+    public String newUserTimeZoneDropdown = "//select[@name='timezone_id']";
+    public String newUserActiveCheckbox = "//input[@name='activeAccount']";
+    public String newUserSaveButton = "//button[@name='save']";
 
     public void selectHamburgerTab(String tabName) {
         commonUtils.clickOnElement(commonUtils.findElementByXpath(purchaserToggleIcon), null);
@@ -182,6 +202,7 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String clickOnFormsLink(String formType) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='globalFormTable']/tbody/tr"));
 
+          String formName = "";
         for (WebElement row : rows) {
             WebElement nameCell = row.findElement(By.xpath("./td[2]"));
 
@@ -189,8 +210,7 @@ public class PurchaseLevelAccountPage extends BasePage{
                 System.out.println("Found Form Type: " + nameCell.getText());
 
                 WebElement valueCell = row.findElement(By.xpath("./td[4]"));
-                String formName = valueCell.getText().trim();
-                System.out.println("Copied Value: " + formName);
+                 formName = valueCell.getText().trim();
 
                 WebElement copyIcon = row.findElement(By.xpath("//td[@class='text-center']/ion-icon[@name='copy-outline']"));
                 copyIcon.click();
@@ -198,8 +218,23 @@ public class PurchaseLevelAccountPage extends BasePage{
                 return formName;
             }
         }
-        return null;
 
+        System.out.println(formName);
+        return formName;
     }
+
+
+
+    public void openNewTabWithURL(String url) {
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+
+        // Switch to the new tab
+        for (String tab : driver.getWindowHandles()) {
+            driver.switchTo().window(tab);
+        }
+        // Open the given URL in the new tab
+        driver.get(url);
+    }
+
 
 }
