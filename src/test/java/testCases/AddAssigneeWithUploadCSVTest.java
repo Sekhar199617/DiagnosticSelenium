@@ -19,7 +19,7 @@ public class AddAssigneeWithUploadCSVTest extends BaseClass {
     @Test(groups= {"Smoke"})
     public void verifyAddAssigneeWithCSV() {
 
-    logger.info("****** Starting Add Assignee Wit Upload CSV Test ******");
+    logger.info("****** Starting Add Assignee With Upload CSV Test ******");
 		try{
 
         login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
@@ -64,6 +64,6 @@ public class AddAssigneeWithUploadCSVTest extends BaseClass {
     {
         Assert.fail();
     }
-		logger.info("****** Finished Add New Account User Test ******");
+		logger.info("****** Finished Add Assignee With Upload CSVr Test ******");
 }
 }

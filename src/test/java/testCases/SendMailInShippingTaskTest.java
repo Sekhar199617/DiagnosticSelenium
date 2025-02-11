@@ -15,7 +15,7 @@ public class SendMailInShippingTaskTest extends BaseClass {
     @Test
     public void verifySupportEntityVisibleToUser() {
 
-        logger.info("****** Starting Support Entity Visible To User Test ******");
+        logger.info("****** Starting Send the Mail on Clicking The Contact Assignee Button in Shipping Task Test ******");
         try {
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
@@ -34,6 +34,6 @@ public class SendMailInShippingTaskTest extends BaseClass {
         } catch (Exception e) {
             Assert.fail();
         }
-        logger.info("****** Finished Add Patient Data Form Test Case ******");
+        logger.info("****** Finished Send the Mail on Clicking The Contact Assignee Button in Shipping Task Test ******");
     }
 }
