@@ -29,7 +29,7 @@ public class AccountDetailsIntakeFormsTest extends BaseClass {
         commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.createNewButton),null);
         commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formScopeDropdown),p.getProperty("formScopeAccount"));
     }
-    @Test(groups = {"Smoke"}, priority = 2)
+    @Test(groups = {"Smoke"}, priority = 3)
     public void verify_add_accountData() {
         try {
             logger.info("****** Starting Add Account Data Form Test Case ******");
@@ -59,7 +59,7 @@ public class AccountDetailsIntakeFormsTest extends BaseClass {
         logger.info("****** Finished Add Account Data Form Test Case ******");
     }
 
-    @Test(groups = {"Smoke"}, priority = 1)
+    @Test(groups = {"Smoke"}, priority = 2)
     public void verify_add_event() {
         try {
             logger.info("****** Starting Add Patient Data Form Test Case ******");
@@ -96,6 +96,47 @@ public class AccountDetailsIntakeFormsTest extends BaseClass {
             Assert.fail();
         }
         logger.info("****** Finished Add Patient Data Form Test Case ******");
+    }
+
+    @Test(groups = {"Smoke"}, priority = 1)
+    public void verify_create_form_with_custom_field() {
+        try {
+            logger.info("****** Starting Create Form With Custom Field Test Case ******");
+
+            CommonUtils commonUtils = new CommonUtils(driver);
+            AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
+            Thread.sleep(1000);
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formNameField), randomString());
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypeAccount"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formTypeDropdown), p.getProperty("formTypeKiosk"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formDescriptionField), randomString());
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.selectLogoImageDropdown), p.getProperty("selectLogoImage"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formInstructionField), randomString());
+            commonUtils.scrollToBottom();
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addAccountFormFieldButton), null);
+            commonUtils.scrollToBottom();
+            commonUtils.selectDynamicField(p.getProperty("availableFieldNameAccount"), addFormsPage.availableFieldAccount);
+            commonUtils.clickSelectButton(addFormsPage.availableFieldSelectButton);
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.field1InstructionField), randomString());
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.saveField1Button), null);
+
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addLegalConsentButton), null);
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.createLegalConsentButton), null);
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.consentFormNameField), randomString());
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.instructionlegalConsentFormField), randomString());
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.saveLegalConsentFormButton), null);
+            commonUtils.validateGetText(commonUtils.findElementByXpath(addFormsPage.successfulMessageText),p.getProperty("consentFormSuccessfulMessageText"));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.okButton),null);
+            commonUtils.scrollToBottom();
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.patientFinishedButton), null);
+            commonUtils.validateGetText(commonUtils.findElementByXpath(addFormsPage.successfulMessageText), p.getProperty("successfulFormCreationMessage"));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.okButton), null);
+
+
+        } catch (Exception e) {
+            Assert.fail();
+        }
+        logger.info("****** Finished Create Form With Custom Field Test Case ******");
     }
 
     @AfterMethod
