@@ -438,5 +438,13 @@ public class CommonUtils extends BaseClass {
         }
     }
 
-}
+    public void validateAndClickRadiobutton (String radiobuttonLocator)
+    {
+        WebElement radioButton = driver.findElement(By.xpath(radiobuttonLocator));
 
+        if (!radioButton.isSelected()){
+            radioButton.click();
+        }
+    }
+
+}

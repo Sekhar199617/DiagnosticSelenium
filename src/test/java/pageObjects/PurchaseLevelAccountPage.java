@@ -7,6 +7,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.CommonUtils;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.time.Duration;
 import java.util.List;
 
@@ -17,7 +20,6 @@ public class PurchaseLevelAccountPage extends BasePage{
         super(driver);
         this.commonUtils = new CommonUtils(driver);
     }
-
     public String userTypeDropdown = "//select[@id='roleFilter']";
     public String chooseFileButton = "//input[@name='csvfile']";
     public String uploadCsvExcelButton = "//button[normalize-space()='upload_csv/excel']";
@@ -35,9 +37,6 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String firstNameNewOrderField = "//input[@id='first-name']";
     public String lastNameNewOrderField = "//input[@id='last-name']";
     public String emailNewOrderField = "//input[@id='order-email']";
-    // public String countryCodeNewOrderDropdown = "//div[@class='iti__selected-flag']";
-    // public String countryNameNewOrderLocator = "//span[@class='iti__country-name' and text()='%s']";
-    public String countryListNewOrder = "//span[@class='iti__country-name']";
     public String mobileNumberNewOrderField = "//input[@name='phone_number']";
     public String demoUserCheckboxNewOrder = "//input[@id='demo-user']";
     public String continueNewOrderButton = "//button[@id='continue-btn']";
@@ -61,24 +60,20 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String physicianEmailField = "//input[@id='physician_email']";
     public String physicianPhoneField = "//input[@id='physician_phone']";
     public String confirmOrderButton = "//button[@id='confirm-order']";
-    public String newOrderSuccessfulConfirmationMessage = "//h2[@id='swal2-title']";
-    public String newOrderSuccessfulConfirmationOkButton = "//button[normalize-space()='ok']";
     public String countryDropdown = "//div[@class='iti__selected-flag']";
-    public String purchaserTogglerIcon = "//span[@class='navbar-toggler-icon']";
+    public String purchaserToggleIcon = "//span[@class='navbar-toggler-icon']";
     public String hamburgerMenuList = "//div[@class='mt--10px']/li/a";
-    public String assignmentViewButton = "//tr[@class='odd']//button[@type='button'][normalize-space()='View']";
-    public String observationLinkCopyValidationMessage = "//h2[@id='swal2-title']";
-    public String observationLinkCopyOkButton = "//button[normalize-space()='Ok']";
+    public String welcomeTextMessage = "//h1[@class='text-primary fw-semibold display-4 mb-0']";
+    public String successfulConfirmationMessage = "//h2[@class='swal2-title' and @id='swal2-title']";
+    public String successfulConfirmationOkButton = "//button[@type='button' and contains(@class, 'swal2-confirm')]";
+    public String shippingTaskRadioButton = "//input[@class='shipping_tasks mx-2']";
+
+    public String formUrlFormName = "//div[contains(@class,'order-md-1')]";
 
     public void selectHamburgerTab(String tabName) {
-        commonUtils.clickOnElement(commonUtils.findElementByXpath(purchaserTogglerIcon), null);
+        commonUtils.clickOnElement(commonUtils.findElementByXpath(purchaserToggleIcon), null);
         commonUtils.selectTab(commonUtils.findElementsByXpath(hamburgerMenuList), tabName);
     }
-    public String countryListbox = "//ul[@id='country-listbox']";
-    public String countryOptionByName = "//li[span[normalize-space(text())='%s']]";
-    public String countryDropdownArrow = "//div[@class='iti__arrow']";
-    public String countryOptionArrow = "//span[@class='iti__country-name']";
-
 
     public void performActionOnUser(String tableId, String userName, String actionText) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
@@ -146,14 +141,64 @@ public class PurchaseLevelAccountPage extends BasePage{
             WebElement nameCell = row.findElement(By.xpath("./td[2]"));
 
             if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user: " + nameCell.getText());
+                System.out.println("Found user Observation: " + nameCell.getText());
 
-                WebElement copyIcon = row.findElement(By.xpath("//ion-icon[@name='copy-outline']"));
+                WebElement copyIcon = row.findElement(By.xpath("(//td[@class='text-center']/ion-icon[@name='copy-outline'])[1]"));
                 copyIcon.click();
 
                 break;
             }
         }
+
+    }
+
+    public static String getClipboardText() throws Exception {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Clipboard clipboard = toolkit.getSystemClipboard();
+        return (String) clipboard.getData(DataFlavor.stringFlavor);
+    }
+
+
+    public void shippingTaskDismiss(String userName, String actionText) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='purchaseUsersTable']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[1]"));
+
+            if (nameCell.getText().trim().equals(userName)) {
+                System.out.println("Found user: " + nameCell.getText());
+
+                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));
+                actionsButton.click();
+
+                WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
+                actionOption.click();
+                break;
+            }
+        }
+
+    }
+
+    public String clickOnFormsLink(String formType) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='globalFormTable']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+
+            if (nameCell.getText().trim().equals(formType)) {
+                System.out.println("Found Form Type: " + nameCell.getText());
+
+                WebElement valueCell = row.findElement(By.xpath("./td[4]"));
+                String formName = valueCell.getText().trim();
+                System.out.println("Copied Value: " + formName);
+
+                WebElement copyIcon = row.findElement(By.xpath("//td[@class='text-center']/ion-icon[@name='copy-outline']"));
+                copyIcon.click();
+
+                return formName;
+            }
+        }
+        return null;
 
     }
 

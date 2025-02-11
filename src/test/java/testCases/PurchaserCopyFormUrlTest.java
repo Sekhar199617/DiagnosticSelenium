@@ -1,5 +1,6 @@
 package testCases;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
@@ -11,20 +12,17 @@ import utilities.CommonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaseCopyLinkFromObservationColumn extends BaseClass {
-
-
+public class PurchaserCopyFormUrlTest extends BaseClass {
 
     public CommonUtils commonUtils;
     public PurchaseLevelAccountPage ob;
 
     @Test(groups = {"Smoke"})
-    public void VerifyPurchaseCopyLinkFromObservationColumn() {
+    public void VerifyPurchaserCopyFormUrl(){
 
-        logger.info("****** Starting Purchase Copy Link From Observation Column Test ******");
+        logger.info("***** Starting Purchaser Copy Form Url And Past it in Different Tab *****");
         try {
-
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
+            login(p.getProperty("adminEmail"),p.getProperty("adminPassword"),true);
 
             DashboardPage dp = new DashboardPage(driver);
 
@@ -47,14 +45,25 @@ public class PurchaseCopyLinkFromObservationColumn extends BaseClass {
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
 
+            ob.selectHamburgerTab("Forms");
 
-            ob.selectHamburgerTab("Assignments");
-           // commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.assignmentViewButton),null);
-            ob.clickOnAssignmentView("assignmentsTable",p.getProperty("purchaserAssignmentNameToClickView"));
+
+            ob.clickOnFormsLink(p.getProperty("purchaserFormCopyUrlFormType"));
+            String copiedURL = ob.getClipboardText();
+            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("copyFormUrlConfirmationMessage"));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
+
+            ((JavascriptExecutor) driver).executeScript("window.open()");
+
+            // Switch to the new tab
+            for (String tab : driver.getWindowHandles()) {
+                driver.switchTo().window(tab);
+            }
+
+            // Open site in the new tab
+            driver.get(copiedURL);
+
             Thread.sleep(2000);
-            ob.clickOnObservationLink("dataTables_scroll",p.getProperty("purchaserAssignmentNameToClickView"));
-            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.observationLinkCopyValidationMessage),p.getProperty("observationLinkCopyValidationMessage"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.observationLinkCopyOkButton),null);
 
 
         } catch (Exception e) {
@@ -62,8 +71,7 @@ public class PurchaseCopyLinkFromObservationColumn extends BaseClass {
         }
 
 
-        logger.info("****** Finished Purchase Copy Link From Observation Column  Test ******");
+        logger.info("****** Finished Purchaser Dismiss Shipping Task Test ******");
     }
-}
 
-
+    }
