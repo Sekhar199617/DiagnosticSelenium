@@ -67,24 +67,17 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
 
             String countryXPath = "//li[@role='option' and contains(., '" + p.getProperty("purchaseCountryCodeNewOrder") + "')]";
             WebElement countryOption = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(countryXPath)));
-
             js.executeScript("arguments[0].scrollIntoView(true);", countryOption);
             Thread.sleep(500); // Ensure smooth scrolling
-
             js.executeScript("arguments[0].click();", countryOption);
-
-
-
             Thread.sleep(5000);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(pl.mobileNumberNewOrderField), p.getProperty("purchaserMobileNumberNewOrder"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.demoUserCheckboxNewOrder), null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.continueNewOrderButton), null);
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.countryNewOrderDropdown), p.getProperty("purchaseCountryNameNewOrder"));
-
             WebElement regionElement = commonUtils.findElementByXpath(pl.regionInputNewOrderField);
             WebElement regionDropdownElement = commonUtils.findElementByXpath(pl.regionNewOrderDropdown);
             String countryNameNewOrder = p.getProperty("purchaseCountryNameNewOrder");
-
             //Select city and region
             handleCityAndRegion(countryNameNewOrder, regionElement, regionDropdownElement, p.getProperty("purchaseRegionNameNewOrder"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(pl.shippingAddressNewOrder), p.getProperty("purchaserShippingAddressNewOrder"));
@@ -96,15 +89,12 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.addBundleNewOrderDropdown), p.getProperty("purchaserAddBundleNewOrderDropdown"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.flavorNewOrderDropdown), p.getProperty("purchaserFlavorNewOrderDropdown"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.addQuantityDropdown), p.getProperty("purchaserAddQuantityDropdown"));
-
-            Thread.sleep(2000);
+            Thread.sleep(1000);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.addToOrderButton), null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.continueNewOrderButton), null);
-
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.selectShipmentScheduleDropdown), p.getProperty("purchaserSelectShipmentScheduleDropdown"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.eventNameNewOrderDropdown), p.getProperty("purchaserEventNameNewOrderDropdown"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.shippingSpeedNewOrderDropdown), p.getProperty("purchaserShippingSpeedNewOrderDropdown"));
-
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(pl.orderingPhysicianNameField), p.getProperty("purchaserOrderingPhysicianName"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(pl.npiOrIdField), p.getProperty("purchaserNpiOrIdField"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(pl.physicianEmailField), p.getProperty("purchaserPhysicianEmail"));

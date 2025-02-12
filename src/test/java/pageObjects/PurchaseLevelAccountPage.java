@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import utilities.CommonUtils;
 
 import java.util.List;
+import java.util.Properties;
 
 public class PurchaseLevelAccountPage extends BasePage{
     CommonUtils commonUtils;
@@ -33,8 +34,6 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String firstNameNewOrderField = "//input[@id='first-name']";
     public String lastNameNewOrderField = "//input[@id='last-name']";
     public String emailNewOrderField = "//input[@id='order-email']";
-   // public String countryCodeNewOrderDropdown = "//div[@class='iti__selected-flag']";
-   // public String countryNameNewOrderLocator = "//span[@class='iti__country-name' and text()='%s']";
     public String countryListNewOrder = "//span[@class='iti__country-name']";
     public String mobileNumberNewOrderField = "//input[@name='phone_number']";
     public String demoUserCheckboxNewOrder = "//input[@id='demo-user']";
@@ -92,5 +91,6 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
 
     }
+
 
 }

@@ -47,7 +47,5 @@ public class AccountDetailsAddFormsPage extends BasePage{
     public String consentFormNameField = "//input[@name='consent_form_name']";
     public String instructionlegalConsentFormField = "//textarea[@id='consent_instruction']";
     public String saveLegalConsentFormButton = "//a[@id='addConsentSubmit']";
-    public String okConsentFormCreatedButton = "//button[normalize-space()='Ok']";
-    public String consentFormSuccessfulMessageText = "//h2[@id='swal2-title']";
 
 }
