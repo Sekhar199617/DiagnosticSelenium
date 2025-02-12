@@ -19,7 +19,6 @@ public class SendMailInShippingTaskTest extends BaseClass {
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
             TaskPage tp = new TaskPage(driver);
-
             // Selecting entities from hamburger menu
             dp.selectHamburgerTab("Tasks");
 

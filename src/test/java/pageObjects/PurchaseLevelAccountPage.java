@@ -15,6 +15,7 @@ public class PurchaseLevelAccountPage extends BasePage{
         super(driver);
         this.commonUtils = new CommonUtils(driver);
     }
+
     public String userTypeDropdown = "//select[@id='roleFilter']";
     public String chooseFileButton = "//input[@name='csvfile']";
     public String uploadCsvExcelButton = "//button[normalize-space()='upload_csv/excel']";

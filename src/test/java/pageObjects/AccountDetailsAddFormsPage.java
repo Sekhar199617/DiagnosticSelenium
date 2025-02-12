@@ -26,7 +26,6 @@ public class AccountDetailsAddFormsPage extends BasePage{
     public String formInstructionField = "//input[@name='form_instruction']";
     public String afterFormSubmissionRedirectToDropDown = "//select[@name='after_form_submission_redirect_to']";
     public String addAccountFormFieldButton = "//a[normalize-space()='Add Account Form Fields']";
-
     public String field1InstructionField = "(//textarea[@id='custom_instruction'])[1]";
     public String saveField1Button = "(//button[@onclick='formTemplate(this)'])[1]";
     public String attachedBundlesList = "//div[@id='unselected_bundles']";

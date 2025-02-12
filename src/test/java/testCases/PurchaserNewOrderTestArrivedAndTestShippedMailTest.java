@@ -64,7 +64,6 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             Thread.sleep(1000);
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
             String countryXPath = "//li[@role='option' and contains(., '" + p.getProperty("purchaseCountryCodeNewOrder") + "')]";
             WebElement countryOption = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(countryXPath)));
             js.executeScript("arguments[0].scrollIntoView(true);", countryOption);
@@ -104,15 +103,12 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             commonUtils.validateGetText(commonUtils.findElementByXpath(pl.newOrderSuccessfulConfirmationMessage), p.getProperty("purchaserNewOrderSuccessfulConfirmationMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.newOrderSuccessfulConfirmationOkButton), null);
 
-
         } catch (Exception e) {
             Assert.fail();
         }
 
-
         logger.info("****** Finished Purchaser New Order Test Arrived And Test Shipped Mail  Test ******");
     }
-
 
     public void handleCityAndRegion(String countryName, WebElement regionElement, WebElement regionDropdownElement, String regionName) {
 
@@ -134,6 +130,5 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             }
         }
     }
-
 
 }
