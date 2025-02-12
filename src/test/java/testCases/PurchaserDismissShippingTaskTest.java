@@ -49,12 +49,12 @@ public class PurchaserDismissShippingTaskTest extends BaseClass {
 
             //Validate and click on shipping task Radio Button
             commonUtils.validateAndClickRadiobutton(ob.shippingTaskRadioButton);
-            ob.shippingTaskDismiss(p.getProperty("purchaserShippingTaskDismissAccountName"),"Dismiss");
+            ob.shippingTaskDismiss(p.getProperty("purchaserShippingTaskDismissAccountName"),"dismiss");
 
             //Confirmation Popup
             commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("purchaserDismissShippingTaskMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
-
+            Thread.sleep(1000);
             //Validation Popup
             commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("purchaserTaskDismissedValidationMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);

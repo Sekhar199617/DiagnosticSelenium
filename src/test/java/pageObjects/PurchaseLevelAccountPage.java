@@ -35,7 +35,7 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String userUploadOkButton = "//button[normalize-space()='ok']";
     public String accountLevelHeading = "//span[@id='header_label']";
     public String accountLevelCancelButton = "//a[@onclick='detectChanges()']";
-    public String newOrderButton = "//button[normalize-space()='New Order']";
+    public String newOrderButton = "//button[normalize-space()='new_order']";
     public String newPatientLink = "//a[@id='newPatientBtn']";
     public String firstNameNewOrderField = "//input[@id='first-name']";
     public String lastNameNewOrderField = "//input[@id='last-name']";
@@ -91,7 +91,6 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String newUserTimeZoneDropdown = "//select[@name='timezone_id']";
     public String newUserActiveCheckbox = "//input[@name='activeAccount']";
     public String newUserSaveButton = "//button[@name='save']";
-    public String eventStartDate = "//input[@id='event_start_date']";
 
     public void selectHamburgerTab(String tabName) {
         commonUtils.clickOnElement(commonUtils.findElementByXpath(purchaserToggleIcon), null);
@@ -148,7 +147,7 @@ public class PurchaseLevelAccountPage extends BasePage{
             if (nameCell.getText().trim().equals(userName)) {
                 System.out.println("Found user: " + nameCell.getText());
 
-                WebElement viewButton = row.findElement(By.xpath("//button[normalize-space()='View']"));
+                WebElement viewButton = row.findElement(By.xpath("//button[normalize-space()='view']"));
                 viewButton.click();
 
                 break;
@@ -186,12 +185,12 @@ public class PurchaseLevelAccountPage extends BasePage{
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='purchaseUsersTable']/tbody/tr"));
 
         for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[1]"));
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
 
             if (nameCell.getText().trim().equals(userName)) {
                 System.out.println("Found user: " + nameCell.getText());
 
-                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));
+                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'actions')]"));
                 actionsButton.click();
 
                 WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
@@ -245,6 +244,26 @@ public class PurchaseLevelAccountPage extends BasePage{
 
         LocalDate localDate = LocalDate.parse(date, inputFormat);
         return localDate.format(outputFormat);
+    }
+
+    public void performUserActionOnUser(String tableId, String userName, String actionText) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[1]"));
+
+            if (nameCell.getText().trim().equals(userName)) {
+                System.out.println("Found user: " + nameCell.getText());
+
+                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'actions')]"));
+                actionsButton.click();
+
+                WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
+                actionOption.click();
+                break;
+            }
+        }
+
     }
 
 

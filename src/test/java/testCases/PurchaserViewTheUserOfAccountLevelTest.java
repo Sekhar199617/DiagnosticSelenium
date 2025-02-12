@@ -46,7 +46,7 @@ public class PurchaserViewTheUserOfAccountLevelTest extends BaseClass {
             dp.selectHamburgerTab("Users");
 
             //Clicking on view for user in purchase user
-            pl.performActionOnUser("purchaseUsersTable", p.getProperty("purchaseAccountLevelUserName"), "View");
+            pl.performUserActionOnUser("purchaseUsersTable", p.getProperty("purchaseAccountLevelUserName"), "view");
 
             commonUtils.validateGetText(commonUtils.findElementByXpath(pl.accountLevelHeading),p.getProperty("purchaseAccountLevelHeadingMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.accountLevelCancelButton),null);
