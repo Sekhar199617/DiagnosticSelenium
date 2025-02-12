@@ -12,6 +12,8 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class PurchaseLevelAccountPage extends BasePage{
@@ -89,6 +91,7 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String newUserTimeZoneDropdown = "//select[@name='timezone_id']";
     public String newUserActiveCheckbox = "//input[@name='activeAccount']";
     public String newUserSaveButton = "//button[@name='save']";
+    public String eventStartDate = "//input[@id='event_start_date']";
 
     public void selectHamburgerTab(String tabName) {
         commonUtils.clickOnElement(commonUtils.findElementByXpath(purchaserToggleIcon), null);
@@ -234,6 +237,14 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
         // Open the given URL in the new tab
         driver.get(url);
+    }
+
+    public String convertDateFormat(String date) {
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate localDate = LocalDate.parse(date, inputFormat);
+        return localDate.format(outputFormat);
     }
 
 

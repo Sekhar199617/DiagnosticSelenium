@@ -64,8 +64,6 @@ public class PurchaserCreateAccountAdminManagerInDropdownListTest  extends BaseC
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.newUserSaveButton),null);
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("purchaserNewUserValidationMessage"),commonUtils.findElementByXpath(ob.successfulConfirmationOkButton));
 
-            Thread.sleep(2000);
-
         } catch (Exception e) {
             Assert.fail();
         }
