@@ -44,7 +44,6 @@ public class PurchaserViewTheUserOfAccountLevelTest extends BaseClass {
 
             //Click on hamburger menu
             dp.selectHamburgerTab("Users");
-           // pl.selectPurchaseLevelHamburgerTab("Users");
 
             //Clicking on view for user in purchase user
             pl.performActionOnUser("purchaseUsersTable", p.getProperty("purchaseAccountLevelUserName"), "View");

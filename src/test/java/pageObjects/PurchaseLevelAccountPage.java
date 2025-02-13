@@ -64,7 +64,6 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String countryOptionByName = "//li[span[normalize-space(text())='%s']]";
     public String countryDropdownArrow = "//div[@class='iti__arrow']";
     public String countryOptionArrow = "//span[@class='iti__country-name']";
-    public String main = "iti__flag-container";
 
 
     public void performActionOnUser(String tableId, String userName, String actionText) {
