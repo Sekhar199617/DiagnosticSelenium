@@ -1,7 +1,12 @@
 package testCases;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.math3.random.RandomGenerator;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -13,6 +18,8 @@ import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
+import java.io.File;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -20,6 +27,10 @@ import java.util.Set;
 public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
 
     public CommonUtils commonUtils;
+    public PurchaseLevelAccountPage pl;
+    public AccountDetailsAddFormsPage addFormsPage;
+
+
 
     @BeforeMethod(groups= {"Smoke"})
     public void verifyPurchaserPrecreatedCollectionInFormDataTest() {
@@ -33,7 +44,7 @@ public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
             dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
+           // PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
@@ -43,20 +54,6 @@ public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
             //Clicking on Assign Test in action dropdown for a account
             pl.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
 
-            //Switch the tab
-           List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-            driver.switchTo().window(tabs.get(1));
-
-
-            //Click on hamburger menu
-            pl.selectPurchaseLevelHamburgerTab("Forms");
-
-            AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
-
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addButton),null);
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.createNewButton),null);
-
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypeAccount"));
     }
 
     @Test(groups = {"Smoke"}, priority = 1)
@@ -64,30 +61,31 @@ public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
         try {
             logger.info("****** Starting Account Data Precreated Collection Test ******");
 
-            AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
-
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypeAccount"));
-            PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
+          //  AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
+         //   PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
 
-
             //Click on hamburger menu
             pl.selectPurchaseLevelHamburgerTab("Forms");
 
-
-
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.createNewButton),null);
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formNameField), randomString());
 
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypeAccount"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("purchaserFormEntityTypeAccount"));
-            WebElement formType2Content = driver.findElement(By.cssSelector("row d-flex align-items-center mb-3 formScope"));
-            if (formType2Content.isDisplayed()) {
+
+            if (pl.isElementDisplayed(pl.formScopeDropdown)) {
                 System.out.println("Form Scope Dropdown is displayed correctly.");
             } else {
                 System.out.println("Form Scope Dropdown is NOT displayed.");
+            }
+
+            if (pl.isElementDisplayed(pl.bundlesList)) {
+                System.out.println("Bundle List is displayed correctly.");
+            } else {
+                System.out.println("Bundle List Dropdown is NOT displayed.");
             }
 
         } catch (Exception e) {
@@ -100,11 +98,10 @@ public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
     public void verifyPatientDataPrecreatedCollectionTest() {
         try {
             logger.info("****** Starting Patient Data Precreated Collection Test ******");
-            AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypeAccount"));
+          //  AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
+         //   PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
 
-            PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
-            //Switch the tab
+           //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(2));
 
@@ -115,8 +112,20 @@ public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.createNewButton),null);
 
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypeAccount"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypeAccount"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formNameField), randomString());
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("purchaserFormEntityTypePatient"));
+
+            if (pl.isElementDisplayed(pl.formScopeDropdown)) {
+                System.out.println("Form Scope Dropdown is displayed correctly.");
+            } else {
+                System.out.println("Form Scope Dropdown is NOT displayed.");
+            }
+
+            if (pl.isElementDisplayed(pl.bundlesList)) {
+                System.out.println("Bundle List is displayed correctly.");
+            } else {
+                System.out.println("Bundle List Dropdown is NOT displayed.");
+            }
 
         } catch (Exception e) {
             Assert.fail();
