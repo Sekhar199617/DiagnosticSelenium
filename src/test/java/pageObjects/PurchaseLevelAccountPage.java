@@ -26,8 +26,6 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String numberToAssignCompleteUploadButton = "//button[@id='complete_upload']";
     public String userUploadValidationMessage = "//h2[@class='swal2-title']";
     public String userUploadOkButton = "//button[normalize-space()='ok']";
-    public String purchaseLevelHamburgerMenu = "//span[@class='navbar-toggler-icon']";
-    public String purchaseLevelHamburgerMenuList = "//div[contains(@class, 'mt--10px')]//li/a";
     public String accountLevelHeading = "//span[@id='header_label']";
     public String accountLevelCancelButton = "//a[@onclick='detectChanges()']";
     public String newOrderButton = "//button[normalize-space()='New Order']";
@@ -68,10 +66,6 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String countryOptionArrow = "//span[@class='iti__country-name']";
     public String main = "iti__flag-container";
 
-    public void selectPurchaseLevelHamburgerTab (String tabName) {
-        commonUtils.clickOnElement(commonUtils.findElementByXpath(purchaseLevelHamburgerMenu), null);
-        commonUtils.selectTab(commonUtils.findElementsByXpath(purchaseLevelHamburgerMenuList), tabName);
-    }
 
     public void performActionOnUser(String tableId, String userName, String actionText) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));

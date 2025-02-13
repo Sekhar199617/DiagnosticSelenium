@@ -43,7 +43,8 @@ public class PurchaserViewTheUserOfAccountLevelTest extends BaseClass {
             driver.switchTo().window(tabs.get(1));
 
             //Click on hamburger menu
-            pl.selectPurchaseLevelHamburgerTab("Users");
+            dp.selectHamburgerTab("Users");
+           // pl.selectPurchaseLevelHamburgerTab("Users");
 
             //Clicking on view for user in purchase user
             pl.performActionOnUser("purchaseUsersTable", p.getProperty("purchaseAccountLevelUserName"), "View");
