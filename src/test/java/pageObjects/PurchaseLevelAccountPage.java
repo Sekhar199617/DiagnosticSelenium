@@ -1,12 +1,12 @@
 package pageObjects;
 
+import com.sun.media.sound.Toolkit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utilities.CommonUtils;
 
-import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.time.LocalDate;
@@ -205,6 +205,14 @@ public class PurchaseLevelAccountPage extends BasePage{
                 actionOption.click();
                 break;
             }
+        }
+    }
+
+    public boolean isElementDisplayed(String xpath) {
+        try {
+            return commonUtils.findElementByXpath(xpath).isDisplayed();
+        } catch (Exception e) { // Catch NoSuchElementException or TimeoutException
+            return false;
         }
     }
 
