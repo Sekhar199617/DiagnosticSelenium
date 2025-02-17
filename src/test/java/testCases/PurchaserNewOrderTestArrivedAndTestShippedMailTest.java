@@ -3,7 +3,6 @@ package testCases;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -69,7 +68,6 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             js.executeScript("arguments[0].scrollIntoView(true);", countryOption);
             Thread.sleep(500); // Ensure smooth scrolling
             js.executeScript("arguments[0].click();", countryOption);
-            Thread.sleep(5000);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(pl.mobileNumberNewOrderField), p.getProperty("purchaserMobileNumberNewOrder"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.demoUserCheckboxNewOrder), null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.continueNewOrderButton), null);
@@ -78,7 +76,7 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             WebElement regionDropdownElement = commonUtils.findElementByXpath(pl.regionNewOrderDropdown);
             String countryNameNewOrder = p.getProperty("purchaseCountryNameNewOrder");
             //Select city and region
-            handleCityAndRegion(countryNameNewOrder, regionElement, regionDropdownElement, p.getProperty("purchaseRegionNameNewOrder"));
+           // handleCityAndRegion(countryNameNewOrder, regionElement, regionDropdownElement, p.getProperty("purchaseRegionNameNewOrder"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(pl.shippingAddressNewOrder), p.getProperty("purchaserShippingAddressNewOrder"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(pl.shippingAddress2NewOrder), p.getProperty("purchaserShippingAddress2NewOrder"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(pl.cityNewOrderField), p.getProperty("purchaserCityNewOrderField"));
@@ -88,7 +86,6 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.addBundleNewOrderDropdown), p.getProperty("purchaserAddBundleNewOrderDropdown"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.flavorNewOrderDropdown), p.getProperty("purchaserFlavorNewOrderDropdown"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.addQuantityDropdown), p.getProperty("purchaserAddQuantityDropdown"));
-            Thread.sleep(1000);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.addToOrderButton), null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.continueNewOrderButton), null);
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.selectShipmentScheduleDropdown), p.getProperty("purchaserSelectShipmentScheduleDropdown"));
@@ -100,35 +97,14 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(pl.physicianPhoneField), p.getProperty("purchaserPhysicianPhone"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.continueNewOrderButton), null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.confirmOrderButton), null);
-            commonUtils.validateGetText(commonUtils.findElementByXpath(pl.newOrderSuccessfulConfirmationMessage), p.getProperty("purchaserNewOrderSuccessfulConfirmationMessage"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.newOrderSuccessfulConfirmationOkButton), null);
+            commonUtils.validateGetText(commonUtils.findElementByXpath(pl.successfulConfirmationMessage), p.getProperty("purchaserNewOrderSuccessfulConfirmationMessage"));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.successfulConfirmationOkButton), null);
 
         } catch (Exception e) {
             Assert.fail();
         }
 
         logger.info("****** Finished Purchaser New Order Test Arrived And Test Shipped Mail  Test ******");
-    }
-
-    public void handleCityAndRegion(String countryName, WebElement regionElement, WebElement regionDropdownElement, String regionName) {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        if (countryName.equals("United States")) {
-            if (regionDropdownElement != null) {
-                wait.until(ExpectedConditions.elementToBeClickable(regionDropdownElement));
-                commonUtils.selectDropDownValue(regionDropdownElement, regionName);
-            } else {
-                System.out.println("Region dropdown not found!");
-            }
-        } else {
-            if (regionElement != null) {
-                wait.until(ExpectedConditions.visibilityOf(regionElement));
-                commonUtils.enterValueInTextField(regionElement, regionName);
-            } else {
-                System.out.println("Region input fields not found!");
-            }
-        }
     }
 
 }

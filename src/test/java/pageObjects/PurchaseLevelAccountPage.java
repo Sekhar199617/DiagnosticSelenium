@@ -1,12 +1,20 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.CommonUtils;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Properties;
 
 public class PurchaseLevelAccountPage extends BasePage{
     CommonUtils commonUtils;
@@ -15,7 +23,6 @@ public class PurchaseLevelAccountPage extends BasePage{
         super(driver);
         this.commonUtils = new CommonUtils(driver);
     }
-
     public String userTypeDropdown = "//select[@id='roleFilter']";
     public String chooseFileButton = "//input[@name='csvfile']";
     public String uploadCsvExcelButton = "//button[normalize-space()='upload_csv/excel']";
@@ -28,12 +35,11 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String userUploadOkButton = "//button[normalize-space()='ok']";
     public String accountLevelHeading = "//span[@id='header_label']";
     public String accountLevelCancelButton = "//a[@onclick='detectChanges()']";
-    public String newOrderButton = "//button[normalize-space()='New Order']";
+    public String newOrderButton = "//button[normalize-space()='new_order']";
     public String newPatientLink = "//a[@id='newPatientBtn']";
     public String firstNameNewOrderField = "//input[@id='first-name']";
     public String lastNameNewOrderField = "//input[@id='last-name']";
     public String emailNewOrderField = "//input[@id='order-email']";
-    public String countryListNewOrder = "//span[@class='iti__country-name']";
     public String mobileNumberNewOrderField = "//input[@name='phone_number']";
     public String demoUserCheckboxNewOrder = "//input[@id='demo-user']";
     public String continueNewOrderButton = "//button[@id='continue-btn']";
@@ -57,14 +63,32 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String physicianEmailField = "//input[@id='physician_email']";
     public String physicianPhoneField = "//input[@id='physician_phone']";
     public String confirmOrderButton = "//button[@id='confirm-order']";
-    public String newOrderSuccessfulConfirmationMessage = "//h2[@id='swal2-title']";
-    public String newOrderSuccessfulConfirmationOkButton = "//button[normalize-space()='ok']";
     public String countryDropdown = "//div[@class='iti__selected-flag']";
-    public String countryListbox = "//ul[@id='country-listbox']";
-    public String countryOptionByName = "//li[span[normalize-space(text())='%s']]";
-    public String countryDropdownArrow = "//div[@class='iti__arrow']";
-    public String countryOptionArrow = "//span[@class='iti__country-name']";
-
+    public String welcomeTextMessage = "//h1[@class='text-primary fw-semibold display-4 mb-0']";
+    public String successfulConfirmationMessage = "//h2[@class='swal2-title' and @id='swal2-title']";
+    public String successfulConfirmationOkButton = "//button[@type='button' and contains(@class, 'swal2-confirm')]";
+    public String shippingTaskRadioButton = "//input[@class='shipping_tasks mx-2']";
+    public String formUrlFormName = "//span[contains(@class,'fontHeadline')]";
+    public String  editSettingButton = "//button[@id='enable-edit-form']";
+    public String settingTab = "//ul[@id='settingTabs']/li";
+    public String billingContactDropdown = "//select[@id='billing_contact_id']";
+    public String billingCountryDropdown = "//select[@id='billing_country']";
+    public String billingAddress1Field = "//input[@name='billing_line_one']";
+    public String billingAddress2Field = "//input[@name='billing_line_two']";
+    public String billingCityField = "//input[@name='city']";
+    public String billingStateField = "//input[@name='state']";
+    public String billingPostalCodeField = "//input[@name='postal_code']";
+    public String billingUpdateButton = "//button[@name='updateAccountDetails']";
+    public String addUserAndRolesButton = "(//a[@class='btn btn-primary'][normalize-space()='Add'])[1]";
+    public String newUserNameField = "(//input[@name='name'])[2]";
+    public String newUserPhoneField = "//input[@name='phone_number']";
+    public String newUserEmailField = "(//input[@name='email'])[2]";
+    public String newUserRoleDropdown = "//select[@name='userRole']";
+    public String newUserUsertypeDropdown = "//select[@name='role']";
+    public String newUserAdditionalPrivilegesCheckboxList = "div[class='manager_div'] input";
+    public String newUserTimeZoneDropdown = "//select[@name='timezone_id']";
+    public String newUserActiveCheckbox = "//input[@name='activeAccount']";
+    public String newUserSaveButton = "//button[@name='save']";
 
     public void performActionOnUser(String tableId, String userName, String actionText) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
@@ -76,6 +100,155 @@ public class PurchaseLevelAccountPage extends BasePage{
                 System.out.println("Found user: " + nameCell.getText());
 
                 WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));
+                actionsButton.click();
+
+                WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
+                actionOption.click();
+                break;
+            }
+        }
+
+    }
+
+    public void handleCityAndRegion(String countryName, WebElement regionElement, WebElement regionDropdownElement, String regionName) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        if (countryName.equals("United States")) {
+            if (regionDropdownElement != null) {
+                wait.until(ExpectedConditions.elementToBeClickable(regionDropdownElement));
+                commonUtils.selectDropDownValue(regionDropdownElement, regionName);
+            } else {
+                System.out.println("Region dropdown not found!");
+            }
+        } else {
+            if (regionElement != null) {
+                wait.until(ExpectedConditions.visibilityOf(regionElement));
+                commonUtils.enterValueInTextField(regionElement, regionName);
+            } else {
+                System.out.println("Region input fields not found!");
+            }
+        }
+    }
+
+    public void clickOnAssignmentView(String tableId, String userName) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+
+            if (nameCell.getText().trim().equals(userName)) {
+                System.out.println("Found user: " + nameCell.getText());
+
+                WebElement viewButton = row.findElement(By.xpath("//button[normalize-space()='View']"));
+                viewButton.click();
+
+                break;
+            }
+        }
+
+    }
+
+    public void clickOnObservationLink(String tableId, String userName) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+
+            if (nameCell.getText().trim().equals(userName)) {
+                System.out.println("Found user Observation: " + nameCell.getText());
+
+                WebElement copyIcon = row.findElement(By.xpath("(//td[@class='text-center']/ion-icon[@name='copy-outline'])[1]"));
+                copyIcon.click();
+
+                break;
+            }
+        }
+
+    }
+
+    public static String getClipboardText() throws Exception {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Clipboard clipboard = toolkit.getSystemClipboard();
+        return (String) clipboard.getData(DataFlavor.stringFlavor);
+    }
+
+
+    public void shippingTaskDismiss(String userName, String actionText) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='purchaseUsersTable']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+
+            if (nameCell.getText().trim().equals(userName)) {
+                System.out.println("Found user: " + nameCell.getText());
+
+                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'actions')]"));
+                actionsButton.click();
+
+                WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
+                actionOption.click();
+                break;
+            }
+        }
+
+    }
+
+    public String clickOnFormsLink(String formType) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='globalFormTable']/tbody/tr"));
+
+          String formName = "";
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+
+            if (nameCell.getText().trim().equals(formType)) {
+                System.out.println("Found Form Type: " + nameCell.getText());
+
+                WebElement valueCell = row.findElement(By.xpath("./td[4]"));
+                 formName = valueCell.getText().trim();
+
+                WebElement copyIcon = row.findElement(By.xpath("//td[@class='text-center']/ion-icon[@name='copy-outline']"));
+                copyIcon.click();
+
+                return formName;
+            }
+        }
+
+        System.out.println(formName);
+        return formName;
+    }
+
+
+
+    public void openNewTabWithURL(String url) {
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+
+        // Switch to the new tab
+        for (String tab : driver.getWindowHandles()) {
+            driver.switchTo().window(tab);
+        }
+        // Open the given URL in the new tab
+        driver.get(url);
+    }
+
+    public String convertDateFormat(String date) {
+        DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate localDate = LocalDate.parse(date, inputFormat);
+        return localDate.format(outputFormat);
+    }
+
+    public void performUserActionOnUser(String tableId, String userName, String actionText) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[1]"));
+
+            if (nameCell.getText().trim().equals(userName)) {
+                System.out.println("Found user: " + nameCell.getText());
+
+                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'actions')]"));
                 actionsButton.click();
 
                 WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
