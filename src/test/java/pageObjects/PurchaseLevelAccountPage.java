@@ -89,6 +89,22 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String newUserTimeZoneDropdown = "//select[@name='timezone_id']";
     public String newUserActiveCheckbox = "//input[@name='activeAccount']";
     public String newUserSaveButton = "//button[@name='save']";
+    public String startTrainingButton = "//a[normalize-space()='Start Training']";
+    public String dateOfBirth = "//input[@name='dob']";
+    public String genderDropdown = "//select[@name='gender']";
+    public String raceDropdown = "//select[@name='race']";
+    public String shippingAddress1 = "(//input[@name='address'])[1]";
+    public String shippingAddress2 = "//input[@name='address2']";
+    public String cityField = "//input[@name='city']";
+    public String postalCode = "//input[@id='text-input']";
+    public String uploadFrontImageButton = "//button[@id='upload_front_btn']";
+    public String uploadBackImageButton = "//button[@id='upload_back_btn']";
+    public String nextButton = "(//button[@name='submit'])[2]";
+
+    public String diagnosticLogo = "//img[@alt='Diagnostic.ly']";
+    public String formScopeDropdown = "//select[@id='form_scope']";
+    public String bundlesList = "//div[@class='col-md-10 showBundleList']";
+
 
     public void performActionOnUser(String tableId, String userName, String actionText) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));

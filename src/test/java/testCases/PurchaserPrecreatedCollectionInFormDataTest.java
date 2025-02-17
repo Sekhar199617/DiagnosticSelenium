@@ -29,6 +29,7 @@ public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
     public CommonUtils commonUtils;
     public PurchaseLevelAccountPage pl;
     public AccountDetailsAddFormsPage addFormsPage;
+    public DashboardPage dp;
 
 
 
@@ -37,14 +38,14 @@ public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
 
         login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
+            dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
 
             dp.searchForItem(p.getProperty("accountName"));
             dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-           // PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
+            pl = new PurchaseLevelAccountPage(driver);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
@@ -61,14 +62,17 @@ public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
         try {
             logger.info("****** Starting Account Data Precreated Collection Test ******");
 
-          //  AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
-         //   PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
+           addFormsPage = new AccountDetailsAddFormsPage(driver);
+             pl = new PurchaseLevelAccountPage(driver);
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
 
+            //Click on logo
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.diagnosticLogo),null);
+
             //Click on hamburger menu
-            pl.selectPurchaseLevelHamburgerTab("Forms");
+            dp.selectHamburgerTab("Forms");
 
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.createNewButton),null);
@@ -98,16 +102,18 @@ public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
     public void verifyPatientDataPrecreatedCollectionTest() {
         try {
             logger.info("****** Starting Patient Data Precreated Collection Test ******");
-          //  AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
-         //   PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
+           addFormsPage = new AccountDetailsAddFormsPage(driver);
+           pl = new PurchaseLevelAccountPage(driver);
 
            //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(2));
 
+            //Click on logo
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.diagnosticLogo),null);
 
             //Click on hamburger menu
-            pl.selectPurchaseLevelHamburgerTab("Forms");
+            dp.selectHamburgerTab("Forms");
 
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.createNewButton),null);
