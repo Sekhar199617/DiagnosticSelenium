@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.AccountDetailsUsersAndRolesPage;
 import pageObjects.DashboardPage;
+import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -13,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddAssigneeWithUploadCSVTest extends BaseClass {
+public class PurchaserAddAssigneeWithUploadCSVTest extends BaseClass {
     public CommonUtils commonUtils;
 
     @Test(groups= {"Smoke"})
@@ -40,25 +41,30 @@ public class AddAssigneeWithUploadCSVTest extends BaseClass {
 
             //Clicking on Assign Test in action dropdown for a account
             au.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
+            PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
+        commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.userTypeDropdown),p.getProperty("usersUserTypeAccountAdmin"));
+
+        // Click on assign test for account name
+            pl.performActionOnUser("accountsTableUserRoles",p.getProperty("userAccountAdminName"),"Assign Tests" );
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
             //Click on upload csv excel button
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(au.uploadCsvExcelButton),null);
-            WebElement fileUploadElement = commonUtils.findElementByXpath(au.chooseFileButton);
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.uploadCsvExcelButton),null);
+            WebElement fileUploadElement = commonUtils.findElementByXpath(pl.chooseFileButton);
             String filePath = Paths.get("src/test/resources/userAssignee.csv").toAbsolutePath().toString();
             commonUtils.uploadFile(fileUploadElement, filePath);
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(au.uploadCsvButton),null);
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(au.assignBundleButton),null);
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.uploadCsvButton),null);
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.assignBundleButton),null);
             //Select assign bundles from dropdown
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(au.assigneeType),p.getProperty("userUploadAssigneeType"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.assigneeType),p.getProperty("userUploadAssigneeType"));
             //Select Experience Type
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(au.experienceAssigneeUploadDropdown),p.getProperty("userUploadAssigneeExperience"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.experienceAssigneeUploadDropdown),p.getProperty("userUploadAssigneeExperience"));
             Thread.sleep(1000);
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(au.numberToAssignCompleteUploadButton),null);
-            commonUtils.validateGetText(commonUtils.findElementByXpath(au.dialogueText),p.getProperty("userAssigneeUploadValidationMessage"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(au.dialogueOkButton),null);
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.numberToAssignCompleteUploadButton),null);
+            commonUtils.validateGetText(commonUtils.findElementByXpath(pl.userUploadValidationMessage),p.getProperty("userAssigneeUploadValidationMessage"));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.userUploadOkButton),null);
 
     }catch(Exception e)
     {

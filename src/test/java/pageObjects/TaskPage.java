@@ -1,12 +1,11 @@
 package pageObjects;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.By;;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utilities.CommonUtils;
 
 import java.util.List;
-import java.util.Properties;
 
 public class TaskPage extends BasePage{
     CommonUtils commonUtils;
