@@ -1,5 +1,6 @@
 package pageObjects;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utilities.CommonUtils;
@@ -45,25 +46,51 @@ public class AccountDetailsUsersAndRolesPage extends BasePage {
 	public String assigneeType = "//select[@id='assignment_type']";
 	public String experienceAssigneeUploadDropdown = "//select[@id='observation_experience']";
 	public String numberToAssignCompleteUploadButton = "//button[@id='complete_upload']";
+	public String userTypeDropDownField = "roleFilter"; //id
 
 	public void performActionOnUser(String tableId, String userName, String actionText) {
-		List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+		int attempts = 0;
+		boolean actionPerformed = false;
 
-		for (WebElement row : rows) {
-			WebElement nameCell = row.findElement(By.xpath("./td[1]"));
+		while (attempts < 2) {
+			try {
+				List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
 
-			if (nameCell.getText().trim().equals(userName)) {
-				System.out.println("Found user: " + nameCell.getText());
+				for (WebElement row : rows) {
+					WebElement nameCell = row.findElement(By.xpath("./td[1]"));
 
-				WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));
-				actionsButton.click();
+					if (nameCell.getText().trim().equals(userName)) {
+						System.out.println("Found user: " + nameCell.getText());
 
-				WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
-				actionOption.click();
+						WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));
+						actionsButton.click();
+
+						WebElement actionOption = row.findElement(By.xpath("//a[normalize-space()='" + actionText + "']"));
+						commonUtils.waitForElementToBeClickable(actionOption, 10);
+						actionOption.click();
+
+						actionPerformed = true;
+						break; // Exit the loop once the action is completed
+					}
+				}
+
+				// If we exit the loop successfully, break out of retry attempts
+				if (actionPerformed) {
+					break;
+				}
+			} catch (StaleElementReferenceException e) {
+				System.out.println("Caught StaleElementReferenceException. Retrying...");
+				attempts++;
+			} catch (Exception e) {
+				System.out.println("Exception occurred: " + e.getMessage());
 				break;
 			}
 		}
 
+		if (!actionPerformed) {
+			System.out.println("Action could not be performed after 2 attempts.");
+		}
 	}
+
 
 }
