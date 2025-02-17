@@ -1,4 +1,5 @@
 package pageObjects;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import utilities.CommonUtils;
 
@@ -29,9 +30,33 @@ public class DashboardPage extends BasePage {
 	}
 
 	public void selectHamburgerTab(String tabName) {
-		commonUtils.clickOnElement(commonUtils.findElementByXpath(togglerIcon), null);
-		commonUtils.selectTab(commonUtils.findElementsByXpath(hamburgerMenuList), tabName);
+		int attempts = 0;
+		boolean tabSelected = false;
+
+		while (attempts < 2 && !tabSelected) {
+			try {
+				// Wait for the hamburger menu toggle icon to be clickable and click on it
+				commonUtils.waitForElementToBeClickable(commonUtils.findElementByXpath(togglerIcon), 15);
+				commonUtils.clickOnElement(commonUtils.findElementByXpath(togglerIcon), null);
+
+				// Wait for the hamburger menu list and select the desired tab
+				commonUtils.selectTab(commonUtils.findElementsByXpath(hamburgerMenuList), tabName);
+
+				tabSelected = true;  // If no exception is thrown, tab is selected successfully
+			} catch (StaleElementReferenceException e) {
+				System.out.println("Caught StaleElementReferenceException. Retrying...");
+				attempts++;
+			} catch (Exception e) {
+				System.out.println("Exception occurred: " + e.getMessage());
+				break;  // Exit loop on other exceptions
+			}
+		}
+
+		if (!tabSelected) {
+			System.out.println("Tab could not be selected after 2 attempts.");
+		}
 	}
+
 
 	public void searchForItem(String searchItem) {
 		commonUtils.enterValueInTextField(commonUtils.findElementByXpath(searchField), searchItem);

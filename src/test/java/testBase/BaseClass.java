@@ -134,6 +134,8 @@ public class BaseClass {
     
     @AfterClass(groups= {"Smoke"})
     public void tearDown() {
-    	driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

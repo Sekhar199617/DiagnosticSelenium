@@ -108,14 +108,21 @@ public class CommonUtils extends BaseClass {
     }
 
     public void selectTab(List<WebElement> element, String tabName) {
+        boolean tabFound = false;
+
     	for(WebElement tab: element) {
     		String tabText = tab.getText();
             if (tabText.equalsIgnoreCase(tabName)) {
-                waitForElementToBeClickable(tab, 5);
+                waitForElementToBeClickable(tab, 10);
                 tab.click();
+                tabFound = true;
                 break;
             }
     	}
+
+        if (!tabFound) {
+            Assert.fail("Tab with name '" + tabName + "' was not found");
+        }
     }
 
     public void selectDropDownValueWithClick(List<WebElement> element, String name) {

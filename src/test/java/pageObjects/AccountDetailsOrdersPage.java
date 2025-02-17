@@ -21,5 +21,6 @@ public class AccountDetailsOrdersPage extends BasePage {
     public String shippingAmountPerUnit = "//input[@id='shipping_pricePerUnit']";
     public String estimatedTaxField = "//input[@id='estimated_tax']";
     public String addOrderButton = "//button[@id='add_user_purchase']";
+    public String editButton = "//table[@id='orderTable']//tbody//tr//a[normalize-space()='Edit']";
 
 }
