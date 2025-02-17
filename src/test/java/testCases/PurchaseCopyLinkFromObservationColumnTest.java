@@ -1,6 +1,5 @@
 package testCases;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -49,7 +48,8 @@ public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
 
-            ob.selectHamburgerTab("Assignments");
+            dp.selectHamburgerTab("Assignments");
+           // ob.selectHamburgerTab("Assignments");
             ob.clickOnAssignmentView("assignmentsTable",p.getProperty("purchaserAssignmentNameToClickView"));
             Thread.sleep(2000);
 

@@ -1,6 +1,5 @@
 package testCases;
 
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
@@ -45,7 +44,7 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
 
-            ob.selectHamburgerTab("Forms");
+            dp.selectHamburgerTab("Forms");
 
             String copiedFormName = ob.clickOnFormsLink(p.getProperty("purchaserFormCopyUrlFormType"));
             System.out.println(copiedFormName + " copied");
@@ -59,8 +58,6 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
             String expectedFormName = commonUtils.findElementByXpath(ob.formUrlFormName).getText();
 
             Assert.assertEquals(copiedFormName,expectedFormName , "Form name is not matching");
-
-            Thread.sleep(2000);
 
 
         } catch (Exception e) {

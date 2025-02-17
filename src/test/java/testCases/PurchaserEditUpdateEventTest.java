@@ -1,8 +1,6 @@
 package testCases;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsAddEventTagsPage;
@@ -11,9 +9,6 @@ import pageObjects.DashboardPage;
 import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +46,7 @@ public class PurchaserEditUpdateEventTest extends BaseClass {
             driver.switchTo().window(tabs.get(1));
 
             //Click on setting in hamburger tab
-            ob.selectHamburgerTab("Settings");
+            dp.selectHamburgerTab("Settings");
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Events/Tags");
 
             AccountDetailsAddEventTagsPage ev = new AccountDetailsAddEventTagsPage(driver);

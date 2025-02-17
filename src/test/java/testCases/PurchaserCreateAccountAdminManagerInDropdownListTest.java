@@ -44,17 +44,14 @@ public class PurchaserCreateAccountAdminManagerInDropdownListTest  extends BaseC
             driver.switchTo().window(tabs.get(1));
 
             //Click on setting in hamburger tab
-            ob.selectHamburgerTab("Settings");
-            commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "users_&_roles");
+            dp.selectHamburgerTab("Settings");
+            commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.addUserAndRolesButton),null);
 
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.newUserNameField),p.getProperty("purchaserNewUserNameField"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.newUserPhoneField),p.getProperty("purchaserNewUserPhoneField"));
 
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.newUserEmailField),randomString() + "@gmail.com");
-
-
-           // commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.newUserEmailField),p.getProperty("purchaserNewUserEmailField"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.newUserRoleDropdown),p.getProperty("purchaserNewUserRoleDropdown"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.newUserUsertypeDropdown),p.getProperty("purchaserNewUserUsertypeDropdown"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.newUserTimeZoneDropdown),p.getProperty("purchaserNewUserTimeZoneDropdown"));

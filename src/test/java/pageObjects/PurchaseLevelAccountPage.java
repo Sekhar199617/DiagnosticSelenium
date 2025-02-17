@@ -64,8 +64,6 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String physicianPhoneField = "//input[@id='physician_phone']";
     public String confirmOrderButton = "//button[@id='confirm-order']";
     public String countryDropdown = "//div[@class='iti__selected-flag']";
-    public String purchaserToggleIcon = "//span[@class='navbar-toggler-icon']";
-    public String hamburgerMenuList = "//div[@class='mt--10px']/li/a";
     public String welcomeTextMessage = "//h1[@class='text-primary fw-semibold display-4 mb-0']";
     public String successfulConfirmationMessage = "//h2[@class='swal2-title' and @id='swal2-title']";
     public String successfulConfirmationOkButton = "//button[@type='button' and contains(@class, 'swal2-confirm')]";
@@ -81,7 +79,7 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String billingStateField = "//input[@name='state']";
     public String billingPostalCodeField = "//input[@name='postal_code']";
     public String billingUpdateButton = "//button[@name='updateAccountDetails']";
-    public String addUserAndRolesButton = "(//a[@class='btn btn-primary'][normalize-space()='add'])[1]";
+    public String addUserAndRolesButton = "(//a[@class='btn btn-primary'][normalize-space()='Add'])[1]";
     public String newUserNameField = "(//input[@name='name'])[2]";
     public String newUserPhoneField = "//input[@name='phone_number']";
     public String newUserEmailField = "(//input[@name='email'])[2]";
@@ -91,11 +89,6 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String newUserTimeZoneDropdown = "//select[@name='timezone_id']";
     public String newUserActiveCheckbox = "//input[@name='activeAccount']";
     public String newUserSaveButton = "//button[@name='save']";
-
-    public void selectHamburgerTab(String tabName) {
-        commonUtils.clickOnElement(commonUtils.findElementByXpath(purchaserToggleIcon), null);
-        commonUtils.selectTab(commonUtils.findElementsByXpath(hamburgerMenuList), tabName);
-    }
 
     public void performActionOnUser(String tableId, String userName, String actionText) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
@@ -147,7 +140,7 @@ public class PurchaseLevelAccountPage extends BasePage{
             if (nameCell.getText().trim().equals(userName)) {
                 System.out.println("Found user: " + nameCell.getText());
 
-                WebElement viewButton = row.findElement(By.xpath("//button[normalize-space()='view']"));
+                WebElement viewButton = row.findElement(By.xpath("//button[normalize-space()='View']"));
                 viewButton.click();
 
                 break;

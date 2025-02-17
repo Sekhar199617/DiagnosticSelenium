@@ -1,7 +1,5 @@
 package testCases;
 
-import org.apache.poi.ss.formula.functions.T;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
@@ -46,7 +44,7 @@ public class PurchaserEditUpdateBillingDetailsTest extends BaseClass {
             driver.switchTo().window(tabs.get(1));
 
             //Click on setting in hamburger tab
-            ob.selectHamburgerTab("Settings");
+            dp.selectHamburgerTab("Settings");
 
             //Click on Billing tab in setting
             commonUtils.selectTab(commonUtils.findElementsByXpath(ob.settingTab),"Billing");
@@ -64,9 +62,6 @@ public class PurchaserEditUpdateBillingDetailsTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.billingUpdateButton),null);
             commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("purchaserBillingDetailsUpdateMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
-
-
-            Thread.sleep(2000);
 
         } catch (Exception e) {
             Assert.fail();

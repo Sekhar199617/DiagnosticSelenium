@@ -45,7 +45,7 @@ public class PurchaserDismissShippingTaskTest extends BaseClass {
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
 
-            ob.selectHamburgerTab("Tasks");
+            dp.selectHamburgerTab("Tasks");
 
             //Validate and click on shipping task Radio Button
             commonUtils.validateAndClickRadiobutton(ob.shippingTaskRadioButton);
