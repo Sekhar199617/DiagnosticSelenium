@@ -216,5 +216,70 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
     }
 
+    public void clickOnAssignmentView(String tableId, String userName) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+
+            if (nameCell.getText().trim().equals(userName)) {
+                System.out.println("Found user: " + nameCell.getText());
+
+                WebElement viewButton = row.findElement(By.xpath("//button[normalize-space()='View']"));
+                viewButton.click();
+
+                break;
+            }
+        }
+
+    }
+
+    public String clickOnObservationLink(String assignName) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='detailsAssignmentsTable']/tbody/tr"));
+
+        String name = "";
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+
+            if (nameCell.getText().trim().equals(assignName)) {
+                System.out.println("Found Form Type: " + nameCell.getText());
+
+                WebElement valueCell = row.findElement(By.xpath("./td[4]"));
+                name = valueCell.getText().trim();
+
+                WebElement copyIcon = row.findElement(By.xpath("//td[@class='text-center']/ion-icon[@name='copy-outline']"));
+                copyIcon.click();
+
+                return name;
+            }
+        }
+
+        System.out.println(name);
+        return name;
+    }
+
+
+    public static String getClipboardText() {
+        try {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Clipboard clipboard = toolkit.getSystemClipboard();
+            return (String) clipboard.getData(DataFlavor.stringFlavor);
+        } catch (UnsupportedFlavorException | IOException e) {
+            System.out.println("Clipboard access failed: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+    public void openNewTabWithURL(String url) {
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+
+        // Switch to the new tab
+        for (String tab : driver.getWindowHandles()) {
+            driver.switchTo().window(tab);
+        }
+        // Open the given URL in the new tab
+        driver.get(url);
+    }
 
 }
