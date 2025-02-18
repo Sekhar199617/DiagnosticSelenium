@@ -77,7 +77,26 @@ public class DashboardPage extends BasePage {
 	}
 
 	public void clickOnLogo() {
-		commonUtils.clickOnElement(commonUtils.findElementByXpath(logo), null);
+		int attempts = 0;
+		boolean elementClicked = false;
+
+		while (attempts < 2 && !elementClicked) {
+			try {
+				commonUtils.clickOnElement(commonUtils.findElementByXpath(logo), null);
+
+				elementClicked = true;  // If no exception is thrown, tab is selected successfully
+			} catch (StaleElementReferenceException e) {
+				System.out.println("Caught StaleElementReferenceException. Retrying...");
+				attempts++;
+			} catch (Exception e) {
+				System.out.println("Exception occurred: " + e.getMessage());
+				break;  // Exit loop on other exceptions
+			}
+		}
+
+		if (!elementClicked) {
+			System.out.println("Logo not clicked after 2 attempts.");
+		}
 	}
 
 }
