@@ -20,6 +20,10 @@ public class DashboardPage extends BasePage {
 	public String actionsDropDown = "//button[@id='dropdownMenuButton1']";
 	public String view = "//a[normalize-space()='View']";
 	public String hamburgerMenuList = "//div[@class='mt--10px']/li/a";
+	public String accountNameInTable = "//table[@id='accountsTable']//tbody//td[1]";
+	public String activeAccounts = "[id='show_current_status'] b a"; //css
+	public String totalEntriesText = "accountsTable_info"; //id
+	public String logo = "//a[@class='navbar-brand']";
 	
 	public boolean isMyAccountExists()	{
 		try	{
@@ -63,9 +67,17 @@ public class DashboardPage extends BasePage {
 		commonUtils.clickOnElement(commonUtils.findElementByXpath(searchButton), "Search");
 	}
 
+	public void validateAccountNameInTable(String accountName) {
+		commonUtils.validateGetText(commonUtils.findElementByXpath(accountNameInTable), accountName);
+	}
+
 	public void clickView() {
 		commonUtils.clickOnElement(commonUtils.findElementByXpath(actionsDropDown), null);
 		commonUtils.clickOnElement(commonUtils.findElementByXpath(view), "View");
+	}
+
+	public void clickOnLogo() {
+		commonUtils.clickOnElement(commonUtils.findElementByXpath(logo), null);
 	}
 
 }

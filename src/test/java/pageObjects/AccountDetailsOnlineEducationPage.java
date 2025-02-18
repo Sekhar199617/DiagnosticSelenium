@@ -65,7 +65,7 @@ public class AccountDetailsOnlineEducationPage extends BasePage {
     }
 
 
-    public boolean validateDataInPurchaserAccount(List<String[]> rowDataList) {
+    public boolean validateDataInPurchaserAccount(String rows, List<String[]> rowDataList) {
         // Check if there's any data to validate
         if (rowDataList.isEmpty()) {
             System.out.println("No data to validate.");
@@ -73,8 +73,7 @@ public class AccountDetailsOnlineEducationPage extends BasePage {
         }
 
         // Assuming we're on the purchaser account page now
-        WebElement purchaserTable = driver.findElement(By.id("accountsTable"));
-        List<WebElement> purchaserRows = purchaserTable.findElements(By.tagName("tr"));
+        List<WebElement> purchaserRows = commonUtils.findElementsByXpath(rows);
 
         // Loop through the rows to validate each one
         for (int i = 1; i < rowDataList.size(); i++) {
@@ -83,13 +82,15 @@ public class AccountDetailsOnlineEducationPage extends BasePage {
             String purchaserBundleName = purchaserRow.findElement(By.xpath("td[2]")).getText();
             String purchaserEducationFlowName = purchaserRow.findElement(By.xpath("td[3]")).getText();
 
-            System.out.println(purchaserRow.findElement(By.xpath("td[1]")));
-            System.out.println("Friendly" + purchaserFriendlyName);
-
             String[] originalRowData = rowDataList.get(i);
             String storedFriendlyName = originalRowData[0];
             String storedBundleName = originalRowData[1];
             String storedEducationFlowName = originalRowData[2];
+
+            System.out.println("Purchaser Row " + (i + 1) + ":");
+            System.out.println(storedFriendlyName + " == " + purchaserFriendlyName);
+            System.out.println(storedBundleName + " == " + purchaserBundleName);
+            System.out.println(storedEducationFlowName + " == " + purchaserEducationFlowName);
 
             // Compare the data
             if (!purchaserFriendlyName.equals(storedFriendlyName) ||

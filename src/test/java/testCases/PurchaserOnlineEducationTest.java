@@ -13,8 +13,10 @@ public class PurchaserOnlineEducationTest extends BaseClass {
 
     @Test(groups= {"Smoke"})
     public void verifyExperiencesForElectronicBundlesPresence() {
-        logger.info("****** Starting Verify Experiences For Electronic Bundles Presence Test ******");
+
         try{
+
+            logger.info("****** Starting Verify Experiences For Electronic Bundles Presence Test ******");
 
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
@@ -40,6 +42,8 @@ public class PurchaserOnlineEducationTest extends BaseClass {
             List<String> electronicTabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(electronicTabs.get(1));
 
+            dashboardPage.clickOnLogo(); // To change small case letters to normal
+
             dashboardPage.selectHamburgerTab("Settings");
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Online Education");
             commonUtils.validateRadioButton(commonUtils.findElementById(aoe.electronicAndAdhocRadioButton));
@@ -54,7 +58,7 @@ public class PurchaserOnlineEducationTest extends BaseClass {
                 Assert.fail("Option is not present");
             }
 
-            boolean electronicDataConsistent = aoe.validateDataInPurchaserAccount(electronicRowDataList);
+            boolean electronicDataConsistent = aoe.validateDataInPurchaserAccount(aoe.electronicTableRows, electronicRowDataList);
             if (electronicDataConsistent) {
                 System.out.println("Test Passed: Experiences For Electronic Bundles Data is Consistent.");
             } else {
@@ -87,6 +91,8 @@ public class PurchaserOnlineEducationTest extends BaseClass {
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
 
+            dashboardPage.clickOnLogo(); // To change small case letters to normal
+
             dashboardPage.selectHamburgerTab("Settings");
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Online Education");
             commonUtils.selectRadioButton(commonUtils.findElementById(aoe.purchaserExpProvisionedOrderRadioButton));
@@ -101,7 +107,7 @@ public class PurchaserOnlineEducationTest extends BaseClass {
                 Assert.fail("Option is not present");
             }
 
-            boolean isDataConsistent = aoe.validateDataInPurchaserAccount(poRowDataList);
+            boolean isDataConsistent = aoe.validateDataInPurchaserAccount(aoe.poTableRows, poRowDataList);
             if (isDataConsistent) {
                 System.out.println("Test Passed: Experiences For Provisioned Orders Data is Consistent.");
             } else {
@@ -118,7 +124,7 @@ public class PurchaserOnlineEducationTest extends BaseClass {
 
         }catch(Exception e)
         {
-        Assert.fail();
+            Assert.fail();
         }
         logger.info("****** Finished Verify Experiences For Provisioned Orders Presence Test ******");
     }
