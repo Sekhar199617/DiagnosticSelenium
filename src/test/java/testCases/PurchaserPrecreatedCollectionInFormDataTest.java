@@ -34,7 +34,7 @@ public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
 
 
     @BeforeMethod(groups= {"Smoke"})
-    public void verifyPurchaserPrecreatedCollectionInFormDataTest() {
+    public void verifyPurchaserPrecreatedCollectionInFormDataTest() throws InterruptedException {
 
         login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
