@@ -7,14 +7,18 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.CommonUtils;
-
 import java.awt.*;
+import java.awt.datatransfer.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class PurchaseLevelAccountPage extends BasePage{
     CommonUtils commonUtils;
@@ -89,6 +93,32 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String newUserTimeZoneDropdown = "//select[@name='timezone_id']";
     public String newUserActiveCheckbox = "//input[@name='activeAccount']";
     public String newUserSaveButton = "//button[@name='save']";
+    public String startTrainingButton = "//a[normalize-space()='Start Training']";
+    public String resumeTrainingButton = "//a[normalize-space()='Resume Training']";
+    public String firstNameRegistrationField = "(//input[@name='name'])[1]";
+    public String lastNameRegistrationField = "//input[@name='last_name']";
+    public String dateOfBirth = "//input[@name='dob']";
+    public String genderDropdown = "//select[@name='gender']";
+    public String raceDropdown = "//select[@name='race']";
+    public String countryDropdownRegistration = "//select[@aria-label='Country Dropdown']";
+    public String shippingAddress1 = "(//input[@name='address'])[1]";
+    public String shippingAddress2 = "//input[@name='address2']";
+    public String cityField = "//input[@name='city']";
+    public String stateInputFieldRegistration = "//input[@id='state']";
+    public String postalCode = "//input[@id='text-input']";
+    public String uploadFrontImageButton = "//button[@id='upload_front_btn']";
+    public String uploadBackImageButton = "//button[@id='upload_back_btn']";
+    public String nextButton = "(//button[@name='submit'])[2]";
+    public String ethnicityDropdown = "//select[@name='ethnicity']";
+    public String frontSideUploadChooseButton = "//input[@name='frontID']";
+    public String frontSideSaveButton = "//button[@name='submit1']";
+    public String backSideUploadChooseButton = "//input[@name='backID']";
+    public String backSideSaveButton = "(//button[@name='submit'])[1]";
+    public String registrationFormSubmission = "//h1[@class='banner-title']";
+    public String diagnosticLogo = "//img[@alt='Diagnostic.ly']";
+    public String formScopeDropdown = "//select[@id='form_scope']";
+    public String bundlesList = "//div[@class='col-md-10 showBundleList']";
+
 
     public void performActionOnUser(String tableId, String userName, String actionText) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
@@ -131,24 +161,6 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
     }
 
-    public void clickOnAssignmentView(String tableId, String userName) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user: " + nameCell.getText());
-
-                WebElement viewButton = row.findElement(By.xpath("//button[normalize-space()='View']"));
-                viewButton.click();
-
-                break;
-            }
-        }
-
-    }
-
     public void clickOnObservationLink(String tableId, String userName) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
 
@@ -165,12 +177,6 @@ public class PurchaseLevelAccountPage extends BasePage{
             }
         }
 
-    }
-
-    public static String getClipboardText() throws Exception {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Clipboard clipboard = toolkit.getSystemClipboard();
-        return (String) clipboard.getData(DataFlavor.stringFlavor);
     }
 
 
@@ -259,5 +265,73 @@ public class PurchaseLevelAccountPage extends BasePage{
 
     }
 
+    public boolean isElementDisplayed(String xpath) {
+        try {
+            return commonUtils.findElementByXpath(xpath).isDisplayed();
+        } catch (Exception e) { // Catch NoSuchElementException or TimeoutException
+            return false;
+        }
+    }
+
+    public void clickTrainingButton() {
+        if (isElementDisplayed(startTrainingButton)) {
+            driver.findElement(By.xpath(startTrainingButton)).click();
+            System.out.println("Clicked on Start Training button");
+        } else if (isElementDisplayed(resumeTrainingButton)) {
+            driver.findElement(By.xpath(resumeTrainingButton)).click();
+            System.out.println("Clicked on Resume Training button");
+        } else {
+            throw new NoSuchElementException("Neither Start Training nor Resume Training button is displayed.");
+        }
+    }
+
+    public void clickOnAssignmentView(String tableId, String userName) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+
+            if (nameCell.getText().trim().equals(userName)) {
+                System.out.println("Found user: " + nameCell.getText());
+
+                WebElement viewButton = row.findElement(By.xpath(".//button[normalize-space()='View']"));
+                viewButton.click();
+
+                break;
+            }
+        }
+
+    }
+
+    public String clickOnObservationLink(String assignName) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='detailsAssignmentsTable']/tbody/tr"));
+        String name = "";
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+            WebElement statusCell = row.findElement(By.xpath("./td[10]"));
+
+            if (nameCell.getText().trim().equals(assignName) && statusCell.getText().trim().equals("Not Started")) {
+                System.out.println("Found Form Type: " + nameCell.getText());
+
+                WebElement valueCell = row.findElement(By.xpath("./td[4]"));
+                name = valueCell.getText().trim();
+
+                WebElement copyIcon = row.findElement(By.xpath("./td[@class='text-center']/ion-icon[@name='copy-outline']"));
+                copyIcon.click();
+
+                return name;
+            }
+        }
+
+        System.out.println("No matching record found with status 'Not Started'");
+        return name;
+    }
+
+    public static String getClipboardText() throws Exception {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Clipboard clipboard = toolkit.getSystemClipboard();
+        return (String) clipboard.getData(DataFlavor.stringFlavor);
+    }
 
 }
