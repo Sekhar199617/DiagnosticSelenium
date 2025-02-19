@@ -20,6 +20,13 @@ public class ProductsAndBundlesPage extends BasePage {
     public String educationReqWithTestPurchaseCheckbox = "obs_req_test_purc"; //id
     public String educationAllowedWithTestPurchaseCheckbox = "obs_alw_test_purc"; //id
     public String educationAllowedWithoutTestPurchaseCheckbox = "obs_alw_no_test_purc"; //id
+    public String productOptionsValidationText = "error_msg_prod"; //id
+
+    //Availability
+    public String setExclusionsButton = "button[id='openExclusionsBtn']"; //css
+    public String exclusionsSearchField = "input[id='geoSearchInput']";
+    public String countriesList = "[id='geoResults'] strong";
+    public String exclusionsSaveButton = "saveExclusionsBtn"; //id
 
     //Shipping Settings
     public String returnToLabCheckbox = "return_to_lab"; //id
@@ -34,6 +41,7 @@ public class ProductsAndBundlesPage extends BasePage {
     public String warehouseSkuField = "support_entity_sku"; //id
     public String shippingWeightField = "weight"; //id
     public String weightUnitDropdown = "weight_unit"; //id
+    public String yesChangeButton = "//button[contains(text(),'Yes, Change it!')]";
     public String startingUnitsOnHandField = "starting_units_on_hand"; //id
     public String reorderWhenBelowField = "reorder_when_below"; //id
 
@@ -50,5 +58,7 @@ public class ProductsAndBundlesPage extends BasePage {
     public String productInboundShippingCostPaidByDropdown = "product_inbound_shipment"; //id
     public String activeCheckbox = "product_active"; //id
     public String activeDropdown = "active_value"; //id
+    public String dateField = "datetimepicker-input"; //id
+    public String activeDropdownOptions = "select[id='active_value'] options"; //css
     public String saveButton = "addProductForm"; //id
 }
