@@ -1,9 +1,10 @@
 package testCases;
 
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 import pageObjects.AccountDetailsAddFormsPage;
@@ -19,15 +20,19 @@ public class CreateAccountTest extends BaseClass {
 	public CommonUtils commonUtils;
 	public CreateAccountPage createAccountPage;
 	public String newAccountName;
+	public DashboardPage dp;
+	public AccountDetailsAddFormsPage af;
 
 	@Test(groups = { "Smoke" }, priority = 1)
 	public void verify_Create_Account() {
 		login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 		try {
-			logger.info("****** Starting Create Account Test Case ******");
+			logger.info("****** Starting Create Account And Delete Created Account Test Case ******");
 
 			createAccountPage = new CreateAccountPage(driver);
 			commonUtils = new CommonUtils(driver);
+			dp = new DashboardPage(driver);
+		    af = new AccountDetailsAddFormsPage(driver);
 
 			newAccountName = randomString();
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(createAccountPage.clickCreateAccount),null );
@@ -71,59 +76,26 @@ public class CreateAccountTest extends BaseClass {
 				System.out.println("Test Failed: Names do not match");
 			}
 
-		} catch (Exception e) {
-			logger.error("Exception occurred during test execution: ", e);
-			Assert.fail("Test failed due to exception: " + e.getMessage());
-		}
-		logger.info("****** Finished Create Account Test Case ******");
-	}
+			//Click on Back To Search
+			commonUtils.clickOnElement(commonUtils.findElementByXpath(createAccountPage.backToSearchButton),null);
 
+			commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.searchButton),null);
+			driver.navigate().refresh();
+			commonUtils.scrollToBottom();
+			createAccountPage.performActionOnUser(newAccountName);
 
-	@Test(groups = { "Smoke" }, priority = 2)
-	  public void delete_NewCreatedAccount() {
-		  login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-		  try {
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-			  logger.info("****** Starting Delete New Created Account Test Case ******");
-			  DashboardPage dp = new DashboardPage(driver);
-			  commonUtils = new CommonUtils(driver);
-			  AccountDetailsAddFormsPage af = new AccountDetailsAddFormsPage(driver);
+			WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(commonUtils.findElementByXpath(createAccountPage.deleteAccount)));
+			deleteButton.click();
 
-			  commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.searchButton),null);
-			  driver.navigate().refresh();
-			  commonUtils.scrollToBottom();
-			 createAccountPage.performActionOnUser(newAccountName);
+			commonUtils.clickOnElement(commonUtils.findElementByXpath(af.okButton),null);
 
-			  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-			  WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(commonUtils.findElementByXpath(createAccountPage.deleteAccount)));
-			  deleteButton.click();
-
-			 commonUtils.clickOnElement(commonUtils.findElementByXpath(af.okButton),null);
-
-		  } catch (Exception e) {
-			  logger.error("Exception occurred during test execution: ", e);
-			  Assert.fail("Test failed due to exception: " + e.getMessage());
-		  }
-		  logger.info("****** Finished Delete New Created Account Test Case ******");
-
-
-	 }
-
-	@Test(groups = { "Smoke" }, priority = 3)
-	public void verifyDeleteAccountIsNotPresentInSearch() {
-		login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-		try {
-
-			logger.info("****** Starting Verify Delete Account Is Not Present In Search Test Case ******");
-			DashboardPage dp = new DashboardPage(driver);
-			commonUtils = new CommonUtils(driver);
-			AccountDetailsAddFormsPage af = new AccountDetailsAddFormsPage(driver);
-
+			//Check the deleted account is displayed or not
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.searchButton), null);
 			driver.navigate().refresh();
 
-			boolean deleted = createAccountPage.isUserDeleted(newAccountName);
+			boolean deleted = createAccountPage.isAccountDeleted(newAccountName);
 
 			if (deleted) {
 				System.out.println("Test Passed: User is deleted.");
@@ -131,20 +103,15 @@ public class CreateAccountTest extends BaseClass {
 				System.out.println("Test Failed: User is still present.");
 			}
 
+
 		} catch (Exception e) {
 			logger.error("Exception occurred during test execution: ", e);
 			Assert.fail("Test failed due to exception: " + e.getMessage());
-		}
-		logger.info("****** Finished Verify Delete Account Is Not Present In Search Test Case ******");
-	}
 
 
-	@AfterMethod
-	public void deleteCookies() {
-		// Delete cookies after each test
-		if (driver != null) {
-			driver.manage().deleteAllCookies();
 		}
+		logger.info("****** Finished Create Account And Delete Created Account Test Case ******");
 	}
+
 
 }

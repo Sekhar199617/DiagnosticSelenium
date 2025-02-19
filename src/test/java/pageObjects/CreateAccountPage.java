@@ -37,6 +37,7 @@ public class CreateAccountPage extends  BasePage{
 
     public String deleteAccount = "(//button[normalize-space()='Yes, Delete It'])[1]";
     public String newAccountHeading = "//div[@class='row mb-3']";
+    public String backToSearchButton = "//a[normalize-space()='Back to Search Results']";
 
     public void performActionOnUser( String userName) throws InterruptedException {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='accountsTable']/tbody/tr"));
@@ -67,7 +68,7 @@ public class CreateAccountPage extends  BasePage{
 
     }
 
-    public boolean isUserDeleted(String userName) throws InterruptedException {
+    public boolean isAccountDeleted(String userName) throws InterruptedException {
        dp.searchForItem(userName); // Use the existing search method
         Thread.sleep(2000); // Wait for results to load
 
@@ -75,10 +76,10 @@ public class CreateAccountPage extends  BasePage{
 
         boolean isDeleted = !noDataMessage.isEmpty();
         if (isDeleted) {
-            System.out.println("User successfully deleted.");
+            System.out.println("Account successfully deleted.");
             return true;
         } else {
-            System.out.println("User is still present.");
+            System.out.println("Account is still present.");
             return false;
         }
     }

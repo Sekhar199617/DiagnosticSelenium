@@ -65,11 +65,8 @@ public class PurchaserFillInformationForRegistrationPageTest extends BaseClass {
             AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),  p.getProperty("observationLinkCopyValidationMessage"),
                     commonUtils.findElementByXpath(au.dialogueOkButton));
-//            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.observationLinkCopyValidationMessage),p.getProperty("observationLinkCopyValidationMessage"));
-//            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.observationLinkCopyOkButton),null);
 
             ob.openNewTabWithURL(copiedURL);
-          //  ob.languageSelectionRecoveryScenario();
 
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.resumeTrainingButton),null);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.firstNameNewOrderField),p.getProperty("firstNameRegistrationPage"));
