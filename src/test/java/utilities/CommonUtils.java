@@ -221,6 +221,7 @@ public class CommonUtils extends BaseClass {
     }
 
     public void selectCheckbox(WebElement checkbox) {
+        scrollToElement(checkbox);
         waitForElementToBeClickable(checkbox, 5);
         if (!checkbox.isSelected()) {
             checkbox.click();
@@ -287,6 +288,7 @@ public class CommonUtils extends BaseClass {
         try {
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
             waitForElementToBeVisible(element, 10);
+            waitForElementToBeClickable(element, 10);
         } catch (Exception e) {
             throw new RuntimeException("Failed to scroll to element: " + e.getMessage(), e);
         }
