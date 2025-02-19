@@ -11,6 +11,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -128,27 +130,6 @@ public class PurchaseLevelAccountPage extends BasePage{
             }
         }
 
-    }
-
-    public void handleCityAndRegion(String countryName, WebElement regionElement, WebElement regionDropdownElement, String regionName) {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        if (countryName.equals("United States")) {
-            if (regionDropdownElement != null) {
-                wait.until(ExpectedConditions.elementToBeClickable(regionDropdownElement));
-                commonUtils.selectDropDownValue(regionDropdownElement, regionName);
-            } else {
-                System.out.println("Region dropdown not found!");
-            }
-        } else {
-            if (regionElement != null) {
-                wait.until(ExpectedConditions.visibilityOf(regionElement));
-                commonUtils.enterValueInTextField(regionElement, regionName);
-            } else {
-                System.out.println("Region input fields not found!");
-            }
-        }
     }
 
     public void clickOnAssignmentView(String tableId, String userName) {
@@ -287,24 +268,6 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
     }
 
-    public void clickOnAssignmentView(String tableId, String userName) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user: " + nameCell.getText());
-
-                WebElement viewButton = row.findElement(By.xpath("//button[normalize-space()='View']"));
-                viewButton.click();
-
-                break;
-            }
-        }
-
-    }
-
     public String clickOnObservationLink(String assignName) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='detailsAssignmentsTable']/tbody/tr"));
 
@@ -329,28 +292,5 @@ public class PurchaseLevelAccountPage extends BasePage{
         return name;
     }
 
-
-    public static String getClipboardText() {
-        try {
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
-            Clipboard clipboard = toolkit.getSystemClipboard();
-            return (String) clipboard.getData(DataFlavor.stringFlavor);
-        } catch (UnsupportedFlavorException | IOException e) {
-            System.out.println("Clipboard access failed: " + e.getMessage());
-            return null;
-        }
-    }
-
-
-    public void openNewTabWithURL(String url) {
-        ((JavascriptExecutor) driver).executeScript("window.open()");
-
-        // Switch to the new tab
-        for (String tab : driver.getWindowHandles()) {
-            driver.switchTo().window(tab);
-        }
-        // Open the given URL in the new tab
-        driver.get(url);
-    }
 
 }
