@@ -43,6 +43,9 @@ public class PurchaserEditUpdateBillingDetailsTest extends BaseClass {
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
 
+            DashboardPage dashboardPage = new DashboardPage(driver);
+            dashboardPage.clickOnLogo(); // To change small case letters to normal
+
             //Click on setting in hamburger tab
             dp.selectHamburgerTab("Settings");
 
@@ -55,10 +58,13 @@ public class PurchaserEditUpdateBillingDetailsTest extends BaseClass {
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.billingCountryDropdown),p.getProperty("purchaserBillingCountryDropdown"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingAddress1Field),p.getProperty("purchaserBillingAddress1"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingAddress2Field),p.getProperty("purchaserBillingAddress2"));
+            commonUtils.scrollToElement(commonUtils.findElementByXpath(ob.billingCityField));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingCityField),p.getProperty("purchaserBillingCity"));
+            commonUtils.scrollToElement(commonUtils.findElementByXpath(ob.billingStateField));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingStateField),p.getProperty("purchaserBillingState"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingPostalCodeField),p.getProperty("purchaserBillingPostalCode"));
 
+            commonUtils.scrollToUp();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.billingUpdateButton),null);
             commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("purchaserBillingDetailsUpdateMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
@@ -66,7 +72,6 @@ public class PurchaserEditUpdateBillingDetailsTest extends BaseClass {
         } catch (Exception e) {
             Assert.fail();
         }
-
 
         logger.info("****** Finished Purchaser Edit Update Billing Details Test ******");
     }

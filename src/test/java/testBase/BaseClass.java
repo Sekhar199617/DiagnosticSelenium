@@ -18,8 +18,12 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
@@ -35,27 +39,48 @@ public class BaseClass {
 	public CommonUtils commonUtils;
 	private JSONObject testData;
 
-    @BeforeClass(groups= {"Smoke"})
-    @Parameters({"os", "browser"})
-    public void setup(@Optional("Windows")String os, String browser) throws IOException 
+    @BeforeClass(groups = {"Smoke"})
+    @Parameters({"os", "browser", "headless"})
+    public void setup(@Optional("Windows") String os, @Optional("chrome") String browser, @Optional("false") String headless) throws IOException
     {
     	FileReader file = new FileReader("./src//test//resources//config.properties");
     	p = new Properties();
     	p.load(file);
 
         logger = LogManager.getLogger(this.getClass());
-        
-        switch(browser.toLowerCase())
-        {
-        case "chrome" : driver = new ChromeDriver(); break;
-        case "edge" : driver = new EdgeDriver(); break;
-        case "firefox" : driver = new FirefoxDriver(); break;
-        default : System.out.println("Invalid browser name..."); return;
+
+        boolean isHeadless = Boolean.parseBoolean(headless);
+
+        switch (browser.toLowerCase()) {
+            case "chrome":
+                ChromeOptions chromeOptions = new ChromeOptions();
+                if (isHeadless) {
+                    chromeOptions.addArguments("--headless", "--disable-gpu", "--window-size=1920x1080");
+                }
+                driver = new ChromeDriver(chromeOptions);
+                break;
+            case "edge":
+                EdgeOptions edgeOptions = new EdgeOptions();
+                if (isHeadless) {
+                    edgeOptions.addArguments("--headless", "--disable-gpu", "--window-size=1920x1080");
+                }
+                driver = new EdgeDriver(edgeOptions);
+                break;
+            case "firefox":
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                if (isHeadless) {
+                    firefoxOptions.addArguments("--headless", "--disable-gpu", "--window-size=1920x1080");
+                }
+                driver = new FirefoxDriver(firefoxOptions);
+                break;
+            default:
+                System.out.println("Invalid browser name...");
+                return;
         }
 
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        
+
         driver.get(p.getProperty("adminAppURL"));
         driver.manage().window().maximize();
     }
