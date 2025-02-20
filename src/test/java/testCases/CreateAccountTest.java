@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 import pageObjects.AccountDetailsAddFormsPage;
+import pageObjects.AccountDetailsUsersAndRolesPage;
 import pageObjects.CreateAccountPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
@@ -82,7 +83,10 @@ public class CreateAccountTest extends BaseClass {
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.searchButton),null);
 			driver.navigate().refresh();
 			commonUtils.scrollToBottom();
-			createAccountPage.performActionOnUser(newAccountName);
+
+			//Perform delete option for user
+			createAccountPage.performAccountDeleteActionOnUser("accountsTable",newAccountName,"Delete");
+
 
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -91,10 +95,10 @@ public class CreateAccountTest extends BaseClass {
 
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(af.okButton),null);
 
+			commonUtils.scrollToUp();
 			//Check the deleted account is displayed or not
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.searchButton), null);
 			driver.navigate().refresh();
-
 			boolean deleted = createAccountPage.isAccountDeleted(newAccountName);
 
 			if (deleted) {
