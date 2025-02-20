@@ -72,9 +72,6 @@ public class PurchaserFillInformationForRegistrationPageTest extends BaseClass {
                     commonUtils.findElementByXpath(au.dialogueOkButton));
 
             ob.openNewTabWithURL(copiedURL);
-          //  ob.languageSelectionRecoveryScenario();
-
-         //   commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.startTrainingButton),null);
             ob.clickTrainingButton();
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.firstNameRegistrationField),p.getProperty("firstNameRegistrationPage"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.lastNameRegistrationField),p.getProperty("lastNameRegistrationPage"));

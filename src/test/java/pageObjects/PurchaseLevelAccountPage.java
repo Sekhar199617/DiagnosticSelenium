@@ -1,6 +1,5 @@
 package pageObjects;
 
-import com.sun.media.sound.Toolkit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,12 +8,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.CommonUtils;
 
+import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class PurchaseLevelAccountPage extends BasePage{
     CommonUtils commonUtils;
@@ -157,24 +158,6 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
     }
 
-    public void clickOnAssignmentView(String tableId, String userName) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user: " + nameCell.getText());
-
-                WebElement viewButton = row.findElement(By.xpath("//button[normalize-space()='View']"));
-                viewButton.click();
-
-                break;
-            }
-        }
-
-    }
-
     public void clickOnObservationLink(String tableId, String userName) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
 
@@ -295,10 +278,10 @@ public class PurchaseLevelAccountPage extends BasePage{
 
     public void clickTrainingButton() {
         if (isElementDisplayed(startTrainingButton)) {
-            driver.findElement(By.xpath(startTrainingButton)).click();
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(startTrainingButton),null);
             System.out.println("Clicked on Start Training button");
         } else if (isElementDisplayed(resumeTrainingButton)) {
-            driver.findElement(By.xpath(resumeTrainingButton)).click();
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(resumeTrainingButton),null);
             System.out.println("Clicked on Resume Training button");
         } else {
             throw new NoSuchElementException("Neither Start Training nor Resume Training button is displayed.");
@@ -315,7 +298,7 @@ public class PurchaseLevelAccountPage extends BasePage{
                 System.out.println("Found user: " + nameCell.getText());
 
                 WebElement viewButton = row.findElement(By.xpath(".//button[normalize-space()='View']"));
-                viewButton.click();
+                commonUtils.clickOnElement(viewButton,null);
 
                 break;
             }
@@ -346,29 +329,6 @@ public class PurchaseLevelAccountPage extends BasePage{
 
         System.out.println("No matching record found with status 'Not Started'");
         return name;
-    }
-
-    public static String getClipboardText() {
-        try {
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
-            Clipboard clipboard = toolkit.getSystemClipboard();
-            return (String) clipboard.getData(DataFlavor.stringFlavor);
-        } catch (UnsupportedFlavorException | IOException e) {
-            System.out.println("Clipboard access failed: " + e.getMessage());
-            return null;
-        }
-    }
-
-
-    public void openNewTabWithURL(String url) {
-        ((JavascriptExecutor) driver).executeScript("window.open()");
-
-        // Switch to the new tab
-        for (String tab : driver.getWindowHandles()) {
-            driver.switchTo().window(tab);
-        }
-        // Open the given URL in the new tab
-        driver.get(url);
     }
 
 }
