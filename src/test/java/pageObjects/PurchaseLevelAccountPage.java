@@ -35,7 +35,7 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String userUploadOkButton = "//button[normalize-space()='ok']";
     public String accountLevelHeading = "//span[@id='header_label']";
     public String accountLevelCancelButton = "//a[@onclick='detectChanges()']";
-    public String newOrderButton = "//button[normalize-space()='new_order']";
+    public String newOrderButton = "//button[normalize-space()='New Order']";
     public String newPatientLink = "//a[@id='newPatientBtn']";
     public String firstNameNewOrderField = "//input[@id='first-name']";
     public String lastNameNewOrderField = "//input[@id='last-name']";
@@ -91,12 +91,16 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String newUserSaveButton = "//button[@name='save']";
     public String startTrainingButton = "//a[normalize-space()='Start Training']";
     public String resumeTrainingButton = "//a[normalize-space()='Resume Training']";
+    public String firstNameRegistrationField = "(//input[@name='name'])[1]";
+    public String lastNameRegistrationField = "//input[@name='last_name']";
     public String dateOfBirth = "//input[@name='dob']";
     public String genderDropdown = "//select[@name='gender']";
     public String raceDropdown = "//select[@name='race']";
+    public String countryDropdownRegistration = "//select[@aria-label='Country Dropdown']";
     public String shippingAddress1 = "(//input[@name='address'])[1]";
     public String shippingAddress2 = "//input[@name='address2']";
     public String cityField = "//input[@name='city']";
+    public String stateInputFieldRegistration = "//input[@id='state']";
     public String postalCode = "//input[@id='text-input']";
     public String uploadFrontImageButton = "//button[@id='upload_front_btn']";
     public String uploadBackImageButton = "//button[@id='upload_back_btn']";
@@ -110,6 +114,10 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String diagnosticLogo = "//img[@alt='Diagnostic.ly']";
     public String formScopeDropdown = "//select[@id='form_scope']";
     public String bundlesList = "//div[@class='col-md-10 showBundleList']";
+    public String getHelpButton = "//button[normalize-space()='Get Help']";
+    public String textChatOption = "(//button[contains(@class,'btn btn-primary getHelpSubBtn getChatBtnTrigger')][normalize-space()='Text Chat'])[1]";
+    public String closeChatButton = "//button[@class='btn-close chat-btn-close']";
+    public String lastSessionDate = "//th[@aria-label='Last Session Date: activate to sort column ascending']";
 
 
     public void performActionOnUser(String tableId, String userName, String actionText) {
@@ -149,6 +157,25 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
 
     }
+
+    public void clickOnAssignmentView2(String tableId, String userName, String bundleName) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+            WebElement bundleCell = row.findElement(By.xpath("./td[9]"));
+
+            if (nameCell.getText().trim().equals(userName) && bundleCell.getText().trim().equals(bundleName)) {
+                System.out.println("Found user: " + nameCell.getText() + " with bundle: " + bundleCell.getText());
+
+                WebElement viewButton = row.findElement(By.xpath(".//button[normalize-space()='View']"));
+                viewButton.click();
+
+                break;
+            }
+        }
+    }
+
 
     public void clickOnObservationLink(String tableId, String userName) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
@@ -268,28 +295,66 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
     }
 
-    public String clickOnObservationLink(String assignName) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='detailsAssignmentsTable']/tbody/tr"));
+//    public String clickOnObservationLink(String assignName) {
+//        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='detailsAssignmentsTable']/tbody/tr"));
+//
+//        String name = "";
+//        for (WebElement row : rows) {
+//            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+//
+//            if (nameCell.getText().trim().equals(assignName)) {
+//                System.out.println("Found Form Type: " + nameCell.getText());
+//
+//                WebElement valueCell = row.findElement(By.xpath("./td[4]"));
+//                name = valueCell.getText().trim();
+//
+//                WebElement copyIcon = row.findElement(By.xpath("//td[@class='text-center']/ion-icon[@name='copy-outline']"));
+//                copyIcon.click();
+//
+//                return name;
+//            }
+//        }
+    //
+//        System.out.println(name);
+//        return name;
+//    }
 
+    public String clickOnObservationLinkCopy(String assignName) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='detailsAssignmentsTable']/tbody/tr"));
         String name = "";
+
         for (WebElement row : rows) {
             WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+            WebElement statusCell = row.findElement(By.xpath("./td[10]"));
 
-            if (nameCell.getText().trim().equals(assignName)) {
+            if (nameCell.getText().trim().equals(assignName) && statusCell.getText().trim().equals("Not Started")) {
                 System.out.println("Found Form Type: " + nameCell.getText());
 
                 WebElement valueCell = row.findElement(By.xpath("./td[4]"));
                 name = valueCell.getText().trim();
 
-                WebElement copyIcon = row.findElement(By.xpath("//td[@class='text-center']/ion-icon[@name='copy-outline']"));
+                WebElement copyIcon = row.findElement(By.xpath("./td[@class='text-center']/ion-icon[@name='copy-outline']"));
                 copyIcon.click();
 
                 return name;
             }
         }
 
-        System.out.println(name);
+        System.out.println("No matching record found with status 'Not Started'");
         return name;
+    }
+
+
+    public void clickTrainingButton() {
+        if (isElementDisplayed(startTrainingButton)) {
+            driver.findElement(By.xpath(startTrainingButton)).click();
+            System.out.println("Clicked on Start Training button");
+        } else if (isElementDisplayed(resumeTrainingButton)) {
+            driver.findElement(By.xpath(resumeTrainingButton)).click();
+            System.out.println("Clicked on Resume Training button");
+        } else {
+            throw new NoSuchElementException("Neither Start Training nor Resume Training button is displayed.");
+        }
     }
 
 
