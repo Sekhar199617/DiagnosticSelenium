@@ -456,13 +456,13 @@ public class CommonUtils extends BaseClass {
         }
     }
 
-    public WebElement findUserAndClickActionsDropdown(String tableId, String userName) {
+    public WebElement findUserAndClickActionsDropdown(String tableId, String accountName) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
 
         for (WebElement row : rows) {
             WebElement nameCell = row.findElement(By.xpath("./td[1]"));
 
-            if (nameCell.getText().trim().equals(userName)) {
+            if (nameCell.getText().trim().equals(accountName)) {
                 System.out.println("Found user: " + nameCell.getText());
 
                 WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));

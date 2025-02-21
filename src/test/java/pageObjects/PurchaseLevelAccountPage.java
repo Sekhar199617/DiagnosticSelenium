@@ -260,9 +260,9 @@ public class PurchaseLevelAccountPage extends BasePage{
 
     }
 
-    public boolean isElementDisplayed(String xpath) {
+    public boolean isElementDisplayed(WebElement element) {
         try {
-            return commonUtils.findElementByXpath(xpath).isDisplayed();
+            return element.isDisplayed();
         } catch (Exception e) { // Catch NoSuchElementException or TimeoutException
             return false;
         }
