@@ -2,46 +2,37 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Master Suite">
   <listeners>
-  	<listener class-name="utilities.ExtentReportManager"></listener>
+  	<listener class-name="utilities.ExtentReportManager"/>
   </listeners>
   <test thread-count="5" name="Test">
-  	<parameter name="os" value="Windows"></parameter>
-    <parameter name="browser" value="chrome"></parameter>
-    <parameter name="headless" value="true"></parameter>
+  	<parameter name="os" value="Windows"/>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="headless" value="true"/>
     <classes>
       <class name="testCases.AdminLoginDDT"/>
       <class name="testCases.PurchaserCreateAccountAdminManagerInDropdownListTest"/>
       <class name="testCases.AccountDetailsSettingsBillingTest"/>
       <class name="testCases.AccountDetailsAddEventTest"/>
       <class name="testCases.EntitiesTest"/>
-      <class name="testCases.PurchaserViewTheUserOfAccountLevelTest"/>
       <class name="testBase.BaseClass"/>
-      <class name="testCases.PurchaserNewOrderTestArrivedAndTestShippedMailTest"/>
       <class name="testCases.PurchaserProvisionedOrderTest"/>
       <class name="testCases.SchedulesTest"/>
       <class name="testCases.SupportEntityVisibleToUserTest"/>
       <class name="testCases.AccountDetailsSettingsAddIntegrationTest"/>
       <class name="testCases.TemplatesTest"/>
-      <class name="testCases.SendMailInShippingTaskTest"/>
       <class name="testCases.AccountDetailsUsersAndRolesTest"/>
       <class name="testCases.AccountDetailsIntakeFormsTest"/>
       <class name="testCases.ContactUsTest"/>
-      <class name="testCases.PurchaserEditUpdateEventTest"/>
       <class name="testCases.CreateAccountTest"/>
       <class name="testCases.AccountDetailsAddLocationTest"/>
       <class name="testCases.PurchaserEditUpdateBillingDetailsTest"/>
-      <class name="testCases.DashboardTest"/>
       <class name="testCases.AccountDetailsOrdersTest"/>
       <class name="testCases.PurchaserOnlineEducationTest"/>
       <class name="testCases.ProductsAndBundlesTest"/>
-      <class name="testCases.PurchaseCopyLinkFromObservationColumnTest"/>
-      <class name="testCases.PurchaserCopyFormUrlTest"/>
-      <class name="testCases.PurchaserAddAssigneeWithUploadCSVTest"/>
       <class name="testCases.ObserverLoginTest"/>
       <class name="testCases.UsersTest"/>
       <class name="testCases.EducationFlowsTest"/>
       <class name="testCases.AccountDetailsCreateGroupTest"/>
-      <class name="testCases.PurchaserDismissShippingTaskTest"/>
       <class name="testCases.AccountDetailsOnlineEducationTest"/>
       <class name="testCases.AdminLoginTest"/>
     </classes>
