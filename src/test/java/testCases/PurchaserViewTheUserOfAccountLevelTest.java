@@ -1,5 +1,7 @@
 package testCases;
 
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
@@ -36,7 +38,7 @@ public class PurchaserViewTheUserOfAccountLevelTest extends BaseClass {
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.userTypeDropdown),p.getProperty("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            pl.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
+            pl.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -46,14 +48,15 @@ public class PurchaserViewTheUserOfAccountLevelTest extends BaseClass {
             dp.selectHamburgerTab("Users");
 
             //Clicking on view for user in purchase user
-            pl.performUserActionOnUser("purchaseUsersTable", p.getProperty("purchaseAccountLevelUserName"), "view");
+            pl.performTableAction("purchaseUsersTable", p.getProperty("purchaseAccountLevelUserName"), "View", 1);
+
 
             commonUtils.validateGetText(commonUtils.findElementByXpath(pl.accountLevelHeading),p.getProperty("purchaseAccountLevelHeadingMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.accountLevelCancelButton),null);
 
         }catch(Exception e)
         {
-            Assert.fail();
+            AssertJUnit.fail();
         }
         logger.info("****** Finished Purchaser View The User Of Account Level Test ******");
     }

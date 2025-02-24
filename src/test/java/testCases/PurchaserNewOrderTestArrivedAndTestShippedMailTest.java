@@ -1,5 +1,7 @@
 package testCases;
 
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -45,11 +47,13 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.userTypeDropdown), p.getProperty("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            pl.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
+            pl.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
+            //Click on logo
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.diagnosticLogo),null);
 
             //Create New Order
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.newOrderButton), null);
@@ -101,7 +105,7 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.successfulConfirmationOkButton), null);
 
         } catch (Exception e) {
-            Assert.fail();
+            AssertJUnit.fail();
         }
 
         logger.info("****** Finished Purchaser New Order Test Arrived And Test Shipped Mail  Test ******");

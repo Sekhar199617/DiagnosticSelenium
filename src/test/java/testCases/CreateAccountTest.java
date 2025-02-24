@@ -1,14 +1,12 @@
 package testCases;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.Test;
-import org.testng.Assert;
 import pageObjects.AccountDetailsAddFormsPage;
-import pageObjects.AccountDetailsUsersAndRolesPage;
 import pageObjects.CreateAccountPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
@@ -83,6 +81,7 @@ public class CreateAccountTest extends BaseClass {
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.searchButton),null);
 			driver.navigate().refresh();
 			commonUtils.scrollToBottom();
+			Thread.sleep(2000);
 
 			//Perform delete option for user
 			createAccountPage.performAccountDeleteActionOnUser("accountsTable",newAccountName,"Delete");

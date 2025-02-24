@@ -42,7 +42,7 @@ public class PurchaserFillInformationForRegistrationPageTest extends BaseClass {
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), p.getProperty("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            ob.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
+            ob.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -52,12 +52,9 @@ public class PurchaserFillInformationForRegistrationPageTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.diagnosticLogo),null);
 
             dp.selectHamburgerTab("Assignments");
-            // commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.assignmentViewButton),null);
             ob.clickOnAssignmentView("assignmentsTable",p.getProperty("purchaserAssignmentNameToClickView"));
 
-            //
-
-            String copiedFormName = ob.clickOnObservationLink(p.getProperty("purchaserAssignmentNameToClickView"));
+            String copiedFormName = ob.clickOnFormsLink("detailsAssignmentsTable",p.getProperty("purchaserAssignmentNameToClickView"));
             System.out.println(copiedFormName + " copied");
 
             String copiedURL = ob.getClipboardText();

@@ -9,12 +9,9 @@ import utilities.CommonUtils;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class PurchaseLevelAccountPage extends BasePage{
     CommonUtils commonUtils;
@@ -110,30 +107,12 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String diagnosticLogo = "//img[@alt='Diagnostic.ly']";
     public String formScopeDropdown = "//select[@id='form_scope']";
     public String bundlesList = "//div[@class='col-md-10 showBundleList']";
+    public String tableRowsXpath = "//table[@id='%s']/tbody/tr";
 
-
-    public void performActionOnUser(String tableId, String userName, String actionText) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[1]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user: " + nameCell.getText());
-
-                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));
-                actionsButton.click();
-
-                WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
-                actionOption.click();
-                break;
-            }
-        }
-
-    }
 
     public void clickOnAssignmentView(String tableId, String userName) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+        List<WebElement> rows = commonUtils.findElementsByXpath(String.format(tableRowsXpath, tableId));
+
 
         for (WebElement row : rows) {
             WebElement nameCell = row.findElement(By.xpath("./td[2]"));
@@ -150,24 +129,6 @@ public class PurchaseLevelAccountPage extends BasePage{
 
     }
 
-    public void clickOnObservationLink(String tableId, String userName) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user Observation: " + nameCell.getText());
-
-                WebElement copyIcon = row.findElement(By.xpath("(//td[@class='text-center']/ion-icon[@name='copy-outline'])[1]"));
-                copyIcon.click();
-
-                break;
-            }
-        }
-
-    }
-
     public static String getClipboardText() throws Exception {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Clipboard clipboard = toolkit.getSystemClipboard();
@@ -175,28 +136,8 @@ public class PurchaseLevelAccountPage extends BasePage{
     }
 
 
-    public void shippingTaskDismiss(String userName, String actionText) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='purchaseUsersTable']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user: " + nameCell.getText());
-
-                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'actions')]"));
-                actionsButton.click();
-
-                WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
-                actionOption.click();
-                break;
-            }
-        }
-
-    }
-
-    public String clickOnFormsLink(String formType) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='globalFormTable']/tbody/tr"));
+    public String clickOnFormsLink(String tableId, String formType) {
+        List<WebElement> rows = commonUtils.findElementsByXpath(String.format(tableRowsXpath, tableId));
 
           String formName = "";
         for (WebElement row : rows) {
@@ -240,26 +181,6 @@ public class PurchaseLevelAccountPage extends BasePage{
         return localDate.format(outputFormat);
     }
 
-    public void performUserActionOnUser(String tableId, String userName, String actionText) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[1]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user: " + nameCell.getText());
-
-                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'actions')]"));
-                actionsButton.click();
-
-                WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
-                actionOption.click();
-                break;
-            }
-        }
-
-    }
-
     public boolean isElementDisplayed(WebElement element) {
         try {
             return element.isDisplayed();
@@ -268,28 +189,23 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
     }
 
-    public String clickOnObservationLink(String assignName) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='detailsAssignmentsTable']/tbody/tr"));
+    public void performTableAction(String tableId, String userName, String actionText, int nameCellIndex) {
+        List<WebElement> rows = commonUtils.findElementsByXpath(String.format(tableRowsXpath, tableId));
 
-        String name = "";
         for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+            WebElement nameCell = row.findElement(By.xpath("./td[" + nameCellIndex + "]"));
 
-            if (nameCell.getText().trim().equals(assignName)) {
-                System.out.println("Found Form Type: " + nameCell.getText());
+            if (nameCell.getText().trim().equals(userName)) {
+                System.out.println("Found user: " + nameCell.getText());
 
-                WebElement valueCell = row.findElement(By.xpath("./td[4]"));
-                name = valueCell.getText().trim();
+                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));
+                actionsButton.click();
 
-                WebElement copyIcon = row.findElement(By.xpath("//td[@class='text-center']/ion-icon[@name='copy-outline']"));
-                copyIcon.click();
-
-                return name;
+                WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
+                actionOption.click();
+                break;
             }
         }
-
-        System.out.println(name);
-        return name;
     }
 
 

@@ -2,29 +2,16 @@
 
     import org.testng.annotations.Test;
     import org.testng.AssertJUnit;
-    import org.apache.commons.io.FileUtils;
-    import org.apache.commons.lang3.RandomStringUtils;
-    import org.apache.commons.math3.random.RandomGenerator;
-    import org.openqa.selenium.*;
-    import org.openqa.selenium.support.ui.ExpectedConditions;
-    import org.openqa.selenium.support.ui.Select;
-    import org.openqa.selenium.support.ui.WebDriverWait;
-    import org.testng.Assert;
     import org.testng.annotations.AfterMethod;
     import org.testng.annotations.BeforeMethod;
-    import org.testng.annotations.Test;
     import pageObjects.AccountDetailsAddFormsPage;
     import pageObjects.AccountDetailsPage;
     import pageObjects.DashboardPage;
     import pageObjects.PurchaseLevelAccountPage;
     import testBase.BaseClass;
     import utilities.CommonUtils;
-
-    import java.io.File;
-    import java.time.Duration;
     import java.util.ArrayList;
     import java.util.List;
-    import java.util.Set;
 
     public class PurchaserPrecreatedCollectionInFormDataTest extends BaseClass {
 
@@ -55,7 +42,7 @@
                 commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.userTypeDropdown),p.getProperty("usersUserTypeAccountAdmin"));
 
                 //Clicking on Assign Test in action dropdown for a account
-                pl.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
+                pl.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
 
         }
 
@@ -111,9 +98,6 @@
                 List<String> tabs = new ArrayList<>(driver.getWindowHandles());
                 driver.switchTo().window(tabs.get(1));
 
-                //Click on logo
-                commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.diagnosticLogo),null);
-
                 //Click on hamburger menu
                 dp.selectHamburgerTab("Forms");
 
@@ -147,21 +131,6 @@
             if (driver != null) {
                 driver.manage().deleteAllCookies();
             }
-        }
-
-        @AfterMethod
-        public void closeExtraWindows() {
-            if (driver != null) {
-                String mainWindow = driver.getWindowHandle();
-                Set<String> windowHandles = driver.getWindowHandles();
-
-                for (String window : windowHandles) {
-                    if (!window.equals(mainWindow)) {
-                        driver.switchTo().window(window);
-                        driver.close();
-                    }
-                }
-                driver.switchTo().window(mainWindow);  // Keep one tab active
-            }
+            commonUtils.closeExtraWindows();
         }
     }

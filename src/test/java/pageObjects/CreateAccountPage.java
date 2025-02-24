@@ -4,8 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.CommonUtils;
 
+import java.time.Duration;
 import java.util.List;
 
 public class CreateAccountPage extends  BasePage{
@@ -41,24 +44,23 @@ public class CreateAccountPage extends  BasePage{
     public String newAccountHeading = "//div[@class='row mb-3']";
     public String backToSearchButton = "//a[normalize-space()='Back to Search Results']";
 
-    public void performAccountDeleteActionOnUser(String tableId, String userName, String action) throws InterruptedException {
+    public void performAccountDeleteActionOnUser(String tableId, String accountName, String action) throws InterruptedException {
         // Use the common method to find the user and click the "Actions" button
-        WebElement row = commonUtils.findUserAndClickActionsDropdown(tableId, userName);
+        WebElement row = commonUtils.findUserAndClickActionsDropdown(tableId, accountName);
 
         if (row != null) {
-            Thread.sleep(1000); // Wait for dropdown to appear
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-            // Find the action option (e.g., "Delete", "Edit", etc.)
-            List<WebElement> actionOptions = row.findElements(By.xpath(".//span[contains(text(),'" + action + "')]"));
-            if (!actionOptions.isEmpty()) {
-                WebElement actionOption = actionOptions.get(0);
+            try {
+                // Find the action option (e.g., "Delete", "Edit", etc.)
+                WebElement actionOption = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='dropdown-menu show']//span[@class='dropdown-item'][normalize-space()='" + action + "']")));
                 actionOption.click();
-                System.out.println(action + " button clicked for user: " + userName);
-            } else {
-                System.out.println(action + " option not found for user: " + userName);
+                System.out.println(action + " button clicked for user: " + accountName);
+            } catch (NoSuchElementException e) {
+                System.out.println(action + " option not found for user: " + accountName);
             }
         } else {
-            System.out.println("User not found: " + userName);
+            System.out.println("User not found: " + accountName);
         }
     }
 

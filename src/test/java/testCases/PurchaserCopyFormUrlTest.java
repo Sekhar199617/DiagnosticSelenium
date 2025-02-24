@@ -1,5 +1,7 @@
 package testCases;
 
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
@@ -38,7 +40,7 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), p.getProperty("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            ob.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
+            ob.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -46,7 +48,7 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
 
             dp.selectHamburgerTab("Forms");
 
-            String copiedFormName = ob.clickOnFormsLink(p.getProperty("purchaserFormCopyUrlFormType"));
+            String copiedFormName = ob.clickOnFormsLink("globalFormTable",p.getProperty("purchaserFormCopyUrlFormType"));
             System.out.println(copiedFormName + " copied");
 
             String copiedURL = ob.getClipboardText();
@@ -57,7 +59,7 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
             ob.openNewTabWithURL(copiedURL);
             String expectedFormName = commonUtils.findElementByXpath(ob.formUrlFormName).getText();
 
-            Assert.assertEquals(copiedFormName,expectedFormName , "Form name is not matching");
+            AssertJUnit.assertEquals(copiedFormName,expectedFormName , "Form name is not matching");
 
 
         } catch (Exception e) {
