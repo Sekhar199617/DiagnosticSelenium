@@ -1,9 +1,7 @@
 package testCases;
 
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import pageObjects.*;
 import testBase.BaseClass;
 import utilities.CommonUtils;
@@ -56,7 +54,7 @@ public class PurchaserViewTheUserOfAccountLevelTest extends BaseClass {
 
         }catch(Exception e)
         {
-            AssertJUnit.fail();
+            Assert.fail();
         }
         logger.info("****** Finished Purchaser View The User Of Account Level Test ******");
     }

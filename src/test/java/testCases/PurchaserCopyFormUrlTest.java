@@ -1,9 +1,7 @@
 package testCases;
 
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.DashboardPage;
 import pageObjects.PurchaseLevelAccountPage;
@@ -59,13 +57,12 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
             ob.openNewTabWithURL(copiedURL);
             String expectedFormName = commonUtils.findElementByXpath(ob.formUrlFormName).getText();
 
-            AssertJUnit.assertEquals(copiedFormName,expectedFormName , "Form name is not matching");
+            Assert.assertEquals(copiedFormName,expectedFormName , "Form name is not matching");
 
 
         } catch (Exception e) {
             Assert.fail();
         }
-
 
         logger.info("****** Finished Purchaser Dismiss Shipping Task Test ******");
     }

@@ -1,7 +1,7 @@
     package testCases;
 
+    import org.testng.Assert;
     import org.testng.annotations.Test;
-    import org.testng.AssertJUnit;
     import org.testng.annotations.AfterMethod;
     import org.testng.annotations.BeforeMethod;
     import pageObjects.AccountDetailsAddFormsPage;
@@ -82,7 +82,7 @@
                 }
 
             } catch (Exception e) {
-                AssertJUnit.fail();
+                Assert.fail();
             }
             logger.info("****** Finished Account Data Precreated Collection Test ******");
         }
@@ -120,7 +120,7 @@
                 }
 
             } catch (Exception e) {
-                AssertJUnit.fail();
+                Assert.fail();
             }
             logger.info("****** Finished Patient Data Precreated Collection Tese ******");
         }

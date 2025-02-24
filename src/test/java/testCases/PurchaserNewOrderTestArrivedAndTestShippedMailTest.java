@@ -1,14 +1,12 @@
 package testCases;
 
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.DashboardPage;
 import pageObjects.PurchaseLevelAccountPage;
@@ -105,7 +103,7 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.successfulConfirmationOkButton), null);
 
         } catch (Exception e) {
-            AssertJUnit.fail();
+            Assert.fail();
         }
 
         logger.info("****** Finished Purchaser New Order Test Arrived And Test Shipped Mail  Test ******");

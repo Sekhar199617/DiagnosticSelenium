@@ -1,10 +1,8 @@
 package testCases;
 
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import pageObjects.AccountDetailsAddEventTagsPage;
 import pageObjects.AccountDetailsPage;
 import pageObjects.DashboardPage;
@@ -72,7 +70,7 @@ public class PurchaserEditUpdateEventTest extends BaseClass {
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("purchaserEventSuccessfulMessage"),commonUtils.findElementByXpath(ob.successfulConfirmationOkButton));
 
         } catch (Exception e) {
-            AssertJUnit.fail();
+            Assert.fail();
         }
 
 

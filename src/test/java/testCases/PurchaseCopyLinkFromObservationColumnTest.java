@@ -1,7 +1,6 @@
 package testCases;
 
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -72,7 +71,7 @@ public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
             String expectedText = "Welcome Back, " + firstName;
 
             // Assertion to validate the message
-            AssertJUnit.assertEquals(actualText, expectedText, "Welcome message is incorrect!");
+            Assert.assertEquals(actualText, expectedText, "Welcome message is incorrect!");
 
 
         } catch (Exception e) {

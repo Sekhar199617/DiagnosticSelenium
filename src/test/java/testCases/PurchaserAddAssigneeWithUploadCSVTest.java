@@ -1,10 +1,8 @@
 package testCases;
 
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.AccountDetailsUsersAndRolesPage;
 import pageObjects.DashboardPage;

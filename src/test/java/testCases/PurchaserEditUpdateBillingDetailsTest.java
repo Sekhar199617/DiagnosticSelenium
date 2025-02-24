@@ -1,9 +1,7 @@
 package testCases;
 
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.DashboardPage;
 import pageObjects.PurchaseLevelAccountPage;
@@ -72,7 +70,7 @@ public class PurchaserEditUpdateBillingDetailsTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
 
         } catch (Exception e) {
-            AssertJUnit.fail();
+            Assert.fail();
         }
 
         logger.info("****** Finished Purchaser Edit Update Billing Details Test ******");
