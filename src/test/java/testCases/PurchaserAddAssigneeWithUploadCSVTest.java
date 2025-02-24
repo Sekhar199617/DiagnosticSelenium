@@ -1,8 +1,8 @@
 package testCases;
 
+import org.testng.annotations.Test;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.AccountDetailsUsersAndRolesPage;
 import pageObjects.DashboardPage;
@@ -45,7 +45,7 @@ public class PurchaserAddAssigneeWithUploadCSVTest extends BaseClass {
         commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.userTypeDropdown),p.getProperty("usersUserTypeAccountAdmin"));
 
         // Click on assign test for account name
-            pl.performActionOnUser("accountsTableUserRoles",p.getProperty("userAccountAdminName"),"Assign Tests" );
+            pl.performTableAction("accountsTableUserRoles",p.getProperty("userAccountAdminName"),"Assign Tests",1 );
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());

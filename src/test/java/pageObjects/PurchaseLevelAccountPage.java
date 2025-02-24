@@ -4,14 +4,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.CommonUtils;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -89,50 +86,33 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String newUserTimeZoneDropdown = "//select[@name='timezone_id']";
     public String newUserActiveCheckbox = "//input[@name='activeAccount']";
     public String newUserSaveButton = "//button[@name='save']";
+    public String startTrainingButton = "//a[normalize-space()='Start Training']";
+    public String resumeTrainingButton = "//a[normalize-space()='Resume Training']";
+    public String dateOfBirth = "//input[@name='dob']";
+    public String genderDropdown = "//select[@name='gender']";
+    public String raceDropdown = "//select[@name='race']";
+    public String shippingAddress1 = "(//input[@name='address'])[1]";
+    public String shippingAddress2 = "//input[@name='address2']";
+    public String cityField = "//input[@name='city']";
+    public String postalCode = "//input[@id='text-input']";
+    public String uploadFrontImageButton = "//button[@id='upload_front_btn']";
+    public String uploadBackImageButton = "//button[@id='upload_back_btn']";
+    public String nextButton = "(//button[@name='submit'])[2]";
+    public String ethnicityDropdown = "//select[@name='ethnicity']";
+    public String frontSideUploadChooseButton = "//input[@name='frontID']";
+    public String frontSideSaveButton = "//button[@name='submit1']";
+    public String backSideUploadChooseButton = "//input[@name='backID']";
+    public String backSideSaveButton = "(//button[@name='submit'])[1]";
+    public String registrationFormSubmission = "//h1[@class='banner-title']";
+    public String diagnosticLogo = "//img[@alt='Diagnostic.ly']";
+    public String formScopeDropdown = "//select[@id='form_scope']";
+    public String bundlesList = "//div[@class='col-md-10 showBundleList']";
+    public String tableRowsXpath = "//table[@id='%s']/tbody/tr";
 
-    public void performActionOnUser(String tableId, String userName, String actionText) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[1]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user: " + nameCell.getText());
-
-                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));
-                actionsButton.click();
-
-                WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
-                actionOption.click();
-                break;
-            }
-        }
-
-    }
-
-    public void handleCityAndRegion(String countryName, WebElement regionElement, WebElement regionDropdownElement, String regionName) {
-
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        if (countryName.equals("United States")) {
-            if (regionDropdownElement != null) {
-                wait.until(ExpectedConditions.elementToBeClickable(regionDropdownElement));
-                commonUtils.selectDropDownValue(regionDropdownElement, regionName);
-            } else {
-                System.out.println("Region dropdown not found!");
-            }
-        } else {
-            if (regionElement != null) {
-                wait.until(ExpectedConditions.visibilityOf(regionElement));
-                commonUtils.enterValueInTextField(regionElement, regionName);
-            } else {
-                System.out.println("Region input fields not found!");
-            }
-        }
-    }
 
     public void clickOnAssignmentView(String tableId, String userName) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+        List<WebElement> rows = commonUtils.findElementsByXpath(String.format(tableRowsXpath, tableId));
+
 
         for (WebElement row : rows) {
             WebElement nameCell = row.findElement(By.xpath("./td[2]"));
@@ -149,24 +129,6 @@ public class PurchaseLevelAccountPage extends BasePage{
 
     }
 
-    public void clickOnObservationLink(String tableId, String userName) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user Observation: " + nameCell.getText());
-
-                WebElement copyIcon = row.findElement(By.xpath("(//td[@class='text-center']/ion-icon[@name='copy-outline'])[1]"));
-                copyIcon.click();
-
-                break;
-            }
-        }
-
-    }
-
     public static String getClipboardText() throws Exception {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Clipboard clipboard = toolkit.getSystemClipboard();
@@ -174,28 +136,8 @@ public class PurchaseLevelAccountPage extends BasePage{
     }
 
 
-    public void shippingTaskDismiss(String userName, String actionText) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='purchaseUsersTable']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user: " + nameCell.getText());
-
-                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'actions')]"));
-                actionsButton.click();
-
-                WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
-                actionOption.click();
-                break;
-            }
-        }
-
-    }
-
-    public String clickOnFormsLink(String formType) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='globalFormTable']/tbody/tr"));
+    public String clickOnFormsLink(String tableId, String formType) {
+        List<WebElement> rows = commonUtils.findElementsByXpath(String.format(tableRowsXpath, tableId));
 
           String formName = "";
         for (WebElement row : rows) {
@@ -239,16 +181,24 @@ public class PurchaseLevelAccountPage extends BasePage{
         return localDate.format(outputFormat);
     }
 
-    public void performUserActionOnUser(String tableId, String userName, String actionText) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+    public boolean isElementDisplayed(WebElement element) {
+        try {
+            return element.isDisplayed();
+        } catch (Exception e) { // Catch NoSuchElementException or TimeoutException
+            return false;
+        }
+    }
+
+    public void performTableAction(String tableId, String userName, String actionText, int nameCellIndex) {
+        List<WebElement> rows = commonUtils.findElementsByXpath(String.format(tableRowsXpath, tableId));
 
         for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[1]"));
+            WebElement nameCell = row.findElement(By.xpath("./td[" + nameCellIndex + "]"));
 
             if (nameCell.getText().trim().equals(userName)) {
                 System.out.println("Found user: " + nameCell.getText());
 
-                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'actions')]"));
+                WebElement actionsButton = row.findElement(By.xpath(".//button[contains(text(),'Actions')]"));
                 actionsButton.click();
 
                 WebElement actionOption = row.findElement(By.xpath(".//a[contains(text(),'" + actionText + "')]"));
@@ -256,7 +206,6 @@ public class PurchaseLevelAccountPage extends BasePage{
                 break;
             }
         }
-
     }
 
 

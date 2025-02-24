@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.Set;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
@@ -453,6 +455,39 @@ public class CommonUtils extends BaseClass {
 
         if (!radioButton.isSelected()){
             radioButton.click();
+        }
+    }
+
+    public WebElement findUserAndClickActionsDropdown(String tableId, String accountName) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[1]"));
+
+            if (nameCell.getText().trim().equals(accountName)) {
+                System.out.println("Found user: " + nameCell.getText());
+
+                WebElement actionOption = row.findElement(By.xpath(".//button[contains(text(),'Action')]"));
+                actionOption.click();
+
+                return row; // Return the row for further actions
+            }
+        }
+        return null; // User not found
+    }
+
+    public void closeExtraWindows() {
+        if (driver != null) {
+            String mainWindow = driver.getWindowHandle();
+            Set<String> windowHandles = driver.getWindowHandles();
+
+            for (String window : windowHandles) {
+                if (!window.equals(mainWindow)) {
+                    driver.switchTo().window(window);
+                    driver.close();
+                }
+            }
+            driver.switchTo().window(mainWindow);  // Keep one tab active
         }
     }
 

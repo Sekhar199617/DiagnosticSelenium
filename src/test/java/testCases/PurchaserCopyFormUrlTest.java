@@ -1,7 +1,7 @@
 package testCases;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.Assert;
 import pageObjects.AccountDetailsPage;
 import pageObjects.DashboardPage;
 import pageObjects.PurchaseLevelAccountPage;
@@ -38,7 +38,7 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), p.getProperty("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            ob.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
+            ob.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -46,7 +46,7 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
 
             dp.selectHamburgerTab("Forms");
 
-            String copiedFormName = ob.clickOnFormsLink(p.getProperty("purchaserFormCopyUrlFormType"));
+            String copiedFormName = ob.clickOnFormsLink("globalFormTable",p.getProperty("purchaserFormCopyUrlFormType"));
             System.out.println(copiedFormName + " copied");
 
             String copiedURL = ob.getClipboardText();
@@ -63,7 +63,6 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
         } catch (Exception e) {
             Assert.fail();
         }
-
 
         logger.info("****** Finished Purchaser Dismiss Shipping Task Test ******");
     }

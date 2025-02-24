@@ -1,8 +1,8 @@
 package testCases;
 
+import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import pageObjects.AccountDetailsAddEventTagsPage;
 import pageObjects.AccountDetailsPage;
 import pageObjects.DashboardPage;
@@ -39,7 +39,7 @@ public class PurchaserEditUpdateEventTest extends BaseClass {
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), p.getProperty("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            ob.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
+            ob.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
