@@ -1,12 +1,12 @@
 package pageObjects;
 
+import com.sun.media.sound.Toolkit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utilities.CommonUtils;
 
-import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.time.LocalDate;
@@ -88,12 +88,16 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String newUserSaveButton = "//button[@name='save']";
     public String startTrainingButton = "//a[normalize-space()='Start Training']";
     public String resumeTrainingButton = "//a[normalize-space()='Resume Training']";
+    public String firstNameRegistrationField = "(//input[@name='name'])[1]";
+    public String lastNameRegistrationField = "//input[@name='last_name']";
     public String dateOfBirth = "//input[@name='dob']";
     public String genderDropdown = "//select[@name='gender']";
     public String raceDropdown = "//select[@name='race']";
+    public String countryDropdownRegistration = "//select[@aria-label='Country Dropdown']";
     public String shippingAddress1 = "(//input[@name='address'])[1]";
     public String shippingAddress2 = "//input[@name='address2']";
     public String cityField = "//input[@name='city']";
+    public String stateInputFieldRegistration = "//input[@id='state']";
     public String postalCode = "//input[@id='text-input']";
     public String uploadFrontImageButton = "//button[@id='upload_front_btn']";
     public String uploadBackImageButton = "//button[@id='upload_back_btn']";
@@ -208,5 +212,90 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
     }
 
+    public boolean isElementDisplayed(String xpath) {
+        try {
+            return commonUtils.findElementByXpath(xpath).isDisplayed();
+        } catch (Exception e) { // Catch NoSuchElementException or TimeoutException
+            return false;
+        }
+    }
+
+    public void clickTrainingButton() {
+        if (isElementDisplayed(startTrainingButton)) {
+            driver.findElement(By.xpath(startTrainingButton)).click();
+            System.out.println("Clicked on Start Training button");
+        } else if (isElementDisplayed(resumeTrainingButton)) {
+            driver.findElement(By.xpath(resumeTrainingButton)).click();
+            System.out.println("Clicked on Resume Training button");
+        } else {
+            throw new NoSuchElementException("Neither Start Training nor Resume Training button is displayed.");
+        }
+    }
+
+    public void clickOnAssignmentView(String tableId, String userName) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+
+            if (nameCell.getText().trim().equals(userName)) {
+                System.out.println("Found user: " + nameCell.getText());
+
+                WebElement viewButton = row.findElement(By.xpath(".//button[normalize-space()='View']"));
+                viewButton.click();
+
+                break;
+            }
+        }
+
+    }
+
+    public String clickOnObservationLink(String assignName) {
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='detailsAssignmentsTable']/tbody/tr"));
+        String name = "";
+
+        for (WebElement row : rows) {
+            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
+            WebElement statusCell = row.findElement(By.xpath("./td[10]"));
+
+            if (nameCell.getText().trim().equals(assignName) && statusCell.getText().trim().equals("Not Started")) {
+                System.out.println("Found Form Type: " + nameCell.getText());
+
+                WebElement valueCell = row.findElement(By.xpath("./td[4]"));
+                name = valueCell.getText().trim();
+
+                WebElement copyIcon = row.findElement(By.xpath("./td[@class='text-center']/ion-icon[@name='copy-outline']"));
+                copyIcon.click();
+
+                return name;
+            }
+        }
+
+        System.out.println("No matching record found with status 'Not Started'");
+        return name;
+    }
+
+    public static String getClipboardText() {
+        try {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Clipboard clipboard = toolkit.getSystemClipboard();
+            return (String) clipboard.getData(DataFlavor.stringFlavor);
+        } catch (UnsupportedFlavorException | IOException e) {
+            System.out.println("Clipboard access failed: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+    public void openNewTabWithURL(String url) {
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+
+        // Switch to the new tab
+        for (String tab : driver.getWindowHandles()) {
+            driver.switchTo().window(tab);
+        }
+        // Open the given URL in the new tab
+        driver.get(url);
+    }
 
 }
