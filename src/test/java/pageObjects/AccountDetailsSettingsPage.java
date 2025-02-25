@@ -12,9 +12,10 @@ public class AccountDetailsSettingsPage extends BasePage {
     }
 
     public String settingsTabsList = "//ul[@id='settingTabs']/li/a";
+    public String activeCheckbox = "[name='activeAccount']"; //css
+    public String demoAccountCheckbox = "[name='demoUser']"; //css
     public String editButton = "//button[@id='enable-edit-form']";
     public String createNewButton = "//a[normalize-space()='Create New']";
-  //  public String editButton = "//button[@id='enable-edit-form']";
     public String ssoButton = "//a[@id='tab16']";
     public String singleSignOnIntegrationAddButton = "//div[@id='addSSOIntegrationType']";
     public String integrationTypeDropdown = "//select[@id='sso_protocol']";
