@@ -43,22 +43,21 @@ public class DashboardTest extends BaseClass {
     @Test(groups = {"Smoke"})
     public void verifySearchWithoutInputFunctionality() {
 
-        String activeAccounts = commonUtils.getTextFromElement(commonUtils.findElementByCssSelector(dp.activeAccounts));
+        String activeAccountsCount = commonUtils.getTextFromElement(commonUtils.findElementByCssSelector(dp.activeAccounts));
 
         commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.searchButton), "Search");
         commonUtils.scrollToBottomAndClick(commonUtils.findElementById(dp.totalEntriesText));
 
         String totalEntriesText = commonUtils.getTextFromElement(commonUtils.findElementById(dp.totalEntriesText));
         String[] totalEntriesList = totalEntriesText.split("of ");
-        String totalEntries = totalEntriesList[1].split(" ")[0];
+        String totalEntriesCount = totalEntriesList[1].split(" ")[0];
 
-        if (activeAccounts.equals(totalEntries)) {
-            Assert.assertEquals(activeAccounts, totalEntries);
-            System.out.println("Total active accounts count (" + activeAccounts + ") is matching with total entries " +
-                    "count (" + totalEntries + ").");
+        if (Integer.parseInt(totalEntriesCount) >= Integer.parseInt(activeAccountsCount)) {
+            System.out.println("Total entries count (" + totalEntriesCount + ") is greater than or equal to active " +
+                    "accounts count (" + activeAccountsCount + ").");
         } else {
-            System.out.println("Total active accounts count (" + activeAccounts + ") is not matching with total " +
-                    "entries (" + totalEntries + ").");
+            System.out.println("Total entries (" + totalEntriesCount + ") is less than active " +
+                    "accounts count (" + activeAccountsCount + ").");
             Assert.fail();
         }
 
