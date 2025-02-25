@@ -1,1 +1,14 @@
 /target/
+/.classpath/
+/.project/
+/.settings/
+/.idea/
+/allure-results/
+/allure-report/
+/reports/
+/screenshots/
+/logs/
+/test-output/
+/target/test-classes/
+/target/test-reports/
+
