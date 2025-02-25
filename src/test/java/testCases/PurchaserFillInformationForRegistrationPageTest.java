@@ -52,9 +52,10 @@ public class PurchaserFillInformationForRegistrationPageTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.diagnosticLogo),null);
 
             dp.selectHamburgerTab("Assignments");
-            ob.clickOnAssignmentView("assignmentsTable",p.getProperty("purchaserAssignmentNameToClickView"));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.lastSessionDescArrow),null);
+            ob.clickOnAssignmentView("assignmentsTable",p.getProperty("purchaserAssignmentNameToView"));
 
-            String copiedFormName = ob.clickOnFormsLink("detailsAssignmentsTable",p.getProperty("purchaserAssignmentNameToClickView"));
+            String copiedFormName = ob.clickOnFormsLink("detailsAssignmentsTable",p.getProperty("purchaserAssignmentNameToView"));
             System.out.println(copiedFormName + " copied");
 
             String copiedURL = ob.getClipboardText();
@@ -65,19 +66,20 @@ public class PurchaserFillInformationForRegistrationPageTest extends BaseClass {
 
             ob.openNewTabWithURL(copiedURL);
 
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.resumeTrainingButton),null);
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.firstNameNewOrderField),p.getProperty("firstNameRegistrationPage"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.lastNameNewOrderField),p.getProperty("lastNameRegistrationPage"));
+            ob.clickTrainingButton();
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.firstNameRegistrationField),p.getProperty("firstNameRegistrationPage"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.lastNameRegistrationField),p.getProperty("lastNameRegistrationPage"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.mobileNumberNewOrderField),p.getProperty("mobileNumberRegistrationPage"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.dateOfBirth),p.getProperty("dateOfBirthRegistrationPage"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.genderDropdown),p.getProperty("genderRegistrationPage"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.raceDropdown),p.getProperty("raceRegistrationPage"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.ethnicityDropdown),p.getProperty("ethnicityRegistrationPage"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.countryDropdown),p.getProperty("countryRegistrationPage"));
+            commonUtils.scrollToBottom();
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.countryDropdownRegistration),p.getProperty("countryRegistrationPage"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.shippingAddress1),p.getProperty("shippingAddress1RegistrationPage"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.shippingAddress2),p.getProperty("shippingAddress2RegistrationPage"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.cityField),p.getProperty("cityRegistrationPage"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.regionNewOrderDropdown),p.getProperty("stateRegistrationPage"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.stateInputFieldRegistration),p.getProperty("stateRegistrationPage"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.postalCode),p.getProperty("postalCodeRegistrationPage"));
 
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.uploadFrontImageButton),null);

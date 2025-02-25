@@ -1,17 +1,18 @@
 package pageObjects;
 
-import com.sun.media.sound.Toolkit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utilities.CommonUtils;
 
+import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class PurchaseLevelAccountPage extends BasePage{
     CommonUtils commonUtils;
@@ -112,6 +113,7 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String formScopeDropdown = "//select[@id='form_scope']";
     public String bundlesList = "//div[@class='col-md-10 showBundleList']";
     public String tableRowsXpath = "//table[@id='%s']/tbody/tr";
+    public String lastSessionDescArrow = "//th[@aria-label='Last Session Date: activate to sort column ascending']";
 
 
     public void clickOnAssignmentView(String tableId, String userName) {
@@ -232,23 +234,6 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
     }
 
-    public void clickOnAssignmentView(String tableId, String userName) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user: " + nameCell.getText());
-
-                WebElement viewButton = row.findElement(By.xpath(".//button[normalize-space()='View']"));
-                viewButton.click();
-
-                break;
-            }
-        }
-
-    }
 
     public String clickOnObservationLink(String assignName) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='detailsAssignmentsTable']/tbody/tr"));
@@ -275,27 +260,5 @@ public class PurchaseLevelAccountPage extends BasePage{
         return name;
     }
 
-    public static String getClipboardText() {
-        try {
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
-            Clipboard clipboard = toolkit.getSystemClipboard();
-            return (String) clipboard.getData(DataFlavor.stringFlavor);
-        } catch (UnsupportedFlavorException | IOException e) {
-            System.out.println("Clipboard access failed: " + e.getMessage());
-            return null;
-        }
-    }
-
-
-    public void openNewTabWithURL(String url) {
-        ((JavascriptExecutor) driver).executeScript("window.open()");
-
-        // Switch to the new tab
-        for (String tab : driver.getWindowHandles()) {
-            driver.switchTo().window(tab);
-        }
-        // Open the given URL in the new tab
-        driver.get(url);
-    }
 
 }
