@@ -1,6 +1,6 @@
 package pageObjects;
 
-import com.sun.media.sound.Toolkit;
+import java.awt.Toolkit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +12,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class PurchaseLevelAccountPage extends BasePage{
     CommonUtils commonUtils;
@@ -22,17 +23,17 @@ public class PurchaseLevelAccountPage extends BasePage{
     }
     public String userTypeDropdown = "//select[@id='roleFilter']";
     public String chooseFileButton = "//input[@name='csvfile']";
-    public String uploadCsvExcelButton = "//button[normalize-space()='upload_csv/excel']";
+    public String uploadCsvExcelButton = "//button[normalize-space()='Upload CSV/Excel']    ";
     public String uploadCsvButton = "//button[@name='submit1']";
     public String assignBundleButton = "//button[@id='assign_bundle_btn']";
     public String assigneeType = "//select[@id='assignment_type']";
     public String experienceAssigneeUploadDropdown = "//select[@id='observation_experience']";
     public String numberToAssignCompleteUploadButton = "//button[@id='complete_upload']";
     public String userUploadValidationMessage = "//h2[@class='swal2-title']";
-    public String userUploadOkButton = "//button[normalize-space()='ok']";
+    public String userUploadOkButton = "//button[normalize-space()='Ok']";
     public String accountLevelHeading = "//span[@id='header_label']";
     public String accountLevelCancelButton = "//a[@onclick='detectChanges()']";
-    public String newOrderButton = "//button[normalize-space()='new_order']";
+    public String newOrderButton = "//button[normalize-space()='New Order']";
     public String newPatientLink = "//a[@id='newPatientBtn']";
     public String firstNameNewOrderField = "//input[@id='first-name']";
     public String lastNameNewOrderField = "//input[@id='last-name']";
@@ -165,7 +166,6 @@ public class PurchaseLevelAccountPage extends BasePage{
     }
 
 
-
     public void openNewTabWithURL(String url) {
         ((JavascriptExecutor) driver).executeScript("window.open()");
 
@@ -232,24 +232,6 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
     }
 
-    public void clickOnAssignmentView(String tableId, String userName) {
-        List<WebElement> rows = driver.findElements(By.xpath("//table[@id='" + tableId + "']/tbody/tr"));
-
-        for (WebElement row : rows) {
-            WebElement nameCell = row.findElement(By.xpath("./td[2]"));
-
-            if (nameCell.getText().trim().equals(userName)) {
-                System.out.println("Found user: " + nameCell.getText());
-
-                WebElement viewButton = row.findElement(By.xpath(".//button[normalize-space()='View']"));
-                viewButton.click();
-
-                break;
-            }
-        }
-
-    }
-
     public String clickOnObservationLink(String assignName) {
         List<WebElement> rows = driver.findElements(By.xpath("//table[@id='detailsAssignmentsTable']/tbody/tr"));
         String name = "";
@@ -273,29 +255,6 @@ public class PurchaseLevelAccountPage extends BasePage{
 
         System.out.println("No matching record found with status 'Not Started'");
         return name;
-    }
-
-    public static String getClipboardText() {
-        try {
-            Toolkit toolkit = Toolkit.getDefaultToolkit();
-            Clipboard clipboard = toolkit.getSystemClipboard();
-            return (String) clipboard.getData(DataFlavor.stringFlavor);
-        } catch (UnsupportedFlavorException | IOException e) {
-            System.out.println("Clipboard access failed: " + e.getMessage());
-            return null;
-        }
-    }
-
-
-    public void openNewTabWithURL(String url) {
-        ((JavascriptExecutor) driver).executeScript("window.open()");
-
-        // Switch to the new tab
-        for (String tab : driver.getWindowHandles()) {
-            driver.switchTo().window(tab);
-        }
-        // Open the given URL in the new tab
-        driver.get(url);
     }
 
 }

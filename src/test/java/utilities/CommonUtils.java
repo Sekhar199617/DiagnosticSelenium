@@ -491,4 +491,13 @@ public class CommonUtils extends BaseClass {
         }
     }
 
+    public void selectRandomDropDown(List<WebElement> element) {
+        Random random = new Random();
+        int randomIndex = random.nextInt(element.size());
+
+        WebElement selectDropdown = element.get(randomIndex);
+        waitForElementToBeVisible(selectDropdown, 5);
+        selectDropdown.click();
+    }
+
 }

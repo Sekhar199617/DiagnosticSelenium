@@ -54,7 +54,7 @@ public class PurchaserEditUpdateBillingDetailsTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.editSettingButton),null);
 
             //Edit or Update Details
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.billingContactDropdown),p.getProperty("purchaserBillingContactType"));
+            commonUtils.selectRandomDropDown(commonUtils.findElementsByXpath(ob.billingContactDropdown));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.billingCountryDropdown),p.getProperty("purchaserBillingCountryDropdown"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingAddress1Field),p.getProperty("purchaserBillingAddress1"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingAddress2Field),p.getProperty("purchaserBillingAddress2"));

@@ -54,7 +54,8 @@ public class AccountDetailsCreateGroupTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.uploadButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.reviewMembersButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.okButton),null);
-                       commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.saveGroupButton),null);
+            commonUtils.scrollToBottom();
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.saveGroupButton),null);
             commonUtils.validateGetText(commonUtils.findElementByXpath(gp.successfulMessage),p.getProperty("createdSuccessfullyMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.successfulOkButton),null);
 
