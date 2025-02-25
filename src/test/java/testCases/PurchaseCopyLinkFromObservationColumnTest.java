@@ -50,12 +50,13 @@ public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
             driver.switchTo().window(tabs.get(1));
 
             dp.selectHamburgerTab("Assignments");
-           // ob.selectHamburgerTab("Assignments");
-            ob.clickOnAssignmentView("assignmentsTable",p.getProperty("purchaserAssignmentNameToClickView"));
+
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.lastSessionDescArrow),null);
+            ob.clickOnAssignmentView("assignmentsTable",p.getProperty("purchaserAssignmentNameToView"));
             Thread.sleep(2000);
 
             //Copy observation link
-            ob.clickOnFormsLink("detailsAssignmentsTable",p.getProperty("purchaserAssignmentNameToClickView"));
+            ob.clickOnFormsLink("detailsAssignmentsTable",p.getProperty("purchaserAssignmentNameToView"));
             String copiedURL = ob.getClipboardText();
 
             commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("observationLinkCopyValidationMessage"));
@@ -65,7 +66,7 @@ public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
 
             WebElement welcomeHeader = commonUtils.findElementByXpath(ob.welcomeTextMessage);
             String actualText = welcomeHeader.getText();
-            String firstName = p.getProperty("purchaserAssignmentNameToClickView").split(" ")[0];
+            String firstName = p.getProperty("purchaserAssignmentNameToView").split(" ")[0];
 
             // Construct the expected text dynamically
             String expectedText = "Welcome Back, " + firstName;
