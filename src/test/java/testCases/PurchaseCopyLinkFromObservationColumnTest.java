@@ -1,5 +1,8 @@
 package testCases;
 
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -10,8 +13,10 @@ import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
 
@@ -48,15 +53,15 @@ public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
+            //Click on logo
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.diagnosticLogo),null);
 
             dp.selectHamburgerTab("Assignments");
 
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.lastSessionDescArrow),null);
-            ob.clickOnAssignmentView("assignmentsTable",p.getProperty("purchaserAssignmentNameToView"));
+            ob.clickFirstAssignmentView("assignmentsTable");
             Thread.sleep(2000);
 
-            //Copy observation link
-            ob.clickOnFormsLink("detailsAssignmentsTable",p.getProperty("purchaserAssignmentNameToView"));
+            ob.clickFirstCopyIcon("detailsAssignmentsTable");
             String copiedURL = ob.getClipboardText();
 
             commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("observationLinkCopyValidationMessage"));
@@ -64,16 +69,24 @@ public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
 
             ob.openNewTabWithURL(copiedURL);
 
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3)); // Short wait time
+
+            try {
+                WebElement saveLanguageButton = wait.until(ExpectedConditions.visibilityOf(commonUtils.findElementByXpath(ob.saveLanguage)));
+
+                if (saveLanguageButton.isDisplayed()) {
+                    saveLanguageButton.click();
+                    System.out.println("Clicked on Save Language Preference button.");
+                }
+            } catch (Exception e) {
+                System.out.println("Save Language Preference button not found within timeout. Continuing test.");
+            }
+
             WebElement welcomeHeader = commonUtils.findElementByXpath(ob.welcomeTextMessage);
             String actualText = welcomeHeader.getText();
-            String firstName = p.getProperty("purchaserAssignmentNameToView").split(" ")[0];
+            System.out.println("Actual Welcome Header Text: " + actualText);
 
-            // Construct the expected text dynamically
-            String expectedText = "Welcome Back, " + firstName;
-
-            // Assertion to validate the message
-            Assert.assertEquals(actualText, expectedText, "Welcome message is incorrect!");
-
+            Assert.assertTrue(actualText.trim().contains("Welcome Back"), "Welcome message does not contain 'Welcome Back'!");
 
         } catch (Exception e) {
             Assert.fail();

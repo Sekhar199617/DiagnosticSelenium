@@ -46,6 +46,8 @@ public class PurchaserDismissShippingTaskTest extends BaseClass {
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
+            //Click on logo
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.diagnosticLogo),null);
 
             dp.selectHamburgerTab("Tasks");
 

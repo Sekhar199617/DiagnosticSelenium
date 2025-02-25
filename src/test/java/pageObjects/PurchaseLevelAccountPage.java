@@ -115,6 +115,7 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String bundlesList = "//div[@class='col-md-10 showBundleList']";
     public String tableRowsXpath = "//table[@id='%s']/tbody/tr";
     public String lastSessionDescArrow = "//th[@aria-label='Last Session Date: activate to sort column ascending']";
+    public String saveLanguage = "//button[@id='setLanguagePreference']";
 
 
     public void clickOnAssignmentView(String tableId, String userName) {
@@ -135,6 +136,39 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
 
     }
+
+    public void clickFirstAssignmentView(String tableId) {
+        List<WebElement> rows = commonUtils.findElementsByXpath(String.format(tableRowsXpath, tableId));
+
+        if (!rows.isEmpty()) {
+            WebElement firstRow = rows.get(0);  // Get the first row
+            WebElement viewButton = firstRow.findElement(By.xpath(".//button[normalize-space()='View']")); // Locate 'View' button within the row
+            viewButton.click();
+            System.out.println("Clicked on the first 'View' button.");
+        } else {
+            System.out.println("No rows found in the table.");
+        }
+    }
+
+    public String clickFirstCopyIcon(String tableId) {
+        List<WebElement> rows = commonUtils.findElementsByXpath(String.format(tableRowsXpath, tableId));
+
+        if (!rows.isEmpty()) {
+            WebElement firstRow = rows.get(0);  // Get the first row
+            WebElement valueCell = firstRow.findElement(By.xpath("./td[4]")); // Get the value in the fourth column
+            String formName = valueCell.getText().trim();
+
+            WebElement copyIcon = firstRow.findElement(By.xpath(".//td[@class='text-center']/ion-icon[@name='copy-outline']"));
+            copyIcon.click();
+
+            System.out.println("Clicked on the first 'Copy' icon.");
+            return formName;
+        } else {
+            System.out.println("No rows found in the table.");
+            return "";
+        }
+    }
+
 
     public static String getClipboardText() throws Exception {
         Toolkit toolkit = Toolkit.getDefaultToolkit();

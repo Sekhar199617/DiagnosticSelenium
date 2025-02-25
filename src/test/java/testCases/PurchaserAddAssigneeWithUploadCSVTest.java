@@ -36,17 +36,8 @@ public class PurchaserAddAssigneeWithUploadCSVTest extends BaseClass {
         commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
         //Select account admin in user type dropdown
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(au.userTypeDropdown),p.getProperty("usersUserTypeAccountAdmin"));
-
-            //Clicking on Assign Test in action dropdown for a account
-            au.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
             PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
-             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.userTypeDropdown),p.getProperty("usersUserTypeAccountAdmin"));
-           //  Thread.sleep(2000);
-
-            // Click on assign test for account name
-            pl.performTableAction("accountsTableUserRoles",p.getProperty("userAccountAdminName"),"Assign Tests",2 );
+            pl.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -62,11 +53,11 @@ public class PurchaserAddAssigneeWithUploadCSVTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.uploadCsvButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.assignBundleButton),null);
             //Select assign bundles from dropdown
-           // commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.assigneeType),p.getProperty("userUploadAssigneeType"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.assigneeType),p.getProperty("userUploadAssigneeType"));
 
             System.out.println("press");
             //Select Experience Type
-           // commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.experienceAssigneeUploadDropdown),p.getProperty("userUploadAssigneeExperience"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.experienceAssigneeUploadDropdown),p.getProperty("userUploadAssigneeExperience"));
             Thread.sleep(1000);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.numberToAssignCompleteUploadButton),null);
             commonUtils.validateGetText(commonUtils.findElementByXpath(pl.userUploadValidationMessage),p.getProperty("userAssigneeUploadValidationMessage"));
