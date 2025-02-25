@@ -41,6 +41,54 @@ public class ProductsAndBundlesPage extends BasePage {
     public String uploadBundleImage = "//button[normalize-space()='Upload']";
     public String uploadDragButton = "//button[@id='upload_images']";
     public String saveButton = "//button[@id='addProductForm']";
+    public String addProductButton = "//a[normalize-space()='Add Product']";
+    public String skuField = "product_sku"; //id
+    public String productNameField = "(//input[@id='name'])[2]";
+    public String typeDropdownField = "selectProductType"; //id
+    public String gdtProductPriceField = "product_price"; //id
+    public String accountProductPriceField = "own_account_product_price"; //id
+    public String productPurchaseRequiredCheckbox = "prod_purc_req"; //id
+    public String bulkShipmentAllowedCheckbox = "bulk_shipment"; //id
+    public String individualShipmentAllowedCheckbox = "indiv_shipment"; //id
+    public String educationReqWithTestPurchaseCheckbox = "obs_req_test_purc"; //id
+    public String educationAllowedWithTestPurchaseCheckbox = "obs_alw_test_purc"; //id
+    public String educationAllowedWithoutTestPurchaseCheckbox = "obs_alw_no_test_purc"; //id
+    public String productOptionsValidationText = "error_msg_prod"; //id
+    //Availability
+    public String setExclusionsButton = "button[id='openExclusionsBtn']"; //css
+    public String exclusionsSearchField = "input[id='geoSearchInput']";
+    public String countriesList = "[id='geoResults'] strong";
+    public String exclusionsSaveButton = "saveExclusionsBtn";//id
+    //Shipping Settings
+    public String returnToLabCheckbox = "return_to_lab"; //id
+    public String outboundShippingToAssigneeMaxTimeDropdown = "outbound_to_patient"; //id
+    public String inboundShippingToLabMaxTime = "inbound_time"; //id
+    public String vendorProductIdField = "vendor_product_id"; //id
+    //Product Details
+    public String collectionTypeDropdown = "collection_type"; //id
+    public String labNameDropdown = "support_entity_id_lab"; //id
+    public String warehouseNameDropdown = "support_entity_id"; //id
+    public String warehouseSkuField = "support_entity_sku"; //id
+    public String shippingWeightField = "weight"; //id
+    public String weightUnitDropdown = "weight_unit"; //id
+    public String yesChangeButton = "//button[contains(text(),'Yes, Change it!')]";
+    public String startingUnitsOnHandField = "starting_units_on_hand"; //id
+    public String reorderWhenBelowField = "reorder_when_below"; //id
+    //Supplier Information
+    public String kitNameField = "kit_name"; //id
+    public String kitSupplierSkuField = "kit_sku"; //id
+    public String kitCostPerUnitField = "kit_supplier_cost_per_unit"; //id
+    public String kitIncludedInShipmentDropdown = "kit_shipment"; //id
+    public String kitInboundShippingCostPaidByDropdown = "kit_inbound_shipment"; //id
+    public String supplierProductNameField = "product_name"; //id
+    public String productSupplierSkuField = "product_supplier_sku"; //id
+    public String productCostPerUnitField = "product_supplier_cost_per_unit"; //id
+    public String productIncludedInShipmentDropdown = "product_shipment"; //id
+    public String productInboundShippingCostPaidByDropdown = "product_inbound_shipment"; //id
+    public String activeCheckbox = "product_active"; //id
+    public String activeDropdown = "active_value"; //id
+    public String dateField = "datetimepicker-input"; //id
+    public String activeDropdownOptions = "select[id='active_value'] options"; //css
 
     public void selectMultipleRandomProducts(String tableId, int productCount) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -87,19 +135,7 @@ public class ProductsAndBundlesPage extends BasePage {
         }
     }
 
-    public String addProductButton = "//a[normalize-space()='Add Product']";
-    public String skuField = "product_sku"; //id
-    public String productNameField = "(//input[@id='name'])[2]";
-    public String typeDropdownField = "selectProductType"; //id
-    public String gdtProductPriceField = "product_price"; //id
-    public String accountProductPriceField = "own_account_product_price"; //id
-    public String productPurchaseRequiredCheckbox = "prod_purc_req"; //id
-    public String bulkShipmentAllowedCheckbox = "bulk_shipment"; //id
-    public String individualShipmentAllowedCheckbox = "indiv_shipment"; //id
-    public String educationReqWithTestPurchaseCheckbox = "obs_req_test_purc"; //id
-    public String educationAllowedWithTestPurchaseCheckbox = "obs_alw_test_purc"; //id
-    public String educationAllowedWithoutTestPurchaseCheckbox = "obs_alw_no_test_purc"; //id
-    public String productOptionsValidationText = "error_msg_prod"; //id
+
     public void scrollUntilNewContentLoads() {
         try {
             JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -111,11 +147,6 @@ public class ProductsAndBundlesPage extends BasePage {
 
                 long newHeight = (long) js.executeScript("return document.body.scrollHeight");
 
-    //Availability
-    public String setExclusionsButton = "button[id='openExclusionsBtn']"; //css
-    public String exclusionsSearchField = "input[id='geoSearchInput']";
-    public String countriesList = "[id='geoResults'] strong";
-    public String exclusionsSaveButton = "saveExclusionsBtn"; //id
                 // Stop scrolling if no new content is loaded
                 if (newHeight == lastHeight) {
                     break;
@@ -127,27 +158,14 @@ public class ProductsAndBundlesPage extends BasePage {
         }
     }
 
-    //Shipping Settings
-    public String returnToLabCheckbox = "return_to_lab"; //id
-    public String outboundShippingToAssigneeMaxTimeDropdown = "outbound_to_patient"; //id
-    public String inboundShippingToLabMaxTime = "inbound_time"; //id
-    public String vendorProductIdField = "vendor_product_id"; //id
+
     public void uploadImage() throws AWTException, InterruptedException {
         // Click on the "Upload" button to open the file dialog
         WebElement uploadButton = commonUtils.findElementByXpath(uploadDragButton);
         uploadButton.click();
         Thread.sleep(2000); // Wait for the dialog to open
 
-    //Product Details
-    public String collectionTypeDropdown = "collection_type"; //id
-    public String labNameDropdown = "support_entity_id_lab"; //id
-    public String warehouseNameDropdown = "support_entity_id"; //id
-    public String warehouseSkuField = "support_entity_sku"; //id
-    public String shippingWeightField = "weight"; //id
-    public String weightUnitDropdown = "weight_unit"; //id
-    public String yesChangeButton = "//button[contains(text(),'Yes, Change it!')]";
-    public String startingUnitsOnHandField = "starting_units_on_hand"; //id
-    public String reorderWhenBelowField = "reorder_when_below"; //id
+
         String imageFilePath = Paths.get("src/test/resources/backImage.png").toAbsolutePath().toString();
         System.out.println("Resolved file path: " + imageFilePath);
 
@@ -177,20 +195,5 @@ public class ProductsAndBundlesPage extends BasePage {
         Thread.sleep(2000);
     }
 
-    //Supplier Information
-    public String kitNameField = "kit_name"; //id
-    public String kitSupplierSkuField = "kit_sku"; //id
-    public String kitCostPerUnitField = "kit_supplier_cost_per_unit"; //id
-    public String kitIncludedInShipmentDropdown = "kit_shipment"; //id
-    public String kitInboundShippingCostPaidByDropdown = "kit_inbound_shipment"; //id
-    public String supplierProductNameField = "product_name"; //id
-    public String productSupplierSkuField = "product_supplier_sku"; //id
-    public String productCostPerUnitField = "product_supplier_cost_per_unit"; //id
-    public String productIncludedInShipmentDropdown = "product_shipment"; //id
-    public String productInboundShippingCostPaidByDropdown = "product_inbound_shipment"; //id
-    public String activeCheckbox = "product_active"; //id
-    public String activeDropdown = "active_value"; //id
-    public String dateField = "datetimepicker-input"; //id
-    public String activeDropdownOptions = "select[id='active_value'] options"; //css
-    public String saveButton = "addProductForm"; //id
+
 }
