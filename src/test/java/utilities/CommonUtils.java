@@ -6,11 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -152,6 +148,27 @@ public class CommonUtils extends BaseClass {
         waitForElementToBeVisible(element, 10);
     	Select dropdown = new Select(element);
     	dropdown.selectByVisibleText(text);
+    }
+
+    public void validateSelectedDropdownValue(List<WebElement> options, String expectedContactName) {
+
+        boolean isContactPresent = false;
+        boolean isContactSelected = false;
+
+        for (WebElement option : options) {
+            if (option.getText().trim().equals(expectedContactName)) {
+                isContactPresent = true;
+
+                // Check if the option is pre-selected
+                if (option.isSelected()) {
+                    isContactSelected = true;
+                    Assert.assertTrue(isContactSelected, "Option Selected By Default");
+                }
+
+                System.out.println("The contact '" + expectedContactName + "' is present in the dropdown.");
+                break;
+            }
+        }
     }
 
     public void validateRadioButton(WebElement element) {
