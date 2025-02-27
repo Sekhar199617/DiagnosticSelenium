@@ -6,5 +6,21 @@
   "billingCountry" : "United States",
   "billingCity" : "New York",
   "billingState" : "New York",
-  "billingUpdatedDialogueText" : "Account Details Updated"
+  "billingUpdatedDialogueText" : "Account Details Updated",
+
+  "****************************** ACCOUNT DETAILS - EVENT ********************************": "",
+  "editEventStartDate" : "15/05/2025",
+  "editEventEndDate" : "16/06/2025",
+  "editEventStartTiming" : "05:45",
+  "editEventEndTiming" : "19:15",
+  "editTestingWindowStartDate" : "26/05",
+  "editTestingWindowEndDate" : "15/06",
+  "editTestingWindowStartTiming" : "05:50",
+  "editTestingWindowEndTiming" : "09:25",
+  "eventCreatedMessage" : "Event Created",
+  "editSuccessfullyEventMessage" : "Event Updated",
+  "unsavedChangesMessage" : "There Are Unsaved Changes That will be Lost. Are You Sure?",
+  "deleteEventWarningMessage" : "Are You Sure You Want to Delete This Event?",
+  "deleteEventMessage" : "Event Deleted",
+  "createEventFormSuccessfulMessage" : "Successfully Created New Event-level Form for in Company Test 1"
 }
