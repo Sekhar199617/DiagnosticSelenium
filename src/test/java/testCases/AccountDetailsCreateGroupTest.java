@@ -13,6 +13,13 @@ import java.nio.file.Paths;
 
 public class AccountDetailsCreateGroupTest extends BaseClass {
 
+    public DashboardPage dp;
+    public CommonUtils commonUtils;
+    public AccountDetailsPage ad;
+    public AccountDetailsAddGroupPage gp;
+    public  String jsonPath;
+
+
     @Test(groups = { "Smoke" })
     public void verify_create_group() {
         try {
@@ -20,25 +27,25 @@ public class AccountDetailsCreateGroupTest extends BaseClass {
 
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
-            CommonUtils commonUtils = new CommonUtils(driver);
-            dp.searchForItem(p.getProperty("accountName"));
+            dp = new DashboardPage(driver);
+            commonUtils = new CommonUtils(driver);
+            ad = new AccountDetailsPage(driver);
+            gp = new AccountDetailsAddGroupPage(driver);
+            jsonPath = "./testData//accountDetailsData.json";
+            loadTestData(jsonPath);
+
+            dp.searchForItem(getTestData("accountName"));
             dp.clickView();
 
-            AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Groups");
-
-            AccountDetailsAddGroupPage gp = new AccountDetailsAddGroupPage(driver);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.addGroupButton), null);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(gp.groupNameField),randomString());
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(gp.orderingModeDropdown),p.getProperty("orderingModeDropdown"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(gp.selectLogImageDropdown),p.getProperty("selectLogImageDropdown"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(gp.discountModeDropdown),p.getProperty("discountModeDropdown"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(gp.bundlesAndExperienceDropdown),p.getProperty("bundlesAndExperienceDropdown"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(gp.orderingModeDropdown),getTestData("orderingModeDropdown"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(gp.selectLogImageDropdown),getTestData("selectLogImageDropdown"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(gp.discountModeDropdown),getTestData("discountModeDropdown"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(gp.bundlesAndExperienceDropdown),getTestData("bundlesAndExperienceDropdown"));
 
-            Thread.sleep(1000);
-
-            String communicationPreferencesType = p.getProperty("communicationPreferences");
+            String communicationPreferencesType = getTestData("communicationPreferences");
             if (communicationPreferencesType.equalsIgnoreCase("Immediately")) {
                 commonUtils.clickRadioButton(commonUtils.findElementByXpath(gp.immediateCommunicationPreferenceRadioButton));
             } else if (communicationPreferencesType.equalsIgnoreCase("Manually (Later)")) {
@@ -54,10 +61,8 @@ public class AccountDetailsCreateGroupTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.uploadButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.reviewMembersButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.okButton),null);
-            commonUtils.scrollToBottom();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.saveGroupButton),null);
-            commonUtils.validateGetText(commonUtils.findElementByXpath(gp.successfulMessage),p.getProperty("createdSuccessfullyMessage"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.successfulOkButton),null);
+            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(gp.successfulMessage),getTestData("createdSuccessfullyMessage"),commonUtils.findElementByXpath(gp.successfulOkButton));
 
             logger.info("****** Finished Create Group Test Case ******");
         } catch (Exception e) {

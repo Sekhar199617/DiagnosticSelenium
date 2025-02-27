@@ -48,7 +48,7 @@ public class AccountDetailsAddLocationTest extends BaseClass {
             WebElement stateElement = commonUtils.findElementByXpath(lp.stateInputField);
             WebElement cityDropdownElement = commonUtils.findElementByXpath(lp.cityDropdown);
             WebElement stateDropdownElement = commonUtils.findElementByXpath(lp.stateDropdown);
-            commonUtils.handleCityAndState(p.getProperty("locationCountry"), cityElement, stateElement, cityDropdownElement, stateDropdownElement, getTestData("newLocationCity"), getTestData("newLocationState"));
+            commonUtils.handleCityAndState(getTestData("newLocationCountry"), cityElement, stateElement, cityDropdownElement, stateDropdownElement, getTestData("newLocationCity"), getTestData("newLocationState"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(lp.mondayStartTimeDropdown),getTestData("mondayStartTime") );
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(lp.mondayEndTimeDropdown),getTestData("mondayEndTime"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(lp.toMFButton),null);
@@ -64,8 +64,7 @@ public class AccountDetailsAddLocationTest extends BaseClass {
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(lp.recurrenceScheduleMondayEndTime),getTestData("recurrenceScheduleMondayEndTime"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(lp.recurrenceScheduleMFButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(lp.submitLocation), null);
-            commonUtils.validateGetText(commonUtils.findElementByXpath(lp.successfulMessage), getTestData("newLocationSuccessfulMessage"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(lp.okButton), null);
+            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(lp.successfulMessage), getTestData("newLocationSuccessfulMessage"),commonUtils.findElementByXpath(lp.okButton));
 
         } catch (Exception e) {
             Assert.fail();

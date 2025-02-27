@@ -24,5 +24,29 @@
   "extraHoursPickup" : "3",
   "recurrenceScheduleMondayStartTime" : "08:00 AM",
   "recurrenceScheduleMondayEndTime" : "08:30 PM",
-  "newLocationSuccessfulMessage" : "Location added successfully"
+  "newLocationSuccessfulMessage" : "Location added successfully",
+
+  "****************************** ACCOUNT DETAILS - CREATE GROUP TEST ********************************": "",
+  "orderingModeDropdown" : "Employees Order Directly",
+  "selectLogImageDropdown" : "Account Default",
+  "discountModeDropdown" : "No Discount",
+  "bundlesAndExperienceDropdown" : "All Bundles and Experiences Available to Group",
+  "communicationPreferences" : "Manually (Later)",
+  "createdSuccessfullyMessage" : "Group Created Successfully",
+
+  "****************************** ACCOUNT DETAILS - CREATE INTAKE FORM TEST ********************************": "",
+
+  "formScopeAccount" : "Account",
+  "formEntityTypeAccount" : "Account Data",
+  "formTypeKiosk" : "Kiosk",
+  "selectLogoImage" : "None",
+  "successfulFormCreationMessage" : "Successfully Created New Account-level Form for Company Test 1",
+  "formEntityTypePatient" : "Patient Data",
+  "formTypeSelfRegistration" : "Self-Registration",
+  "bundleName" : "Advanced Heart Panel",
+  "availableFieldNamePatient1" : "Email",
+  "availableFieldNamePatient" : "Office Address, City, State, ZIP",
+  "availableFieldNameAccount" : "Account Name",
+  "consentFormSuccessfulMessageText" : "Consent Form Created",
+
 }
