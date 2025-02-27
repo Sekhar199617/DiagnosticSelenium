@@ -6,5 +6,23 @@
   "billingCountry" : "United States",
   "billingCity" : "New York",
   "billingState" : "New York",
-  "billingUpdatedDialogueText" : "Account Details Updated"
+  "billingUpdatedDialogueText" : "Account Details Updated",
+
+  "****************************** ACCOUNT DETAILS - ADD LOCATION TEST ********************************": "",
+  "accountName" : "Company Test 1",
+  "locationType" : "Urgent Care",
+  "newLocationAddress" : "Test Location",
+  "newLocationAddress2" : "Test Location2",
+  "newLocationCountry" : "United States",
+  "newLocationPostcode" : "400001",
+  "newLocationCity" : "Allen",
+  "newLocationState" : "Iowa",
+  "mondayStartTime" : "01:00 AM",
+  "mondayEndTime" : "06:30 PM",
+  "desiredInitialPickupDate" : "28/02/2025",
+  "getDesiredInitialPickupTime" : "10:45",
+  "extraHoursPickup" : "3",
+  "recurrenceScheduleMondayStartTime" : "08:00 AM",
+  "recurrenceScheduleMondayEndTime" : "08:30 PM",
+  "newLocationSuccessfulMessage" : "Location added successfully"
 }
