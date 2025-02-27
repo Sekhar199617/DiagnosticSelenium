@@ -12,6 +12,7 @@ public class AccountDetailsSettingsPage extends BasePage {
     }
 
     public String settingsTabsList = "//ul[@id='settingTabs']/li/a";
+    public String accountNameField = "acc_name"; //id
     public String activeCheckbox = "[name='activeAccount']"; //css
     public String demoAccountCheckbox = "[name='demoUser']"; //css
     public String editButton = "//button[@id='enable-edit-form']";
