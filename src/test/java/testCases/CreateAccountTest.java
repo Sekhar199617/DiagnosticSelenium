@@ -21,6 +21,7 @@ public class CreateAccountTest extends BaseClass {
 	public String newAccountName;
 	public DashboardPage dp;
 	public AccountDetailsAddFormsPage af;
+	public  String jsonPath;
 
 	@Test(groups = { "Smoke" }, priority = 1)
 	public void verify_Create_Account() {
@@ -32,6 +33,8 @@ public class CreateAccountTest extends BaseClass {
 			commonUtils = new CommonUtils(driver);
 			dp = new DashboardPage(driver);
 		    af = new AccountDetailsAddFormsPage(driver);
+			jsonPath = "./testData/adminAccountData/dashboardData.json";
+			loadTestData(jsonPath);
 
 			newAccountName = randomString();
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(createAccountPage.clickCreateAccount),null );
@@ -41,7 +44,7 @@ public class CreateAccountTest extends BaseClass {
 			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.phoneField),randomNumbers(10));
 
 			// Validate and select the account type based on the config file
-			String accountType = p.getProperty("accountType");
+			String accountType = getTestData("accountType");
 			if (accountType.equalsIgnoreCase("Individual")) {
 				commonUtils.clickRadioButton(commonUtils.findElementByXpath(createAccountPage.accountTypeIndividualRadioButton));
 			} else if (accountType.equalsIgnoreCase("Company")) {
@@ -52,17 +55,17 @@ public class CreateAccountTest extends BaseClass {
 			}
 
 			commonUtils.selectDropDownValue(commonUtils.findElementByXpath(createAccountPage.diagnosticMessagingSetDropdown),
-					p.getProperty("diagnosticMessagingSetDropdown"));
+					getTestData("diagnosticMessagingSetDropdown"));
 			commonUtils.selectDropDownValue(commonUtils.findElementByXpath(createAccountPage.defaultIntakeFormDropdown),
-					p.getProperty("defaultIntake"));
+					getTestData("defaultIntake"));
 			commonUtils.selectDropDownValue(commonUtils.findElementByXpath(createAccountPage.billingCountryDropdown),
-					p.getProperty("billingCountryName"));
+					getTestData("billingCountryName"));
 			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingAddress_1Field),
-					p.getProperty("billingAddress1"));
+					getTestData("billingAddress1"));
 			commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(createAccountPage.billingCityField));
-			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingCityField), p.getProperty("billingCity"));
-			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingStateField), p.getProperty("billingState"));
-			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingPostcodeField), p.getProperty("postCode"));
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingCityField), getTestData("billingCity"));
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingStateField), getTestData("billingState"));
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingPostcodeField), getTestData("postCode"));
 			commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(createAccountPage.saveNewAccount_button));
 
 			WebElement accountDetailsElement = commonUtils.findElementByXpath(createAccountPage.newAccountHeading);

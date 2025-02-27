@@ -17,6 +17,15 @@ import java.time.Duration;
 import java.util.List;
 
 public class SupportEntityVisibleToUserTest extends BaseClass {
+
+    public DashboardPage dp;
+    public CommonUtils commonUtils;
+    public EntityPage ep;
+    public AccountDetailsPage ad;
+    public AccountDetailsIntegrationPage ip;
+    public  String jsonPath;
+
+
     @Test
     public void verifySupportEntityVisibleToUser() {
 
@@ -24,9 +33,13 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
         try {
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
-            CommonUtils commonUtils = new CommonUtils(driver);
-            EntityPage ep = new EntityPage(driver);
+            dp = new DashboardPage(driver);
+            commonUtils = new CommonUtils(driver);
+            ep = new EntityPage(driver);
+            ad = new AccountDetailsPage(driver);
+            ip = new AccountDetailsIntegrationPage(driver);
+            jsonPath = "./testData/adminAccountData/dashboardData.json";
+            loadTestData(jsonPath);
 
             // Selecting entities from hamburger menu
             dp.selectHamburgerTab("Entities");
@@ -34,7 +47,7 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
             commonUtils.scrollToBottom();
 
             //Here passing name of entity and storing that entity type and clicking on edit option of that entity
-            ep.editSupportEntity(ep.supportEntityChart, p.getProperty("supportEntitiesName"), "Edit");
+            ep.editSupportEntity(ep.supportEntityChart, getTestData("supportEntitiesName"), "Edit");
 
             //In edit entity validating and clicking if the permit checkbox is ticked or not
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ep.AuthenticationTab), null);
@@ -42,20 +55,17 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
             commonUtils.validateAndClickCheckbox(ep.checkboxLocator);
             commonUtils.scrollToBottom();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ep.updateSupportEntityButton), null);
-            commonUtils.validateGetText(commonUtils.findElementByXpath(ep.supportEntityUpdateValidationMessage), p.getProperty("supportEntityUpdateValidationMessage"));
+            commonUtils.validateGetText(commonUtils.findElementByXpath(ep.supportEntityUpdateValidationMessage), getTestData("supportEntityUpdateValidationMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ep.supportEntityUpdatedOKbutton), null);
 
             //Clicking accounts tab in hamburger menu
             commonUtils.scrollToUp();
             dp.selectHamburgerTab("Accounts");
-            dp.searchForItem(p.getProperty("accountName"));
+            dp.searchForItem(getTestData("accountName"));
             dp.clickView();
 
             //Clicking on Integration tab of account details page
-            AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Integrations");
-
-            AccountDetailsIntegrationPage ip = new AccountDetailsIntegrationPage(driver);
 
             //Add new integration
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ip.newIntegrationButton), null);
@@ -64,7 +74,7 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ip.typesOfIntegrationDropdown),ep.entityVariableName);
 
             //Checking the Support Entities Name is visible or not in partner dropdown
-            ip.validateDropdownValue(ip.partnerDropdown, p.getProperty("supportEntitiesName"));
+            ip.validateDropdownValue(ip.partnerDropdown, getTestData("supportEntitiesName"));
 
         }catch(Exception e)
         {
