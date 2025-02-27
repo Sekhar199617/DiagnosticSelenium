@@ -32,15 +32,15 @@ public class PurchaserViewTheUserOfAccountLevelTest extends BaseClass {
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
-            //Select account admin in user type dropdown
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.userTypeDropdown),p.getProperty("usersUserTypeAccountAdmin"));
-
             //Clicking on Assign Test in action dropdown for a account
             pl.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
+
+            //Click on logo
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.diagnosticLogo),null);
 
             //Click on hamburger menu
             dp.selectHamburgerTab("Users");

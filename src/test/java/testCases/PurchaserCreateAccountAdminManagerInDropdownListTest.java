@@ -44,6 +44,8 @@ public class PurchaserCreateAccountAdminManagerInDropdownListTest  extends BaseC
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
+            //Click on logo
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.diagnosticLogo),null);
 
             //Click on setting in hamburger tab
             dp.selectHamburgerTab("Settings");

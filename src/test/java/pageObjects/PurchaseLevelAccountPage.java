@@ -1,5 +1,6 @@
 package pageObjects;
 
+import java.awt.Toolkit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -23,17 +24,17 @@ public class PurchaseLevelAccountPage extends BasePage{
     }
     public String userTypeDropdown = "//select[@id='roleFilter']";
     public String chooseFileButton = "//input[@name='csvfile']";
-    public String uploadCsvExcelButton = "//button[normalize-space()='upload_csv/excel']";
+    public String uploadCsvExcelButton = "//button[normalize-space()='Upload CSV/Excel']    ";
     public String uploadCsvButton = "//button[@name='submit1']";
     public String assignBundleButton = "//button[@id='assign_bundle_btn']";
     public String assigneeType = "//select[@id='assignment_type']";
     public String experienceAssigneeUploadDropdown = "//select[@id='observation_experience']";
     public String numberToAssignCompleteUploadButton = "//button[@id='complete_upload']";
     public String userUploadValidationMessage = "//h2[@class='swal2-title']";
-    public String userUploadOkButton = "//button[normalize-space()='ok']";
+    public String userUploadOkButton = "//button[normalize-space()='Ok']";
     public String accountLevelHeading = "//span[@id='header_label']";
     public String accountLevelCancelButton = "//a[@onclick='detectChanges()']";
-    public String newOrderButton = "//button[normalize-space()='new_order']";
+    public String newOrderButton = "//button[normalize-space()='New Order']";
     public String newPatientLink = "//a[@id='newPatientBtn']";
     public String firstNameNewOrderField = "//input[@id='first-name']";
     public String lastNameNewOrderField = "//input[@id='last-name']";
@@ -114,6 +115,10 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String bundlesList = "//div[@class='col-md-10 showBundleList']";
     public String tableRowsXpath = "//table[@id='%s']/tbody/tr";
     public String lastSessionDescArrow = "//th[@aria-label='Last Session Date: activate to sort column ascending']";
+    public String saveLanguage = "//button[@id='setLanguagePreference']";
+    public String actionDropdownView = ".//button[normalize-space()='View']";
+    public String tableCopyIcon = ".//td[@class='text-center']/ion-icon[@name='copy-outline']";
+    public String taskDismissed = "(//h2[normalize-space()='Task Dismissed Successfully'])[1]";
 
 
     public void clickOnAssignmentView(String tableId, String userName) {
@@ -126,7 +131,7 @@ public class PurchaseLevelAccountPage extends BasePage{
             if (nameCell.getText().trim().equals(userName)) {
                 System.out.println("Found user: " + nameCell.getText());
 
-                WebElement viewButton = row.findElement(By.xpath("//button[normalize-space()='View']"));
+                WebElement viewButton = row.findElement(By.xpath(actionDropdownView));
                 viewButton.click();
 
                 break;
@@ -134,6 +139,39 @@ public class PurchaseLevelAccountPage extends BasePage{
         }
 
     }
+
+    public void clickFirstAssignmentView(String tableId) {
+        List<WebElement> rows = commonUtils.findElementsByXpath(String.format(tableRowsXpath, tableId));
+
+        if (!rows.isEmpty()) {
+            WebElement firstRow = rows.get(0);  // Get the first row
+            WebElement viewButton = firstRow.findElement(By.xpath(actionDropdownView)); // Locate 'View' button within the row
+            viewButton.click();
+            System.out.println("Clicked on the first 'View' button.");
+        } else {
+            System.out.println("No rows found in the table.");
+        }
+    }
+
+    public String clickFirstCopyIcon(String tableId) {
+        List<WebElement> rows = commonUtils.findElementsByXpath(String.format(tableRowsXpath, tableId));
+
+        if (!rows.isEmpty()) {
+            WebElement firstRow = rows.get(0);  // Get the first row
+            WebElement valueCell = firstRow.findElement(By.xpath("./td[4]")); // Get the value in the fourth column
+            String formName = valueCell.getText().trim();
+
+            WebElement copyIcon = firstRow.findElement(By.xpath(tableCopyIcon));
+            copyIcon.click();
+
+            System.out.println("Clicked on the first 'Copy' icon.");
+            return formName;
+        } else {
+            System.out.println("No rows found in the table.");
+            return "";
+        }
+    }
+
 
     public static String getClipboardText() throws Exception {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -155,7 +193,7 @@ public class PurchaseLevelAccountPage extends BasePage{
                 WebElement valueCell = row.findElement(By.xpath("./td[4]"));
                  formName = valueCell.getText().trim();
 
-                WebElement copyIcon = row.findElement(By.xpath("//td[@class='text-center']/ion-icon[@name='copy-outline']"));
+                WebElement copyIcon = row.findElement(By.xpath(tableCopyIcon));
                 copyIcon.click();
 
                 return formName;
@@ -165,7 +203,6 @@ public class PurchaseLevelAccountPage extends BasePage{
         System.out.println(formName);
         return formName;
     }
-
 
 
     public void openNewTabWithURL(String url) {

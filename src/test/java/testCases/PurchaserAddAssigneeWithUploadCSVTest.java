@@ -36,20 +36,15 @@ public class PurchaserAddAssigneeWithUploadCSVTest extends BaseClass {
         commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
         //Select account admin in user type dropdown
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
-        commonUtils.selectDropDownValue(commonUtils.findElementByXpath(au.userTypeDropdown),p.getProperty("usersUserTypeAccountAdmin"));
-
-            //Clicking on Assign Test in action dropdown for a account
-            au.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests");
             PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
-        commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.userTypeDropdown),p.getProperty("usersUserTypeAccountAdmin"));
-
-        // Click on assign test for account name
-            pl.performTableAction("accountsTableUserRoles",p.getProperty("userAccountAdminName"),"Assign Tests",1 );
+            pl.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
             driver.switchTo().window(tabs.get(1));
+
+            //Click on logo
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.diagnosticLogo),null);
             //Click on upload csv excel button
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.uploadCsvExcelButton),null);
             WebElement fileUploadElement = commonUtils.findElementByXpath(pl.chooseFileButton);
@@ -70,6 +65,6 @@ public class PurchaserAddAssigneeWithUploadCSVTest extends BaseClass {
     {
         Assert.fail();
     }
-		logger.info("****** Finished Add Assignee With Upload CSVr Test ******");
+		logger.info("****** Finished Add Assignee With Upload CSV Test ******");
 }
 }
