@@ -27,7 +27,7 @@ public class AccountDetailsAddEventTest extends BaseClass {
     public String eventFormName;
 
     @BeforeMethod (groups = {"Smoke"})
-    public void event_common_step(){
+    public void eventCommonStep(){
 
         login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
@@ -47,7 +47,7 @@ public class AccountDetailsAddEventTest extends BaseClass {
     }
 
     @Test(groups = { "Smoke" }, priority = 1)
-    public void verify_add_event() {
+    public void verifyAddEvent() {
         try {
             logger.info("****** Starting Add Event Test Case ******");
             eventName = randomString();
@@ -55,14 +55,14 @@ public class AccountDetailsAddEventTest extends BaseClass {
             // Fill Event Details
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addEventTagsPage.addEventButton), null);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventNameTagField), eventName );
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventStartDateCalender), p.getProperty("eventStartDate"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventEndDateCalender), p.getProperty("eventEndDate") );
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventStartTime), p.getProperty("eventStartTiming") );
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventEndTime), p.getProperty("eventEndTiming") );
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.testingWindowStartDateCalender), p.getProperty("testingWindowStartDate") );
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.testingWindowEndDateCalender), p.getProperty("testingWindowEndDate"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.testingWindowStartTime), p.getProperty("testingWindowStartTiming") );
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.testingWindowEndTime), p.getProperty("testingWindowEndTiming") );
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventStartDateCalender), getTestData("eventStartDate"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventEndDateCalender), getTestData("eventEndDate") );
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventStartTime), getTestData("eventStartTiming") );
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventEndTime), getTestData("eventEndTiming") );
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.testingWindowStartDateCalender), getTestData("testingWindowStartDate") );
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.testingWindowEndDateCalender), getTestData("testingWindowEndDate"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.testingWindowStartTime), getTestData("testingWindowStartTiming") );
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.testingWindowEndTime), getTestData("testingWindowEndTiming") );
             commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(addEventTagsPage.saveButton));
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(pl.successfulConfirmationMessage),getTestData("eventCreatedMessage"),commonUtils.findElementByXpath(pl.successfulConfirmationOkButton));
 
@@ -74,9 +74,9 @@ public class AccountDetailsAddEventTest extends BaseClass {
     }
 
     @Test (groups = {"Smoke"}, priority = 3)
-    public void verify_Edit_Event() throws InterruptedException {
+    public void verifyEditEvent() throws InterruptedException {
         try {
-            logger.info("****** Starting Edit Event Test Case ******");
+            logger.info("****** Starting Edit And Delete Event Test Case ******");
 
             pl.performTableAction("accountsTable", eventName, "Edit",1);
             loadTestData(jsonPath);
@@ -116,11 +116,11 @@ public class AccountDetailsAddEventTest extends BaseClass {
         } catch (Exception e) {
             Assert.fail();
         }
-        logger.info("****** Finished Edit Event Test Case ******");
+        logger.info("****** Finished Edit And Delete Event Test Case ******");
     }
 
     @Test (groups = {"Smoke"}, priority = 2)
-    public void verify_Add_Edit_Form() throws InterruptedException {
+    public void verifyAddEditForm() throws InterruptedException {
         try{
             logger.info("****** Starting Add Edit Form Test Case ******");
 
@@ -131,15 +131,17 @@ public class AccountDetailsAddEventTest extends BaseClass {
             //Add form
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addEventTagsPage.addFormButton),null);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formNameField), eventFormName);
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypeAccount"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formTypeDropdown), p.getProperty("formTypeKiosk"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), getTestData("formEntityTypeAccount"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formTypeDropdown), getTestData("formTypeKiosk"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formDescriptionField), randomString());
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.selectLogoImageDropdown), p.getProperty("selectLogoImage"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.selectLogoImageDropdown), getTestData("selectLogoImage"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formInstructionField), randomString());
             commonUtils.scrollToBottom();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.addAccountFormFieldButton), null);
             commonUtils.scrollToBottom();
-            commonUtils.selectDynamicField(p.getProperty("availableFieldNameAccount"), addFormsPage.availableFieldAccount);
+            System.out.println("Test");
+            commonUtils.selectDynamicField(getTestData("availableFieldNameAccount"), addFormsPage.availableFieldAccount);
+            System.out.println("Test2");
             commonUtils.clickSelectButton(addFormsPage.availableFieldSelectButton);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.field1InstructionField), randomString());
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addFormsPage.saveField1Button), null);
