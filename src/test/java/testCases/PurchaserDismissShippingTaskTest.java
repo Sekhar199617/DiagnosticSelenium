@@ -1,15 +1,21 @@
 package testCases;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.testng.AssertJUnit;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
+import pageObjects.AccountDetailsSettingsPage;
 import pageObjects.DashboardPage;
 import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +40,7 @@ public class PurchaserDismissShippingTaskTest extends BaseClass {
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             ob = new PurchaseLevelAccountPage(driver);
+            AccountDetailsSettingsPage as = new AccountDetailsSettingsPage(driver);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
@@ -48,20 +55,23 @@ public class PurchaserDismissShippingTaskTest extends BaseClass {
             driver.switchTo().window(tabs.get(1));
             //Click on logo
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.diagnosticLogo),null);
-
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
             dp.selectHamburgerTab("Tasks");
 
             //Validate and click on shipping task Radio Button
             commonUtils.validateAndClickRadiobutton(ob.shippingTaskRadioButton);
+
             ob.performTableAction("purchaseUsersTable",p.getProperty("purchaserShippingTaskDismissAccountName"),"Dismiss",2);
 
+            wait.until(ExpectedConditions.visibilityOf(commonUtils.findElementByXpath(as.successfulMessage)));
             //Confirmation Popup
-            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("purchaserDismissShippingTaskMessage"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
-            Thread.sleep(1000);
+            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(as.successfulMessage),p.getProperty("purchaserDismissShippingTaskMessage"),commonUtils.findElementByXpath(ob.userUploadOkButton));
+
             //Validation Popup
-            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("purchaserTaskDismissedValidationMessage"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ob.taskDismissed)));
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ob.userUploadOkButton)));
+            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(ob.taskDismissed),p.getProperty("purchaserTaskDismissedValidationMessage"),commonUtils.findElementByXpath(ob.userUploadOkButton));
 
         } catch (Exception e) {
             Assert.fail();

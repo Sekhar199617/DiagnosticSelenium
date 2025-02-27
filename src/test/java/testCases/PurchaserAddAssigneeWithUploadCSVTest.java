@@ -54,8 +54,6 @@ public class PurchaserAddAssigneeWithUploadCSVTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.assignBundleButton),null);
             //Select assign bundles from dropdown
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.assigneeType),p.getProperty("userUploadAssigneeType"));
-
-            System.out.println("press");
             //Select Experience Type
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(pl.experienceAssigneeUploadDropdown),p.getProperty("userUploadAssigneeExperience"));
             Thread.sleep(1000);

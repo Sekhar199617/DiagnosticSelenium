@@ -116,6 +116,9 @@ public class PurchaseLevelAccountPage extends BasePage{
     public String tableRowsXpath = "//table[@id='%s']/tbody/tr";
     public String lastSessionDescArrow = "//th[@aria-label='Last Session Date: activate to sort column ascending']";
     public String saveLanguage = "//button[@id='setLanguagePreference']";
+    public String actionDropdownView = ".//button[normalize-space()='View']";
+    public String tableCopyIcon = ".//td[@class='text-center']/ion-icon[@name='copy-outline']";
+    public String taskDismissed = "(//h2[normalize-space()='Task Dismissed Successfully'])[1]";
 
 
     public void clickOnAssignmentView(String tableId, String userName) {
@@ -128,7 +131,7 @@ public class PurchaseLevelAccountPage extends BasePage{
             if (nameCell.getText().trim().equals(userName)) {
                 System.out.println("Found user: " + nameCell.getText());
 
-                WebElement viewButton = row.findElement(By.xpath("//button[normalize-space()='View']"));
+                WebElement viewButton = row.findElement(By.xpath(actionDropdownView));
                 viewButton.click();
 
                 break;
@@ -142,7 +145,7 @@ public class PurchaseLevelAccountPage extends BasePage{
 
         if (!rows.isEmpty()) {
             WebElement firstRow = rows.get(0);  // Get the first row
-            WebElement viewButton = firstRow.findElement(By.xpath(".//button[normalize-space()='View']")); // Locate 'View' button within the row
+            WebElement viewButton = firstRow.findElement(By.xpath(actionDropdownView)); // Locate 'View' button within the row
             viewButton.click();
             System.out.println("Clicked on the first 'View' button.");
         } else {
@@ -158,7 +161,7 @@ public class PurchaseLevelAccountPage extends BasePage{
             WebElement valueCell = firstRow.findElement(By.xpath("./td[4]")); // Get the value in the fourth column
             String formName = valueCell.getText().trim();
 
-            WebElement copyIcon = firstRow.findElement(By.xpath(".//td[@class='text-center']/ion-icon[@name='copy-outline']"));
+            WebElement copyIcon = firstRow.findElement(By.xpath(tableCopyIcon));
             copyIcon.click();
 
             System.out.println("Clicked on the first 'Copy' icon.");
@@ -190,7 +193,7 @@ public class PurchaseLevelAccountPage extends BasePage{
                 WebElement valueCell = row.findElement(By.xpath("./td[4]"));
                  formName = valueCell.getText().trim();
 
-                WebElement copyIcon = row.findElement(By.xpath("//td[@class='text-center']/ion-icon[@name='copy-outline']"));
+                WebElement copyIcon = row.findElement(By.xpath(tableCopyIcon));
                 copyIcon.click();
 
                 return formName;
