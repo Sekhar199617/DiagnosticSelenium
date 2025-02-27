@@ -1,0 +1,22 @@
+{
+  "****************************** SETTINGS - BILLING ********************************": "",
+  "mobileCountryCode" : "India (\u092D\u093E\u0930\u0924)",
+  "defaultTimeZone" : "(UTC+530) Asia/Kolkata",
+  "billingDialogueText" : "New User Added",
+  "billingCountry" : "United States",
+  "billingCity" : "New York",
+  "billingState" : "New York",
+  "billingUpdatedDialogueText" : "Account Details Updated",
+
+  "****************************** ACCOUNT DETAILS - ADD INTEGRATION TEST ********************************": "",
+  "accountName" : "Company Test 1",
+  "integrationType" : "SAML2",
+  "samlSsoUrlAddIntegration" : "https://development.diagnostic.ly/admin/global_dashboard.php",
+  "singleSignOnUrlAddIntegration" : "https://development.diagnostic.ly/admin/global_dashboard.php",
+  "singleSignOutUrlAddIntegration" : "https://development.diagnostic.ly/admin/global_dashboard.php",
+  "remoteLogoutUrlAddIntegration" : "https://development.diagnostic.ly/admin/global_dashboard.php",
+  "certificateFingerprintAddIntegration" : "test121212",
+  "iPRangesAddIntegration" : "1212121212",
+  "integrationSuccessfulMessage" : "Integration Added"
+
+}
