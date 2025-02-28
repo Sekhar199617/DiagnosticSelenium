@@ -30,7 +30,11 @@ public class PurchaserCreateAccountAdminManagerInDropdownListTest  extends BaseC
             ad = new AccountDetailsPage(driver);
             ob = new PurchaseLevelAccountPage(driver);
 
-            loadTestDataForTest();
+            loadTestData(
+                    "./testData/accountDetailsData.json",
+                    "./testData/purchaserAccountData/purchaser.json"
+            );
+
             dp.searchForItem(getTestData("accountName"));
             dp.clickView();
 
@@ -73,12 +77,5 @@ public class PurchaserCreateAccountAdminManagerInDropdownListTest  extends BaseC
         logger.info("****** Finished Purchaser Create Account Admin Manager In Dropdown List Test ******");
     }
 
-    public void loadTestDataForTest() {
-        List<String> jsonFiles = Arrays.asList(
-                "./testData/accountDetailsData.json",
-                "./testData/purchaserAccountData/purchaser.json"
-        );
 
-        testData = commonUtils.mergeMultipleJsonFiles(jsonFiles);
-    }
 }

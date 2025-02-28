@@ -520,29 +520,4 @@ public class CommonUtils extends BaseClass {
         selectDropdown.click();
     }
 
-    public JSONObject mergeMultipleJsonFiles(List<String> jsonFiles) {
-        JSONObject mergedTestData = new JSONObject();
-
-        for (String jsonPath : jsonFiles) {
-            try {
-                JSONParser parser = new JSONParser();
-                FileReader reader = new FileReader(jsonPath);
-                JSONObject newData = (JSONObject) parser.parse(reader);
-                reader.close();
-
-                // Merge new data into mergedTestData without overwriting
-                for (Object key : newData.keySet()) {
-                    if (!mergedTestData.containsKey(key)) {
-                        mergedTestData.put(key, newData.get(key));
-                    }
-                }
-
-            } catch (Exception e) {
-                System.out.println("❌ Error reading JSON file: " + jsonPath);
-                e.printStackTrace();
-            }
-        }
-        return mergedTestData; // ✅ Return the merged JSON data
-    }
-
 }

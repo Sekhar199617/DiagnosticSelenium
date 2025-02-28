@@ -41,7 +41,10 @@ public class PurchaserDismissShippingTaskTest extends BaseClass {
             ad = new AccountDetailsPage(driver);
             ob = new PurchaseLevelAccountPage(driver);
             as = new AccountDetailsSettingsPage(driver);
-            loadTestDataForTest();
+            loadTestData(
+                    "./testData/accountDetailsData.json",
+                    "./testData/purchaserAccountData/purchaser.json"
+            );
 
             dp.searchForItem(getTestData("accountName"));
             dp.clickView();
@@ -82,14 +85,5 @@ public class PurchaserDismissShippingTaskTest extends BaseClass {
         }
 
         logger.info("****** Finished Purchaser Dismiss Shipping Task Test ******");
-    }
-
-    public void loadTestDataForTest() {
-        List<String> jsonFiles = Arrays.asList(
-                "./testData/accountDetailsData.json",
-                "./testData/purchaserAccountData/purchaser.json"
-        );
-
-        testData = commonUtils.mergeMultipleJsonFiles(jsonFiles);
     }
 }

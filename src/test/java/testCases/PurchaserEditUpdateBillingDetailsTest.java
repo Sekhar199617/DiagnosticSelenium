@@ -29,7 +29,9 @@ public class PurchaserEditUpdateBillingDetailsTest extends BaseClass {
             commonUtils = new CommonUtils(driver);
             ad = new AccountDetailsPage(driver);
             ob = new PurchaseLevelAccountPage(driver);
-            loadTestDataForTest();
+
+            loadTestData("./testData/accountDetailsData.json",
+                    "./testData/purchaserAccountData/purchaser.json");
 
             dp.searchForItem(getTestData("accountName"));
             dp.clickView();
@@ -76,15 +78,6 @@ public class PurchaserEditUpdateBillingDetailsTest extends BaseClass {
         }
 
         logger.info("****** Finished Purchaser Edit Update Billing Details Test ******");
-    }
-
-    public void loadTestDataForTest() {
-        List<String> jsonFiles = Arrays.asList(
-                "./testData/accountDetailsData.json",
-                "./testData/purchaserAccountData/purchaser.json"
-        );
-
-        testData = commonUtils.mergeMultipleJsonFiles(jsonFiles);
     }
 
 }
