@@ -17,12 +17,16 @@ import utilities.CommonUtils;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PurchaserDismissShippingTaskTest extends BaseClass {
 
     public CommonUtils commonUtils;
     public PurchaseLevelAccountPage ob;
+    public DashboardPage dp;
+    public AccountDetailsPage ad;
+    public AccountDetailsSettingsPage as;
 
     @Test(groups = {"Smoke"})
     public void VerifyPurchaserDismissShippingTaskTest() {
@@ -32,23 +36,26 @@ public class PurchaserDismissShippingTaskTest extends BaseClass {
 
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
-
+            dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
-            dp.searchForItem(p.getProperty("accountName"));
-            dp.clickView();
-
-            AccountDetailsPage ad = new AccountDetailsPage(driver);
+            ad = new AccountDetailsPage(driver);
             ob = new PurchaseLevelAccountPage(driver);
-            AccountDetailsSettingsPage as = new AccountDetailsSettingsPage(driver);
+            as = new AccountDetailsSettingsPage(driver);
+            loadTestData(
+                    "./testData/accountDetailsData.json",
+                    "./testData/purchaserAccountData/purchaser.json"
+            );
+
+            dp.searchForItem(getTestData("accountName"));
+            dp.clickView();
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
             //Select account admin in user type dropdown
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), p.getProperty("usersUserTypeAccountAdmin"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), getTestData("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            ob.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
+            ob.performTableAction("accountsTableUserRoles", getTestData("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -61,22 +68,21 @@ public class PurchaserDismissShippingTaskTest extends BaseClass {
             //Validate and click on shipping task Radio Button
             commonUtils.validateAndClickRadiobutton(ob.shippingTaskRadioButton);
 
-            ob.performTableAction("purchaseUsersTable",p.getProperty("purchaserShippingTaskDismissAccountName"),"Dismiss",2);
+            ob.performTableAction("purchaseUsersTable",getTestData("purchaserShippingTaskDismissAccountName"),"Dismiss",2);
 
             wait.until(ExpectedConditions.visibilityOf(commonUtils.findElementByXpath(as.successfulMessage)));
             //Confirmation Popup
-            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(as.successfulMessage),p.getProperty("purchaserDismissShippingTaskMessage"),commonUtils.findElementByXpath(ob.userUploadOkButton));
+            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(as.successfulMessage),getTestData("purchaserDismissShippingTaskMessage"),commonUtils.findElementByXpath(ob.userUploadOkButton));
 
             //Validation Popup
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ob.taskDismissed)));
 
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ob.userUploadOkButton)));
-            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(ob.taskDismissed),p.getProperty("purchaserTaskDismissedValidationMessage"),commonUtils.findElementByXpath(ob.userUploadOkButton));
+            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(ob.taskDismissed),getTestData("purchaserTaskDismissedValidationMessage"),commonUtils.findElementByXpath(ob.userUploadOkButton));
 
         } catch (Exception e) {
             Assert.fail();
         }
-
 
         logger.info("****** Finished Purchaser Dismiss Shipping Task Test ******");
     }

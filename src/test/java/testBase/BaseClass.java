@@ -37,7 +37,7 @@ public class BaseClass {
     public Logger logger;
     public Properties p;
 	public CommonUtils commonUtils;
-	private JSONObject testData;
+	public JSONObject testData;
 
     @BeforeClass(groups = {"Smoke"})
     @Parameters({"os", "browser", "headless"})
@@ -140,22 +140,45 @@ public class BaseClass {
 	    FileUtils.copyFile(sourceFile, targetFile);
 	    return targetFilePath;
 	}
-	
-	public void loadTestData(String jsonPath) {
-        try {
-            JSONParser parser = new JSONParser();
-            FileReader reader = new FileReader(jsonPath);
-            Object obj = parser.parse(reader);
-            testData = (JSONObject) obj;
-        } catch (Exception e) {
-            logger.error("Error reading the test data JSON file: " + e.getMessage());
+
+    public String getTestData(String key) {
+        if (testData != null) {
+            return (String) testData.get(key);
+        } else {
+            logger.error("Test data is null");
+            return null;
         }
     }
 
-    // Method to get data from the JSON file by key
-    public String getTestData(String key) {
-        return (String) testData.get(key);
+    public void loadTestData(String... jsonPaths) {
+        testData = mergeMultipleJsonFiles(jsonPaths);
     }
+
+
+    public JSONObject mergeMultipleJsonFiles(String... jsonPaths) {
+        JSONObject mergedTestData = new JSONObject();
+
+        for (String jsonPath : jsonPaths) {
+            try {
+                JSONParser parser = new JSONParser();
+                FileReader reader = new FileReader(jsonPath);
+                JSONObject newData = (JSONObject) parser.parse(reader);
+                reader.close();
+
+                // Merge new data into mergedTestData without overwriting
+                for (Object key : newData.keySet()) {
+                    if (!mergedTestData.containsKey(key)) {
+                        mergedTestData.put(key, newData.get(key));
+                    }
+                }
+
+            } catch (Exception e) {
+                logger.error("❌ Error reading JSON file: " + jsonPath + " - " + e.getMessage());
+            }
+        }
+        return mergedTestData;
+    }
+
     
     @AfterClass(groups= {"Smoke"})
     public void tearDown() {
