@@ -1,12 +1,10 @@
 package testCases;
 
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 import pageObjects.AccountDetailsPage;
 import pageObjects.DashboardPage;
 import pageObjects.PurchaseLevelAccountPage;
@@ -16,7 +14,6 @@ import utilities.CommonUtils;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
 
@@ -24,6 +21,9 @@ public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
 
     public CommonUtils commonUtils;
     public PurchaseLevelAccountPage ob;
+    public DashboardPage dp;
+    public AccountDetailsPage ad;
+    public String jsonPath;
 
     @Test(groups = {"Smoke"})
     public void VerifyPurchaseCopyLinkFromObservationColumn() {
@@ -33,22 +33,23 @@ public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
 
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
-
+            dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
-            dp.searchForItem(p.getProperty("accountName"));
-            dp.clickView();
-
-            AccountDetailsPage ad = new AccountDetailsPage(driver);
+            ad = new AccountDetailsPage(driver);
             ob = new PurchaseLevelAccountPage(driver);
+            jsonPath = "./testData/purchaserAccountData/purchaser.json";
+            loadTestData(jsonPath);
+
+            dp.searchForItem(getTestData("accountName"));
+            dp.clickView();
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
             //Select account admin in user type dropdown
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), p.getProperty("usersUserTypeAccountAdmin"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), getTestData("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            ob.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
+            ob.performTableAction("accountsTableUserRoles", getTestData("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -64,7 +65,7 @@ public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
             ob.clickFirstCopyIcon("detailsAssignmentsTable");
             String copiedURL = ob.getClipboardText();
 
-            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("observationLinkCopyValidationMessage"));
+            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),getTestData("observationLinkCopyValidationMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
 
             ob.openNewTabWithURL(copiedURL);

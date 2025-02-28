@@ -15,6 +15,9 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
 
     public CommonUtils commonUtils;
     public PurchaseLevelAccountPage ob;
+    public DashboardPage dp;
+    public AccountDetailsPage ad;
+    public String jsonPath;
 
     @Test(groups = {"Smoke"})
     public void VerifyPurchaserCopyFormUrl(){
@@ -23,22 +26,23 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
         try {
             login(p.getProperty("adminEmail"),p.getProperty("adminPassword"),true);
 
-            DashboardPage dp = new DashboardPage(driver);
-
+            dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
-            dp.searchForItem(p.getProperty("accountName"));
-            dp.clickView();
-
-            AccountDetailsPage ad = new AccountDetailsPage(driver);
+            ad = new AccountDetailsPage(driver);
             ob = new PurchaseLevelAccountPage(driver);
+            jsonPath = "./testData/purchaserAccountData/purchaser.json";
+            loadTestData(jsonPath);
+
+            dp.searchForItem(getTestData("accountName"));
+            dp.clickView();
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
             //Select account admin in user type dropdown
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), p.getProperty("usersUserTypeAccountAdmin"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), getTestData("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            ob.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
+            ob.performTableAction("accountsTableUserRoles", getTestData("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -46,11 +50,11 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
 
             dp.selectHamburgerTab("Forms");
 
-            String copiedFormName = ob.clickOnFormsLink("globalFormTable",p.getProperty("purchaserFormCopyUrlFormType"));
+            String copiedFormName = ob.clickOnFormsLink("globalFormTable",getTestData("purchaserFormCopyUrlFormType"));
             System.out.println(copiedFormName + " copied");
 
             String copiedURL = ob.getClipboardText();
-            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("copyFormUrlConfirmationMessage"));
+            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),getTestData("copyFormUrlConfirmationMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
 
             //Open the copied link in new Tab
@@ -66,5 +70,4 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
 
         logger.info("****** Finished Purchaser Dismiss Shipping Task Test ******");
     }
-
-    }
+}

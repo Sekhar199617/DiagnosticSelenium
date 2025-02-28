@@ -8,11 +8,20 @@
   "purchaserNewUserUsertypeDropdown": "Manager",
   "purchaserNewUserTimeZoneDropdown": "(UTC+530) Asia/Kolkata",
   "purchaserNewUserValidationMessage": "New User Added",
+  "****************************** COPY OBSERVATION LINK ********************************": "",
+
+  "accountName" : "Company Test 1",
+  "observationLinkCopyValidationMessage" : "Link Copied",
+
+  "****************************** USER UPLOAD ********************************": "",
 
   "****************************** DISMISS SHIPPING TASK ********************************": "",
   "purchaserShippingTaskDismissAccountName": "NewOrderTest Test",
   "purchaserDismissShippingTaskMessage": "Are You Sure You Want to Dismiss Task?",
   "purchaserTaskDismissedValidationMessage": "Task Dismissed Successfully",
+  "userUploadAssigneeType" : "Education/Observation Only",
+  "userUploadAssigneeExperience" : "Anti Bundle Experience for Com...",
+  "userAssigneeUploadValidationMessage" : "The Data 1 For Assignees has been Imported Successfully",
 
   "****************************** EDIT UPDATE BILLING DETAILS ********************************": "",
   "purchaserBillingCountryDropdown": "India",
@@ -22,4 +31,8 @@
   "purchaserBillingState": "testBillingState",
   "purchaserBillingPostalCode": "121212",
   "purchaserBillingDetailsUpdateMessage": "Account Details Updated"
+  "****************************** COPY FORM URL ********************************": "",
+
+  "copyFormUrlConfirmationMessage" : "Copied Form Link URL to Clipboard",
+  "purchaserFormCopyUrlFormType" : "Kiosk"
 }
