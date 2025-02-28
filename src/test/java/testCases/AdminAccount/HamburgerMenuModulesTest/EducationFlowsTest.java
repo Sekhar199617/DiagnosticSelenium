@@ -14,12 +14,18 @@ public class EducationFlowsTest extends BaseClass {
 
         logger.info("****** Starting Educational Flows Test ******");
         try{
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-
             CommonUtils commonUtils = new CommonUtils(driver);
             UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
             EducationFlowsPage educationFlowsPage = new EducationFlowsPage(driver);
             DashboardPage dashboardPage = new DashboardPage(driver);
+
+            String loginJsonPath = "./testData//adminLoginData.json";
+            loadTestData(loginJsonPath);
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            String hamburgerMenuModulesDataJsonPath = "./testData//hamburgerMenuModulesData.json";
+            loadTestData(hamburgerMenuModulesDataJsonPath);
 
             dashboardPage.selectHamburgerTab("Education Flows");
 
@@ -27,11 +33,11 @@ public class EducationFlowsTest extends BaseClass {
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(educationFlowsPage.educationFlowNameField),
                     randomString());
             commonUtils.selectDropDownValueWithClick(commonUtils.findElementsByXpath(educationFlowsPage.list),
-                    p.getProperty("purposeOfFlow"));
+                    getTestData("purposeOfFlow"));
             commonUtils.validateCheckbox(commonUtils.findElementByXpath(educationFlowsPage.activeCheckbox));
             commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(educationFlowsPage.saveButton));
             commonUtils.validateGetText(commonUtils.findElementByXpath(educationFlowsPage.dialogueText),
-                    p.getProperty("educationFlowDialogueText"));
+                    getTestData("educationFlowDialogueText"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(educationFlowsPage.educationFlowDialogue),
                     "Ok");
 
@@ -39,12 +45,12 @@ public class EducationFlowsTest extends BaseClass {
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(educationFlowsPage.educationFlowNameField),
                     randomString() + "updated");
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(educationFlowsPage.purposeOfFlowDropDown),
-                    p.getProperty("updatedPurposeOfFlow"));
+                    getTestData("updatedPurposeOfFlow"));
             commonUtils.validateCheckbox(commonUtils.findElementByXpath(educationFlowsPage.activeCheckbox));
             commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(educationFlowsPage.updateButton));
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(
                     usersAndRolesPage.dialogueText),
-                    p.getProperty("updatedEducationFlowDialogueText"),
+                    getTestData("updatedEducationFlowDialogueText"),
                     commonUtils.findElementByXpath(usersAndRolesPage.dialogueOkButton)
             );
         }catch(Exception e)

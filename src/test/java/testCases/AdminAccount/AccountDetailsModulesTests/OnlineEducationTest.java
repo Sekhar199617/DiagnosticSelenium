@@ -16,7 +16,6 @@ public class OnlineEducationTest extends BaseClass {
 
         logger.info("****** Starting Online Education Test ******");
         try {
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             DashboardPage dashboardPage = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
@@ -24,8 +23,19 @@ public class OnlineEducationTest extends BaseClass {
             AccountDetailsPage accountDetailsPage = new AccountDetailsPage(driver);
             OnlineEducationPage onlineEducationPage = new OnlineEducationPage(driver);
 
+            String loginJsonPath = "./testData//adminLoginData.json";
+            loadTestData(loginJsonPath);
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            String dashboardDataJsonPath = "./testData//dashboardData.json";
+            loadTestData(dashboardDataJsonPath);
+
             dashboardPage.searchForItem(p.getProperty("accountName"));
             dashboardPage.clickView();
+
+            String accountDetailsJsonPath = "./testData//accountDetailsData.json";
+            loadTestData(accountDetailsJsonPath);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(accountDetailsPage.tabList),
                     "Online Education");
@@ -38,11 +48,11 @@ public class OnlineEducationTest extends BaseClass {
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(onlineEducationPage.experienceNameField),
                     randomString());
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(onlineEducationPage.attachBundleDropDown),
-                    p.getProperty("attachBundle"));
+                    getTestData("attachBundle"));
             commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(onlineEducationPage.saveButton));
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(
                     usersAndRolesPage.dialogueText),
-                    p.getProperty("onlineEducationDialogueText"),
+                    getTestData("onlineEducationDialogueText"),
                     commonUtils.findElementByXpath(usersAndRolesPage.dialogueOkButton)
             );
         }catch(Exception e)

@@ -157,10 +157,10 @@ public class BaseClass {
         return (String) testData.get(key);
     }
     
-    @AfterClass(groups= {"Smoke"})
+    /*@AfterClass(groups= {"Smoke"})
     public void tearDown() {
         if (driver != null) {
             driver.quit();
         }
-    }
+    }*/
 }

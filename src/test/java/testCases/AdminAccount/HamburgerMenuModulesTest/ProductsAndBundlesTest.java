@@ -15,15 +15,21 @@ import java.time.format.DateTimeFormatter;
 public class ProductsAndBundlesTest extends BaseClass {
 
     @Test
-    public void verifyAddProduct() throws InterruptedException {
+    public void verifyAddProduct() {
 
+        logger.info("****** Starting Add Product Test ******");
         try {
-            logger.info("****** Starting Add Product Test ******");
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-
             DashboardPage dashboardPage = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
             ProductsAndBundlesPage productsAndBundlesPage = new ProductsAndBundlesPage(driver);
+
+            String loginJsonPath = "./testData//adminLoginData.json";
+            loadTestData(loginJsonPath);
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            String hamburgerMenuModulesDataJsonPath = "./testData//hamburgerMenuModulesData.json";
+            loadTestData(hamburgerMenuModulesDataJsonPath);
 
             dashboardPage.selectHamburgerTab("Products & Bundles");
 
@@ -70,7 +76,7 @@ public class ProductsAndBundlesTest extends BaseClass {
             if(isProductPurchaseRequiredCheckboxEnabled) {
                 String validationText = commonUtils.getTextFromElement(commonUtils.findElementById(
                         productsAndBundlesPage.productOptionsValidationText));
-                Assert.assertEquals(validationText, p.getProperty("productOptionsValidationText"));
+                Assert.assertEquals(validationText, getTestData("productOptionsValidationText"));
 
                 boolean isEducationAllowedWithoutTestPurchaseCheckboxEnabled =
                         educationAllowedWithoutTestPurchaseCheckbox.isEnabled();
@@ -100,30 +106,30 @@ public class ProductsAndBundlesTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByCssSelector(productsAndBundlesPage.setExclusionsButton),
                     "Set Exclusions");
             commonUtils.enterValueInTextField(commonUtils.findElementByCssSelector(
-                    productsAndBundlesPage.exclusionsSearchField), p.getProperty("exclusionCountry"));
+                    productsAndBundlesPage.exclusionsSearchField), getTestData("exclusionCountry"));
             Thread.sleep(2000);
             commonUtils.selectDropDownValueWithClick(commonUtils.findElementsByCssSelector(
-                    productsAndBundlesPage.countriesList), p.getProperty("exclusionCountry"));
+                    productsAndBundlesPage.countriesList), getTestData("exclusionCountry"));
             commonUtils.clickOnElement(commonUtils.findElementById(productsAndBundlesPage.exclusionsSaveButton),
                     "Save");
 
             //SHIPPING SETTINGS
             commonUtils.selectDropDownValue(commonUtils.findElementById(
                     productsAndBundlesPage.outboundShippingToAssigneeMaxTimeDropdown),
-                    p.getProperty("outboundShippingToAssigneeMaximumTime")
+                    getTestData("outboundShippingToAssigneeMaximumTime")
             );
 
             //PRODUCT DETAILS
             commonUtils.enterValueInTextField(commonUtils.findElementById(productsAndBundlesPage.vendorProductIdField),
                     "Product" + randomNumbers(5));
             commonUtils.selectDropDownValue(commonUtils.findElementById(productsAndBundlesPage.warehouseNameDropdown),
-                    p.getProperty("warehouseName"));
+                    getTestData("warehouseName"));
             commonUtils.enterValueInTextField(commonUtils.findElementById(productsAndBundlesPage.warehouseSkuField),
                     "Warehouse SKU" + randomNumbers(3));
             commonUtils.enterValueInTextField(commonUtils.findElementById(productsAndBundlesPage.shippingWeightField),
                     randomNumbers(3));
             commonUtils.selectDropDownValue(commonUtils.findElementById(productsAndBundlesPage.weightUnitDropdown),
-                    p.getProperty("weightUnit"));
+                    getTestData("weightUnit"));
             WebElement yesChangeButton = commonUtils.findElementByXpath(productsAndBundlesPage.yesChangeButton);
             try {
                 yesChangeButton.click();
@@ -145,13 +151,13 @@ public class ProductsAndBundlesTest extends BaseClass {
                     randomNumbers(3));
             commonUtils.selectDropDownValue(commonUtils.findElementById(
                     productsAndBundlesPage.productIncludedInShipmentDropdown),
-                    p.getProperty("productIncludedInShipment"));
+                    getTestData("productIncludedInShipment"));
             commonUtils.selectDropDownValue(commonUtils.findElementById(
                     productsAndBundlesPage.productInboundShippingCostPaidByDropdown),
-                    p.getProperty("productInboundShippingCostPaidBy"));
+                    getTestData("productInboundShippingCostPaidBy"));
             commonUtils.validateCheckbox(commonUtils.findElementById(productsAndBundlesPage.activeCheckbox));
             commonUtils.selectDropDownValue(commonUtils.findElementById(productsAndBundlesPage.activeDropdown),
-                    p.getProperty("active"));
+                    getTestData("active"));
 
             LocalDate today = LocalDate.now();
             LocalDate tomorrow = today.plusDays(1);
@@ -159,15 +165,15 @@ public class ProductsAndBundlesTest extends BaseClass {
             String formattedToday = today.format(formatter);
             String formattedTomorrow = tomorrow.format(formatter);
 
-            if (p.getProperty("active").equalsIgnoreCase("Beginning on")) {
+            if (getTestData("active").equalsIgnoreCase("Beginning on")) {
                 commonUtils.enterValueInTextField(commonUtils.findElementById(productsAndBundlesPage.dateField),
                         formattedToday);
                 System.out.println("Validating with today's date: " + formattedToday);
-            } else if (p.getProperty("active").equalsIgnoreCase("Until")) {
+            } else if (getTestData("active").equalsIgnoreCase("Until")) {
                 commonUtils.enterValueInTextField(commonUtils.findElementById(productsAndBundlesPage.dateField),
                         formattedTomorrow);
                 System.out.println("Validating with tomorrow's date: " + formattedTomorrow);
-            } else if (p.getProperty("active").equalsIgnoreCase("Immediately")) {
+            } else if (getTestData("active").equalsIgnoreCase("Immediately")) {
                 System.out.println("This option doesn't have a Date field");
             }
 
@@ -175,13 +181,12 @@ public class ProductsAndBundlesTest extends BaseClass {
 
             UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),
-                    p.getProperty("addProductPromptWindowText"),
+                    getTestData("addProductPromptWindowText"),
                     commonUtils.findElementByXpath(au.dialogueOkButton));
         }catch(Exception e)
         {
             Assert.fail();
         }
         logger.info("****** Finished Add Product Test ******");
-
     }
 }

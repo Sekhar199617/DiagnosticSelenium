@@ -14,18 +14,25 @@ public class TemplatesTest extends BaseClass {
     public void verifyAddNewMessageSet() {
         logger.info("****** Starting Add New Message Set Test ******");
         try{
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             DashboardPage dashboardPage = new DashboardPage(driver);
             TemplatesPage templatesPage = new TemplatesPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
             UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
 
+            String loginJsonPath = "./testData//adminLoginData.json";
+            loadTestData(loginJsonPath);
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            String hamburgerMenuModulesDataJsonPath = "./testData//hamburgerMenuModulesData.json";
+            loadTestData(hamburgerMenuModulesDataJsonPath);
+
             dashboardPage.selectHamburgerTab("Templates");
 
             commonUtils.clickOnElement(commonUtils.findElementByXpath(templatesPage.addButton), "Add");
             commonUtils.selectDropDownValue(commonUtils.findElementByName(templatesPage.copyMessagingTemplateDropDown),
-                    p.getProperty("copyMessagingTemplate"));
+                    getTestData("copyMessagingTemplate"));
             commonUtils.enterValueInTextField(commonUtils.findElementById(templatesPage.messagingSetNameField),
                     randomString());
             commonUtils.validateCheckbox(commonUtils.findElementByName(templatesPage.allowAccountsToSelectThisMessagingSet));
@@ -41,9 +48,9 @@ public class TemplatesTest extends BaseClass {
             commonUtils.enterValueInTextField(commonUtils.findElementByName(templatesPage.emailFromAddressForAssigneesField),
                     randomString() + "addressassign@gmail.com");
             commonUtils.enterValueInTextField(commonUtils.findElementByName(templatesPage.websiteURLField),
-                    p.getProperty("websiteURL"));
+                    getTestData("websiteURL"));
             commonUtils.enterValueInTextField(commonUtils.findElementByName(templatesPage.provisioningSystemURLField),
-                    p.getProperty("provisioningSystemURL"));
+                    getTestData("provisioningSystemURL"));
             commonUtils.enterValueInTextField(commonUtils.findElementByName(templatesPage.supportPhoneField),
                     randomNumbers(10));
             String logoFilePath = System.getProperty("user.dir") + File.separator + "src" +
@@ -56,7 +63,7 @@ public class TemplatesTest extends BaseClass {
 
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(
                             usersAndRolesPage.dialogueText),
-                    p.getProperty("messageSetDialogueText"),
+                    getTestData("messageSetDialogueText"),
                     commonUtils.findElementByXpath(usersAndRolesPage.dialogueOkButton)
             );
         }catch (Exception e)

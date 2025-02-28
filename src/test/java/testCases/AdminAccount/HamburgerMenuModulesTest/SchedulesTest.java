@@ -14,15 +14,20 @@ public class SchedulesTest extends BaseClass {
     public void verifyCreateObserver() {
         logger.info("****** Starting Create Observer Test ******");
         try{
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-
             DashboardPage dashboardPage = new DashboardPage(driver);
             SchedulesPage schedulesPage = new SchedulesPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
             UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
 
-            dashboardPage.selectHamburgerTab("Schedules");
+            String loginJsonPath = "./testData//adminLoginData.json";
+            loadTestData(loginJsonPath);
 
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            String accountDetailsJsonPath = "./testData//accountDetailsData.json";
+            loadTestData(accountDetailsJsonPath);
+
+            dashboardPage.selectHamburgerTab("Schedules");
             commonUtils.clickOnElement(commonUtils.findElementByXpath(schedulesPage.editScheduleButton), null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(schedulesPage.newObserverButton), null);
 
@@ -48,14 +53,14 @@ public class SchedulesTest extends BaseClass {
                     usersAndRolesPage.saveButton,
                     usersAndRolesPage.dialogueText,
                     usersAndRolesPage.dialogueOkButton,
-                    p.getProperty("mobileCountryCode"),
+                    getTestData("mobileCountryCode"),
                     randomNumbers(10),
-                    p.getProperty("role"),
-                    p.getProperty("observerUserType"),
-                    p.getProperty("licenseID"),
-                    p.getProperty("credentials"),
-                    p.getProperty("defaultTimeZone"),
-                    p.getProperty("dialogueText")
+                    getTestData("role"),
+                    getTestData("observerUserType"),
+                    randomNumbers(6),
+                    randomAlphaNumeric(),
+                    getTestData("defaultTimeZone"),
+                    getTestData("newUsersDialogueText")
             );
         }catch (Exception e)
         {

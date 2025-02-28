@@ -1,5 +1,4 @@
 package testCases.AdminAccount.HamburgerMenuModulesTest;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AdminAccount.HamburgerMenuModules.ContactUsPage;
@@ -11,29 +10,34 @@ public class ContactUsTest extends BaseClass {
 
     @Test
     public void verifyContactUs() {
+        logger.info("****** Starting Contact Us Test ******");
         try {
-            logger.info("****** Starting Contact Us Test ******");
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-
             ContactUsPage contactUsPage = new ContactUsPage();
             DashboardPage dashboardPage = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
-            dashboardPage.selectHamburgerTab("Contact Us");
+            String loginJsonPath = "./testData//adminLoginData.json";
+            loadTestData(loginJsonPath);
 
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            String hamburgerMenuModulesDataJsonPath = "./testData//hamburgerMenuModulesData.json";
+            loadTestData(hamburgerMenuModulesDataJsonPath);
+
+            dashboardPage.selectHamburgerTab("Contact Us");
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(contactUsPage.nameField), randomString());
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(contactUsPage.emailField),
                     randomString() + "@gmail.com");
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(contactUsPage.phoneField),
                     randomNumbers(10));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(contactUsPage.companyOrAccountField),
-                    p.getProperty("company"));
+                    getTestData("company"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(contactUsPage.preferredContactMethodDropdown),
-                    p.getProperty("preferredContactMethod"));
+                    getTestData("preferredContactMethod"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(contactUsPage.questionTypeDropdown),
-                    p.getProperty("questionType"));
+                    getTestData("questionType"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(contactUsPage.messageField),
-                    p.getProperty("queryText"));
+                    getTestData("queryText"));
             commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(contactUsPage.submitRequestButton));
         }catch(Exception e)
         {

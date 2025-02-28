@@ -13,15 +13,21 @@ public class UsersTest extends BaseClass {
     public void verifyCreateUserTest() {
         logger.info("****** Starting Create User Test ******");
         try{
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             UsersPage usersPage = new UsersPage(driver);
             DashboardPage dashboardPage = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
             UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
 
-            dashboardPage.selectHamburgerTab("Users");
+            String loginJsonPath = "./testData//adminLoginData.json";
+            loadTestData(loginJsonPath);
 
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            String accountDetailsJsonPath = "./testData//accountDetailsData.json";
+            loadTestData(accountDetailsJsonPath);
+
+            dashboardPage.selectHamburgerTab("Users");
             commonUtils.clickOnElement(commonUtils.findElementByXpath(usersPage.createUserButton),
                     "Create User");
 
@@ -47,14 +53,14 @@ public class UsersTest extends BaseClass {
                     usersAndRolesPage.saveButton,
                     usersAndRolesPage.dialogueText,
                     usersAndRolesPage.dialogueOkButton,
-                    p.getProperty("mobileCountryCode"),
+                    getTestData("mobileCountryCode"),
                     randomNumbers(10),
-                    p.getProperty("role"),
-                    p.getProperty("usersUserType"),
-                    p.getProperty("licenseID"),
-                    p.getProperty("credentials"),
-                    p.getProperty("defaultTimeZone"),
-                    p.getProperty("dialogueText")
+                    getTestData("role"),
+                    getTestData("usersUserType"),
+                    randomNumbers(6),
+                    randomAlphaNumeric(),
+                    getTestData("defaultTimeZone"),
+                    getTestData("newUsersDialogueText")
             );
         }catch(Exception e)
         {

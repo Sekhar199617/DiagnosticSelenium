@@ -20,15 +20,24 @@ public class UsersAndRolesTest extends BaseClass {
 		try{
 			randomUser = randomString();
 
-			login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-
 			commonUtils = new CommonUtils(driver);
 			DashboardPage dashboardPage = new DashboardPage(driver);
 			UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
 			AccountDetailsPage accountDetailsPage = new AccountDetailsPage(driver);
 
-			dashboardPage.searchForItem(p.getProperty("accountName"));
+			String loginJsonPath = "./testData//adminLoginData.json";
+			loadTestData(loginJsonPath);
+
+			login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+			String dashboardDataJsonPath = "./testData//dashboardData.json";
+			loadTestData(dashboardDataJsonPath);
+
+			dashboardPage.searchForItem(getTestData("accountName"));
 			dashboardPage.clickView();
+
+			String accountDetailsJsonPath = "./testData//accountDetailsData.json";
+			loadTestData(accountDetailsJsonPath);
 
 			commonUtils.selectTab(commonUtils.findElementsByXpath(accountDetailsPage.tabList), "Users & Roles");
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(accountDetailsPage.addText), "Add");
@@ -55,14 +64,14 @@ public class UsersAndRolesTest extends BaseClass {
 					usersAndRolesPage.saveButton,
 					usersAndRolesPage.dialogueText,
 					usersAndRolesPage.dialogueOkButton,
-					p.getProperty("mobileCountryCode"),
+					getTestData("mobileCountryCode"),
 					randomNumbers(10),
-					p.getProperty("role"),
-					p.getProperty("usersUserType"),
-					p.getProperty("licenseID"),
-					p.getProperty("credentials"),
-					p.getProperty("defaultTimeZone"),
-					p.getProperty("dialogueText")
+					getTestData("role"),
+					getTestData("userType"),
+					randomNumbers(6),
+					randomAlphaNumeric(),
+					getTestData("defaultTimeZone"),
+					getTestData("newUsersDialogueText")
 			);
 		}catch(Exception e)
 		{

@@ -12,7 +12,7 @@ public class LoginDDT extends BaseClass {
 	CommonUtils commonUtils;
 	
 	@Test(dataProvider="LoginData", dataProviderClass=DataProviders.class)
-	public void verify_loginDDT(String email, String password, String exp)
+	public void verifyLoginDDT(String email, String password, String exp)
 	{
 		logger.info("****** Starting Admin Login DDT ******");
 		try

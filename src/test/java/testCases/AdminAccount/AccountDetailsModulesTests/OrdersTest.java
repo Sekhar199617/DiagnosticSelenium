@@ -15,33 +15,43 @@ public class OrdersTest extends BaseClass {
 
         logger.info("****** Starting Provisioned Orders Test ******");
         try {
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             OrdersPage ordersPage = new OrdersPage(driver);
             DashboardPage dashboardPage = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
             AccountDetailsPage ad = new AccountDetailsPage(driver);
 
-            dashboardPage.searchForItem(p.getProperty("accountName"));
+            String loginJsonPath = "./testData//adminLoginData.json";
+            loadTestData(loginJsonPath);
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            String dashboardDataJsonPath = "./testData//dashboardData.json";
+            loadTestData(dashboardDataJsonPath);
+
+            dashboardPage.searchForItem(getTestData("accountName"));
             dashboardPage.clickView();
+
+            String accountDetailsJsonPath = "./testData//accountDetailsData.json";
+            loadTestData(accountDetailsJsonPath);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Orders");
             commonUtils.selectRadioButton(commonUtils.findElementByXpath(ordersPage.provisionedOrdersRadioButton));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ordersPage.addText), null);
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ordersPage.purchasableBundleDropDown),
-                    p.getProperty("purchasableBundle"));
+                    getTestData("purchasableBundle"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ordersPage.availableShippingOptions),
-                    p.getProperty("availableShippingOptions"));
+                    getTestData("availableShippingOptions"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ordersPage.availableVariationsOptions),
-                    p.getProperty("availableVariationsOptions"));
+                    getTestData("availableVariationsOptions"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ordersPage.noOfUnitsDropDown),
-                    p.getProperty("noOfUnits"));
+                    getTestData("noOfUnits"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ordersPage.pricePerUnit),
-                    p.getProperty("pricePerUnit"));
+                    randomNumbers(3));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ordersPage.shippingAmountPerUnit),
-                    p.getProperty("shippingAmountPerUnit"));
+                    randomNumbers(3));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ordersPage.estimatedTaxField),
-                    p.getProperty("estimatedTax"));
+                    randomNumbers(3));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ordersPage.addOrderButton), null);
         }catch(Exception e)
         {

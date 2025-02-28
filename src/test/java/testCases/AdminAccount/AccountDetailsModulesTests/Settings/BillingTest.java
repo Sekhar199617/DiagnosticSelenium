@@ -22,14 +22,9 @@ public class BillingTest extends BaseClass {
         logger.info("****** Starting Create and Update Billing Contact Test ******");
         try {
 
-            String jsonPath = "./testData//accountDetailsData.json";
-            loadTestData(jsonPath);
-
             randomUser = randomString();
             randomEmail = randomString() + "@gmail.com";
             randomPhone = randomNumbers(10);
-
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             DashboardPage dashboardPage = new DashboardPage(driver);
             CommonLocatorsPage commonLocatorsPage = new CommonLocatorsPage();
@@ -39,8 +34,19 @@ public class BillingTest extends BaseClass {
             UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
             BillingPage billingPage = new BillingPage(driver);
 
-            dashboardPage.searchForItem(p.getProperty("accountName"));
+            String loginJsonPath = "./testData//adminLoginData.json";
+            loadTestData(loginJsonPath);
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            String dashboardDataJsonPath = "./testData//dashboardData.json";
+            loadTestData(dashboardDataJsonPath);
+
+            dashboardPage.searchForItem(getTestData("accountName"));
             dashboardPage.clickView();
+
+            String accountDetailsDataJsonPath = "./testData//accountDetailsData.json";
+            loadTestData(accountDetailsDataJsonPath);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(accountDetailsPage.tabList), "Settings");
 

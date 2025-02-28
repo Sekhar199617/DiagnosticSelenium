@@ -1,5 +1,4 @@
 package testCases.AdminAccount.DashboardTests;
-
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,7 +18,13 @@ public class DashboardTest extends BaseClass {
     @BeforeMethod(groups = {"Smoke"})
     public void setupInitiated() throws IOException {
 
-        login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
+        String loginJsonPath = "./testData//adminLoginData.json";
+        loadTestData(loginJsonPath);
+
+        login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+        String dashboardDataJsonPath = "./testData//dashboardData.json";
+        loadTestData(dashboardDataJsonPath);
 
         dp = new DashboardPage(driver);
         ad = new AccountDetailsPage(driver);
@@ -29,12 +34,12 @@ public class DashboardTest extends BaseClass {
     @Test(groups = {"Smoke"})
     public void verifySearchWithInputFunctionality() {
 
-        dp.searchForItem(p.getProperty("accountName"));
-        dp.validateAccountNameInTable(p.getProperty("accountName"));
+        dp.searchForItem(getTestData("accountName"));
+        dp.validateAccountNameInTable(getTestData("accountName"));
 
         dp.clickView();
 
-        ad.validateAccountDetailsTitle("Account Details for " + p.getProperty("accountName"));
+        ad.validateAccountDetailsTitle("Account Details for " + getTestData("accountName"));
         ad.validateDefaultSelectedTab();
     }
 

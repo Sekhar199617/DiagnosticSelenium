@@ -1,0 +1,37 @@
+{
+  "********************************** CONTACT US *********************************": "",
+  "company" : "Diagnostic Company",
+  "preferredContactMethod" : "Phone",
+  "questionType" : "Products",
+  "queryText" : "Customer care associates are available during normal business hours and will reply to your message in the order received.",
+
+  "********************************* EDUCATION FLOWS *****************************": "",
+  "purposeOfFlow" : "Education + QA (Assignee Reminded If Abandoned Mid-Flow)",
+  "educationFlowDialogueText" : "Education Flow Created Successfully",
+  "updatedPurposeOfFlow" : "Education Only (Assignee Can Abandon Mid-Flow)",
+  "updatedEducationFlowDialogueText" : "Education Flow Updated Successfully",
+
+  "************************************ ENTITIES **********************************": "",
+  "entityType" : "Manufacturer",
+  "entityState" : "New York",
+  "billingContactState" : "New Jersey",
+  "paymentTerms" : "Net 15",
+  "entityDialogueText" : "Support Entity Created",
+
+  "************************************ PRODUCTS AND BUNDLES ***********************": "",
+  "productOptionsValidationText" : "If you make the product purchase required, then you must select at least one of the two shipment methods (bulk or individual).",
+  "exclusionCountry" : "India",
+  "outboundShippingToAssigneeMaximumTime" : "5 days",
+  "warehouseName" : "Primary Warehouse Shiphero",
+  "weightUnit" : "kg",
+  "productIncludedInShipment" : "Yes",
+  "productInboundShippingCostPaidBy" : "Client",
+  "active" : "Until",
+  "addProductPromptWindowText" : "Product Created",
+
+  "***************************************** TEMPLATES ******************************": "",
+  "copyMessagingTemplate" : "Atlantic Council",
+  "websiteURL" : "https://development.diagnostic.ly/",
+  "provisioningSystemURL" : "https://development.diagnosticprovisioning.com/",
+  "messageSetDialogueText" : "New Message Set Has Been Created",
+}
