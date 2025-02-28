@@ -1,11 +1,14 @@
 package utilities;
 import java.io.File;
+import java.io.FileReader;
 import java.time.Duration;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -515,6 +518,31 @@ public class CommonUtils extends BaseClass {
         WebElement selectDropdown = element.get(randomIndex);
         waitForElementToBeVisible(selectDropdown, 5);
         selectDropdown.click();
+    }
+
+    public JSONObject mergeMultipleJsonFiles(List<String> jsonFiles) {
+        JSONObject mergedTestData = new JSONObject();
+
+        for (String jsonPath : jsonFiles) {
+            try {
+                JSONParser parser = new JSONParser();
+                FileReader reader = new FileReader(jsonPath);
+                JSONObject newData = (JSONObject) parser.parse(reader);
+                reader.close();
+
+                // Merge new data into mergedTestData without overwriting
+                for (Object key : newData.keySet()) {
+                    if (!mergedTestData.containsKey(key)) {
+                        mergedTestData.put(key, newData.get(key));
+                    }
+                }
+
+            } catch (Exception e) {
+                System.out.println("❌ Error reading JSON file: " + jsonPath);
+                e.printStackTrace();
+            }
+        }
+        return mergedTestData; // ✅ Return the merged JSON data
     }
 
 }

@@ -1,0 +1,25 @@
+{
+  "****************************** CREATE ACCOUNT ADMIN MANAGER ********************************": "",
+  "usersUserTypeAccountAdmin": "Account Admins",
+  "userAccountAdminName": "Assignee",
+  "purchaserNewUserNameField": "TestNewUser",
+  "purchaserNewUserPhoneField": "12121212",
+  "purchaserNewUserRoleDropdown": "Management Lead",
+  "purchaserNewUserUsertypeDropdown": "Manager",
+  "purchaserNewUserTimeZoneDropdown": "(UTC+530) Asia/Kolkata",
+  "purchaserNewUserValidationMessage": "New User Added",
+
+  "****************************** DISMISS SHIPPING TASK ********************************": "",
+  "purchaserShippingTaskDismissAccountName": "NewOrderTest Test",
+  "purchaserDismissShippingTaskMessage": "Are You Sure You Want to Dismiss Task?",
+  "purchaserTaskDismissedValidationMessage": "Task Dismissed Successfully",
+
+  "****************************** EDIT UPDATE BILLING DETAILS ********************************": "",
+  "purchaserBillingCountryDropdown": "India",
+  "purchaserBillingAddress1": "Mumbai",
+  "purchaserBillingAddress2": "Mumbai",
+  "purchaserBillingCity": "testBillingCity",
+  "purchaserBillingState": "testBillingState",
+  "purchaserBillingPostalCode": "121212",
+  "purchaserBillingDetailsUpdateMessage": "Account Details Updated"
+}
