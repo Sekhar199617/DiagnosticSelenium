@@ -37,10 +37,11 @@ public class AccountDetailsAddEventTest extends BaseClass {
         addEventTagsPage = new AccountDetailsAddEventTagsPage(driver);
         pl = new PurchaseLevelAccountPage(driver);
         jsonPath = "./testData//accountDetailsData.json";
+        loadTestData(jsonPath);
         addFormsPage = new AccountDetailsAddFormsPage(driver);
 
 
-        dp.searchForItem(p.getProperty("accountName"));
+        dp.searchForItem(getTestData("accountName"));
         dp.clickView();
         commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Events/Tags");
 
