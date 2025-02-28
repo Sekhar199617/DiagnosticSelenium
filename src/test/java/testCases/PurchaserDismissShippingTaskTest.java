@@ -1,16 +1,13 @@
 package testCases;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import org.testng.Assert;
-import org.testng.annotations.Test;
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsSettingsPage;
-import pageObjects.DashboardPage;
+import pageObjects.AccountDetailsModules.AdminAccount.AccountDetailsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Settings.SettingsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
 import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
@@ -40,7 +37,7 @@ public class PurchaserDismissShippingTaskTest extends BaseClass {
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             ob = new PurchaseLevelAccountPage(driver);
-            AccountDetailsSettingsPage as = new AccountDetailsSettingsPage(driver);
+            SettingsPage as = new SettingsPage(driver);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 

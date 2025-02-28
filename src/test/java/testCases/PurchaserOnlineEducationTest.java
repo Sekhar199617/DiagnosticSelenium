@@ -3,7 +3,10 @@ package testCases;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import pageObjects.*;
+import pageObjects.AccountDetailsModules.AdminAccount.AccountDetailsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.AccountDetailsModules.AdminAccount.OnlineEducation.OnlineEducationPage;
+import pageObjects.AccountDetailsModules.AdminAccount.UsersAndRoles.UsersAndRolesPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 import java.util.ArrayList;
@@ -21,9 +24,9 @@ public class PurchaserOnlineEducationTest extends BaseClass {
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             DashboardPage dashboardPage = new DashboardPage(driver);
-            AccountDetailsOnlineEducationPage aoe = new AccountDetailsOnlineEducationPage(driver);
+            OnlineEducationPage aoe = new OnlineEducationPage(driver);
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
             dashboardPage.searchForItem(p.getProperty("accountName"));

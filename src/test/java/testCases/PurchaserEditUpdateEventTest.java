@@ -3,9 +3,9 @@ package testCases;
 import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
-import pageObjects.AccountDetailsAddEventTagsPage;
-import pageObjects.AccountDetailsPage;
-import pageObjects.DashboardPage;
+import pageObjects.AccountDetailsModules.AdminAccount.EventsTags.EventTagsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.AccountDetailsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
 import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
@@ -51,7 +51,7 @@ public class PurchaserEditUpdateEventTest extends BaseClass {
             dp.selectHamburgerTab("Settings");
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Events/Tags");
 
-            AccountDetailsAddEventTagsPage ev = new AccountDetailsAddEventTagsPage(driver);
+            EventTagsPage ev = new EventTagsPage(driver);
 
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ev.addEventButton), null);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ev.eventNameTagField), randomString() );

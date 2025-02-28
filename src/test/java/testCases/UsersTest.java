@@ -1,9 +1,9 @@
 package testCases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.DashboardPage;
-import pageObjects.UsersPage;
+import pageObjects.AccountDetailsModules.AdminAccount.UsersAndRoles.UsersAndRolesPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.HamburgerMenuModules.AdminAccount.Users.UsersPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -23,7 +23,7 @@ public class UsersTest extends BaseClass {
             UsersPage up = new UsersPage(driver);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(up.createUserButton), "Create User");
 
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.createUser(
                     au.newUserNameField,
                     randomString(),

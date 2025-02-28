@@ -2,9 +2,9 @@ package testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsSettingsPage;
-import pageObjects.DashboardPage;
+import pageObjects.AccountDetailsModules.AdminAccount.AccountDetailsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Settings.SettingsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -22,7 +22,7 @@ public class AccountDetailsSettingsAddIntegrationTest extends BaseClass {
             dp.clickView();
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Settings");
-            AccountDetailsSettingsPage sp = new AccountDetailsSettingsPage(driver);
+            SettingsPage sp = new SettingsPage(driver);
 
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.ssoButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.editButton),null);

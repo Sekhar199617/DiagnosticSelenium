@@ -1,20 +1,12 @@
 package testCases;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsIntegrationPage;
-import pageObjects.AccountDetailsPage;
-import pageObjects.DashboardPage;
-import pageObjects.EntityPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Integrations.IntegrationsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.AccountDetailsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.HamburgerMenuModules.AdminAccount.Entities.EntityPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
-
-import java.time.Duration;
-import java.util.List;
 
 public class SupportEntityVisibleToUserTest extends BaseClass {
     @Test
@@ -55,7 +47,7 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Integrations");
 
-            AccountDetailsIntegrationPage ip = new AccountDetailsIntegrationPage(driver);
+            IntegrationsPage ip = new IntegrationsPage(driver);
 
             //Add new integration
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ip.newIntegrationButton), null);

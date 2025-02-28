@@ -2,8 +2,8 @@ package testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.DashboardPage;
-import pageObjects.ProductsAndBundlesPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.HamburgerMenuModules.AdminAccount.ProductsAndBundles.ProductsAndBundlesPage;
 import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;

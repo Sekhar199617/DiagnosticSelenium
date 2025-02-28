@@ -1,14 +1,12 @@
 package testCases;
 
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.Test;
-import pageObjects.AccountDetailsPage;
-import pageObjects.DashboardPage;
+import pageObjects.AccountDetailsModules.AdminAccount.AccountDetailsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
 import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
@@ -16,7 +14,6 @@ import utilities.CommonUtils;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
 

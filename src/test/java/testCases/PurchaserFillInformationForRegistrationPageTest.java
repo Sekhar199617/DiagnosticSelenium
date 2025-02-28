@@ -3,9 +3,9 @@ package testCases;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.DashboardPage;
+import pageObjects.AccountDetailsModules.AdminAccount.AccountDetailsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.UsersAndRoles.UsersAndRolesPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
 import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
@@ -60,7 +60,7 @@ public class PurchaserFillInformationForRegistrationPageTest extends BaseClass {
 
             String copiedURL = ob.getClipboardText();
 
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),  p.getProperty("observationLinkCopyValidationMessage"),
                     commonUtils.findElementByXpath(au.dialogueOkButton));
 

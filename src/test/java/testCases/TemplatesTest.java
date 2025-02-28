@@ -1,9 +1,9 @@
 package testCases;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.DashboardPage;
-import pageObjects.TemplatesPage;
+import pageObjects.AccountDetailsModules.AdminAccount.UsersAndRoles.UsersAndRolesPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.HamburgerMenuModules.AdminAccount.Templates.TemplatesPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 import java.io.File;
@@ -51,7 +51,7 @@ public class TemplatesTest extends BaseClass {
             commonUtils.uploadFile(commonUtils.findElementByCssSelector(tp.faviconFileUpload), faviconFilePath);
             commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(tp.addMessageSetButton));
 
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),
                     p.getProperty("messageSetDialogueText"),
                     commonUtils.findElementByXpath(au.dialogueOkButton));

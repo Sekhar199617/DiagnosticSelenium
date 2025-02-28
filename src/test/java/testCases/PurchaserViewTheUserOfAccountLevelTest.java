@@ -3,6 +3,8 @@ package testCases;
 import org.testng.annotations.Test;
 import org.testng.Assert;
 import pageObjects.*;
+import pageObjects.AccountDetailsModules.AdminAccount.AccountDetailsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 

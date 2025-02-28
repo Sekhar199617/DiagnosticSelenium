@@ -2,9 +2,9 @@ package testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.DashboardPage;
-import pageObjects.SchedulesPage;
+import pageObjects.AccountDetailsModules.AdminAccount.UsersAndRoles.UsersAndRolesPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.HamburgerMenuModules.AdminAccount.Schedules.SchedulesPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -25,7 +25,7 @@ public class SchedulesTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.editScheduleButton), null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.newObserverButton), null);
 
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.createUser(
                     au.newUserNameField,
                     randomString(),

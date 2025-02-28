@@ -3,10 +3,10 @@ package testCases;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsOrdersPage;
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.DashboardPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Orders.OrdersPage;
+import pageObjects.AccountDetailsModules.AdminAccount.AccountDetailsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.UsersAndRoles.UsersAndRolesPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -28,7 +28,7 @@ public class PurchaserProvisionedOrderTest extends BaseClass {
             dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
             commonUtils.selectDropDownValue(commonUtils.findElementById(au.userTypeDropDownField), "Account Admins");
             au.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"),
@@ -40,7 +40,7 @@ public class PurchaserProvisionedOrderTest extends BaseClass {
             dp.selectHamburgerTab("Settings");
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Orders");
 
-            AccountDetailsOrdersPage po = new AccountDetailsOrdersPage(driver);
+            OrdersPage po = new OrdersPage();
             commonUtils.validateRadioButton(commonUtils.findElementByXpath(po.provisionedOrdersRadioButton));
 
             WebElement addButton = commonUtils.findElementByXpath(po.addOrderButton);

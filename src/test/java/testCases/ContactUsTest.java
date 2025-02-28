@@ -2,8 +2,8 @@ package testCases;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.ContactUsPage;
-import pageObjects.DashboardPage;
+import pageObjects.HamburgerMenuModules.AdminAccount.ContactUs.ContactUsPage;
+import pageObjects.AccountDetailsModules.AdminAccount.Dashboard.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
