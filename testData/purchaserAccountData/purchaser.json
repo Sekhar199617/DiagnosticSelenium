@@ -1,0 +1,19 @@
+{
+  "****************************** COPY OBSERVATION LINK ********************************": "",
+
+  "accountName" : "Company Test 1",
+  "usersUserTypeAccountAdmin" : "Account Admins",
+  "userAccountAdminName" : "Assignee",
+  "observationLinkCopyValidationMessage" : "Link Copied",
+
+  "****************************** USER UPLOAD ********************************": "",
+
+  "userUploadAssigneeType" : "Education/Observation Only",
+  "userUploadAssigneeExperience" : "Anti Bundle Experience for Com...",
+  "userAssigneeUploadValidationMessage" : "The Data 1 For Assignees has been Imported Successfully",
+
+  "****************************** COPY FORM URL ********************************": "",
+
+  "copyFormUrlConfirmationMessage" : "Copied Form Link URL to Clipboard",
+  "purchaserFormCopyUrlFormType" : "Kiosk"
+}
