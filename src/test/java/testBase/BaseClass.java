@@ -37,7 +37,7 @@ public class BaseClass {
     public Logger logger;
     public Properties p;
 	public CommonUtils commonUtils;
-	private JSONObject testData;
+	public JSONObject testData;
 
     @BeforeClass(groups = {"Smoke"})
     @Parameters({"os", "browser", "headless"})

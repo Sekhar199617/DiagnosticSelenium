@@ -1,9 +1,5 @@
 package testCases;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AccountDetailsIntegrationPage;
@@ -13,7 +9,7 @@ import pageObjects.EntityPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 
 public class SupportEntityVisibleToUserTest extends BaseClass {
@@ -23,7 +19,6 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
     public EntityPage ep;
     public AccountDetailsPage ad;
     public AccountDetailsIntegrationPage ip;
-    public  String jsonPath;
 
 
     @Test
@@ -38,8 +33,7 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
             ep = new EntityPage(driver);
             ad = new AccountDetailsPage(driver);
             ip = new AccountDetailsIntegrationPage(driver);
-            jsonPath = "./testData/adminAccountData/dashboardData.json";
-            loadTestData(jsonPath);
+            loadTestDataForTest();
 
             // Selecting entities from hamburger menu
             dp.selectHamburgerTab("Entities");
@@ -82,4 +76,13 @@ public class SupportEntityVisibleToUserTest extends BaseClass {
         }
         logger.info("****** Finished Support Entity Visible To User Test ******");
         }
+
+    public void loadTestDataForTest() {
+        List<String> jsonFiles = Arrays.asList(
+                "./testData/adminAccountData/accountDetailsData.json",
+                "./testData/adminAccountData/dashboardData.json"
+        );
+
+        testData = commonUtils.mergeMultipleJsonFiles(jsonFiles); // ✅ Directly assign merged data
+    }
     }
