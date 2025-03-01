@@ -21,7 +21,8 @@ public class UsersAndRolesTest extends BaseClass {
 
 			loadTestData(
 					"./testData/adminLoginData.json",
-					"./testData/accountDetailsData.json"
+					"./testData/accountDetailsData.json",
+					"./testData/dashboardData.json"
 			);
 
 			login(getTestData("adminEmail"), getTestData("adminPassword"), true);
