@@ -1,11 +1,14 @@
-package testCases;
+package testCases.AdminAccount.AccountDetailsModulesTests.Settings;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.Settings.SettingsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.Settings.BillingPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class AccountDetailsSettingsBillingTest extends BaseClass {
+public class BillingTest extends BaseClass {
 
     public String randomUser;
     public String randomEmail;
@@ -16,23 +19,24 @@ public class AccountDetailsSettingsBillingTest extends BaseClass {
 
         logger.info("****** Starting Create and Update Billing Contact Test ******");
         try {
-
-            String jsonPath = "./testData//accountDetailsData.json";
-            loadTestData(jsonPath);
-
             randomUser = randomString();
             randomEmail = randomString() + "@gmail.com";
             randomPhone = randomNumbers(10);
-
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             DashboardPage dp = new DashboardPage(driver);
             CommonLocatorsPage cl = new CommonLocatorsPage();
             CommonUtils commonUtils = new CommonUtils(driver);
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            AccountDetailsSettingsPage ads = new AccountDetailsSettingsPage(driver);
+            SettingsPage ads = new SettingsPage(driver);
             AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
-            AccountDetailsSettingsBillingPage billingPage = new AccountDetailsSettingsBillingPage();
+            BillingPage billingPage = new BillingPage();
+
+            loadTestData(
+                    "./testData/adminLoginData.json",
+                    "./testData/accountDetailsData.json"
+            );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
             dp.searchForItem(p.getProperty("accountName"));
             dp.clickView();

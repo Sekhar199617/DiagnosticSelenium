@@ -1,14 +1,15 @@
-package pageObjects;
+package pageObjects.AdminAccount.AccountDetailsModules;
 
 import org.openqa.selenium.WebDriver;
 
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
-public class AccountDetailsAddLocationPage extends BasePage {
+public class LocationsPage extends BasePage {
 
     CommonUtils commonUtils;
 
-    public AccountDetailsAddLocationPage(WebDriver driver) {
+    public LocationsPage(WebDriver driver) {
         super(driver);
         commonUtils = new CommonUtils(driver);
     }

@@ -1,16 +1,16 @@
-package testCases;
+package testCases.AdminAccount.AccountDetailsModulesTests;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsAddLocationPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.LocationsPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class AccountDetailsAddLocationTest extends BaseClass {
+public class LocationsTest extends BaseClass {
 
     @Test
     public void verifyAddLocationTest() {
@@ -28,7 +28,7 @@ public class AccountDetailsAddLocationTest extends BaseClass {
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Locations");
 
-            AccountDetailsAddLocationPage lp= new AccountDetailsAddLocationPage(driver);
+            LocationsPage lp= new LocationsPage(driver);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(lp.addLocationButton), null);
             commonUtils.validateGetText(commonUtils.findElementByXpath(lp.validateAccountName), p.getProperty("accountName"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(lp.locationNameField), randomString());

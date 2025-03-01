@@ -1,4 +1,4 @@
-package testCases;
+package testCases.AdminAccount.AccountDetailsModulesTests;
 
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -8,18 +8,20 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import pageObjects.*;
+import pageObjects.AdminAccount.AccountDetailsModules.EventsTagsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
 import java.time.Duration;
 
 
-public class AccountDetailsAddEventTest extends BaseClass {
+public class EventsTagsTest extends BaseClass {
 
     public DashboardPage dp;
     public CommonUtils commonUtils;
     public AccountDetailsPage ad;
-    public AccountDetailsAddEventTagsPage addEventTagsPage;
+    public EventsTagsPage addEventTagsPage;
     public String eventName;
     public PurchaseLevelAccountPage pl;
     public  String jsonPath;
@@ -34,7 +36,7 @@ public class AccountDetailsAddEventTest extends BaseClass {
         dp = new DashboardPage(driver);
         commonUtils = new CommonUtils(driver);
         ad = new AccountDetailsPage(driver);
-        addEventTagsPage = new AccountDetailsAddEventTagsPage(driver);
+        addEventTagsPage = new EventsTagsPage(driver);
         pl = new PurchaseLevelAccountPage(driver);
         jsonPath = "./testData//accountDetailsData.json";
         loadTestData(jsonPath);

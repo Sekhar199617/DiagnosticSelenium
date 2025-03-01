@@ -1,14 +1,14 @@
-package testCases;
+package testCases.AdminAccount.AccountDetailsModulesTests.Settings;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsSettingsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.Settings.SettingsPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class AccountDetailsSettingsAddIntegrationTest extends BaseClass {
+public class SSOTest extends BaseClass {
 
     @Test(groups = { "Smoke" })
     public void verify_add_integration() {
@@ -22,7 +22,7 @@ public class AccountDetailsSettingsAddIntegrationTest extends BaseClass {
             dp.clickView();
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Settings");
-            AccountDetailsSettingsPage sp = new AccountDetailsSettingsPage(driver);
+            SettingsPage sp = new SettingsPage(driver);
 
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.ssoButton),null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.editButton),null);

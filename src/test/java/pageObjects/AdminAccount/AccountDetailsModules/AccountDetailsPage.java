@@ -1,6 +1,7 @@
-package pageObjects;
+package pageObjects.AdminAccount.AccountDetailsModules;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
 public class AccountDetailsPage extends BasePage {
