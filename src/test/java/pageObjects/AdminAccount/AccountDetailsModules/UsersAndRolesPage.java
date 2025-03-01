@@ -1,17 +1,18 @@
-package pageObjects;
+package pageObjects.AdminAccount.AccountDetailsModules;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
 import java.util.List;
 
-public class AccountDetailsUsersAndRolesPage extends BasePage {
+public class UsersAndRolesPage extends BasePage {
 
 	CommonUtils commonUtils;
 
-	public AccountDetailsUsersAndRolesPage(WebDriver driver) {
+	public UsersAndRolesPage(WebDriver driver) {
 		super(driver);
 		this.commonUtils = new CommonUtils(driver);
 	}

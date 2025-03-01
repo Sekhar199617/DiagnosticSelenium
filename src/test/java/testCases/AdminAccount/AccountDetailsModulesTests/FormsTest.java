@@ -1,16 +1,16 @@
-package testCases;
+package testCases.AdminAccount.AccountDetailsModulesTests;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsAddFormsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.FormsPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class AccountDetailsIntakeFormsTest extends BaseClass {
+public class FormsTest extends BaseClass {
 
     @BeforeMethod(groups = {"Smoke"})
     public  void addFormCommonSteps (){
@@ -18,7 +18,7 @@ public class AccountDetailsIntakeFormsTest extends BaseClass {
 
         DashboardPage dp = new DashboardPage(driver);
         CommonUtils commonUtils = new CommonUtils(driver);
-        AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
+        FormsPage addFormsPage = new FormsPage(driver);
         dp.searchForItem(p.getProperty("accountName"));
         dp.clickView();
 
@@ -35,7 +35,7 @@ public class AccountDetailsIntakeFormsTest extends BaseClass {
             logger.info("****** Starting Add Account Data Form Test Case ******");
 
             CommonUtils commonUtils = new CommonUtils(driver);
-            AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
+            FormsPage addFormsPage = new FormsPage(driver);
             Thread.sleep(1000);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formNameField), randomString());
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypeAccount"));
@@ -65,7 +65,7 @@ public class AccountDetailsIntakeFormsTest extends BaseClass {
             logger.info("****** Starting Add Patient Data Form Test Case ******");
 
             CommonUtils commonUtils = new CommonUtils(driver);
-            AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
+            FormsPage addFormsPage = new FormsPage(driver);
             Thread.sleep(2000);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formNameField), randomString());
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypePatient"));
@@ -104,7 +104,7 @@ public class AccountDetailsIntakeFormsTest extends BaseClass {
             logger.info("****** Starting Create Form With Custom Field Test Case ******");
 
             CommonUtils commonUtils = new CommonUtils(driver);
-            AccountDetailsAddFormsPage addFormsPage = new AccountDetailsAddFormsPage(driver);
+            FormsPage addFormsPage = new FormsPage(driver);
             Thread.sleep(1000);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addFormsPage.formNameField), randomString());
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(addFormsPage.formEntityTypeDropdown), p.getProperty("formEntityTypeAccount"));

@@ -8,6 +8,23 @@
   "billingState" : "New York",
   "billingUpdatedDialogueText" : "Account Details Updated",
 
+  "******************************* ONLINE EDUCATION *********************************": "",
+  "attachBundle" : "Basic Fatigue Panel",
+  "onlineEducationDialogueText" : "Experience Created",
+
+  "*********************************** ORDERS ***************************************": "",
+  "purchasableBundle" : "Basic Fatigue Panel",
+  "availableShippingOptions" : "Individual Assignments",
+  "availableVariationsOptions" : "Tests Only",
+  "noOfUnits" : "7",
+
+  "****************************** USERS AND ROLES ********************************": "",
+  "role" : "Organization Lead",
+  "userType" : "Account Admin",
+  "newUsersDialogueText" : "New User Added",
+  "observerUserType" : "Observer",
+  "usersUserType" : "Observer",
+
   "****************************** EVENT ********************************": "",
   "accountName" : "Company Test 1",
   "eventStartDate" : "25/04/2025",

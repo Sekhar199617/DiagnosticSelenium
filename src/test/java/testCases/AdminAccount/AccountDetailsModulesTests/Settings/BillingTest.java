@@ -3,6 +3,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.*;
 import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.UsersAndRolesPage;
 import pageObjects.AdminAccount.AccountDetailsModules.Settings.SettingsPage;
 import pageObjects.AdminAccount.AccountDetailsModules.Settings.BillingPage;
 import testBase.BaseClass;
@@ -28,7 +29,7 @@ public class BillingTest extends BaseClass {
             CommonUtils commonUtils = new CommonUtils(driver);
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             SettingsPage ads = new SettingsPage(driver);
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             BillingPage billingPage = new BillingPage();
 
             loadTestData(
