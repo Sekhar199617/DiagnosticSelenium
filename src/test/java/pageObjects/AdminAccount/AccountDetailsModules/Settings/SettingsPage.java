@@ -1,12 +1,13 @@
-package pageObjects;
+package pageObjects.AdminAccount.AccountDetailsModules.Settings;
 import org.openqa.selenium.WebDriver;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
-public class AccountDetailsSettingsPage extends BasePage {
+public class SettingsPage extends BasePage {
 
     CommonUtils commonUtils;
 
-    public AccountDetailsSettingsPage(WebDriver driver) {
+    public SettingsPage(WebDriver driver) {
         super(driver);
         this.commonUtils = new CommonUtils(driver);
     }

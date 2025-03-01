@@ -1,18 +1,19 @@
-package pageObjects;
+package pageObjects.AdminAccount.AccountDetailsModules.Settings;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
 import java.util.List;
 
-public class AccountDetailsIntegrationPage extends BasePage{
+public class SSOPage extends BasePage {
 
     CommonUtils commonUtils;
     public boolean isDropdownValuePresent;
 
-    public AccountDetailsIntegrationPage(WebDriver driver) {
+    public SSOPage(WebDriver driver) {
         super(driver);
         this.commonUtils = new CommonUtils(driver);
     }

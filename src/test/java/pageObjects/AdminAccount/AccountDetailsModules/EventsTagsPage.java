@@ -1,15 +1,17 @@
-package pageObjects;
+package pageObjects.AdminAccount.AccountDetailsModules;
 
 import org.openqa.selenium.WebDriver;
 
+import pageObjects.BasePage;
+import pageObjects.PurchaseLevelAccountPage;
 import utilities.CommonUtils;
 
-public class AccountDetailsAddEventTagsPage extends BasePage {
+public class EventsTagsPage extends BasePage {
 
     CommonUtils commonUtils;
     PurchaseLevelAccountPage pl;
 
-    public AccountDetailsAddEventTagsPage(WebDriver driver) {
+    public EventsTagsPage(WebDriver driver) {
         super(driver);
         commonUtils = new CommonUtils(driver);
         pl = new PurchaseLevelAccountPage(driver);

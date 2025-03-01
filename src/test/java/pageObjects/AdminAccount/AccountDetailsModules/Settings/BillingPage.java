@@ -1,6 +1,6 @@
-package pageObjects;
+package pageObjects.AdminAccount.AccountDetailsModules.Settings;
 
-public class AccountDetailsSettingsBillingPage {
+public class BillingPage {
 
     public String billingContactDropdownField = "billing_contact_id"; //id
     public String billingContactDropdownOptions = "[id='billing_contact_id'] option"; //css
