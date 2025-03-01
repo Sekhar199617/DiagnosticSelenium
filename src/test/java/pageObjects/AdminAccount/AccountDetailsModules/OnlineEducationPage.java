@@ -1,17 +1,18 @@
-package pageObjects;
+package pageObjects.AdminAccount.AccountDetailsModules;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountDetailsOnlineEducationPage extends BasePage {
+public class OnlineEducationPage extends BasePage {
 
     CommonUtils commonUtils;
 
-    public AccountDetailsOnlineEducationPage(WebDriver driver) {
+    public OnlineEducationPage(WebDriver driver) {
         super(driver);
         this.commonUtils = new CommonUtils(driver);
     }

@@ -1,32 +1,38 @@
-package testCases;
+package testCases.AdminAccount.AccountDetailsModulesTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsOnlineEducationPage;
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsUsersAndRolesPage;
+import pageObjects.AdminAccount.AccountDetailsModules.OnlineEducationPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.UsersAndRolesPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class AccountDetailsOnlineEducationTest extends BaseClass {
+public class OnlineEducationTest extends BaseClass {
 
     @Test
     public void verifyOnlineEducationTest() {
 
         logger.info("****** Starting Online Education Test ******");
         try {
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
+            loadTestData(
+                    "./testData/adminLoginData.json",
+                    "./testData/accountDetailsData.json",
+                    "./testData/dashboardData.json"
+            );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
-            dp.searchForItem(p.getProperty("accountName"));
+            dp.searchForItem(getTestData("accountName"));
             dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Online Education");
 
-            AccountDetailsOnlineEducationPage aoe = new AccountDetailsOnlineEducationPage(driver);
+            OnlineEducationPage aoe = new OnlineEducationPage(driver);
             commonUtils.selectRadioButton(commonUtils.findElementByXpath(
                     aoe.experiencesForProvisionedOrdersRadioButton));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(aoe.manageButton), "Manage");
@@ -34,12 +40,12 @@ public class AccountDetailsOnlineEducationTest extends BaseClass {
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(aoe.experienceNameField),
                     randomString());
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(aoe.attachBundleDropDown),
-                    p.getProperty("attachBundle"));
+                    getTestData("attachBundle"));
             commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(aoe.saveButton));
 
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),
-                    p.getProperty("onlineEducationDialogueText"),
+                    getTestData("onlineEducationDialogueText"),
                     commonUtils.findElementByXpath(au.dialogueOkButton));
         }catch(Exception e)
         {

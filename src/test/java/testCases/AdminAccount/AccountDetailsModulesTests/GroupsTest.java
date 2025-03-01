@@ -1,17 +1,17 @@
-package testCases;
+package testCases.AdminAccount.AccountDetailsModulesTests;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsAddGroupPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.GroupsPage;
 import pageObjects.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
 import java.nio.file.Paths;
 
-public class AccountDetailsCreateGroupTest extends BaseClass {
+public class GroupsTest extends BaseClass {
 
     @Test(groups = { "Smoke" })
     public void verify_create_group() {
@@ -28,7 +28,7 @@ public class AccountDetailsCreateGroupTest extends BaseClass {
             AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Groups");
 
-            AccountDetailsAddGroupPage gp = new AccountDetailsAddGroupPage(driver);
+            GroupsPage gp = new GroupsPage(driver);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(gp.addGroupButton), null);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(gp.groupNameField),randomString());
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(gp.orderingModeDropdown),p.getProperty("orderingModeDropdown"));

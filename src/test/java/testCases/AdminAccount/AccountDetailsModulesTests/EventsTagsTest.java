@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import pageObjects.*;
+import pageObjects.AdminAccount.AccountDetailsModules.FormsPage;
 import pageObjects.AdminAccount.AccountDetailsModules.EventsTagsPage;
 import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
 import testBase.BaseClass;
@@ -25,7 +26,7 @@ public class EventsTagsTest extends BaseClass {
     public String eventName;
     public PurchaseLevelAccountPage pl;
     public  String jsonPath;
-    public AccountDetailsAddFormsPage addFormsPage;
+    public FormsPage addFormsPage;
     public String eventFormName;
 
     @BeforeMethod (groups = {"Smoke"})
@@ -40,7 +41,7 @@ public class EventsTagsTest extends BaseClass {
         pl = new PurchaseLevelAccountPage(driver);
         jsonPath = "./testData//accountDetailsData.json";
         loadTestData(jsonPath);
-        addFormsPage = new AccountDetailsAddFormsPage(driver);
+        addFormsPage = new FormsPage(driver);
 
 
         dp.searchForItem(getTestData("accountName"));

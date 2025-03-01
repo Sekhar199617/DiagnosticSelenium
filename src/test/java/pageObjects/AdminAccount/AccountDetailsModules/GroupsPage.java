@@ -1,13 +1,14 @@
-package pageObjects;
+package pageObjects.AdminAccount.AccountDetailsModules;
 
 import org.openqa.selenium.WebDriver;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
-public class AccountDetailsAddGroupPage extends BasePage {
+public class GroupsPage extends BasePage {
 
     CommonUtils commonUtils;
 
-    public AccountDetailsAddGroupPage(WebDriver driver) {
+    public GroupsPage(WebDriver driver) {
         super(driver);
         commonUtils = new CommonUtils(driver);
     }
