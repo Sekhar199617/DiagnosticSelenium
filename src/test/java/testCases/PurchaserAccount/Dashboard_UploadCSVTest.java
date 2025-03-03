@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardUploadCSVTest extends BaseClass {
+public class Dashboard_UploadCSVTest extends BaseClass {
     public CommonUtils commonUtils;
 
     @Test(groups= {"Smoke"})

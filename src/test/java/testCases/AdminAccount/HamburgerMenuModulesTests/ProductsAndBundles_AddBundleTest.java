@@ -8,7 +8,7 @@ import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class ProductsAndBundlesAddBundleTest extends BaseClass {
+public class ProductsAndBundles_AddBundleTest extends BaseClass {
 
     @Test
     public void verifyCreateBundleByAddingProduct() {

@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssignmentsRegistrationTest extends BaseClass {
+public class Assignments_RegistrationTest extends BaseClass {
 
     public CommonUtils commonUtils;
     public AccountPage ob;

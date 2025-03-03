@@ -1,4 +1,4 @@
-package testCases.PurchaserAccount.Settings;
+package testCases.PurchaserAccount.SettingsTabs;
 
 import org.testng.annotations.Test;
 import org.testng.Assert;
