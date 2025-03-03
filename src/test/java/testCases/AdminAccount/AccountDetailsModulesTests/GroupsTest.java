@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
 import pageObjects.AdminAccount.AccountDetailsModules.GroupsPage;
-import pageObjects.DashboardPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
