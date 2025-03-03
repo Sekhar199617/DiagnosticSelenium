@@ -17,21 +17,30 @@ public class Settings_PurchaserProvisionedOrderTest extends BaseClass {
 
     @Test
     public void verifyProvisionedOrderCreateEditPresence() {
+
         logger.info("****** Starting Provisioned Order Create Edit Presence Test ******");
         try {
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
+            OrdersPage po = new OrdersPage(driver);
+            DashboardPage dp = new DashboardPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
+            AccountDetailsPage ad = new AccountDetailsPage(driver);
 
-            dp.searchForItem(p.getProperty("accountName"));
+            loadTestData(
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json"
+            );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            dp.searchForItem(getTestData("accountName"));
             dp.clickView();
 
-            AccountDetailsPage ad = new AccountDetailsPage(driver);
-            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
             commonUtils.selectDropDownValue(commonUtils.findElementById(au.userTypeDropDownField), "Account Admins");
-            au.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"),
+            au.performActionOnUser("accountsTableUserRoles", getTestData("userAccountAdminName"),
                     "Assign Tests");
 
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -40,7 +49,6 @@ public class Settings_PurchaserProvisionedOrderTest extends BaseClass {
             dp.selectHamburgerTab("Settings");
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Orders");
 
-            OrdersPage po = new OrdersPage(driver);
             commonUtils.validateRadioButton(commonUtils.findElementByXpath(po.provisionedOrdersRadioButton));
 
             WebElement addButton = commonUtils.findElementByXpath(po.addOrderButton);

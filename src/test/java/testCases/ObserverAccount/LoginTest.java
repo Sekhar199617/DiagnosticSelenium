@@ -12,23 +12,28 @@ public class LoginTest extends BaseClass {
 	@Test(groups= {"Smoke"})
 	public void verifyObserverLoginAndVideoPresence()
 	{
+		logger.info("****** Starting Observer Login and Video Presence Test Case ******");
 		try
 		{
-			logger.info("****** Starting Observer Login and Video Presence Test Case ******");
-			login(p.getProperty("observerEmail"), p.getProperty("observerPassword"), false);
+			HomePage homePage = new HomePage();
 
-			HomePage oh = new HomePage();
+			loadTestData(
+					"./testData/ObserverAccountData/observerLoginData.json"
+			);
+
+			login(getTestData("observerEmail"), getTestData("observerPassword"), true);
+
 			String actualText = commonUtils.getTextFromElement(commonUtils.findElementByXpath(
-					oh.videoObservationFlowText));
+					homePage.videoObservationFlowText));
 			Assert.assertEquals(actualText, "Video Observation Flow");
 
-			WebElement videoElement = commonUtils.findElementByXpath(oh.videoScreen);
+			WebElement videoElement = commonUtils.findElementByXpath(homePage.videoScreen);
 
-			commonUtils.validateGetText(commonUtils.findElementByXpath(oh.videoVerificationTabText),
+			commonUtils.validateGetText(commonUtils.findElementByXpath(homePage.videoVerificationTabText),
 					"Video Verification");
-			commonUtils.validateGetText(commonUtils.findElementByXpath(oh.imageVerificationTabText),
+			commonUtils.validateGetText(commonUtils.findElementByXpath(homePage.imageVerificationTabText),
 					"Image Verification");
-			commonUtils.validateGetText(commonUtils.findElementByXpath(oh.idVerificationTabText),
+			commonUtils.validateGetText(commonUtils.findElementByXpath(homePage.idVerificationTabText),
 					"ID Verification");
 
 			if (videoElement.isDisplayed()) {

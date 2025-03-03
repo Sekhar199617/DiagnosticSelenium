@@ -17,11 +17,8 @@ public class Settings_OnlineEducationTest extends BaseClass {
     @Test(groups= {"Smoke"})
     public void verifyExperiencesForElectronicBundlesPresence() {
 
+        logger.info("****** Starting Verify Experiences For Electronic Bundles Presence Test ******");
         try{
-
-            logger.info("****** Starting Verify Experiences For Electronic Bundles Presence Test ******");
-
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             DashboardPage dashboardPage = new DashboardPage(driver);
             OnlineEducationPage aoe = new OnlineEducationPage(driver);
@@ -29,7 +26,15 @@ public class Settings_OnlineEducationTest extends BaseClass {
             UsersAndRolesPage au = new UsersAndRolesPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
-            dashboardPage.searchForItem(p.getProperty("accountName"));
+            loadTestData(
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json"
+            );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            dashboardPage.searchForItem(getTestData("accountName"));
             dashboardPage.clickView();
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Online Education");
@@ -39,7 +44,7 @@ public class Settings_OnlineEducationTest extends BaseClass {
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
             commonUtils.selectDropDownValue(commonUtils.findElementById(au.userTypeDropDownField), "Account Admins");
-            au.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"),
+            au.performActionOnUser("accountsTableUserRoles", getTestData("userAccountAdminName"),
                     "Assign Tests");
 
             List<String> electronicTabs = new ArrayList<>(driver.getWindowHandles());
@@ -88,7 +93,7 @@ public class Settings_OnlineEducationTest extends BaseClass {
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
             commonUtils.selectDropDownValue(commonUtils.findElementById(au.userTypeDropDownField), "Account Admins");
-            au.performActionOnUser("accountsTableUserRoles", p.getProperty("userAccountAdminName"),
+            au.performActionOnUser("accountsTableUserRoles", getTestData("userAccountAdminName"),
                     "Assign Tests");
 
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -131,5 +136,4 @@ public class Settings_OnlineEducationTest extends BaseClass {
         }
         logger.info("****** Finished Verify Experiences For Provisioned Orders Presence Test ******");
     }
-
 }

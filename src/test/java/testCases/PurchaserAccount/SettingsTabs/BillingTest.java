@@ -22,15 +22,20 @@ public class BillingTest extends BaseClass {
 
         logger.info("***** Starting Purchaser Edit Update Billing Details Test *****");
         try {
-            login(p.getProperty("adminEmail"),p.getProperty("adminPassword"),true);
 
-            dp = new DashboardPage(driver);
-            commonUtils = new CommonUtils(driver);
-            ad = new AccountDetailsPage(driver);
             ob = new AccountPage(driver);
+            dp = new DashboardPage(driver);
+            ad = new AccountDetailsPage(driver);
+            commonUtils = new CommonUtils(driver);
 
-            loadTestData("./testData/accountDetailsData.json",
-                    "./testData/purchaserAccountData/purchaser.json");
+            loadTestData(
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/PurchaserAccountData/purchaser.json"
+            );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
             dp.searchForItem(getTestData("accountName"));
             dp.clickView();
@@ -38,10 +43,12 @@ public class BillingTest extends BaseClass {
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
             //Select account admin in user type dropdown
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), getTestData("usersUserTypeAccountAdmin"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown),
+                    getTestData("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            ob.performTableAction("accountsTableUserRoles", getTestData("userAccountAdminName"), "Assign Tests",1);
+            ob.performTableAction("accountsTableUserRoles", getTestData("userAccountAdminName"),
+                    "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -58,19 +65,29 @@ public class BillingTest extends BaseClass {
 
             //Edit or Update Details
             commonUtils.selectRandomDropDown(commonUtils.findElementsByXpath(ob.billingContactDropdown));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.billingCountryDropdown),getTestData("purchaserBillingCountryDropdown"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingAddress1Field),getTestData("purchaserBillingAddress1"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingAddress2Field),getTestData("purchaserBillingAddress2"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.billingCountryDropdown),
+                    getTestData("purchaserBillingCountryDropdown"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingAddress1Field),
+                    getTestData("purchaserBillingAddress1"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingAddress2Field),
+                    getTestData("purchaserBillingAddress2"));
             commonUtils.scrollToElement(commonUtils.findElementByXpath(ob.billingCityField));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingCityField),getTestData("purchaserBillingCity"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingCityField),
+                    getTestData("purchaserBillingCity"));
             commonUtils.scrollToElement(commonUtils.findElementByXpath(ob.billingStateField));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingStateField),getTestData("purchaserBillingState"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingPostalCodeField),getTestData("purchaserBillingPostalCode"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingStateField),
+                    getTestData("purchaserBillingState"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.billingPostalCodeField),
+                    getTestData("purchaserBillingPostalCode"));
 
             commonUtils.scrollToUp();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.billingUpdateButton),null);
 
-            commonUtils.validateDialogueTextAndClickConfirm((commonUtils.findElementByXpath(ob.successfulConfirmationMessage)),getTestData("purchaserBillingDetailsUpdateMessage"),commonUtils.findElementByXpath(ob.successfulConfirmationOkButton));
+            commonUtils.validateDialogueTextAndClickConfirm((commonUtils.findElementByXpath(
+                    ob.successfulConfirmationMessage)),
+                    getTestData("purchaserBillingDetailsUpdateMessage"),
+                    commonUtils.findElementByXpath(ob.successfulConfirmationOkButton)
+            );
 
         } catch (Exception e) {
             Assert.fail();
@@ -78,5 +95,4 @@ public class BillingTest extends BaseClass {
 
         logger.info("****** Finished Purchaser Edit Update Billing Details Test ******");
     }
-
 }

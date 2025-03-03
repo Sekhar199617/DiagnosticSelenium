@@ -22,7 +22,6 @@ public class Settings_UsersAndRolesTest extends BaseClass {
 
         logger.info("***** Starting Purchaser Create Account Admin Manager In Dropdown List Test *****");
         try {
-            login(p.getProperty("adminEmail"),p.getProperty("adminPassword"),true);
 
             dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
@@ -30,9 +29,13 @@ public class Settings_UsersAndRolesTest extends BaseClass {
             ob = new AccountPage(driver);
 
             loadTestData(
-                    "./testData/accountDetailsData.json",
-                    "./testData/purchaserAccountData/purchaser.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/PurchaserAccountData/purchaser.json",
+                    "./testData/AdminAccountData/accountDetailsData.json"
             );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
             dp.searchForItem(getTestData("accountName"));
             dp.clickView();
@@ -40,10 +43,12 @@ public class Settings_UsersAndRolesTest extends BaseClass {
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
             //Select account admin in user type dropdown
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), getTestData("usersUserTypeAccountAdmin"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown),
+                    getTestData("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            ob.performTableAction("accountsTableUserRoles", getTestData("userAccountAdminName"), "Assign Tests",1);
+            ob.performTableAction("accountsTableUserRoles", getTestData("userAccountAdminName"),
+                    "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -56,18 +61,29 @@ public class Settings_UsersAndRolesTest extends BaseClass {
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.addUserAndRolesButton),null);
 
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.newUserNameField),getTestData("purchaserNewUserNameField"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.newUserPhoneField),getTestData("purchaserNewUserPhoneField"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.newUserNameField),
+                    getTestData("purchaserNewUserNameField"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.newUserPhoneField),
+                    getTestData("purchaserNewUserPhoneField"));
 
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.newUserEmailField),randomString() + "@gmail.com");
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.newUserRoleDropdown),getTestData("purchaserNewUserRoleDropdown"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.newUserUsertypeDropdown),getTestData("purchaserNewUserUsertypeDropdown"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.newUserTimeZoneDropdown),getTestData("purchaserNewUserTimeZoneDropdown"));
-            commonUtils.selectRandomCheckboxes(commonUtils.findElementsByCssSelector(ob.newUserAdditionalPrivilegesCheckboxList));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ob.newUserEmailField),
+                    randomString() + "@gmail.com");
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.newUserRoleDropdown),
+                    getTestData("purchaserNewUserRoleDropdown"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.newUserUsertypeDropdown),
+                    getTestData("purchaserNewUserUsertypeDropdown"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.newUserTimeZoneDropdown),
+                    getTestData("purchaserNewUserTimeZoneDropdown"));
+            commonUtils.selectRandomCheckboxes(commonUtils.findElementsByCssSelector(
+                    ob.newUserAdditionalPrivilegesCheckboxList));
             commonUtils.scrollToBottom();
             commonUtils.validateAndClickCheckbox(ob.newUserActiveCheckbox);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.newUserSaveButton),null);
-            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),getTestData("purchaserNewUserValidationMessage"),commonUtils.findElementByXpath(ob.successfulConfirmationOkButton));
+            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(
+                    ob.successfulConfirmationMessage),
+                    getTestData("purchaserNewUserValidationMessage"),
+                    commonUtils.findElementByXpath(ob.successfulConfirmationOkButton)
+            );
 
         } catch (Exception e) {
             Assert.fail();
@@ -75,6 +91,4 @@ public class Settings_UsersAndRolesTest extends BaseClass {
 
         logger.info("****** Finished Purchaser Create Account Admin Manager In Dropdown List Test ******");
     }
-
-
 }
