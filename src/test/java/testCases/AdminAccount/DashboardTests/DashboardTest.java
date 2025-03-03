@@ -18,7 +18,11 @@ public class DashboardTest extends BaseClass {
     private CommonUtils commonUtils;
 
     @BeforeMethod(groups = {"Smoke"})
-    public void setupInitiated() throws IOException {
+    public void setupInitiated() {
+
+        dp = new DashboardPage(driver);
+        ad = new AccountDetailsPage(driver);
+        commonUtils = new CommonUtils(driver);
 
         loadTestData(
                 "./testData/adminLoginData.json",
@@ -26,10 +30,6 @@ public class DashboardTest extends BaseClass {
         );
 
         login(getTestData("adminEmail"), getTestData("adminPassword"), true);
-
-        dp = new DashboardPage(driver);
-        ad = new AccountDetailsPage(driver);
-        commonUtils = new CommonUtils(driver);
 
     }
 
@@ -48,7 +48,8 @@ public class DashboardTest extends BaseClass {
     @Test(groups = {"Smoke"})
     public void verifySearchWithoutInputFunctionality() {
 
-        String activeAccountsCount = commonUtils.getTextFromElement(commonUtils.findElementByCssSelector(dp.activeAccounts));
+        String activeAccountsCount = commonUtils.getTextFromElement(
+                commonUtils.findElementByCssSelector(dp.activeAccounts));
 
         commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.searchButton), "Search");
         commonUtils.scrollToBottomAndClick(commonUtils.findElementById(dp.totalEntriesText));

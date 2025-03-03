@@ -24,6 +24,10 @@ public class AdminLoginDDT extends BaseClass {
 			
 			LoginPage loginPage = new LoginPage(driver);
 			commonUtils = new CommonUtils(driver);
+
+			loadTestData(
+					"./testData/adminLoginData.json"
+			);
 			
 			if(exp.equalsIgnoreCase("valid"))
 			{
@@ -47,7 +51,7 @@ public class AdminLoginDDT extends BaseClass {
 				}else {
 					Assert.assertTrue(true);
 					commonUtils.validateGetText(commonUtils.findElementByXpath(loginPage.alertMessage),
-							p.getProperty("invalidCredentialsAlertMessage"));
+							getTestData("invalidCredentialsAlertMessage"));
 				}
 			}
 
@@ -59,9 +63,9 @@ public class AdminLoginDDT extends BaseClass {
                 } else {
                     Assert.assertTrue(true);
                     commonUtils.validateGetText(commonUtils.findElementById(loginPage.emailErrorText),
-                            p.getProperty("emailErrorText"));
+							getTestData("emailErrorText"));
                     commonUtils.validateGetText(commonUtils.findElementById(loginPage.passwordErrorText),
-                            p.getProperty("passwordErrorText"));
+							getTestData("passwordErrorText"));
                 }
             }
 		}catch(Exception e)

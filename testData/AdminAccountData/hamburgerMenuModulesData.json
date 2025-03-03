@@ -16,5 +16,23 @@
   "entityState" : "New York",
   "billingContactState" : "New Jersey",
   "paymentTerms" : "Net 15",
-  "entityDialogueText" : "Support Entity Created"
+  "entityDialogueText" : "Support Entity Created",
+
+  "************************************ PRODUCTS AND BUNDLES ***********************": "",
+  "productOptionsValidationText" : "If you make the product purchase required, then you must select at least one of the two shipment methods (bulk or individual).",
+  "exclusionCountry" : "India",
+  "outboundShippingToAssigneeMaximumTime" : "5 days",
+  "warehouseName" : "Primary Warehouse Shiphero",
+  "weightUnit" : "kg",
+  "productIncludedInShipment" : "Yes",
+  "productInboundShippingCostPaidBy" : "Client",
+  "active" : "Until",
+  "addProductPromptWindowText" : "Product Created",
+
+  "************************************ TEMPLATES **********************************": "",
+  "copyMessagingTemplate" : "Atlantic Council",
+  "websiteURL" : "https://development.diagnostic.ly/",
+  "provisioningSystemURL" : "https://development.diagnosticprovisioning.com/",
+  "messageSetDialogueText" : "New Message Set Has Been Created"
+
 }

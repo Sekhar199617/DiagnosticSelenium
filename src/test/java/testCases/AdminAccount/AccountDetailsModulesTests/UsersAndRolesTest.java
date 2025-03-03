@@ -19,6 +19,11 @@ public class UsersAndRolesTest extends BaseClass {
 		try{
 			randomUser = randomString();
 
+			commonUtils = new CommonUtils(driver);
+			DashboardPage dashboardPage = new DashboardPage(driver);
+			UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
+			AccountDetailsPage accountDetailsPage = new AccountDetailsPage(driver);
+
 			loadTestData(
 					"./testData/adminLoginData.json",
 					"./testData/accountDetailsData.json",
@@ -27,39 +32,36 @@ public class UsersAndRolesTest extends BaseClass {
 
 			login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
-			DashboardPage dp = new DashboardPage(driver);
-			commonUtils = new CommonUtils(driver);
+			dashboardPage.searchForItem(getTestData("accountName"));
+			dashboardPage.clickView();
 
-			dp.searchForItem(getTestData("accountName"));
-			dp.clickView();
+			commonUtils.selectTab(commonUtils.findElementsByXpath(accountDetailsPage.tabList),
+					"Users & Roles");
+			commonUtils.clickOnElement(commonUtils.findElementByXpath(accountDetailsPage.addText),
+					"Add");
 
-			AccountDetailsPage ad = new AccountDetailsPage(driver);
-			commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
-			commonUtils.clickOnElement(commonUtils.findElementByXpath(ad.addText), "Add");
-
-			UsersAndRolesPage au = new UsersAndRolesPage(driver);
 			commonUtils.createUser(
-					au.newUserNameField,
+					usersAndRolesPage.newUserNameField,
 					randomString(),
-					au.mobileCountryCodeDropDown,
-					au.countryList,
-					au.phoneNumberField,
-					au.emailField,
-					au.roleDropDown,
-					au.userTypeDropDown,
-					au.licenseIDField,
-					au.credentialsField,
-					au.bundlesNotAttachedField,
-					au.rightArrow,
-					au.selectedBundleField,
-					au.additionalPriviligesCheckboxesList,
-					au.supportManagerPriviligesCheckboxesList,
-					au.userTimeZoneRadioButton,
-					au.userDefaultTimeZoneDropDown,
-					au.activeCheckbox,
-					au.saveButton,
-					au.dialogueText,
-					au.dialogueOkButton,
+					usersAndRolesPage.mobileCountryCodeDropDown,
+					usersAndRolesPage.countryList,
+					usersAndRolesPage.phoneNumberField,
+					usersAndRolesPage.emailField,
+					usersAndRolesPage.roleDropDown,
+					usersAndRolesPage.userTypeDropDown,
+					usersAndRolesPage.licenseIDField,
+					usersAndRolesPage.credentialsField,
+					usersAndRolesPage.bundlesNotAttachedField,
+					usersAndRolesPage.rightArrow,
+					usersAndRolesPage.selectedBundleField,
+					usersAndRolesPage.additionalPriviligesCheckboxesList,
+					usersAndRolesPage.supportManagerPriviligesCheckboxesList,
+					usersAndRolesPage.userTimeZoneRadioButton,
+					usersAndRolesPage.userDefaultTimeZoneDropDown,
+					usersAndRolesPage.activeCheckbox,
+					usersAndRolesPage.saveButton,
+					usersAndRolesPage.dialogueText,
+					usersAndRolesPage.dialogueOkButton,
 					getTestData("mobileCountryCode"),
 					randomNumbers(10),
 					getTestData("role"),

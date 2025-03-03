@@ -15,6 +15,13 @@ public class OnlineEducationTest extends BaseClass {
 
         logger.info("****** Starting Online Education Test ******");
         try {
+
+            CommonUtils commonUtils = new CommonUtils(driver);
+            DashboardPage dashboardPage = new DashboardPage(driver);
+            UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
+            AccountDetailsPage accountDetailsPage = new AccountDetailsPage(driver);
+            OnlineEducationPage onlineEducationPage = new OnlineEducationPage(driver);
+
             loadTestData(
                     "./testData/adminLoginData.json",
                     "./testData/accountDetailsData.json",
@@ -23,30 +30,28 @@ public class OnlineEducationTest extends BaseClass {
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
-            CommonUtils commonUtils = new CommonUtils(driver);
+            dashboardPage.searchForItem(getTestData("accountName"));
+            dashboardPage.clickView();
 
-            dp.searchForItem(getTestData("accountName"));
-            dp.clickView();
-
-            AccountDetailsPage ad = new AccountDetailsPage(driver);
-            commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Online Education");
-
-            OnlineEducationPage aoe = new OnlineEducationPage(driver);
+            commonUtils.selectTab(commonUtils.findElementsByXpath(accountDetailsPage.tabList),
+                    "Online Education");
             commonUtils.selectRadioButton(commonUtils.findElementByXpath(
-                    aoe.experiencesForProvisionedOrdersRadioButton));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(aoe.manageButton), "Manage");
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(aoe.addButton), "Add");
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(aoe.experienceNameField),
-                    randomString());
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(aoe.attachBundleDropDown),
-                    getTestData("attachBundle"));
-            commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(aoe.saveButton));
+                    onlineEducationPage.experiencesForProvisionedOrdersRadioButton));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(onlineEducationPage.manageButton),
+                    "Manage");
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(onlineEducationPage.addButton),
+                    "Add");
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(
+                    onlineEducationPage.experienceNameField), randomString());
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(
+                    onlineEducationPage.attachBundleDropDown), getTestData("attachBundle"));
+            commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(
+                    onlineEducationPage.saveButton));
 
-            UsersAndRolesPage au = new UsersAndRolesPage(driver);
-            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),
+            commonUtils.validateDialogueTextAndClickConfirm(
+                    commonUtils.findElementByXpath(usersAndRolesPage.dialogueText),
                     getTestData("onlineEducationDialogueText"),
-                    commonUtils.findElementByXpath(au.dialogueOkButton));
+                    commonUtils.findElementByXpath(usersAndRolesPage.dialogueOkButton));
         }catch(Exception e)
         {
             Assert.fail();
