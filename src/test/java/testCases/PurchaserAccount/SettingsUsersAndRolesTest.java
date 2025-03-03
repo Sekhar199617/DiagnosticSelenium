@@ -11,7 +11,7 @@ import utilities.CommonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Settings_UsersAndRolesTest extends BaseClass {
+public class SettingsUsersAndRolesTest extends BaseClass {
     public CommonUtils commonUtils;
     public AccountPage ob;
     public DashboardPage dp;

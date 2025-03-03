@@ -24,15 +24,17 @@ public class FormsTest extends BaseClass {
         logger.info("***** Starting Purchaser Copy Form Url And Past it in Different Tab *****");
         try {
 
-            loadTestData("./testData/PurchaserAccountData/purchaser.json",
-                    "./testData/AdminAccountData/accountDetailsData.json",
-                    "./testData/AdminAccountData/adminLoginData.json");
-            login(p.getProperty("adminEmail"),p.getProperty("adminPassword"),true);
-
             dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
             ad = new AccountDetailsPage(driver);
             ob = new AccountPage(driver);
+
+            loadTestData("./testData/PurchaserAccountData/purchaser.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json",
+                    "./testData/AdminAccountData/adminLoginData.json");
+
+            login(getTestData("adminEmail"),getTestData("adminPassword"),true);
 
             dp.searchForItem(getTestData("accountName"));
             dp.clickView();
@@ -40,10 +42,12 @@ public class FormsTest extends BaseClass {
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
             //Select account admin in user type dropdown
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), getTestData("usersUserTypeAccountAdmin"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown),
+                    getTestData("userType")); //Account Admin
 
             //Clicking on Assign Test in action dropdown for a account
-            ob.performTableAction("accountsTableUserRoles", getTestData("userAccountAdminName"), "Assign Tests",1);
+            ob.performTableAction("accountsTableUserRoles", getTestData("userAccountAdminName"),
+                    "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -51,11 +55,13 @@ public class FormsTest extends BaseClass {
 
             dp.selectHamburgerTab("Forms");
 
-            String copiedFormName = ob.clickOnFormsLink("globalFormTable",getTestData("purchaserFormCopyUrlFormType"));
+            String copiedFormName = ob.clickOnFormsLink("globalFormTable",
+                    getTestData("purchaserFormCopyUrlFormType"));
             System.out.println(copiedFormName + " copied");
 
             String copiedURL = ob.getClipboardText();
-            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),getTestData("copyFormUrlConfirmationMessage"));
+            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),
+                    getTestData("copyFormUrlConfirmationMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
 
             //Open the copied link in new Tab
