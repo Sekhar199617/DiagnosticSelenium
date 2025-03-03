@@ -40,7 +40,7 @@ public class UsersTest extends BaseClass {
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
             //Clicking on Assign Test in action dropdown for a account
-            pl.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"),
+            pl.performTableAction("accountsTableUserRoles", getTestData("userAccountAdminName"),
                     "Assign Tests",1);
 
             //Switch the tab
@@ -54,11 +54,11 @@ public class UsersTest extends BaseClass {
             dp.selectHamburgerTab("Users");
 
             //Clicking on view for user in purchase user
-            pl.performTableAction("purchaseUsersTable", p.getProperty("purchaseAccountLevelUserName"),
+            pl.performTableAction("purchaseUsersTable", getTestData("purchaseAccountLevelUserName"),
                     "View", 1);
 
             commonUtils.validateGetText(commonUtils.findElementByXpath(pl.accountLevelHeading),
-                    p.getProperty("purchaseAccountLevelHeadingMessage"));
+                    getTestData("purchaseAccountLevelHeadingMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.accountLevelCancelButton),null);
 
         }catch(Exception e)
