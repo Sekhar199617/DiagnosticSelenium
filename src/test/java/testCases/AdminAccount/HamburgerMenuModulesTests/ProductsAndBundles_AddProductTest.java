@@ -13,7 +13,7 @@ import utilities.CommonUtils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class ProductsAndBundlesAddProductTest extends BaseClass {
+public class ProductsAndBundles_AddProductTest extends BaseClass {
 
     @Test
     public void verifyAddProduct() throws InterruptedException {

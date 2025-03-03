@@ -12,7 +12,7 @@ import utilities.CommonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsEventsTagsTest extends BaseClass {
+public class Settings_EventsTagsTest extends BaseClass {
 
     public CommonUtils commonUtils;
     public AccountPage ob;

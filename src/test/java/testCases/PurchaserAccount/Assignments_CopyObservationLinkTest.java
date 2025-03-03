@@ -15,7 +15,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssignmentsCopyObservationLinkTest extends BaseClass {
+public class Assignments_CopyObservationLinkTest extends BaseClass {
 
 
 

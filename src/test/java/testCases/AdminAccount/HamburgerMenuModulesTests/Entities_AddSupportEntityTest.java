@@ -7,7 +7,7 @@ import pageObjects.AdminAccount.HamburgerMenuModules.EntitiesPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class EntitiesAddSupportEntityTest extends BaseClass {
+public class Entities_AddSupportEntityTest extends BaseClass {
 
     @Test
     public void verifyAddSupportEntity() throws InterruptedException {

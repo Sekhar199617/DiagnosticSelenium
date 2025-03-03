@@ -17,7 +17,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DashboardNewOrderTest extends BaseClass {
+public class Dashboard_NewOrderTest extends BaseClass {
 
     public CommonUtils commonUtils;
     public AccountPage pl;
