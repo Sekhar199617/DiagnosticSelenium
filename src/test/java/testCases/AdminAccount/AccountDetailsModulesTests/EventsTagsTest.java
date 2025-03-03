@@ -38,7 +38,6 @@ public class EventsTagsTest extends BaseClass {
         ad = new AccountDetailsPage(driver);
         addEventTagsPage = new EventsTagsPage(driver);
         pl = new AccountPage(driver);
-        loadTestData(jsonPath);
         addFormsPage = new FormsPage(driver);
 
         loadTestData(
@@ -60,7 +59,7 @@ public class EventsTagsTest extends BaseClass {
         try {
             logger.info("****** Starting Add Event Test Case ******");
             eventName = randomString();
-            loadTestData(jsonPath);
+
             // Fill Event Details
             commonUtils.clickOnElement(commonUtils.findElementByXpath(addEventTagsPage.addEventButton), null);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventNameTagField), eventName );
@@ -88,7 +87,7 @@ public class EventsTagsTest extends BaseClass {
             logger.info("****** Starting Edit And Delete Event Test Case ******");
 
             pl.performTableAction("accountsTable", eventName, "Edit",1);
-            loadTestData(jsonPath);
+
             //Click on edit for above created Event
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventStartDateCalender), getTestData("editEventStartDate"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(addEventTagsPage.eventEndDateCalender), getTestData("editEventEndDate") );
@@ -134,7 +133,6 @@ public class EventsTagsTest extends BaseClass {
             logger.info("****** Starting Add Edit Form Test Case ******");
 
             pl.performTableAction("accountsTable", eventName, "Edit",1);
-            loadTestData(jsonPath);
 
             eventFormName = randomString();
             //Add form

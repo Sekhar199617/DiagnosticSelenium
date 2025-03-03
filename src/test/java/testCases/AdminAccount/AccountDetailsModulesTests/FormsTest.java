@@ -39,7 +39,7 @@ public class FormsTest extends BaseClass {
                 getTestData("formScopeAccount"));
     }
     @Test(groups = {"Smoke"}, priority = 3)
-    public void verify_add_accountData() {
+    public void verifyAddAccountData() {
         try {
             logger.info("****** Starting Add Account Data Form Test Case ******");
 
@@ -69,7 +69,7 @@ public class FormsTest extends BaseClass {
     }
 
     @Test(groups = {"Smoke"}, priority = 2)
-    public void verify_add_event() {
+    public void verifyAddEvent() {
         try {
             logger.info("****** Starting Add Patient Data Form Test Case ******");
 
@@ -113,7 +113,7 @@ public class FormsTest extends BaseClass {
     }
 
     @Test(groups = {"Smoke"}, priority = 1)
-    public void verify_create_form_with_custom_field() {
+    public void verifyCreateFormWithCustomField() {
         try {
             logger.info("****** Starting Create Form With Custom Field Test Case ******");
 

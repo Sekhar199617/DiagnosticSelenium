@@ -29,7 +29,7 @@
   "availableVariationsOptions" : "Tests Only",
   "noOfUnits" : "7",
 
-  "****************************** USERS AND ROLES ********************************": "",
+  "********************************* USERS AND ROLES ********************************": "",
   "role" : "Organization Lead",
   "userType" : "Account Admin",
   "newUsersDialogueText" : "New User Added",

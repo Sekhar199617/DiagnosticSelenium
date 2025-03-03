@@ -9,32 +9,48 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="headless" value="true"/>
     <classes>
-      <class name="testCases.AdminLoginDDT"/>
-      <class name="testCases.PurchaserCreateAccountAdminManagerInDropdownListTest"/>
-      <class name="testCases.AccountDetailsSettingsBillingTest"/>
-      <class name="testCases.AccountDetailsAddEventTest"/>
-      <class name="testCases.EntitiesTest"/>
-      <class name="testBase.BaseClass"/>
-      <class name="testCases.PurchaserProvisionedOrderTest"/>
-      <class name="testCases.SchedulesTest"/>
-      <class name="testCases.SupportEntityVisibleToUserTest"/>
-      <class name="testCases.AccountDetailsSettingsAddIntegrationTest"/>
-      <class name="testCases.TemplatesTest"/>
-      <class name="testCases.AccountDetailsUsersAndRolesTest"/>
-      <class name="testCases.AccountDetailsIntakeFormsTest"/>
-      <class name="testCases.ContactUsTest"/>
-      <class name="testCases.CreateAccountTest"/>
-      <class name="testCases.AccountDetailsAddLocationTest"/>
-      <class name="testCases.PurchaserEditUpdateBillingDetailsTest"/>
-      <class name="testCases.AccountDetailsOrdersTest"/>
-      <class name="testCases.PurchaserOnlineEducationTest"/>
-      <class name="testCases.ProductsAndBundlesTest"/>
-      <class name="testCases.ObserverLoginTest"/>
-      <class name="testCases.UsersTest"/>
-      <class name="testCases.EducationFlowsTest"/>
-      <class name="testCases.AccountDetailsCreateGroupTest"/>
-      <class name="testCases.AccountDetailsOnlineEducationTest"/>
-      <class name="testCases.AdminLoginTest"/>
+      <!--> ADMIN - LOGIN TESTS -->
+      <class name="testCases.AdminAccount.AdminLoginDDT"/>
+      <class name="testCases.AdminAccount.AdminLoginTest"/>
+      <!--> ADMIN - ACCOUNT DETAILS TESTS -->
+      <class name="testCases.AdminAccount.AccountDetailsModulesTests.Settings.BillingTest"/>
+      <class name="testCases.AdminAccount.AccountDetailsModulesTests.Settings.SSOTest"/>
+      <class name="testCases.AdminAccount.AccountDetailsModulesTests.EventsTagsTest"/>
+      <class name="testCases.AdminAccount.AccountDetailsModulesTests.FormsTest"/>
+      <class name="testCases.AdminAccount.AccountDetailsModulesTests.GroupsTest"/>
+      <class name="testCases.AdminAccount.AccountDetailsModulesTests.LocationsTest"/>
+      <class name="testCases.AdminAccount.AccountDetailsModulesTests.OnlineEducationTest"/>
+      <class name="testCases.AdminAccount.AccountDetailsModulesTests.OrdersTest"/>
+      <class name="testCases.AdminAccount.AccountDetailsModulesTests.UsersAndRolesTest"/>
+      <!--> ADMIN - DASHBOARD TESTS -->
+      <class name="testCases.AdminAccount.DashboardTests.CreateAccountTest"/>
+      <class name="testCases.AdminAccount.DashboardTests.DashboardTest"/>
+      <!--> ADMIN - HAMBURGER MENU MODULES TESTS -->
+      <class name="testCases.AdminAccount.HamburgerMenuModulesTests.ContactUsTest"/>
+      <class name="testCases.AdminAccount.HamburgerMenuModulesTests.EducationFlowsTest"/>
+      <class name="testCases.AdminAccount.HamburgerMenuModulesTests.EntitiesAddSupportEntityTest"/>
+      <class name="testCases.AdminAccount.HamburgerMenuModulesTests.EntitiesVisibilityToUser"/>
+      <class name="testCases.AdminAccount.HamburgerMenuModulesTests.ProductsAndBundlesAddBundleTest"/>
+      <class name="testCases.AdminAccount.HamburgerMenuModulesTests.ProductsAndBundlesAddProductTest"/>
+      <class name="testCases.AdminAccount.HamburgerMenuModulesTests.SchedulesTest"/>
+      <class name="testCases.AdminAccount.HamburgerMenuModulesTests.TasksTest"/>
+      <class name="testCases.AdminAccount.HamburgerMenuModulesTests.TemplatesTest"/>
+      <class name="testCases.AdminAccount.HamburgerMenuModulesTests.UsersTest"/>
+      <!--> OBSERVER - TESTS -->
+      <class name="testCases.ObserverAccount.LoginTest"/>
+      <!--> PURCHASER - TESTS -->
+      <class name="testCases.PurchaserAccount.SettingsTabs.BillingTest"/>
+      <class name="testCases.PurchaserAccount.AssignmentsCopyObservationLinkTest"/>
+      <class name="testCases.PurchaserAccount.AssignmentsRegistrationTest"/>
+      <class name="testCases.PurchaserAccount.DashboardNewOrderTest"/>
+      <class name="testCases.PurchaserAccount.DashboardUploadCSVTest"/>
+      <class name="testCases.PurchaserAccount.FormsTest"/>
+      <class name="testCases.PurchaserAccount.SettingsEventsTagsTest"/>
+      <class name="testCases.PurchaserAccount.SettingsOnlineEducationTest"/>
+      <class name="testCases.PurchaserAccount.SettingsPurchaserProvisionedOrderTest"/>
+      <class name="testCases.PurchaserAccount.SettingsUsersAndRolesTest"/>
+      <class name="testCases.PurchaserAccount.TasksTest"/>
+      <class name="testCases.PurchaserAccount.UsersTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

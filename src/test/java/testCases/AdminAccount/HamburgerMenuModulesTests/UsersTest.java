@@ -21,6 +21,7 @@ public class UsersTest extends BaseClass {
 
             loadTestData(
                     "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json",
                     "./testData/AdminAccountData/hamburgerMenuModulesData.json"
             );
 

@@ -99,6 +99,7 @@ public class ProductsAndBundlesAddProductTest extends BaseClass {
             }
 
             //AVAILABILITY
+            commonUtils.scrollToElement(commonUtils.findElementByCssSelector(pb.setExclusionsButton));
             commonUtils.clickOnElement(commonUtils.findElementByCssSelector(pb.setExclusionsButton),
                     "Set Exclusions");
             commonUtils.enterValueInTextField(commonUtils.findElementByCssSelector(
@@ -109,10 +110,12 @@ public class ProductsAndBundlesAddProductTest extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementById(pb.exclusionsSaveButton), "Save");
 
             //SHIPPING SETTINGS
+            commonUtils.scrollToElement(commonUtils.findElementById(pb.outboundShippingToAssigneeMaxTimeDropdown));
             commonUtils.selectDropDownValue(commonUtils.findElementById(pb.outboundShippingToAssigneeMaxTimeDropdown),
                     getTestData("outboundShippingToAssigneeMaximumTime"));
 
             //PRODUCT DETAILS
+            commonUtils.scrollToBottomAndClick(commonUtils.findElementById(pb.vendorProductIdField));
             commonUtils.enterValueInTextField(commonUtils.findElementById(pb.vendorProductIdField),
                     "Product" + randomNumbers(5));
             commonUtils.selectDropDownValue(commonUtils.findElementById(pb.warehouseNameDropdown),
@@ -165,7 +168,7 @@ public class ProductsAndBundlesAddProductTest extends BaseClass {
                 System.out.println("This option doesn't have a Date field");
             }
 
-            commonUtils.clickOnElement(commonUtils.findElementById(pb.saveButton), "Save");
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(pb.saveButton), "Save");
 
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(
                             usersAndRolesPage.dialogueText),

@@ -1,5 +1,7 @@
 {
 	"adminEmail" : "avinash.jha@ksolves.com",
 	"adminPassword" : "dev@123",
-	"invalidCredentialsAlertMessage" : "Wrong Credentials"
+	"invalidCredentialsAlertMessage" : "Wrong Credentials",
+	"emailErrorText" : "Please enter your email.",
+	"passwordErrorText" : "Please enter your password."
 }
