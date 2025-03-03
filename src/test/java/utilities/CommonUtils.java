@@ -220,24 +220,16 @@ public class CommonUtils extends BaseClass {
 
     public void scrollToBottomAndClick(WebElement element) {
         try {
+            // Scroll to the bottom of the page in small increments
             JavascriptExecutor js = (JavascriptExecutor) driver;
-            boolean elementFound = false;
-
-            // Scroll the page in small increments and check for the element's visibility
-            while (!elementFound) {
-                js.executeScript("window.scrollBy(0, 500);");
-                Thread.sleep(500);
-
-                try {
-                    js.executeScript("arguments[0].scrollIntoView(true);", element);
-                    waitForElementToBeVisible(element, 10);  // Wait for element to be visible
-                    element.click();
-                    elementFound = true;
-                } catch (Exception e) {
-                    // If the element is not visible yet, continue scrolling
-                    System.out.println("Element not found, scrolling more...");
-                }
+            for (int i = 0; i < 10; i++) {
+                js.executeScript("window.scrollBy(0, 500);");  // Scroll down by 500px at a time
+                Thread.sleep(500);  // Wait for the page to load and update the DOM
             }
+
+            js.executeScript("arguments[0].scrollIntoView(true);", element);
+            waitForElementToBeVisible(element,10);
+            element.click();
         } catch (Exception e) {
             System.err.println("Error during scrolling and clicking the element: " + e.getMessage());
         }
