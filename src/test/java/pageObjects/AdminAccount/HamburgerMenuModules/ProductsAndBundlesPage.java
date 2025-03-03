@@ -1,9 +1,10 @@
-package pageObjects;
+package pageObjects.AdminAccount.HamburgerMenuModules;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
 import java.awt.*;

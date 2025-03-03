@@ -1,7 +1,6 @@
-package pageObjects;
+package pageObjects.AdminAccount.HamburgerMenuModules;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import pageObjects.BasePage;
 
 public class TemplatesPage extends BasePage {
 

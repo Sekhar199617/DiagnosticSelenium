@@ -1,6 +1,7 @@
-package pageObjects;
+package pageObjects.AdminAccount.HamburgerMenuModules;
 
 import org.openqa.selenium.WebDriver;
+import pageObjects.BasePage;
 
 public class SchedulesPage extends BasePage {
 

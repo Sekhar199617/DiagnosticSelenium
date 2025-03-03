@@ -1,12 +1,12 @@
-package testCases;
+package testCases.AdminAccount.HamburgerMenuModulesTests;
 
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.DashboardPage;
-import pageObjects.ProductsAndBundlesPage;
+import pageObjects.AdminAccount.AccountDetailsModules.UsersAndRolesPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.AdminAccount.HamburgerMenuModules.ProductsAndBundlesPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -160,7 +160,7 @@ public class ProductsAndBundlesTest extends BaseClass {
 
             commonUtils.clickOnElement(commonUtils.findElementById(pb.saveButton), "Save");
 
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),
                     p.getProperty("addProductPromptWindowText"),
                     commonUtils.findElementByXpath(au.dialogueOkButton));

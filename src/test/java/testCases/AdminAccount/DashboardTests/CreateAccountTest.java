@@ -1,14 +1,13 @@
-package testCases;
+package testCases.AdminAccount.DashboardTests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageObjects.AccountDetailsAddFormsPage;
-import pageObjects.CreateAccountPage;
-import pageObjects.DashboardPage;
+import pageObjects.AdminAccount.AccountDetailsModules.FormsPage;
+import pageObjects.AdminAccount.Dashboard.CreateAccountPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -20,7 +19,7 @@ public class CreateAccountTest extends BaseClass {
 	public CreateAccountPage createAccountPage;
 	public String newAccountName;
 	public DashboardPage dp;
-	public AccountDetailsAddFormsPage af;
+	public FormsPage af;
 
 	@Test(groups = { "Smoke" }, priority = 1)
 	public void verify_Create_Account() {
@@ -31,7 +30,7 @@ public class CreateAccountTest extends BaseClass {
 			createAccountPage = new CreateAccountPage(driver);
 			commonUtils = new CommonUtils(driver);
 			dp = new DashboardPage(driver);
-		    af = new AccountDetailsAddFormsPage(driver);
+		    af = new FormsPage(driver);
 
 			newAccountName = randomString();
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(createAccountPage.clickCreateAccount),null );

@@ -1,6 +1,4 @@
-package pageObjects;
-
-import org.openqa.selenium.WebDriver;
+package pageObjects.AdminAccount.HamburgerMenuModules;
 
 public class ContactUsPage {
 

@@ -1,9 +1,9 @@
-package testCases;
+package testCases.AdminAccount.HamburgerMenuModulesTests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.DashboardPage;
-import pageObjects.ProductsAndBundlesPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.AdminAccount.HamburgerMenuModules.ProductsAndBundlesPage;
 import pageObjects.PurchaseLevelAccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;

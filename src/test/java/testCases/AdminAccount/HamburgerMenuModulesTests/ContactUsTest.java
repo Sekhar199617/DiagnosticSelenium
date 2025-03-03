@@ -1,9 +1,9 @@
-package testCases;
+package testCases.AdminAccount.HamburgerMenuModulesTests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.ContactUsPage;
-import pageObjects.DashboardPage;
+import pageObjects.AdminAccount.HamburgerMenuModules.ContactUsPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -13,7 +13,13 @@ public class ContactUsTest extends BaseClass {
     public void verifyContactUs() {
         try {
             logger.info("****** Starting Contact Us Test ******");
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
+
+            loadTestData(
+                    "./testData/adminLoginData.json",
+                    "./testData/hamburgerMenuModulesData.json"
+            );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
@@ -26,13 +32,13 @@ public class ContactUsTest extends BaseClass {
                     randomString() + "@gmail.com");
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(cu.phoneField), randomNumbers(10));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(cu.companyOrAccountField),
-                    p.getProperty("company"));
+                    getTestData("company"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(cu.preferredContactMethodDropdown),
-                    p.getProperty("preferredContactMethod"));
+                    getTestData("preferredContactMethod"));
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(cu.questionTypeDropdown),
-                    p.getProperty("questionType"));
+                    getTestData("questionType"));
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(cu.messageField),
-                    p.getProperty("queryText"));
+                    getTestData("queryText"));
             commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(cu.submitRequestButton));
         }catch(Exception e)
         {

@@ -1,9 +1,9 @@
-package testCases;
+package testCases.AdminAccount.HamburgerMenuModulesTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.DashboardPage;
-import pageObjects.EducationFlowsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.UsersAndRolesPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.AdminAccount.HamburgerMenuModules.EducationFlowsPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -14,7 +14,12 @@ public class EducationFlowsTest extends BaseClass {
 
         logger.info("****** Starting Educational Flows Test ******");
         try{
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
+            loadTestData(
+                    "./testData/adminLoginData.json",
+                    "./testData/hamburgerMenuModulesData.json"
+            );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
@@ -26,23 +31,23 @@ public class EducationFlowsTest extends BaseClass {
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ef.educationFlowNameField),
                     randomString());
             commonUtils.selectDropDownValueWithClick(commonUtils.findElementsByXpath(ef.list),
-                    p.getProperty("purposeOfFlow"));
+                    getTestData("purposeOfFlow"));
             commonUtils.validateCheckbox(commonUtils.findElementByXpath(ef.activeCheckbox));
             commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(ef.saveButton));
             commonUtils.validateGetText(commonUtils.findElementByXpath(ef.dialogueText),
-                    p.getProperty("educationFlowDialogueText"));
+                    getTestData("educationFlowDialogueText"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ef.educationFlowDialogue), "Ok");
 
             //Update Functionality
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ef.educationFlowNameField),
                     randomString() + "updated");
             commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ef.purposeOfFlowDropDown),
-                    p.getProperty("updatedPurposeOfFlow"));
+                    getTestData("updatedPurposeOfFlow"));
             commonUtils.validateCheckbox(commonUtils.findElementByXpath(ef.activeCheckbox));
             commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(ef.updateButton));
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),
-                    p.getProperty("updatedEducationFlowDialogueText"),
+                    getTestData("updatedEducationFlowDialogueText"),
                     commonUtils.findElementByXpath(au.dialogueOkButton));
         }catch(Exception e)
         {

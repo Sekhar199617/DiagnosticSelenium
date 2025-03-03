@@ -1,14 +1,15 @@
-package pageObjects;
+package pageObjects.AdminAccount.HamburgerMenuModules;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
 import java.util.List;
 import java.util.Properties;
 
-public class EntityPage extends BasePage{
+public class EntityPage extends BasePage {
     CommonUtils commonUtils;
     Properties p;
     public String entityVariableName;

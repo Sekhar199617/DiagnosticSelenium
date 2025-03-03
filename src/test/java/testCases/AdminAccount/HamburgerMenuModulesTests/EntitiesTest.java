@@ -1,9 +1,9 @@
-package testCases;
+package testCases.AdminAccount.HamburgerMenuModulesTests;
 
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.DashboardPage;
-import pageObjects.EntitiesPage;
+import pageObjects.AdminAccount.AccountDetailsModules.UsersAndRolesPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.AdminAccount.HamburgerMenuModules.EntitiesPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -85,7 +85,7 @@ public class EntitiesTest extends BaseClass {
         commonUtils.validateCheckbox(commonUtils.findElementByXpath(ep.activeCheckbox));
         commonUtils.scrollToBottomAndClick(commonUtils.findElementById(ep.saveButton));
 
-        AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+        UsersAndRolesPage au = new UsersAndRolesPage(driver);
         commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),
                 p.getProperty("entityDialogueText"),
                 commonUtils.findElementByXpath(au.dialogueOkButton));
