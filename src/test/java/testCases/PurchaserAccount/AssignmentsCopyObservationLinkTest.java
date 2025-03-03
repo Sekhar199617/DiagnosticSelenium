@@ -1,29 +1,26 @@
-package testCases;
+package testCases.PurchaserAccount;
 
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.Test;
-import pageObjects.AccountDetailsPage;
-import pageObjects.DashboardPage;
-import pageObjects.PurchaseLevelAccountPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
-public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
+public class AssignmentsCopyObservationLinkTest extends BaseClass {
 
 
 
     public CommonUtils commonUtils;
-    public PurchaseLevelAccountPage ob;
+    public AccountPage ob;
 
     @Test(groups = {"Smoke"})
     public void VerifyPurchaseCopyLinkFromObservationColumn() {
@@ -40,7 +37,7 @@ public class PurchaseCopyLinkFromObservationColumnTest extends BaseClass {
             dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            ob = new PurchaseLevelAccountPage(driver);
+            ob = new AccountPage(driver);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 

@@ -1,4 +1,4 @@
-package testCases;
+package testCases.AdminAccount;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import testBase.BaseClass;

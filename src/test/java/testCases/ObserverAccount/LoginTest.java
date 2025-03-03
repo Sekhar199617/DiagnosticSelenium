@@ -1,16 +1,13 @@
-package testCases;
+package testCases.ObserverAccount;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import pageObjects.LoginPage;
-import pageObjects.ObserverHomePage;
+import pageObjects.ObserverAccount.HomePage;
 import testBase.BaseClass;
 
-import java.util.List;
-
-public class ObserverLoginTest extends BaseClass {
+public class LoginTest extends BaseClass {
 	
 	@Test(groups= {"Smoke"})
 	public void verifyObserverLoginAndVideoPresence()
@@ -20,7 +17,7 @@ public class ObserverLoginTest extends BaseClass {
 			logger.info("****** Starting Observer Login and Video Presence Test Case ******");
 			login(p.getProperty("observerEmail"), p.getProperty("observerPassword"), false);
 
-			ObserverHomePage oh = new ObserverHomePage();
+			HomePage oh = new HomePage();
 			String actualText = commonUtils.getTextFromElement(commonUtils.findElementByXpath(
 					oh.videoObservationFlowText));
 			Assert.assertEquals(actualText, "Video Observation Flow");

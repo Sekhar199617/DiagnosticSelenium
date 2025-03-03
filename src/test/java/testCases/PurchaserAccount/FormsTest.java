@@ -1,20 +1,20 @@
-package testCases;
+package testCases.PurchaserAccount;
 
 import org.testng.annotations.Test;
 import org.testng.Assert;
-import pageObjects.AccountDetailsPage;
-import pageObjects.DashboardPage;
-import pageObjects.PurchaseLevelAccountPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaserCopyFormUrlTest extends BaseClass {
+public class FormsTest extends BaseClass {
 
     public CommonUtils commonUtils;
-    public PurchaseLevelAccountPage ob;
+    public AccountPage ob;
 
     @Test(groups = {"Smoke"})
     public void VerifyPurchaserCopyFormUrl(){
@@ -30,7 +30,7 @@ public class PurchaserCopyFormUrlTest extends BaseClass {
             dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            ob = new PurchaseLevelAccountPage(driver);
+            ob = new AccountPage(driver);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 

@@ -1,15 +1,18 @@
-package testCases;
+package testCases.PurchaserAccount;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import pageObjects.*;
+import pageObjects.AdminAccount.AccountDetailsModules.UsersAndRolesPage;
+import pageObjects.AdminAccount.AccountDetailsModules.OnlineEducationPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaserOnlineEducationTest extends BaseClass {
+public class SettingsOnlineEducationTest extends BaseClass {
 
     @Test(groups= {"Smoke"})
     public void verifyExperiencesForElectronicBundlesPresence() {
@@ -21,9 +24,9 @@ public class PurchaserOnlineEducationTest extends BaseClass {
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             DashboardPage dashboardPage = new DashboardPage(driver);
-            AccountDetailsOnlineEducationPage aoe = new AccountDetailsOnlineEducationPage(driver);
+            OnlineEducationPage aoe = new OnlineEducationPage(driver);
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
             dashboardPage.searchForItem(p.getProperty("accountName"));

@@ -1,6 +1,6 @@
-package pageObjects;
+package pageObjects.ObserverAccount;
 
-public class ObserverHomePage {
+public class HomePage {
     public String videoObservationFlowText = "//h3[normalize-space()='Video Observation Flow']";
     public String videoScreen = "//video[@id='stream-elem']";
     public String videoVerificationTabText = "//button[normalize-space()='Video Verification']";

@@ -1,4 +1,4 @@
-package testCases;
+package testCases.PurchaserAccount;
 
 import org.testng.annotations.Test;
 import org.openqa.selenium.By;
@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import pageObjects.AccountDetailsPage;
-import pageObjects.DashboardPage;
-import pageObjects.PurchaseLevelAccountPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -17,10 +17,10 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClass {
+public class DashboardNewOrderTest extends BaseClass {
 
     public CommonUtils commonUtils;
-    public PurchaseLevelAccountPage pl;
+    public AccountPage pl;
 
     @Test(groups = {"Smoke"})
     public void VerifyPurchaserNewOrderTestArrivedAndTestShippedMailTest() {
@@ -37,7 +37,7 @@ public class PurchaserNewOrderTestArrivedAndTestShippedMailTest extends BaseClas
             dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-             pl = new PurchaseLevelAccountPage(driver);
+             pl = new AccountPage(driver);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
