@@ -34,13 +34,14 @@ public class BillingTest extends BaseClass {
             BillingPage billingPage = new BillingPage();
 
             loadTestData(
-                    "./testData/adminLoginData.json",
-                    "./testData/accountDetailsData.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json"
             );
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
-            dp.searchForItem(p.getProperty("accountName"));
+            dp.searchForItem(getTestData("accountName"));
             dp.clickView();
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Settings");

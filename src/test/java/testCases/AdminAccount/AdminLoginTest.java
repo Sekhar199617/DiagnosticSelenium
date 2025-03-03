@@ -10,9 +10,10 @@ public class AdminLoginTest extends BaseClass {
 	{
 		try {
 			logger.info("****** Starting Admin Login Test Case ******");
-			
-			String jsonPath = "./testData//adminLoginData.json";
-			loadTestData(jsonPath);
+
+			loadTestData(
+					"./testData/AdminAccountData/adminLoginData.json"
+			);
 			
 			login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 			Thread.sleep(3000);
@@ -21,5 +22,4 @@ public class AdminLoginTest extends BaseClass {
 		}
 		logger.info("****** Finished Admin Login Test Case ******");
 	}
-
 }

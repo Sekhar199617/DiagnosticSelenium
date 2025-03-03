@@ -14,41 +14,44 @@ public class EducationFlowsTest extends BaseClass {
 
         logger.info("****** Starting Educational Flows Test ******");
         try{
+
+            CommonUtils commonUtils = new CommonUtils(driver);
+            DashboardPage dashboardPage = new DashboardPage(driver);
+            UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
+            EducationFlowsPage educationFlowsPage = new EducationFlowsPage(driver);
+
             loadTestData(
-                    "./testData/adminLoginData.json",
-                    "./testData/hamburgerMenuModulesData.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/hamburgerMenuModulesData.json"
             );
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
-            CommonUtils commonUtils = new CommonUtils(driver);
-
-            dp.selectHamburgerTab("Education Flows");
-
-            EducationFlowsPage ef = new EducationFlowsPage(driver);
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(ef.addButton), "Add");
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ef.educationFlowNameField),
+            dashboardPage.selectHamburgerTab("Education Flows");
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(educationFlowsPage.addButton), "Add");
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(educationFlowsPage.educationFlowNameField),
                     randomString());
-            commonUtils.selectDropDownValueWithClick(commonUtils.findElementsByXpath(ef.list),
+            commonUtils.selectDropDownValueWithClick(commonUtils.findElementsByXpath(educationFlowsPage.list),
                     getTestData("purposeOfFlow"));
-            commonUtils.validateCheckbox(commonUtils.findElementByXpath(ef.activeCheckbox));
-            commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(ef.saveButton));
-            commonUtils.validateGetText(commonUtils.findElementByXpath(ef.dialogueText),
+            commonUtils.validateCheckbox(commonUtils.findElementByXpath(educationFlowsPage.activeCheckbox));
+            commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(educationFlowsPage.saveButton));
+            commonUtils.validateGetText(commonUtils.findElementByXpath(educationFlowsPage.dialogueText),
                     getTestData("educationFlowDialogueText"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(ef.educationFlowDialogue), "Ok");
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(educationFlowsPage.educationFlowDialogue),
+                    "Ok");
 
             //Update Functionality
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ef.educationFlowNameField),
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(educationFlowsPage.educationFlowNameField),
                     randomString() + "updated");
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ef.purposeOfFlowDropDown),
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(educationFlowsPage.purposeOfFlowDropDown),
                     getTestData("updatedPurposeOfFlow"));
-            commonUtils.validateCheckbox(commonUtils.findElementByXpath(ef.activeCheckbox));
-            commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(ef.updateButton));
-            UsersAndRolesPage au = new UsersAndRolesPage(driver);
-            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),
+            commonUtils.validateCheckbox(commonUtils.findElementByXpath(educationFlowsPage.activeCheckbox));
+            commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(educationFlowsPage.updateButton));
+
+            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(
+                            usersAndRolesPage.dialogueText),
                     getTestData("updatedEducationFlowDialogueText"),
-                    commonUtils.findElementByXpath(au.dialogueOkButton));
+                    commonUtils.findElementByXpath(usersAndRolesPage.dialogueOkButton));
         }catch(Exception e)
         {
             Assert.fail();

@@ -14,41 +14,42 @@ public class OrdersTest extends BaseClass {
 
         logger.info("****** Starting Provisioned Orders Test ******");
         try {
+
+            OrdersPage ordersPage = new OrdersPage(driver);
+            CommonUtils commonUtils = new CommonUtils(driver);
+            AccountDetailsPage ad = new AccountDetailsPage(driver);
+            DashboardPage dashboardPage = new DashboardPage(driver);
+
             loadTestData(
-                    "./testData/adminLoginData.json",
-                    "./testData/accountDetailsData.json",
-                    "./testData/dashboardData.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json"
             );
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
-            CommonUtils commonUtils = new CommonUtils(driver);
+            dashboardPage.searchForItem(getTestData("accountName"));
+            dashboardPage.clickView();
 
-            dp.searchForItem(getTestData("accountName"));
-            dp.clickView();
-
-            AccountDetailsPage ad = new AccountDetailsPage(driver);
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Orders");
-
-            OrdersPage po = new OrdersPage(driver);
-            commonUtils.selectRadioButton(commonUtils.findElementByXpath(po.provisionedOrdersRadioButton));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(po.addText), null);
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(po.purchasableBundleDropDown),
+            commonUtils.selectRadioButton(commonUtils.findElementByXpath(
+                    ordersPage.provisionedOrdersRadioButton));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(ordersPage.addText), null);
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ordersPage.purchasableBundleDropDown),
                     getTestData("purchasableBundle"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(po.availableShippingOptions),
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ordersPage.availableShippingOptions),
                     getTestData("availableShippingOptions"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(po.availableVariationsOptions),
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ordersPage.availableVariationsOptions),
                     getTestData("availableVariationsOptions"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(po.noOfUnitsDropDown),
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ordersPage.noOfUnitsDropDown),
                     getTestData("noOfUnits"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(po.pricePerUnit),
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ordersPage.pricePerUnit),
                     randomNumbers(3));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(po.shippingAmountPerUnit),
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ordersPage.shippingAmountPerUnit),
                     randomNumbers(3));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(po.estimatedTaxField),
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ordersPage.estimatedTaxField),
                     randomNumbers(3));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(po.addOrderButton), null);
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(ordersPage.addOrderButton), null);
         }catch(Exception e)
         {
             Assert.fail();

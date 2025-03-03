@@ -11,35 +11,35 @@ public class ContactUsTest extends BaseClass {
 
     @Test
     public void verifyContactUs() {
+        logger.info("****** Starting Contact Us Test ******");
         try {
-            logger.info("****** Starting Contact Us Test ******");
+
+            ContactUsPage contactUsPage = new ContactUsPage();
+            DashboardPage dashboardPage = new DashboardPage(driver);
+            CommonUtils commonUtils = new CommonUtils(driver);
 
             loadTestData(
-                    "./testData/adminLoginData.json",
-                    "./testData/hamburgerMenuModulesData.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/hamburgerMenuModulesData.json"
             );
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
-            CommonUtils commonUtils = new CommonUtils(driver);
-            ContactUsPage cu = new ContactUsPage();
-
-            dp.selectHamburgerTab("Contact Us");
-
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(cu.nameField), randomString());
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(cu.emailField),
+            dashboardPage.selectHamburgerTab("Contact Us");
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(contactUsPage.nameField), randomString());
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(contactUsPage.emailField),
                     randomString() + "@gmail.com");
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(cu.phoneField), randomNumbers(10));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(cu.companyOrAccountField),
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(contactUsPage.phoneField),
+                    randomNumbers(10));
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(contactUsPage.companyOrAccountField),
                     getTestData("company"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(cu.preferredContactMethodDropdown),
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(contactUsPage.preferredContactMethodDropdown),
                     getTestData("preferredContactMethod"));
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(cu.questionTypeDropdown),
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(contactUsPage.questionTypeDropdown),
                     getTestData("questionType"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(cu.messageField),
+            commonUtils.enterValueInTextField(commonUtils.findElementByXpath(contactUsPage.messageField),
                     getTestData("queryText"));
-            commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(cu.submitRequestButton));
+            commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(contactUsPage.submitRequestButton));
         }catch(Exception e)
         {
             Assert.fail();

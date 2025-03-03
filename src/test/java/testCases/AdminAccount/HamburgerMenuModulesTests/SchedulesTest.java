@@ -14,48 +14,55 @@ public class SchedulesTest extends BaseClass {
     public void verifyCreateObserver() {
         logger.info("****** Starting Create Observer Test ******");
         try{
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
+            DashboardPage dashboardPage = new DashboardPage(driver);
+            SchedulesPage schedulesPage = new SchedulesPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
+            UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
 
-            dp.selectHamburgerTab("Schedules");
+            loadTestData(
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json"
+            );
 
-            SchedulesPage sp = new SchedulesPage(driver);
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.editScheduleButton), null);
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.newObserverButton), null);
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
-            UsersAndRolesPage au = new UsersAndRolesPage(driver);
+            dashboardPage.selectHamburgerTab("Schedules");
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(schedulesPage.editScheduleButton),
+                    null);
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(schedulesPage.newObserverButton),
+                    null);
+
             commonUtils.createUser(
-                    au.newUserNameField,
+                    usersAndRolesPage.newUserNameField,
                     randomString(),
-                    au.mobileCountryCodeDropDown,
-                    au.countryList,
-                    au.phoneNumberField,
-                    au.emailField,
-                    au.roleDropDown,
-                    au.userTypeDropDown,
-                    au.licenseIDField,
-                    au.credentialsField,
-                    au.bundlesNotAttachedField,
-                    au.rightArrow,
-                    au.selectedBundleField,
-                    au.additionalPriviligesCheckboxesList,
-                    au.supportManagerPriviligesCheckboxesList,
-                    au.userTimeZoneRadioButton,
-                    au.userDefaultTimeZoneDropDown,
-                    au.activeCheckbox,
-                    au.saveButton,
-                    au.dialogueText,
-                    au.dialogueOkButton,
-                    p.getProperty("mobileCountryCode"),
+                    usersAndRolesPage.mobileCountryCodeDropDown,
+                    usersAndRolesPage.countryList,
+                    usersAndRolesPage.phoneNumberField,
+                    usersAndRolesPage.emailField,
+                    usersAndRolesPage.roleDropDown,
+                    usersAndRolesPage.userTypeDropDown,
+                    usersAndRolesPage.licenseIDField,
+                    usersAndRolesPage.credentialsField,
+                    usersAndRolesPage.bundlesNotAttachedField,
+                    usersAndRolesPage.rightArrow,
+                    usersAndRolesPage.selectedBundleField,
+                    usersAndRolesPage.additionalPriviligesCheckboxesList,
+                    usersAndRolesPage.supportManagerPriviligesCheckboxesList,
+                    usersAndRolesPage.userTimeZoneRadioButton,
+                    usersAndRolesPage.userDefaultTimeZoneDropDown,
+                    usersAndRolesPage.activeCheckbox,
+                    usersAndRolesPage.saveButton,
+                    usersAndRolesPage.dialogueText,
+                    usersAndRolesPage.dialogueOkButton,
+                    getTestData("mobileCountryCode"),
                     randomNumbers(10),
-                    p.getProperty("role"),
-                    p.getProperty("observerUserType"),
-                    p.getProperty("licenseID"),
-                    p.getProperty("credentials"),
-                    p.getProperty("defaultTimeZone"),
-                    p.getProperty("dialogueText")
+                    getTestData("role"),
+                    getTestData("observerUserType"),
+                    randomNumbers(6), //license id
+                    randomAlphaNumeric(), //credentials
+                    getTestData("defaultTimeZone"),
+                    getTestData("newUsersDialogueText")
             );
         }catch (Exception e)
         {

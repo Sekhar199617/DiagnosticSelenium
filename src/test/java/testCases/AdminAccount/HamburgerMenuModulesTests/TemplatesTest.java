@@ -14,47 +14,57 @@ public class TemplatesTest extends BaseClass {
     public void verifyAddNewMessageSet() {
         logger.info("****** Starting Add New Message Set Test ******");
         try{
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
+            DashboardPage dashboardPage = new DashboardPage(driver);
+            TemplatesPage templatesPage = new TemplatesPage(driver);
+            UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
 
-            dp.selectHamburgerTab("Templates");
+            loadTestData(
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/hamburgerMenuModulesData.json"
+            );
 
-            TemplatesPage tp = new TemplatesPage(driver);
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(tp.addButton), "Add");
-            commonUtils.selectDropDownValue(commonUtils.findElementByName(tp.copyMessagingTemplateDropDown),
-                    p.getProperty("copyMessagingTemplate"));
-            commonUtils.enterValueInTextField(commonUtils.findElementById(tp.messagingSetNameField), randomString());
-            commonUtils.validateCheckbox(commonUtils.findElementByName(tp.allowAccountsToSelectThisMessagingSet));
-            commonUtils.enterValueInTextField(commonUtils.findElementByCssSelector(tp.webSiteNameField),
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            dashboardPage.selectHamburgerTab("Templates");
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(templatesPage.addButton), "Add");
+            commonUtils.selectDropDownValue(commonUtils.findElementByName(templatesPage.copyMessagingTemplateDropDown),
+                    getTestData("copyMessagingTemplate"));
+            commonUtils.enterValueInTextField(commonUtils.findElementById(templatesPage.messagingSetNameField),
+                    randomString());
+            commonUtils.validateCheckbox(commonUtils.findElementByName(templatesPage.allowAccountsToSelectThisMessagingSet));
+
+            commonUtils.enterValueInTextField(commonUtils.findElementByCssSelector(templatesPage.webSiteNameField),
                     randomString() + " Site");
-            commonUtils.enterValueInTextField(commonUtils.findElementByName(tp.emailFromNameForPurchasersField),
+            commonUtils.enterValueInTextField(commonUtils.findElementByName(templatesPage.emailFromNameForPurchasersField),
                     randomString() + "namepurch");
-            commonUtils.enterValueInTextField(commonUtils.findElementByName(tp.emailFromAddressForPurchasersField),
+            commonUtils.enterValueInTextField(commonUtils.findElementByName(templatesPage.emailFromAddressForPurchasersField),
                     randomString() + "addresspurch@gmail.com");
-            commonUtils.enterValueInTextField(commonUtils.findElementByName(tp.emailFromNameForAssigneesField),
+            commonUtils.enterValueInTextField(commonUtils.findElementByName(templatesPage.emailFromNameForAssigneesField),
                     randomString() + "nameassign");
 
-            commonUtils.enterValueInTextField(commonUtils.findElementByName(tp.emailFromAddressForAssigneesField),
+            commonUtils.enterValueInTextField(commonUtils.findElementByName(templatesPage.emailFromAddressForAssigneesField),
                     randomString() + "addressassign@gmail.com");
-            commonUtils.enterValueInTextField(commonUtils.findElementByName(tp.websiteURLField),
-                    p.getProperty("websiteURL"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByName(tp.provisioningSystemURLField),
-                    p.getProperty("provisioningSystemURL"));
-            commonUtils.enterValueInTextField(commonUtils.findElementByName(tp.supportPhoneField), randomNumbers(10));
+            commonUtils.enterValueInTextField(commonUtils.findElementByName(templatesPage.websiteURLField),
+                    getTestData("websiteURL"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByName(templatesPage.provisioningSystemURLField),
+                    getTestData("provisioningSystemURL"));
+            commonUtils.enterValueInTextField(commonUtils.findElementByName(templatesPage.supportPhoneField),
+                    randomNumbers(10));
+
             String logoFilePath = System.getProperty("user.dir") + File.separator + "src" +
                     File.separator + "test" + File.separator + "resources" + File.separator + "Selenium_Logo.png";
-            commonUtils.uploadFile(commonUtils.findElementByCssSelector(tp.logoFileUpload), logoFilePath);
+            commonUtils.uploadFile(commonUtils.findElementByCssSelector(templatesPage.logoFileUpload), logoFilePath);
             String faviconFilePath = System.getProperty("user.dir") + File.separator + "src" +
                     File.separator + "test" + File.separator + "resources" + File.separator + "Jenkins.png";
-            commonUtils.uploadFile(commonUtils.findElementByCssSelector(tp.faviconFileUpload), faviconFilePath);
-            commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(tp.addMessageSetButton));
+            commonUtils.uploadFile(commonUtils.findElementByCssSelector(templatesPage.faviconFileUpload), faviconFilePath);
+            commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(templatesPage.addMessageSetButton));
 
-            UsersAndRolesPage au = new UsersAndRolesPage(driver);
-            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),
-                    p.getProperty("messageSetDialogueText"),
-                    commonUtils.findElementByXpath(au.dialogueOkButton));
+            commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(
+                            usersAndRolesPage.dialogueText),
+                    getTestData("messageSetDialogueText"),
+                    commonUtils.findElementByXpath(usersAndRolesPage.dialogueOkButton));
         }catch (Exception e)
         {
             Assert.fail();
