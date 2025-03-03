@@ -6,6 +6,7 @@ import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
 import pageObjects.AdminAccount.AccountDetailsModules.UsersAndRolesPage;
 import pageObjects.AdminAccount.AccountDetailsModules.Settings.SettingsPage;
 import pageObjects.AdminAccount.AccountDetailsModules.Settings.BillingPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 

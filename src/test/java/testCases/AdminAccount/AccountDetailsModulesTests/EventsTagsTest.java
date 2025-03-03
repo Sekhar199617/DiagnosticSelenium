@@ -11,6 +11,8 @@ import pageObjects.*;
 import pageObjects.AdminAccount.AccountDetailsModules.FormsPage;
 import pageObjects.AdminAccount.AccountDetailsModules.EventsTagsPage;
 import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -24,7 +26,7 @@ public class EventsTagsTest extends BaseClass {
     public AccountDetailsPage ad;
     public EventsTagsPage addEventTagsPage;
     public String eventName;
-    public PurchaseLevelAccountPage pl;
+    public AccountPage pl;
     public  String jsonPath;
     public FormsPage addFormsPage;
     public String eventFormName;
@@ -38,7 +40,7 @@ public class EventsTagsTest extends BaseClass {
         commonUtils = new CommonUtils(driver);
         ad = new AccountDetailsPage(driver);
         addEventTagsPage = new EventsTagsPage(driver);
-        pl = new PurchaseLevelAccountPage(driver);
+        pl = new AccountPage(driver);
         jsonPath = "./testData//accountDetailsData.json";
         loadTestData(jsonPath);
         addFormsPage = new FormsPage(driver);

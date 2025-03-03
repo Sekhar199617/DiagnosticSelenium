@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import pageObjects.AdminAccount.AccountDetailsModules.OnlineEducationPage;
 import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
 import pageObjects.AdminAccount.AccountDetailsModules.UsersAndRolesPage;
-import pageObjects.DashboardPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 

@@ -2,7 +2,7 @@ package testCases.AdminAccount.AccountDetailsModulesTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
-import pageObjects.DashboardPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
 import pageObjects.AdminAccount.AccountDetailsModules.OrdersPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;

@@ -21,5 +21,18 @@
   "purchaserBillingCity": "testBillingCity",
   "purchaserBillingState": "testBillingState",
   "purchaserBillingPostalCode": "121212",
-  "purchaserBillingDetailsUpdateMessage": "Account Details Updated"
+  "purchaserBillingDetailsUpdateMessage": "Account Details Updated",
+
+  "****************************** COPY OBSERVATION LINK ********************************": "",
+  "observationLinkCopyValidationMessage" : "Link Copied",
+
+  "****************************** USER UPLOAD ********************************": "",
+  "userUploadAssigneeType" : "Education/Observation Only",
+  "userUploadAssigneeExperience" : "Anti Bundle Experience for Com...",
+  "userAssigneeUploadValidationMessage" : "The Data 1 For Assignees has been Imported Successfully",
+
+  "****************************** COPY FORM URL ********************************": "",
+
+  "copyFormUrlConfirmationMessage" : "Copied Form Link URL to Clipboard",
+  "purchaserFormCopyUrlFormType" : "Kiosk"
 }

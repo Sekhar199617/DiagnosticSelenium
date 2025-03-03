@@ -1,5 +1,6 @@
 package testCases.PurchaserAccount;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
@@ -11,6 +12,7 @@ import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
+import java.sql.Driver;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +20,10 @@ import java.util.List;
 public class Assignments_CopyObservationLinkTest extends BaseClass {
 
 
-
     public CommonUtils commonUtils;
     public AccountPage ob;
+    public DashboardPage dp;
+    public AccountDetailsPage ad;
 
     @Test(groups = {"Smoke"})
     public void VerifyPurchaseCopyLinkFromObservationColumn() {
@@ -28,24 +31,30 @@ public class Assignments_CopyObservationLinkTest extends BaseClass {
         logger.info("****** Starting Purchase Copy Link From Observation Column Test ******");
         try {
 
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
+            loadTestData("./testData/PurchaserAccountData/purchaser.json",
+                    "./testData/AdminAccountData/accountDetailsData.json",
+                    "./testData/AdminAccountData/adminLoginData.json");
 
-            DashboardPage dp = new DashboardPage(driver);
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
+            dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
-            dp.searchForItem(p.getProperty("accountName"));
+            ad = new AccountDetailsPage(driver);
+            ob = new AccountPage(driver);
+
+            dp.searchForItem(getTestData("accountName"));
             dp.clickView();
 
-            AccountDetailsPage ad = new AccountDetailsPage(driver);
-            ob = new AccountPage(driver);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Short wait time
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ob.userTypeDropdown)));
             //Select account admin in user type dropdown
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), p.getProperty("usersUserTypeAccountAdmin"));
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ob.userTypeDropdown), getTestData("usersUserTypeAccountAdmin"));
 
             //Clicking on Assign Test in action dropdown for a account
-            ob.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
+            ob.performTableAction("accountsTableUserRoles", getTestData("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -61,12 +70,10 @@ public class Assignments_CopyObservationLinkTest extends BaseClass {
             ob.clickFirstCopyIcon("detailsAssignmentsTable");
             String copiedURL = ob.getClipboardText();
 
-            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("observationLinkCopyValidationMessage"));
+            commonUtils.validateGetText(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),getTestData("observationLinkCopyValidationMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ob.successfulConfirmationOkButton),null);
 
             ob.openNewTabWithURL(copiedURL);
-
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3)); // Short wait time
 
             try {
                 WebElement saveLanguageButton = wait.until(ExpectedConditions.visibilityOf(commonUtils.findElementByXpath(ob.saveLanguage)));

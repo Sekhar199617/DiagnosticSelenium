@@ -3,18 +3,18 @@ package pageObjects.AdminAccount.AccountDetailsModules;
 import org.openqa.selenium.WebDriver;
 
 import pageObjects.BasePage;
-import pageObjects.PurchaseLevelAccountPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import utilities.CommonUtils;
 
 public class EventsTagsPage extends BasePage {
 
     CommonUtils commonUtils;
-    PurchaseLevelAccountPage pl;
+    AccountPage pl;
 
     public EventsTagsPage(WebDriver driver) {
         super(driver);
         commonUtils = new CommonUtils(driver);
-        pl = new PurchaseLevelAccountPage(driver);
+        pl = new AccountPage(driver);
     }
     public String addEventButton = "//a[@href='events.php?accountId=48&mode=add']";
     public  String eventNameTagField = "(//input[@id='messagingSetName'])[1]";
