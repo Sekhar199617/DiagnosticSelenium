@@ -21,21 +21,27 @@ public class UsersTest extends BaseClass {
         logger.info("****** Starting Purchaser View The User Of Account Level Test ******");
         try{
 
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-
-            DashboardPage dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
-
-            dp.searchForItem(p.getProperty("accountName"));
-            dp.clickView();
-
-            AccountDetailsPage ad = new AccountDetailsPage(driver);
             AccountPage pl = new AccountPage(driver);
+            DashboardPage dp = new DashboardPage(driver);
+            AccountDetailsPage ad = new AccountDetailsPage(driver);
+
+            loadTestData(
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json"
+            );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
+            dp.searchForItem(getTestData("accountName"));
+            dp.clickView();
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
             //Clicking on Assign Test in action dropdown for a account
-            pl.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
+            pl.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"),
+                    "Assign Tests",1);
 
             //Switch the tab
             List<String> tabs = new ArrayList<>(driver.getWindowHandles());
@@ -48,10 +54,11 @@ public class UsersTest extends BaseClass {
             dp.selectHamburgerTab("Users");
 
             //Clicking on view for user in purchase user
-            pl.performTableAction("purchaseUsersTable", p.getProperty("purchaseAccountLevelUserName"), "View", 1);
+            pl.performTableAction("purchaseUsersTable", p.getProperty("purchaseAccountLevelUserName"),
+                    "View", 1);
 
-
-            commonUtils.validateGetText(commonUtils.findElementByXpath(pl.accountLevelHeading),p.getProperty("purchaseAccountLevelHeadingMessage"));
+            commonUtils.validateGetText(commonUtils.findElementByXpath(pl.accountLevelHeading),
+                    p.getProperty("purchaseAccountLevelHeadingMessage"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pl.accountLevelCancelButton),null);
 
         }catch(Exception e)
