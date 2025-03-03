@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dashboard_UploadCSVTest extends BaseClass {
+public class DashboardUploadCSVTest extends BaseClass {
     public CommonUtils commonUtils;
     public DashboardPage dp;
     public AccountDetailsPage ad;

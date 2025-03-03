@@ -12,7 +12,7 @@ import utilities.CommonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Settings_OnlineEducationTest extends BaseClass {
+public class SettingsOnlineEducationTest extends BaseClass {
 
     @Test(groups= {"Smoke"})
     public void verifyExperiencesForElectronicBundlesPresence() {

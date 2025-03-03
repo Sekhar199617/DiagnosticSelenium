@@ -12,12 +12,11 @@ import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-import java.sql.Driver;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Assignments_CopyObservationLinkTest extends BaseClass {
+public class AssignmentsCopyObservationLinkTest extends BaseClass {
 
 
     public CommonUtils commonUtils;

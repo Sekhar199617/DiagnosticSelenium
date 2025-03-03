@@ -30,17 +30,19 @@ public class TasksTest extends BaseClass {
         logger.info("****** Starting Purchaser Dismiss Shipping Task Test ******");
         try {
 
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-
             dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
             ad = new AccountDetailsPage(driver);
             ob = new AccountPage(driver);
             as = new SettingsPage(driver);
+
             loadTestData(
+                    "./testData/AdminAccountData/adminLoginData.json",
                     "./testData/accountDetailsData.json",
                     "./testData/purchaserAccountData/purchaser.json"
             );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
             dp.searchForItem(getTestData("accountName"));
             dp.clickView();

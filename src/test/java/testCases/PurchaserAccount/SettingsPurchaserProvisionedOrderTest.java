@@ -13,7 +13,7 @@ import utilities.CommonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Settings_PurchaserProvisionedOrderTest extends BaseClass {
+public class SettingsPurchaserProvisionedOrderTest extends BaseClass {
 
     @Test
     public void verifyProvisionedOrderCreateEditPresence() {
