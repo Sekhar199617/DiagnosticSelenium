@@ -33,17 +33,21 @@ public class EventsTagsTest extends BaseClass {
     @BeforeMethod (groups = {"Smoke"})
     public void eventCommonStep(){
 
-        login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
-
         dp = new DashboardPage(driver);
         commonUtils = new CommonUtils(driver);
         ad = new AccountDetailsPage(driver);
         addEventTagsPage = new EventsTagsPage(driver);
         pl = new AccountPage(driver);
-        jsonPath = "./testData//accountDetailsData.json";
         loadTestData(jsonPath);
         addFormsPage = new FormsPage(driver);
 
+        loadTestData(
+                "./testData/AdminAccountData/adminLoginData.json",
+                "./testData/AdminAccountData/dashboardData.json",
+                "./testData/AdminAccountData/accountDetailsData.json"
+        );
+
+        login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
         dp.searchForItem(getTestData("accountName"));
         dp.clickView();
