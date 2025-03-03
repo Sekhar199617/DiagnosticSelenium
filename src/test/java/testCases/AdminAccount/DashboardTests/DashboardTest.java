@@ -41,7 +41,7 @@ public class DashboardTest extends BaseClass {
 
         dp.clickView();
 
-        ad.validateAccountDetailsTitle("Account Details for " + p.getProperty("accountName"));
+        ad.validateAccountDetailsTitle("Account Details for " + getTestData("accountName"));
         ad.validateDefaultSelectedTab();
     }
 
