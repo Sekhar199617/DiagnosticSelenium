@@ -13,47 +13,53 @@ public class UsersTest extends BaseClass {
     public void verifyCreateUserTest() {
         logger.info("****** Starting Create User Test ******");
         try{
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
-            DashboardPage dp = new DashboardPage(driver);
+            UsersPage usersPage = new UsersPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
+            DashboardPage dashboardPage = new DashboardPage(driver);
+            UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
 
-            dp.selectHamburgerTab("Users");
+            loadTestData(
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/hamburgerMenuModulesData.json"
+            );
 
-            UsersPage up = new UsersPage(driver);
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(up.createUserButton), "Create User");
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
-            UsersAndRolesPage au = new UsersAndRolesPage(driver);
+            dashboardPage.selectHamburgerTab("Users");
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(usersPage.createUserButton),
+                    "Create User");
+
             commonUtils.createUser(
-                    au.newUserNameField,
+                    usersAndRolesPage.newUserNameField,
                     randomString(),
-                    au.mobileCountryCodeDropDown,
-                    au.countryList,
-                    au.phoneNumberField,
-                    au.emailField,
-                    au.roleDropDown,
-                    au.userTypeDropDown,
-                    au.licenseIDField,
-                    au.credentialsField,
-                    au.bundlesNotAttachedField,
-                    au.rightArrow,
-                    au.selectedBundleField,
-                    au.additionalPriviligesCheckboxesList,
-                    au.supportManagerPriviligesCheckboxesList,
-                    au.userTimeZoneRadioButton,
-                    au.userDefaultTimeZoneDropDown,
-                    au.activeCheckbox,
-                    au.saveButton,
-                    au.dialogueText,
-                    au.dialogueOkButton,
-                    p.getProperty("mobileCountryCode"),
+                    usersAndRolesPage.mobileCountryCodeDropDown,
+                    usersAndRolesPage.countryList,
+                    usersAndRolesPage.phoneNumberField,
+                    usersAndRolesPage.emailField,
+                    usersAndRolesPage.roleDropDown,
+                    usersAndRolesPage.userTypeDropDown,
+                    usersAndRolesPage.licenseIDField,
+                    usersAndRolesPage.credentialsField,
+                    usersAndRolesPage.bundlesNotAttachedField,
+                    usersAndRolesPage.rightArrow,
+                    usersAndRolesPage.selectedBundleField,
+                    usersAndRolesPage.additionalPriviligesCheckboxesList,
+                    usersAndRolesPage.supportManagerPriviligesCheckboxesList,
+                    usersAndRolesPage.userTimeZoneRadioButton,
+                    usersAndRolesPage.userDefaultTimeZoneDropDown,
+                    usersAndRolesPage.activeCheckbox,
+                    usersAndRolesPage.saveButton,
+                    usersAndRolesPage.dialogueText,
+                    usersAndRolesPage.dialogueOkButton,
+                    getTestData("mobileCountryCode"),
                     randomNumbers(10),
-                    p.getProperty("role"),
-                    p.getProperty("usersUserType"),
-                    p.getProperty("licenseID"),
-                    p.getProperty("credentials"),
-                    p.getProperty("defaultTimeZone"),
-                    p.getProperty("dialogueText")
+                    getTestData("role"),
+                    getTestData("usersUserType"),
+                    randomNumbers(6), //licenseID
+                    randomAlphaNumeric(), //credentials
+                    getTestData("defaultTimeZone"),
+                    getTestData("newUsersDialogueText")
             );
         }catch(Exception e)
         {

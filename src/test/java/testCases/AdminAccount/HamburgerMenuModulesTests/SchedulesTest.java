@@ -21,8 +21,8 @@ public class SchedulesTest extends BaseClass {
             UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
 
             loadTestData(
-                    "./testData/adminLoginData.json",
-                    "./testData/accountDetailsData.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json"
             );
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);

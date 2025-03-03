@@ -34,9 +34,9 @@ public class BillingTest extends BaseClass {
             BillingPage billingPage = new BillingPage();
 
             loadTestData(
-                    "./testData/adminLoginData.json",
-                    "./testData/dashboardData.json",
-                    "./testData/accountDetailsData.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json"
             );
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);

@@ -21,8 +21,8 @@ public class TemplatesTest extends BaseClass {
             UsersAndRolesPage usersAndRolesPage = new UsersAndRolesPage(driver);
 
             loadTestData(
-                    "./testData/adminLoginData.json",
-                    "./testData/hamburgerMenuModulesData.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/hamburgerMenuModulesData.json"
             );
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);

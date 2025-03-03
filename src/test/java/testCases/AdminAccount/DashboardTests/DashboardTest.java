@@ -25,8 +25,8 @@ public class DashboardTest extends BaseClass {
         commonUtils = new CommonUtils(driver);
 
         loadTestData(
-                "./testData/adminLoginData.json",
-                "./testData/dashboardData.json"
+                "./testData/AdminAccountData/adminLoginData.json",
+                "./testData/AdminAccountData/dashboardData.json"
         );
 
         login(getTestData("adminEmail"), getTestData("adminPassword"), true);

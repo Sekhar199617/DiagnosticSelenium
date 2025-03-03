@@ -21,9 +21,9 @@ public class OrdersTest extends BaseClass {
             DashboardPage dashboardPage = new DashboardPage(driver);
 
             loadTestData(
-                    "./testData/adminLoginData.json",
-                    "./testData/accountDetailsData.json",
-                    "./testData/dashboardData.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json"
             );
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);

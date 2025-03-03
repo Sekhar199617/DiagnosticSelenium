@@ -26,7 +26,7 @@ public class AdminLoginDDT extends BaseClass {
 			commonUtils = new CommonUtils(driver);
 
 			loadTestData(
-					"./testData/adminLoginData.json"
+					"./testData/AdminAccountData/adminLoginData.json"
 			);
 			
 			if(exp.equalsIgnoreCase("valid"))

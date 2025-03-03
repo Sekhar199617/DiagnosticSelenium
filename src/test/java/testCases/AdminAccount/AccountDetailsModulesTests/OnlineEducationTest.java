@@ -23,9 +23,9 @@ public class OnlineEducationTest extends BaseClass {
             OnlineEducationPage onlineEducationPage = new OnlineEducationPage(driver);
 
             loadTestData(
-                    "./testData/adminLoginData.json",
-                    "./testData/accountDetailsData.json",
-                    "./testData/dashboardData.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/AdminAccountData/accountDetailsData.json"
             );
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);

@@ -21,8 +21,8 @@ public class EducationFlowsTest extends BaseClass {
             EducationFlowsPage educationFlowsPage = new EducationFlowsPage(driver);
 
             loadTestData(
-                    "./testData/adminLoginData.json",
-                    "./testData/hamburgerMenuModulesData.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/hamburgerMenuModulesData.json"
             );
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);

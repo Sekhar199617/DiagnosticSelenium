@@ -27,8 +27,8 @@ public class ProductsAndBundles_AddProductTest extends BaseClass {
             ProductsAndBundlesPage pb = new ProductsAndBundlesPage(driver);
 
             loadTestData(
-                    "./testData/adminLoginData.json",
-                    "./testData/hamburgerMenuModulesData.json"
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/hamburgerMenuModulesData.json"
             );
 
             login(getTestData("adminEmail"), getTestData("adminPassword"), true);

@@ -12,7 +12,7 @@ public class AdminLoginTest extends BaseClass {
 			logger.info("****** Starting Admin Login Test Case ******");
 
 			loadTestData(
-					"./testData/adminLoginData.json"
+					"./testData/AdminAccountData/adminLoginData.json"
 			);
 			
 			login(getTestData("adminEmail"), getTestData("adminPassword"), true);
