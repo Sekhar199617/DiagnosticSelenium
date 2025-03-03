@@ -22,15 +22,23 @@ public class CreateAccountTest extends BaseClass {
 	public FormsPage af;
 
 	@Test(groups = { "Smoke" }, priority = 1)
-	public void verify_Create_Account() {
-		login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
+	public void verifyCreateAccount() {
+
+		logger.info("****** Starting Create Account And Delete Created Account Test Case ******");
 		try {
-			logger.info("****** Starting Create Account And Delete Created Account Test Case ******");
 
 			createAccountPage = new CreateAccountPage(driver);
 			commonUtils = new CommonUtils(driver);
 			dp = new DashboardPage(driver);
 		    af = new FormsPage(driver);
+
+			loadTestData(
+					"./testData/AdminAccountData/adminLoginData.json",
+					"./testData/AdminAccountData/dashboardData.json",
+					"./testData/AdminAccountData/accountDetailsData.json"
+			);
+
+			login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
 			newAccountName = randomString();
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(createAccountPage.clickCreateAccount),null );
@@ -40,7 +48,7 @@ public class CreateAccountTest extends BaseClass {
 			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.phoneField),randomNumbers(10));
 
 			// Validate and select the account type based on the config file
-			String accountType = p.getProperty("accountType");
+			String accountType = getTestData("accountType");
 			if (accountType.equalsIgnoreCase("Individual")) {
 				commonUtils.clickRadioButton(commonUtils.findElementByXpath(createAccountPage.accountTypeIndividualRadioButton));
 			} else if (accountType.equalsIgnoreCase("Company")) {
@@ -51,17 +59,20 @@ public class CreateAccountTest extends BaseClass {
 			}
 
 			commonUtils.selectDropDownValue(commonUtils.findElementByXpath(createAccountPage.diagnosticMessagingSetDropdown),
-					p.getProperty("diagnosticMessagingSetDropdown"));
+					getTestData("diagnosticMessagingSetDropdown"));
 			commonUtils.selectDropDownValue(commonUtils.findElementByXpath(createAccountPage.defaultIntakeFormDropdown),
-					p.getProperty("defaultIntake"));
+					getTestData("defaultIntake"));
 			commonUtils.selectDropDownValue(commonUtils.findElementByXpath(createAccountPage.billingCountryDropdown),
-					p.getProperty("billingCountryName"));
+					getTestData("billingCountryName"));
 			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingAddress_1Field),
-					p.getProperty("billingAddress1"));
+					getTestData("billingAddress1"));
 			commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(createAccountPage.billingCityField));
-			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingCityField), p.getProperty("billingCity"));
-			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingStateField), p.getProperty("billingState"));
-			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingPostcodeField), p.getProperty("postCode"));
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingCityField),
+					getTestData("billingCity"));
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingStateField),
+					getTestData("billingState"));
+			commonUtils.enterValueInTextField(commonUtils.findElementByXpath(createAccountPage.billingPostcodeField),
+					getTestData("postCode"));
 			commonUtils.scrollToBottomAndClick(commonUtils.findElementByXpath(createAccountPage.saveNewAccount_button));
 
 			WebElement accountDetailsElement = commonUtils.findElementByXpath(createAccountPage.newAccountHeading);
@@ -75,7 +86,8 @@ public class CreateAccountTest extends BaseClass {
 			}
 
 			//Click on Back To Search
-			commonUtils.clickOnElement(commonUtils.findElementByXpath(createAccountPage.backToSearchButton),null);
+			commonUtils.clickOnElement(commonUtils.findElementByXpath(createAccountPage.backToSearchButton),
+					null);
 
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(dp.searchButton),null);
 			driver.navigate().refresh();
@@ -88,7 +100,8 @@ public class CreateAccountTest extends BaseClass {
 
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-			WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(commonUtils.findElementByXpath(createAccountPage.deleteAccount)));
+			WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+					commonUtils.findElementByXpath(createAccountPage.deleteAccount)));
 			deleteButton.click();
 
 			commonUtils.clickOnElement(commonUtils.findElementByXpath(af.okButton),null);
@@ -114,6 +127,4 @@ public class CreateAccountTest extends BaseClass {
 		}
 		logger.info("****** Finished Create Account And Delete Created Account Test Case ******");
 	}
-
-
 }

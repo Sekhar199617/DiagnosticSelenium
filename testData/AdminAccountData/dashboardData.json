@@ -1,3 +1,13 @@
 {
-  "accountName" : "Company Test 1"
+  "accountName" : "Company Test 1",
+
+  "***************************** CREATE ACCOUNT **************************": "",
+  "accountType" : "Individual",
+  "diagnosticMessagingSetDropdown" : "Diagnostic.ly Default",
+  "defaultIntake" : "Account Form",
+  "billingCountryName" : "India",
+  "billingAddress1" : "Mumbai",
+  "billingCity" : "Mumbai",
+  "billingState" : "Maharashtra",
+  "postCode" : "400001"
 }
