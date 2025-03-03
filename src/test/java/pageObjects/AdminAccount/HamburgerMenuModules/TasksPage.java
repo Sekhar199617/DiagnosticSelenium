@@ -1,16 +1,17 @@
-package pageObjects;
+package pageObjects.AdminAccount.HamburgerMenuModules;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
 import java.util.List;
 
-public class TaskPage extends BasePage{
+public class TasksPage extends BasePage {
     CommonUtils commonUtils;
 
-    public TaskPage(WebDriver driver) {
+    public TasksPage(WebDriver driver) {
         super(driver);
         commonUtils = new CommonUtils(driver);
     }

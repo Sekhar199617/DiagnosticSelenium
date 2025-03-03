@@ -1,31 +1,29 @@
-package testCases;
-
+package testCases.AdminAccount.HamburgerMenuModulesTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.DashboardPage;
-import pageObjects.SchedulesPage;
+import pageObjects.AdminAccount.AccountDetailsModules.UsersAndRolesPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.AdminAccount.HamburgerMenuModules.UsersPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class SchedulesTest extends BaseClass {
+public class UsersTest extends BaseClass {
 
     @Test
-    public void verifyCreateObserver() {
-        logger.info("****** Starting Create Observer Test ******");
+    public void verifyCreateUserTest() {
+        logger.info("****** Starting Create User Test ******");
         try{
             login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
 
-            dp.selectHamburgerTab("Schedules");
+            dp.selectHamburgerTab("Users");
 
-            SchedulesPage sp = new SchedulesPage(driver);
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.editScheduleButton), null);
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(sp.newObserverButton), null);
+            UsersPage up = new UsersPage(driver);
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(up.createUserButton), "Create User");
 
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.createUser(
                     au.newUserNameField,
                     randomString(),
@@ -51,16 +49,16 @@ public class SchedulesTest extends BaseClass {
                     p.getProperty("mobileCountryCode"),
                     randomNumbers(10),
                     p.getProperty("role"),
-                    p.getProperty("observerUserType"),
+                    p.getProperty("usersUserType"),
                     p.getProperty("licenseID"),
                     p.getProperty("credentials"),
                     p.getProperty("defaultTimeZone"),
                     p.getProperty("dialogueText")
             );
-        }catch (Exception e)
+        }catch(Exception e)
         {
             Assert.fail();
         }
-        logger.info("****** Finished Create Observer Test ******");
+        logger.info("****** Finished Create User Test ******");
     }
 }

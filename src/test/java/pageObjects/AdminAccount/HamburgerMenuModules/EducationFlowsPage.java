@@ -1,5 +1,6 @@
-package pageObjects;
+package pageObjects.AdminAccount.HamburgerMenuModules;
 import org.openqa.selenium.WebDriver;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
 public class EducationFlowsPage extends BasePage {

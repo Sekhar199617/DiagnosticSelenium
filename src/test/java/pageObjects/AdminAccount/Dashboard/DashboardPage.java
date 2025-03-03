@@ -1,6 +1,7 @@
-package pageObjects;
+package pageObjects.AdminAccount.Dashboard;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
 public class DashboardPage extends BasePage {

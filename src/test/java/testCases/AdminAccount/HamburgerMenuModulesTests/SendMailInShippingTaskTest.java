@@ -1,10 +1,10 @@
-package testCases;
+package testCases.AdminAccount.HamburgerMenuModulesTests;
 
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.DashboardPage;
-import pageObjects.TaskPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.AdminAccount.HamburgerMenuModules.TasksPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -18,7 +18,7 @@ public class SendMailInShippingTaskTest extends BaseClass {
 
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
-            TaskPage tp = new TaskPage(driver);
+            TasksPage tp = new TasksPage(driver);
             // Selecting entities from hamburger menu
             dp.selectHamburgerTab("Tasks");
 
