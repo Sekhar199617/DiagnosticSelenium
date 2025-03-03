@@ -17,6 +17,8 @@
   "billingContactState" : "New Jersey",
   "paymentTerms" : "Net 15",
   "entityDialogueText" : "Support Entity Created",
+  "supportEntitiesName" : "Crelio Health",
+  "supportEntityUpdateValidationMessage" : "Support Entity Updated",
 
   "************************************ PRODUCTS AND BUNDLES ***********************": "",
   "productOptionsValidationText" : "If you make the product purchase required, then you must select at least one of the two shipment methods (bulk or individual).",
@@ -28,11 +30,18 @@
   "productInboundShippingCostPaidBy" : "Client",
   "active" : "Until",
   "addProductPromptWindowText" : "Product Created",
+  "bundleTypeDropdown" : "Standard",
+  "bundleUploadSuccessfulMessage" : "Bundle Updated Successfully",
 
   "************************************ TEMPLATES **********************************": "",
   "copyMessagingTemplate" : "Atlantic Council",
   "websiteURL" : "https://development.diagnostic.ly/",
   "provisioningSystemURL" : "https://development.diagnosticprovisioning.com/",
-  "messageSetDialogueText" : "New Message Set Has Been Created"
+  "messageSetDialogueText" : "New Message Set Has Been Created",
+
+  "************************************ TASKS **************************************": "",
+  "pendingTaskAccountName" : "Moin",
+  "pendingTaskAssigneeName" : "Stage Order",
+  "emailSentSuccessfulValidationMessage" : "Email Sent Successfully"
 
 }

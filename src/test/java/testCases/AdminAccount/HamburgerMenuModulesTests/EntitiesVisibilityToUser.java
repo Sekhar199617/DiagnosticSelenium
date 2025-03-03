@@ -8,17 +8,24 @@ import pageObjects.AdminAccount.HamburgerMenuModules.EntityPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class Entities_VisibilityToUser extends BaseClass {
+public class EntitiesVisibilityToUser extends BaseClass {
     @Test
     public void verifySupportEntityVisibleToUser() {
 
         logger.info("****** Starting Support Entity Visible To User Test ******");
         try {
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
             EntityPage ep = new EntityPage(driver);
+
+            loadTestData(
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/AdminAccountData/hamburgerMenuModulesData.json"
+            );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
 
             // Selecting entities from hamburger menu
             dp.selectHamburgerTab("Entities");
@@ -26,7 +33,7 @@ public class Entities_VisibilityToUser extends BaseClass {
             commonUtils.scrollToBottom();
 
             //Here passing name of entity and storing that entity type and clicking on edit option of that entity
-            ep.editSupportEntity(ep.supportEntityChart, p.getProperty("supportEntitiesName"), "Edit");
+            ep.editSupportEntity(ep.supportEntityChart, getTestData("supportEntitiesName"), "Edit");
 
             //In edit entity validating and clicking if the permit checkbox is ticked or not
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ep.AuthenticationTab), null);
@@ -34,13 +41,15 @@ public class Entities_VisibilityToUser extends BaseClass {
             commonUtils.validateAndClickCheckbox(ep.checkboxLocator);
             commonUtils.scrollToBottom();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ep.updateSupportEntityButton), null);
-            commonUtils.validateGetText(commonUtils.findElementByXpath(ep.supportEntityUpdateValidationMessage), p.getProperty("supportEntityUpdateValidationMessage"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(ep.supportEntityUpdatedOKbutton), null);
+            commonUtils.validateGetText(commonUtils.findElementByXpath(ep.supportEntityUpdateValidationMessage),
+                    getTestData("supportEntityUpdateValidationMessage"));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(ep.supportEntityUpdatedOKbutton),
+                    null);
 
             //Clicking accounts tab in hamburger menu
             commonUtils.scrollToUp();
             dp.selectHamburgerTab("Accounts");
-            dp.searchForItem(p.getProperty("accountName"));
+            dp.searchForItem(getTestData("accountName"));
             dp.clickView();
 
             //Clicking on Integration tab of account details page
@@ -53,15 +62,16 @@ public class Entities_VisibilityToUser extends BaseClass {
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ip.newIntegrationButton), null);
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ip.apiMappingButton), null);
             //Selecting the above stored entity type in Integration Dropdown
-            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ip.typesOfIntegrationDropdown),ep.entityVariableName);
+            commonUtils.selectDropDownValue(commonUtils.findElementByXpath(ip.typesOfIntegrationDropdown),
+                    ep.entityVariableName);
 
             //Checking the Support Entities Name is visible or not in partner dropdown
-            ip.validateDropdownValue(ip.partnerDropdown, p.getProperty("supportEntitiesName"));
+            ip.validateDropdownValue(ip.partnerDropdown, getTestData("supportEntitiesName"));
 
         }catch(Exception e)
         {
             Assert.fail();
         }
         logger.info("****** Finished Support Entity Visible To User Test ******");
-        }
     }
+}

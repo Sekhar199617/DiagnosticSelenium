@@ -21,7 +21,7 @@ public class LoginTest extends BaseClass {
 					"./testData/ObserverAccountData/observerLoginData.json"
 			);
 
-			login(getTestData("observerEmail"), getTestData("observerPassword"), true);
+			login(getTestData("observerEmail"), getTestData("observerPassword"), false);
 
 			String actualText = commonUtils.getTextFromElement(commonUtils.findElementByXpath(
 					homePage.videoObservationFlowText));

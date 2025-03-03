@@ -14,19 +14,28 @@ public class TasksTest extends BaseClass {
 
         logger.info("****** Starting Send the Mail on Clicking The Contact Assignee Button in Shipping Task Test ******");
         try {
-            login(p.getProperty("adminEmail"), p.getProperty("adminPassword"), true);
 
             DashboardPage dp = new DashboardPage(driver);
             CommonUtils commonUtils = new CommonUtils(driver);
             TasksPage tp = new TasksPage(driver);
+
+            loadTestData(
+                    "./testData/AdminAccountData/adminLoginData.json",
+                    "./testData/AdminAccountData/dashboardData.json",
+                    "./testData/AdminAccountData/hamburgerMenuModulesData.json"
+            );
+
+            login(getTestData("adminEmail"), getTestData("adminPassword"), true);
+
             // Selecting entities from hamburger menu
             dp.selectHamburgerTab("Tasks");
-
-            tp.clickContactAssignee(p.getProperty("pendingTaskAccountName"),  p.getProperty("pendingTaskAssigneeName"));
-
+            tp.clickContactAssignee(getTestData("pendingTaskAccountName"),
+                    getTestData("pendingTaskAssigneeName"));
             commonUtils.clickOnElement(commonUtils.findElementByXpath(tp.sendContactAssigneeButton),null);
-            commonUtils.validateGetText(commonUtils.findElementByXpath(tp.emailSentSuccessfulMessage),p.getProperty("emailSentSuccessfulValidationMessage"));
-            commonUtils.clickOnElement(commonUtils.findElementByXpath(tp.emailSentSuccessfulMessageOkButton),null);
+            commonUtils.validateGetText(commonUtils.findElementByXpath(tp.emailSentSuccessfulMessage),
+                    getTestData("emailSentSuccessfulValidationMessage"));
+            commonUtils.clickOnElement(commonUtils.findElementByXpath(tp.emailSentSuccessfulMessageOkButton),
+                    null);
 
         } catch (Exception e) {
             Assert.fail();
