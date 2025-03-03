@@ -4,11 +4,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.AdminAccount.Dashboard.DashboardPage;
 import pageObjects.AdminAccount.HamburgerMenuModules.ProductsAndBundlesPage;
-import pageObjects.PurchaseLevelAccountPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class CreateBundleByAddingProduct extends BaseClass {
+public class ProductsAndBundlesAddBundleTest extends BaseClass {
 
     @Test
     public void verifyCreateBundleByAddingProduct() {
@@ -47,7 +47,7 @@ public class CreateBundleByAddingProduct extends BaseClass {
             pb.uploadImage();
             pb.scrollUntilNewContentLoads();
             commonUtils.clickOnElement(commonUtils.findElementByXpath(pb.saveButton),null);
-            PurchaseLevelAccountPage  ob = new PurchaseLevelAccountPage(driver);
+            AccountPage ob = new AccountPage(driver);
 
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(ob.successfulConfirmationMessage),p.getProperty("bundleUploadSuccessfulMessage"),commonUtils.findElementByXpath(ob.successfulConfirmationOkButton));
 

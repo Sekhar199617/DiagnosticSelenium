@@ -1,21 +1,21 @@
-package testCases;
+package testCases.PurchaserAccount;
 
 import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
-import pageObjects.AccountDetailsAddEventTagsPage;
-import pageObjects.AccountDetailsPage;
-import pageObjects.DashboardPage;
-import pageObjects.PurchaseLevelAccountPage;
+import pageObjects.AdminAccount.AccountDetailsModules.EventsTagsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaserEditUpdateEventTest extends BaseClass {
+public class SettingsEventsTagsTest extends BaseClass {
 
     public CommonUtils commonUtils;
-    public PurchaseLevelAccountPage ob;
+    public AccountPage ob;
 
     @Test(groups = {"Smoke"})
     public void VerifyPurchaserCreateAccountAdminManagerInDropdownListTest(){
@@ -31,7 +31,7 @@ public class PurchaserEditUpdateEventTest extends BaseClass {
             dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            ob = new PurchaseLevelAccountPage(driver);
+            ob = new AccountPage(driver);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
@@ -51,7 +51,7 @@ public class PurchaserEditUpdateEventTest extends BaseClass {
             dp.selectHamburgerTab("Settings");
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Events/Tags");
 
-            AccountDetailsAddEventTagsPage ev = new AccountDetailsAddEventTagsPage(driver);
+            EventsTagsPage ev = new EventsTagsPage(driver);
 
             commonUtils.clickOnElement(commonUtils.findElementByXpath(ev.addEventButton), null);
             commonUtils.enterValueInTextField(commonUtils.findElementByXpath(ev.eventNameTagField), randomString() );

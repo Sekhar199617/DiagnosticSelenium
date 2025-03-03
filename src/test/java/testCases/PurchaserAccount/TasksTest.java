@@ -1,32 +1,28 @@
-package testCases;
+package testCases.PurchaserAccount;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import org.testng.Assert;
-import org.testng.annotations.Test;
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsSettingsPage;
-import pageObjects.DashboardPage;
-import pageObjects.PurchaseLevelAccountPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.Settings.SettingsPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class PurchaserDismissShippingTaskTest extends BaseClass {
+public class TasksTest extends BaseClass {
 
     public CommonUtils commonUtils;
-    public PurchaseLevelAccountPage ob;
+    public AccountPage ob;
     public DashboardPage dp;
     public AccountDetailsPage ad;
-    public AccountDetailsSettingsPage as;
+    public SettingsPage as;
 
     @Test(groups = {"Smoke"})
     public void VerifyPurchaserDismissShippingTaskTest() {
@@ -39,8 +35,8 @@ public class PurchaserDismissShippingTaskTest extends BaseClass {
             dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
             ad = new AccountDetailsPage(driver);
-            ob = new PurchaseLevelAccountPage(driver);
-            as = new AccountDetailsSettingsPage(driver);
+            ob = new AccountPage(driver);
+            as = new SettingsPage(driver);
             loadTestData(
                     "./testData/accountDetailsData.json",
                     "./testData/purchaserAccountData/purchaser.json"

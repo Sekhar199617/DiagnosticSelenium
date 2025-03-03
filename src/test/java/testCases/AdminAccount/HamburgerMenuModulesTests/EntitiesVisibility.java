@@ -8,7 +8,7 @@ import pageObjects.AdminAccount.HamburgerMenuModules.EntityPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class SupportEntityVisibleToUserTest extends BaseClass {
+public class EntitiesVisibility extends BaseClass {
     @Test
     public void verifySupportEntityVisibleToUser() {
 

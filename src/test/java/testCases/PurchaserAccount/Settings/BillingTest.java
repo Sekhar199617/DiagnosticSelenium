@@ -1,20 +1,19 @@
-package testCases;
+package testCases.PurchaserAccount.Settings;
 
 import org.testng.annotations.Test;
 import org.testng.Assert;
-import pageObjects.AccountDetailsPage;
-import pageObjects.DashboardPage;
-import pageObjects.PurchaseLevelAccountPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class PurchaserEditUpdateBillingDetailsTest extends BaseClass {
+public class BillingTest extends BaseClass {
     public CommonUtils commonUtils;
-    public PurchaseLevelAccountPage ob;
+    public AccountPage ob;
     public DashboardPage dp;
     public AccountDetailsPage ad;
 
@@ -28,7 +27,7 @@ public class PurchaserEditUpdateBillingDetailsTest extends BaseClass {
             dp = new DashboardPage(driver);
             commonUtils = new CommonUtils(driver);
             ad = new AccountDetailsPage(driver);
-            ob = new PurchaseLevelAccountPage(driver);
+            ob = new AccountPage(driver);
 
             loadTestData("./testData/accountDetailsData.json",
                     "./testData/purchaserAccountData/purchaser.json");

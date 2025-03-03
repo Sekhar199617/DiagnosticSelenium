@@ -1,8 +1,8 @@
-package testCases;
+package testCases.AdminAccount;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.LoginPage;
-import pageObjects.DashboardPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 import utilities.DataProviders;

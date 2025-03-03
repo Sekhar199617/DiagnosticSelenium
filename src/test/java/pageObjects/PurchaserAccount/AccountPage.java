@@ -1,13 +1,13 @@
-package pageObjects;
+package pageObjects.PurchaserAccount;
 
 import java.awt.Toolkit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pageObjects.BasePage;
 import utilities.CommonUtils;
 
-import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.time.LocalDate;
@@ -15,10 +15,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class PurchaseLevelAccountPage extends BasePage{
+public class AccountPage extends BasePage {
     CommonUtils commonUtils;
 
-    public PurchaseLevelAccountPage(WebDriver driver) {
+    public AccountPage(WebDriver driver) {
         super(driver);
         this.commonUtils = new CommonUtils(driver);
     }

@@ -1,12 +1,11 @@
-package testCases;
+package testCases.PurchaserAccount;
 
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.DashboardPage;
-import pageObjects.PurchaseLevelAccountPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -14,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaserAddAssigneeWithUploadCSVTest extends BaseClass {
+public class DashboardUploadCSVTest extends BaseClass {
     public CommonUtils commonUtils;
 
     @Test(groups= {"Smoke"})
@@ -36,7 +35,7 @@ public class PurchaserAddAssigneeWithUploadCSVTest extends BaseClass {
         commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
         //Select account admin in user type dropdown
-            PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
+            AccountPage pl = new AccountPage(driver);
             pl.performTableAction("accountsTableUserRoles", p.getProperty("userAccountAdminName"), "Assign Tests",1);
 
             //Switch the tab

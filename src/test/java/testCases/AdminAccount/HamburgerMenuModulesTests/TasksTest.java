@@ -8,7 +8,7 @@ import pageObjects.AdminAccount.HamburgerMenuModules.TasksPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
-public class SendMailInShippingTaskTest extends BaseClass {
+public class TasksTest extends BaseClass {
     @Test
     public void verifySupportEntityVisibleToUser() {
 

@@ -1,12 +1,12 @@
-package testCases;
+package testCases.PurchaserAccount;
 
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.AccountDetailsPage;
-import pageObjects.AccountDetailsUsersAndRolesPage;
-import pageObjects.DashboardPage;
-import pageObjects.PurchaseLevelAccountPage;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.AccountDetailsModules.UsersAndRolesPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
@@ -14,10 +14,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaserFillInformationForRegistrationPageTest extends BaseClass {
+public class AssignmentsRegistrationTest extends BaseClass {
 
     public CommonUtils commonUtils;
-    public PurchaseLevelAccountPage ob;
+    public AccountPage ob;
 
     @Test(groups = {"Smoke"})
     public void VerifyPurchaserFillInformationForRegistrationPageTest() {
@@ -34,7 +34,7 @@ public class PurchaserFillInformationForRegistrationPageTest extends BaseClass {
             dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            ob = new PurchaseLevelAccountPage(driver);
+            ob = new AccountPage(driver);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
@@ -60,7 +60,7 @@ public class PurchaserFillInformationForRegistrationPageTest extends BaseClass {
 
             String copiedURL = ob.getClipboardText();
 
-            AccountDetailsUsersAndRolesPage au = new AccountDetailsUsersAndRolesPage(driver);
+            UsersAndRolesPage au = new UsersAndRolesPage(driver);
             commonUtils.validateDialogueTextAndClickConfirm(commonUtils.findElementByXpath(au.dialogueText),  p.getProperty("observationLinkCopyValidationMessage"),
                     commonUtils.findElementByXpath(au.dialogueOkButton));
 

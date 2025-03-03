@@ -1,15 +1,17 @@
-package testCases;
+package testCases.PurchaserAccount;
 
 import org.testng.annotations.Test;
 import org.testng.Assert;
-import pageObjects.*;
+import pageObjects.AdminAccount.AccountDetailsModules.AccountDetailsPage;
+import pageObjects.AdminAccount.Dashboard.DashboardPage;
+import pageObjects.PurchaserAccount.AccountPage;
 import testBase.BaseClass;
 import utilities.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaserViewTheUserOfAccountLevelTest extends BaseClass {
+public class UsersTest extends BaseClass {
 
     public CommonUtils commonUtils;
 
@@ -28,7 +30,7 @@ public class PurchaserViewTheUserOfAccountLevelTest extends BaseClass {
             dp.clickView();
 
             AccountDetailsPage ad = new AccountDetailsPage(driver);
-            PurchaseLevelAccountPage pl = new PurchaseLevelAccountPage(driver);
+            AccountPage pl = new AccountPage(driver);
 
             commonUtils.selectTab(commonUtils.findElementsByXpath(ad.tabList), "Users & Roles");
 
